@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useCallback, useState, useEffect } from "react";
+import { useRef, useState, useEffect, useCallback } from "react";
 import { Command } from "cmdk";
 import {
   Search,
@@ -9,10 +9,10 @@ import {
   Youtube,
   Music2,
   ArrowUpRight,
+  ArrowRight,
   Star,
 } from "lucide-react";
 import { mainCommands, socialLinks, reviews } from "@/app/lib/data";
-import { useKeyboardShortcuts } from "@/app/hooks/useKeyboardShortcuts";
 
 const iconMap: Record<string, React.ComponentType<{ size?: number; className?: string }>> = {
   Clapperboard,
@@ -25,6 +25,7 @@ export function CommandPalette() {
   const inputRef = useRef<HTMLInputElement>(null);
   const [currentReview, setCurrentReview] = useState(0);
 
+  // Auto-rotate reviews
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentReview((prev) => (prev + 1) % reviews.length);
@@ -32,34 +33,46 @@ export function CommandPalette() {
     return () => clearInterval(timer);
   }, []);
 
-  const handleSelect = useCallback((href: string) => {
-    window.open(href, "_blank", "noopener,noreferrer");
-  }, []);
-
-  const focusInput = useCallback(() => {
-    inputRef.current?.focus();
-  }, []);
-
-  const blurInput = useCallback(() => {
-    inputRef.current?.blur();
-  }, []);
-
+  // Keyboard shortcuts (desktop only)
   const handleShortcutC = useCallback(() => {
     const cmd = mainCommands.find((c) => c.shortcut === "C");
-    if (cmd) handleSelect(cmd.href);
-  }, [handleSelect]);
+    if (cmd) window.open(cmd.href, "_blank", "noopener,noreferrer");
+  }, []);
 
   const handleShortcutG = useCallback(() => {
     const cmd = mainCommands.find((c) => c.shortcut === "G");
-    if (cmd) handleSelect(cmd.href);
-  }, [handleSelect]);
+    if (cmd) window.open(cmd.href, "_blank", "noopener,noreferrer");
+  }, []);
 
-  useKeyboardShortcuts([
-    { key: "k", metaKey: true, callback: focusInput },
-    { key: "c", metaKey: true, callback: handleShortcutC },
-    { key: "g", metaKey: true, callback: handleShortcutG },
-    { key: "Escape", callback: blurInput },
-  ]);
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Only handle on desktop (lg+)
+      if (window.innerWidth < 1024) return;
+
+      if (e.metaKey || e.ctrlKey) {
+        if (e.key === "k") {
+          e.preventDefault();
+          inputRef.current?.focus();
+        } else if (e.key === "c" && !window.getSelection()?.toString()) {
+          e.preventDefault();
+          handleShortcutC();
+        } else if (e.key === "g") {
+          e.preventDefault();
+          handleShortcutG();
+        }
+      }
+      if (e.key === "Escape") {
+        inputRef.current?.blur();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [handleShortcutC, handleShortcutG]);
+
+  const handleSelect = (href: string) => {
+    window.open(href, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <div className="palette-container w-full">
@@ -67,16 +80,14 @@ export function CommandPalette() {
         {/* Search Input */}
         <div className="relative border-b border-black/5">
           <Search
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6c6c6c]"
+            className="absolute left-3 sm:left-4 top-1/2 -translate-y-1/2 text-[#6c6c6c]"
             size={18}
           />
           <Command.Input
             ref={inputRef}
             placeholder="Video, Współpraca, AI..."
+            className="pl-10! sm:pl-11!"
           />
-          <div className="absolute right-4 top-1/2 -translate-y-1/2 hidden md:flex items-center pointer-events-none">
-            <span className="font-mono text-[13px] text-[#6c6c6c]">⌘K</span>
-          </div>
         </div>
 
         <Command.List className="no-scrollbar">
@@ -86,38 +97,69 @@ export function CommandPalette() {
           <Command.Group heading="Sugestie">
             {mainCommands.map((cmd) => {
               const Icon = iconMap[cmd.icon];
+              const isPrimary = cmd.id === "wspolpraca";
               return (
                 <Command.Item
                   key={cmd.id}
                   value={`${cmd.label} ${cmd.description} ${cmd.keywords}`}
                   onSelect={() => handleSelect(cmd.href)}
-                  className="group"
+                  className="group min-h-12 flex-col lg:flex-row lg:items-center items-start"
                 >
-                  {/* Left side */}
-                  <div className="flex items-center gap-3">
-                    {Icon && <Icon size={20} className="text-[#2656d9]" />}
-                    <span className="font-semibold text-[14px] text-[#141115] transition-transform duration-200 ease-out group-hover:translate-x-1">
-                      {cmd.label}
-                    </span>
+                  {/* Mobile layout - stacked with button */}
+                  <div className="flex flex-col w-full gap-2 sm:hidden">
+                    <div className="flex items-center gap-2">
+                      {Icon && <Icon size={20} className="text-[#2656d9] shrink-0" />}
+                      <span className="font-semibold text-lg text-[#141115]">
+                        {cmd.label}
+                      </span>
+                    </div>
                     {cmd.description && (
-                      <span className="text-[13px] text-[#6c6c6c]">
+                      <span className="text-base text-[#6c6c6c] tracking-wide">
                         {cmd.description}
                       </span>
                     )}
+                    {cmd.action && (
+                      <button
+                        className={`mt-1 px-5 py-2.5 rounded-lg font-medium text-base tracking-wide transition-all duration-200 backdrop-blur-xl border ${
+                          isPrimary
+                            ? "bg-[#2656d9]/90 text-white border-[#2656d9]/50 shadow-lg shadow-[#2656d9]/25 hover:bg-[#2656d9] hover:shadow-xl hover:shadow-[#2656d9]/30 active:scale-[0.98]"
+                            : "bg-white/60 text-[#141115] border-black/10 shadow-lg shadow-black/5 hover:bg-white/80 hover:border-black/15 active:scale-[0.98]"
+                        }`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSelect(cmd.href);
+                        }}
+                      >
+                        {cmd.id === "wspolpraca" ? "Wyślij zapytanie" : cmd.id === "grupka" ? "Chcę dołączyć" : cmd.action}
+                      </button>
+                    )}
                   </div>
 
-                  {/* Right side */}
-                  <div className="flex items-center gap-3">
-                    {cmd.shortcut && (
-                      <span className="font-mono text-[12px] text-[#6c6c6c]">
+                  {/* Desktop/Tablet layout - row */}
+                  <div className="hidden sm:flex items-center justify-between w-full">
+                    <div className="flex items-center gap-3">
+                      {Icon && <Icon size={20} className="text-[#2656d9] shrink-0" />}
+                      <span className="font-semibold text-base text-[#141115] transition-transform duration-200 ease-out group-hover:translate-x-1">
+                        {cmd.label}
+                      </span>
+                      {cmd.description && (
+                        <span className="text-sm text-[#6c6c6c] hidden lg:inline">
+                          {cmd.description}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Tablet: action text, Desktop: shortcut + action */}
+                    <div className="flex items-center gap-4">
+                      <kbd className="font-mono text-sm text-[#6c6c6c] hidden lg:inline">
                         ⌘{cmd.shortcut}
-                      </span>
-                    )}
-                    {cmd.action && (
-                      <span className="font-mono text-[12px] tracking-wide action-glow">
-                        {cmd.action}
-                      </span>
-                    )}
+                      </kbd>
+                      {cmd.action && (
+                        <span className={`font-mono text-sm tracking-wide ${isPrimary ? "action-glow" : "text-[#2656d9]"}`}>
+                          {cmd.action}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </Command.Item>
               );
@@ -135,23 +177,51 @@ export function CommandPalette() {
                   key={link.id}
                   value={`${link.label} ${link.keywords}`}
                   onSelect={() => handleSelect(link.href)}
-                  className="group !p-1.5"
+                  className="group min-h-14 sm:min-h-9 p-3! sm:py-1! sm:px-1.5!"
                 >
-                  <div className="flex items-center gap-2">
-                    {Icon && <Icon size={14} className="text-[#6c6c6c]" />}
-                    <span className="text-[12px] text-[#6c6c6c]">
-                      {link.label}
-                    </span>
+                  {/* Mobile layout - stacked with link button */}
+                  <div className="flex flex-col w-full gap-1.5 sm:hidden">
+                    <div className="flex items-center gap-2">
+                      {Icon && <Icon size={20} className="text-[#2656d9]" />}
+                      <span className="text-base font-medium text-[#141115]">
+                        {link.label}
+                      </span>
+                    </div>
                     {link.stats && (
-                      <span className="text-[11px] text-[#6c6c6c]/70">
+                      <span className="text-sm text-[#6c6c6c] tracking-wide">
                         {link.stats}
                       </span>
                     )}
+                    <button
+                      className="mt-1 flex items-center gap-1 text-sm font-medium text-[#2656d9] hover:underline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSelect(link.href);
+                      }}
+                    >
+                      Sprawdź
+                      <ArrowUpRight size={14} />
+                    </button>
                   </div>
-                  <ArrowUpRight
-                    className="text-[#6c6c6c] opacity-0 group-hover:opacity-100 transition-opacity"
-                    size={12}
-                  />
+
+                  {/* Desktop/Tablet layout - row */}
+                  <div className="hidden sm:flex items-center justify-between w-full">
+                    <div className="flex items-center gap-2">
+                      {Icon && <Icon size={16} className="text-[#6c6c6c] group-hover:text-[#2656d9] transition-colors" />}
+                      <span className="text-sm font-medium text-[#6c6c6c] group-hover:text-[#2656d9] transition-colors">
+                        {link.label}
+                      </span>
+                      {link.stats && (
+                        <span className="text-xs text-[#6c6c6c]/70 group-hover:text-[#2656d9]/70 transition-colors">
+                          {link.stats}
+                        </span>
+                      )}
+                    </div>
+                    <ArrowRight
+                      className="text-[#2656d9] group-hover:translate-x-1 transition-transform duration-300 ease-out"
+                      size={16}
+                    />
+                  </div>
                 </Command.Item>
               );
             })}
@@ -159,7 +229,7 @@ export function CommandPalette() {
         </Command.List>
 
         {/* Reviews Section */}
-        <div className="mt-2 border-t border-black/5 bg-[#F6F5FC]/50 p-4">
+        <div className="mt-2 border-t border-black/5 bg-[#F6F5FC]/50 p-3 sm:p-4">
           <div className="relative h-24 w-full">
             {reviews.map((r, index) => (
               <div
@@ -171,19 +241,19 @@ export function CommandPalette() {
                   pointerEvents: index === currentReview ? "auto" : "none",
                 }}
               >
-                <p className="text-[13px] leading-relaxed text-[#141115] italic">
+                <p className="text-sm sm:text-base leading-relaxed text-[#141115] italic">
                   &ldquo;{r.content}&rdquo;
                 </p>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="text-[11px] font-semibold text-[#141115]">
+                  <span className="text-xs sm:text-sm font-semibold text-[#141115]">
                     {r.author}
                   </span>
-                  <span className="text-[11px] text-[#6c6c6c]">{r.role}</span>
+                  <span className="text-xs sm:text-sm text-[#6c6c6c]">{r.role}</span>
                   <div className="flex text-[#2656d9]">
                     {Array.from({ length: r.rating }).map((_, i) => (
                       <Star
                         key={i}
-                        size={10}
+                        size={12}
                         fill="currentColor"
                         strokeWidth={0}
                       />
@@ -199,7 +269,7 @@ export function CommandPalette() {
               <button
                 key={index}
                 onClick={() => setCurrentReview(index)}
-                className="w-1.5 h-1.5 rounded-full transition-colors"
+                className="w-2 h-2 sm:w-1.5 sm:h-1.5 rounded-full transition-colors"
                 style={{
                   backgroundColor:
                     index === currentReview
