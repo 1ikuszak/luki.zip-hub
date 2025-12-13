@@ -109,18 +109,18 @@ export function CommandPalette() {
                   <div className="flex flex-col w-full gap-2 sm:hidden">
                     <div className="flex items-center gap-2">
                       {Icon && <Icon size={20} className="text-[#2656d9] shrink-0" />}
-                      <span className="font-semibold text-lg text-[#141115]">
+                      <span className="font-semibold text-[16px] text-[#141115]">
                         {cmd.label}
                       </span>
                     </div>
                     {cmd.description && (
-                      <span className="text-base text-[#6c6c6c] tracking-wide">
+                      <span className="text-[14px] text-[#6c6c6c] tracking-wide">
                         {cmd.description}
                       </span>
                     )}
                     {cmd.action && (
                       <button
-                        className={`mt-1 px-5 py-2.5 rounded-lg font-medium text-base tracking-wide transition-all duration-200 backdrop-blur-xl border ${
+                        className={`mt-1 px-5 py-2.5 rounded-lg font-medium text-[14px] tracking-wide transition-all duration-200 backdrop-blur-xl border ${
                           isPrimary
                             ? "bg-[#2656d9]/90 text-white border-[#2656d9]/50 shadow-lg shadow-[#2656d9]/25 hover:bg-[#2656d9] hover:shadow-xl hover:shadow-[#2656d9]/30 active:scale-[0.98]"
                             : "bg-white/60 text-[#141115] border-black/10 shadow-lg shadow-black/5 hover:bg-white/80 hover:border-black/15 active:scale-[0.98]"
@@ -139,11 +139,11 @@ export function CommandPalette() {
                   <div className="hidden sm:flex items-center justify-between w-full">
                     <div className="flex items-center gap-3">
                       {Icon && <Icon size={20} className="text-[#2656d9] shrink-0" />}
-                      <span className="font-semibold text-base text-[#141115] transition-transform duration-200 ease-out group-hover:translate-x-1">
+                      <span className="font-semibold text-[15px] text-[#141115] transition-transform duration-200 ease-out group-hover:translate-x-1">
                         {cmd.label}
                       </span>
                       {cmd.description && (
-                        <span className="text-sm text-[#6c6c6c] hidden lg:inline">
+                        <span className="text-[14px] text-[#6c6c6c] hidden lg:inline">
                           {cmd.description}
                         </span>
                       )}
@@ -151,11 +151,11 @@ export function CommandPalette() {
 
                     {/* Tablet: action text, Desktop: shortcut + action */}
                     <div className="flex items-center gap-4">
-                      <kbd className="font-mono text-sm text-[#6c6c6c] hidden lg:inline">
+                      <kbd className="font-mono text-[13px] text-[#6c6c6c] hidden lg:inline">
                         ⌘{cmd.shortcut}
                       </kbd>
                       {cmd.action && (
-                        <span className={`font-mono text-sm tracking-wide ${isPrimary ? "action-glow" : "text-[#2656d9]"}`}>
+                        <span className={`font-mono text-[13px] tracking-wide ${isPrimary ? "action-glow" : "text-[#2656d9]"}`}>
                           {cmd.action}
                         </span>
                       )}
@@ -183,17 +183,17 @@ export function CommandPalette() {
                   <div className="flex flex-col w-full gap-1.5 sm:hidden">
                     <div className="flex items-center gap-2">
                       {Icon && <Icon size={20} className="text-[#2656d9]" />}
-                      <span className="text-base font-medium text-[#141115]">
+                      <span className="text-[15px] font-medium text-[#141115]">
                         {link.label}
                       </span>
                     </div>
                     {link.stats && (
-                      <span className="text-sm text-[#6c6c6c] tracking-wide">
+                      <span className="text-[13px] text-[#6c6c6c] tracking-wide">
                         {link.stats}
                       </span>
                     )}
                     <button
-                      className="mt-1 flex items-center gap-1 text-sm font-medium text-[#2656d9] hover:underline"
+                      className="mt-1 flex items-center gap-1 text-[13px] font-medium text-[#2656d9] hover:underline"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleSelect(link.href);
@@ -208,11 +208,11 @@ export function CommandPalette() {
                   <div className="hidden sm:flex items-center justify-between w-full">
                     <div className="flex items-center gap-2">
                       {Icon && <Icon size={16} className="text-[#6c6c6c] group-hover:text-[#2656d9] transition-colors" />}
-                      <span className="text-sm font-medium text-[#6c6c6c] group-hover:text-[#2656d9] transition-colors">
+                      <span className="text-[13px] font-medium text-[#6c6c6c] group-hover:text-[#2656d9] transition-colors">
                         {link.label}
                       </span>
                       {link.stats && (
-                        <span className="text-xs text-[#6c6c6c]/70 group-hover:text-[#2656d9]/70 transition-colors">
+                        <span className="text-[12px] text-[#6c6c6c]/70 group-hover:text-[#2656d9]/70 transition-colors">
                           {link.stats}
                         </span>
                       )}
@@ -241,19 +241,19 @@ export function CommandPalette() {
                   pointerEvents: index === currentReview ? "auto" : "none",
                 }}
               >
-                <p className="text-sm sm:text-base leading-relaxed text-[#141115] italic">
+                <p className="text-[13px] sm:text-[14px] leading-relaxed text-[#141115] italic">
                   &ldquo;{r.content}&rdquo;
                 </p>
                 <div className="flex items-center gap-2 mt-2">
-                  <span className="text-xs sm:text-sm font-semibold text-[#141115]">
+                  <span className="text-[11px] sm:text-[12px] font-semibold text-[#141115]">
                     {r.author}
                   </span>
-                  <span className="text-xs sm:text-sm text-[#6c6c6c]">{r.role}</span>
+                  <span className="text-[11px] sm:text-[12px] text-[#6c6c6c]">{r.role}</span>
                   <div className="flex text-[#2656d9]">
                     {Array.from({ length: r.rating }).map((_, i) => (
                       <Star
                         key={i}
-                        size={12}
+                        size={10}
                         fill="currentColor"
                         strokeWidth={0}
                       />
