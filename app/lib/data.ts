@@ -18,7 +18,7 @@ export const mainCommands: CommandItemData[] = [
     description: "Darmowa grupa AI Video",
     shortcut: "G",
     action: "DOŁĄCZ",
-    href: "https://t.me/+hn5RlIFlTBYyMmM0",
+    href: "https://t.me/+18I7hpVZ1DozOWU0",
     keywords: "grupka community telegram ai video",
   },
 ];
