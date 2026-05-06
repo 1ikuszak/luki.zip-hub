@@ -11,10 +11,14 @@
   "dependencies": {
     "cmdk": "^1.1.1",
     "framer-motion": "^12.23.26",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.561.0",
     "next": "16.0.10",
     "react": "19.2.1",
-    "react-dom": "19.2.1"
+    "react-dom": "19.2.1",
+    "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-html": "^16.0.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
@@ -23,6 +27,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "16.0.10",
+    "notion-client": "^7.10.0",
+    "notion-utils": "^7.10.0",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
