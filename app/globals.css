@@ -1,171 +1,457 @@
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,600&display=swap");
 @import "tailwindcss";
+
+/* CLS-killer: Arial fallback z metrykami zbliżonymi do Satoshi */
+@font-face {
+  font-family: "Satoshi-fallback";
+  src: local("Arial");
+  size-adjust: 102.5%;
+  ascent-override: 95%;
+  descent-override: 22%;
+  line-gap-override: 0%;
+  font-display: swap;
+}
 
 :root {
   --bg-page: #F6F5FC;
   --bg-card: #ffffff;
+  --bg: #F6F5FC;
   --text-dark: #141115;
+  --text: #141115;
   --text-muted: #6c6c6c;
+  --text-secondary: #6c6c6c;
   --accent: #2656d9;
   --accent-light: #5278e0;
   --chartreuse: #aeff00;
   --onyx-400: #9f8ea4;
   --border-subtle: rgba(0, 0, 0, 0.05);
+  --border: rgba(0, 0, 0, 0.05);
+  --baseline: 4px;
 }
 
 @theme inline {
   --color-background: var(--bg-page);
-  --color-foreground: var(--text-dark);
-  --font-sans: var(--font-inter);
+  --color-foreground: var(--text);
+  --color-border: var(--border);
+  --color-text-secondary: var(--text-secondary);
+  --color-accent: var(--accent);
+  --font-sans: "Satoshi", "Satoshi-fallback", sans-serif;
 }
 
 body {
+  font-family: "Satoshi", "Satoshi-fallback", sans-serif;
   background: var(--bg-page);
-  color: var(--text-dark);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  color: var(--text);
+  font-feature-settings: "ss01" on, "ss02" on, "cv06" on, "liga" on, "kern" on;
+  font-variant-ligatures: common-ligatures;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Hide scrollbar */
-.no-scrollbar::-webkit-scrollbar {
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--chartreuse);
+  color: #000;
+}
+
+/* Native <details> accordion: hide default markers (Safari/Chrome) */
+summary {
+  list-style: none;
+}
+summary::-webkit-details-marker {
   display: none;
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
 
-/* Selection */
-::selection {
-  background-color: var(--chartreuse);
-  color: black;
-}
-
-/* Light sweep animation for action labels */
-@keyframes light-sweep {
-  0% {
-    background-position: -100% 0;
+/* ─── Containers ─────────────────────────────────────────── */
+@utility container-narrow {
+  max-width: 680px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (min-width: 640px) {
+    padding-inline: 32px;
   }
-  100% {
-    background-position: 200% 0;
+  @media (min-width: 1024px) {
+    padding-inline: 40px;
   }
 }
 
-.action-glow {
-  background: linear-gradient(
-    90deg,
-    var(--accent) 0%,
-    var(--accent) 40%,
-    #ffffff 50%,
-    var(--accent) 60%,
-    var(--accent) 100%
-  );
-  background-size: 200% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: light-sweep 3s ease-in-out infinite;
-}
-
-/* Glow pulse animation for status dot */
-@keyframes glow-pulse {
-  0%, 100% {
-    box-shadow: 0 0 4px 2px rgba(174, 255, 0, 0.4);
+@utility container-default {
+  max-width: 720px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (min-width: 640px) {
+    padding-inline: 32px;
   }
-  50% {
-    box-shadow: 0 0 14px 5px rgba(174, 255, 0, 0.7);
+  @media (min-width: 1024px) {
+    padding-inline: 40px;
   }
 }
 
-.glow-dot {
-  animation: glow-pulse 2s ease-in-out infinite;
-}
-
-/* Blue glow pulse animation for status dot - subtle high-end */
-@keyframes subtle-glow {
-  0%, 100% {
-    box-shadow: 0 0 3px 1px rgba(38, 86, 217, 0.3);
+@utility container-wide {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 20px;
+  @media (min-width: 640px) {
+    padding-inline: 32px;
   }
-  50% {
-    box-shadow: 0 0 6px 2px rgba(38, 86, 217, 0.5);
+  @media (min-width: 1024px) {
+    padding-inline: 40px;
   }
 }
 
-.glow-dot-blue {
-  animation: subtle-glow 2.5s ease-in-out infinite;
+/* ─── Typography utilities ───────────────────────────────── */
+@utility t-h1 {
+  font-size: 40px;
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 40;
+  color: var(--text);
+  @media (min-width: 768px) {
+    font-size: 64px;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-variation-settings: "opsz" 60;
+  }
 }
 
-/* Command Palette Container */
-.palette-container {
-  transition: box-shadow 0.3s ease;
+@utility t-h2 {
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 28;
+  color: var(--text);
+  text-wrap: balance;
+  hanging-punctuation: first;
+  @media (min-width: 768px) {
+    font-size: 40px;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 40;
+  }
 }
 
-.palette-container:focus-within {
-  box-shadow: 0 0 0 1px var(--accent), 0 8px 40px rgba(38, 86, 217, 0.1);
+@utility t-h3 {
+  font-size: 22px;
+  line-height: 1.3;
+  font-weight: 600;
+  font-variation-settings: "opsz" 22;
+  color: var(--text);
+  @media (min-width: 768px) {
+    font-size: 28px;
+    line-height: 1.25;
+    font-variation-settings: "opsz" 28;
+  }
 }
 
-/* cmdk styles */
-[cmdk-root] {
-  background: var(--bg-card);
-  border-radius: 12px;
-  border: 1px solid var(--border-subtle);
-  box-shadow: 0 8px 30px rgb(0 0 0 / 0.04);
-  overflow: hidden;
+@utility t-body-large {
+  font-size: 18px;
+  line-height: 1.6;
+  font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 20px;
+  }
 }
 
-[cmdk-input] {
-  width: 100%;
-  height: 56px;
-  padding-left: 44px;
-  padding-right: 16px;
-  font-size: 15px;
-  border: none;
-  border-bottom: 1px solid var(--border-subtle);
-  outline: none;
-  background: transparent;
-  color: var(--text-dark);
+@utility t-body {
+  font-size: 17px;
+  line-height: 1.6;
+  font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 18px;
+    line-height: 1.7;
+  }
 }
 
-[cmdk-input]::placeholder {
-  color: var(--text-muted);
-}
-
-[cmdk-list] {
-  max-height: 60vh;
-  overflow-y: auto;
-  padding: 8px;
-}
-
-[cmdk-item] {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  border-radius: 8px;
-  cursor: pointer;
-}
-
-
-[cmdk-group] {
-  padding: 0;
-}
-
-[cmdk-group-heading] {
-  font-size: 11px;
-  font-weight: 500;
-  color: var(--text-muted);
-  padding: 8px 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-[cmdk-empty] {
-  padding: 24px;
-  text-align: center;
-  color: var(--text-muted);
+@utility t-small {
   font-size: 14px;
+  line-height: 1.5;
+  font-weight: 400;
+  @media (min-width: 768px) {
+    font-size: 15px;
+  }
 }
 
-[cmdk-separator] {
-  height: 1px;
-  background: var(--border-subtle);
-  margin: 4px 16px;
+@utility t-button {
+  font-size: 16px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+/* ─── Hairline retina (1px = 1 physical px on 2x/3x density) ─ */
+@media (-webkit-min-device-pixel-ratio: 2) {
+  .border-hairline {
+    border-width: 0.5px;
+  }
+}
+
+/* ─── Markdown article styles ────────────────────────────── */
+.markdown {
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.7;
+}
+@media (min-width: 768px) {
+  .markdown {
+    font-size: 19px;
+    line-height: 1.7;
+  }
+}
+.markdown > *:first-child {
+  margin-top: 0;
+}
+.markdown > *:last-child {
+  margin-bottom: 0;
+}
+.markdown p {
+  margin-bottom: 1.1em;
+}
+.markdown p:last-child {
+  margin-bottom: 0;
+}
+/* Editorial style: h2 jest "section divider" — body-size + bold + thin top rule.
+   Pozwala na długie zdaniowe nagłówki bez efektu krzyczącego napisu. */
+.markdown h2 {
+  font-size: inherit;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  line-height: 1.4;
+  margin-top: 2.4em;
+  margin-bottom: 0.6em;
+  padding-top: 1.1em;
+  border-top: 1px solid var(--border);
+  color: var(--text);
+  text-wrap: pretty;
+}
+.markdown h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+.markdown h3 {
+  font-size: inherit;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-top: 1.6em;
+  margin-bottom: 0.4em;
+  color: var(--text);
+  text-wrap: pretty;
+}
+.markdown h3:first-child {
+  margin-top: 0;
+}
+.markdown h4 {
+  font-size: inherit;
+  font-weight: 600;
+  margin-top: 1.2em;
+  margin-bottom: 0.3em;
+  color: var(--text-secondary);
+}
+/* Dwa nagłówki obok siebie — nie podwajaj rule */
+.markdown h2 + h3,
+.markdown h3 + h4 {
+  margin-top: 0.6em;
+}
+.markdown ul,
+.markdown ol {
+  margin-bottom: 1.1em;
+  padding-left: 1.4em;
+}
+.markdown ul {
+  list-style: disc;
+}
+.markdown ol {
+  list-style: decimal;
+}
+.markdown li {
+  margin: 0.25em 0;
+}
+.markdown li > p {
+  margin-bottom: 0.4em;
+}
+.markdown a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+}
+.markdown a:hover {
+  text-decoration-thickness: 2px;
+}
+.markdown blockquote {
+  border-left: 3px solid var(--text);
+  background: rgba(0, 0, 0, 0.025);
+  padding: 0.9em 1.2em;
+  border-radius: 0 6px 6px 0;
+  margin-bottom: 1.2em;
+  color: var(--text);
+  font-style: normal;
+  hanging-punctuation: first;
+}
+.markdown blockquote p {
+  margin-bottom: 0.4em;
+}
+.markdown blockquote p:last-child {
+  margin-bottom: 0;
+}
+.markdown code {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 0.88em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+.markdown pre {
+  position: relative;
+  background: #1a1a1f;
+  color: #f5f5f5;
+  border: 1px solid var(--border);
+  padding: 18px 20px;
+  padding-right: 88px;
+  border-radius: 8px;
+  margin-bottom: 1.2em;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.65;
+}
+@media (min-width: 768px) {
+  .markdown pre {
+    font-size: 14.5px;
+  }
+}
+.markdown pre code {
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+  color: inherit;
+}
+.markdown .copy-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-sans, inherit);
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  padding: 6px 10px 6px 9px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 6px;
+  cursor: pointer;
+  line-height: 1;
+  opacity: 0.9;
+  transition: background 120ms ease, color 120ms ease, opacity 120ms ease,
+    border-color 120ms ease, transform 120ms ease;
+}
+.markdown .copy-btn .copy-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.markdown .copy-btn:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.32);
+  opacity: 1;
+}
+.markdown .copy-btn:active {
+  transform: scale(0.97);
+}
+.markdown .copy-btn:focus-visible {
+  outline: 2px solid var(--chartreuse);
+  outline-offset: 2px;
+}
+.markdown .copy-btn[data-copied="true"] {
+  background: var(--chartreuse);
+  color: var(--text);
+  border-color: var(--chartreuse);
+  opacity: 1;
+}
+.markdown .copy-btn[data-copied="error"] {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #ef4444;
+  opacity: 1;
+}
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2em;
+  font-size: 15px;
+}
+.markdown table th,
+.markdown table td {
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  text-align: left;
+  vertical-align: top;
+}
+.markdown table th {
+  background: rgba(0, 0, 0, 0.04);
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-secondary);
+}
+.markdown table tbody tr:nth-child(even) {
+  background: rgba(0, 0, 0, 0.015);
+}
+.markdown img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 6px;
+  margin: 1em 0;
+}
+.markdown strong {
+  font-weight: 600;
+}
+.markdown hr {
+  border: none;
+  border-top: 1px dashed var(--border);
+  margin: 2em auto;
+  width: 40%;
+}
+
+/* ─── Poradnik hero marquee ──────────────────────────────── */
+.hero-strip-cell {
+  height: 180px;
+}
+@media (min-width: 768px) {
+  .hero-strip-cell {
+    height: 220px;
+  }
+}
+@media (min-width: 1280px) {
+  .hero-strip-cell {
+    height: 260px;
+  }
+}
+
+.marquee-track {
+  animation: hero-marquee 45s linear infinite;
+  will-change: transform;
+}
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+@keyframes hero-marquee {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
 }

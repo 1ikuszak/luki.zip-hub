@@ -1,15 +1,56 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "./components/Analytics";
+import { Navbar } from "./components/Navbar";
+import { Footer } from "./components/Footer";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin", "latin-ext"],
-});
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://luki.zip";
+const title = "luki.zip — brand design & launch video";
+const description =
+  "Robię marki, które wyglądają cool. Brand design, launch video, system.";
 
 export const metadata: Metadata = {
-  title: "luki.zip | Hub",
-  description: "Video, AI & Creative Direction",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  keywords: [
+    "luki.zip",
+    "AI video",
+    "creative direction",
+    "video production",
+    "YouTube",
+    "TikTok",
+    "Łukasz Glica",
+  ],
+  authors: [{ name: "luki.zip" }],
+  alternates: { canonical: "/" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    siteName: title,
+    locale: "pl_PL",
+    type: "website",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: title,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: ["/og-image.png"],
+  },
 };
 
 export default function RootLayout({
@@ -19,7 +60,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
-      <body className={`${inter.variable} antialiased`}>{children}</body>
+      <body className="antialiased">
+        <Navbar />
+        <main>{children}</main>
+        <Footer />
+        <Analytics />
+      </body>
     </html>
   );
 }
