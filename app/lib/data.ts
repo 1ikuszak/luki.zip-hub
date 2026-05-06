@@ -1,6 +1,19 @@
 import { CommandItemData, ReviewData, SocialLink } from "@/app/types";
 
+export const CALENDLY_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSf6pBE9idOVF33I22RuX5h15BfGoXhN8UByOhKRSwxibveoOw/viewform";
+
 export const mainCommands: CommandItemData[] = [
+  {
+    id: "oferta",
+    icon: "Layers",
+    label: "Oferta",
+    description: "Pakiety i wycena",
+    shortcut: "O",
+    action: "ZOBACZ",
+    href: "/oferta",
+    keywords: "oferta pakiety cena pricing wycena starter growth full",
+  },
   {
     id: "wspolpraca",
     icon: "Clapperboard",
