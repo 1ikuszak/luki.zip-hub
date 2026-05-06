@@ -1,0 +1,39 @@
+{
+  "slug": "redesign-saas-onboarding",
+  "title": "Redesign onboardingu w SaaS-ie B2B",
+  "subtitle": "Jak skróciliśmy ścieżkę aktywacji nowych użytkowników o 38% w 6 tygodni.",
+  "heroImage": "/case-studies/redesign-saas-onboarding/hero.svg",
+  "heroImageAlt": "Mockup nowego onboardingu produktu SaaS na ekranie laptopa.",
+  "metaDescription": "Case study: redesign onboardingu w SaaS-ie B2B — proces, decyzje produktowe i efekty biznesowe.",
+  "stats": {
+    "czas": "6 tygodni",
+    "budzet": "45 000 PLN",
+    "efekt": "+38% aktywacji"
+  },
+  "problem": "Klient miał wysoki współczynnik porzuceń podczas pierwszych 24 godzin po rejestracji. Nowi użytkownicy nie rozumieli, jak dojść do swojego pierwszego aha-momentu, a zespół supportu obsługiwał te same pytania w kółko. Trzeba było zaprojektować ścieżkę, która prowadzi za rękę bez bycia natrętną.",
+  "steps": [
+    {
+      "title": "Audyt i wywiady",
+      "description": "Zacząłem od 8 wywiadów z aktywnymi i porzuconymi użytkownikami oraz analizy nagrań sesji w Hotjarze. Z tego wyszedł zestaw 14 frykcji — od mikrokopii po architekturę informacji w panelu.",
+      "image": "/case-studies/redesign-saas-onboarding/step-1.svg",
+      "imageAlt": "Notatki z wywiadów i mapa frykcji rozłożona na ścianie."
+    },
+    {
+      "title": "Prototyp i testy",
+      "description": "Zaprojektowałem nową ścieżkę z checklistą postępu i kontekstowymi tooltipami. Trzy iteracje testów moderowanych z 5 osobami pozwoliły wyciąć dwa zbędne kroki i przepisać 60% mikrokopii.",
+      "image": "/case-studies/redesign-saas-onboarding/step-2.svg",
+      "imageAlt": "Ekran prototypu z checklistą onboardingu."
+    },
+    {
+      "title": "Wdrożenie i pomiar",
+      "description": "Wdrożenie odbyło się w trybie A/B na 50% nowych kont. Po 3 tygodniach przewaga była jednoznaczna — wariant B trafił do produkcji, a metryki obserwujemy dalej w cotygodniowym dashboardzie.",
+      "image": "/case-studies/redesign-saas-onboarding/step-3.svg",
+      "imageAlt": "Dashboard z metrykami aktywacji po wdrożeniu."
+    }
+  ],
+  "quote": {
+    "text": "Łukasz nie tylko zaprojektował lepszy onboarding, ale wymusił na nas porządne myślenie o tym, kogo właściwie aktywujemy. To była najbardziej wartościowa interwencja produktowa w tym roku.",
+    "author": "Anna Kowalska",
+    "role": "Head of Product, Acme SaaS"
+  }
+}

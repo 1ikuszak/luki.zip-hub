@@ -1,0 +1,147 @@
+{
+  "Claude": {
+    "url": "https://claude.ai",
+    "benefit": "Mój główny model do researchu i pisania",
+    "isAffiliate": false
+  },
+  "claude.ai": {
+    "url": "https://claude.ai",
+    "benefit": "Mój główny model do researchu i pisania",
+    "isAffiliate": false
+  },
+  "Cosmos.so": {
+    "url": "https://www.cosmos.so",
+    "benefit": "Wyszukiwarka stylowych obrazków do moodboardów",
+    "isAffiliate": false
+  },
+  "Midjourney": {
+    "url": "https://www.midjourney.com",
+    "benefit": "Generator obrazów do moodboardów i wizualizacji",
+    "isAffiliate": false
+  },
+  "midjourney.com": {
+    "url": "https://www.midjourney.com",
+    "benefit": "Generator obrazów do moodboardów i wizualizacji",
+    "isAffiliate": false
+  },
+  "Figma": {
+    "url": "https://www.figma.com",
+    "benefit": "Standard branżowy do projektowania UI/grafik",
+    "isAffiliate": false
+  },
+  "figma.com": {
+    "url": "https://www.figma.com",
+    "benefit": "Standard branżowy do projektowania UI/grafik",
+    "isAffiliate": false
+  },
+  "Obsidian": {
+    "url": "https://obsidian.md",
+    "benefit": "Lokalny knowledge base na markdown",
+    "isAffiliate": false
+  },
+  "obsidian.md": {
+    "url": "https://obsidian.md",
+    "benefit": "Lokalny knowledge base na markdown",
+    "isAffiliate": false
+  },
+  "Excalidraw": {
+    "url": "https://excalidraw.com",
+    "benefit": "Szybkie diagramy odręczne",
+    "isAffiliate": false
+  },
+  "excalidraw.com": {
+    "url": "https://excalidraw.com",
+    "benefit": "Szybkie diagramy odręczne",
+    "isAffiliate": false
+  },
+  "Freepik": {
+    "url": "https://www.freepik.com",
+    "benefit": "Stock zdjęć i wektorów",
+    "isAffiliate": false
+  },
+  "freepik.com": {
+    "url": "https://www.freepik.com",
+    "benefit": "Stock zdjęć i wektorów",
+    "isAffiliate": false
+  },
+  "Eyecannndy": {
+    "url": "https://eyecannndy.com",
+    "benefit": "Katalog technik wizualnych do video",
+    "isAffiliate": false
+  },
+  "eyecannndy.com": {
+    "url": "https://eyecannndy.com",
+    "benefit": "Katalog technik wizualnych do video",
+    "isAffiliate": false
+  },
+  "Shotdeck": {
+    "url": "https://shotdeck.com",
+    "benefit": "Baza referencji filmowych po stylu kadru",
+    "isAffiliate": false
+  },
+  "shotdeck.com": {
+    "url": "https://shotdeck.com",
+    "benefit": "Baza referencji filmowych po stylu kadru",
+    "isAffiliate": false
+  },
+  "Google Labs": {
+    "url": "https://labs.google",
+    "benefit": "Eksperymentalne narzędzia AI od Google (Veo, Flow)",
+    "isAffiliate": false
+  },
+  "labs.google": {
+    "url": "https://labs.google",
+    "benefit": "Eksperymentalne narzędzia AI od Google (Veo, Flow)",
+    "isAffiliate": false
+  },
+  "Google Flow": {
+    "url": "https://labs.google/fx/tools/flow",
+    "benefit": "Veo 3 i prompt-to-video w Google Flow",
+    "isAffiliate": false
+  },
+  "labs.google/fx/tools/flow": {
+    "url": "https://labs.google/fx/tools/flow",
+    "benefit": "Veo 3 i prompt-to-video w Google Flow",
+    "isAffiliate": false
+  },
+  "CapCut": {
+    "url": "https://www.capcut.com",
+    "benefit": "Bezpłatny edytor video do shortów",
+    "isAffiliate": false
+  },
+  "Descript": {
+    "url": "https://www.descript.com",
+    "benefit": "Transkrypcja + edycja video jak w dokumencie",
+    "isAffiliate": false
+  },
+  "ElevenLabs": {
+    "url": "https://elevenlabs.io",
+    "benefit": "Voiceover AI w jakości studyjnej",
+    "isAffiliate": false
+  },
+  "Higgsfield": {
+    "url": "https://higgsfield.ai",
+    "benefit": "Generator ultra-realistycznych zdjęć i video",
+    "isAffiliate": false
+  },
+  "Kling": {
+    "url": "https://klingai.com",
+    "benefit": "Model text-to-video z mocnym ruchem postaci",
+    "isAffiliate": false
+  },
+  "Veo": {
+    "url": "https://labs.google/fx/tools/flow",
+    "benefit": "Najlepszy model text-to-video od Google",
+    "isAffiliate": false
+  },
+  "Nano Banana": {
+    "url": "https://www.dfirst.ai",
+    "benefit": "Szybki generator obrazów (GPT Image 2 / Nano Banana)",
+    "isAffiliate": false
+  },
+  "Claude Code": {
+    "url": "https://claude.ai/code",
+    "benefit": "Terminalowy AI agent do kodowania i automatyzacji",
+    "isAffiliate": false
+  }
+}

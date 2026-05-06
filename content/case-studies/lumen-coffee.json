@@ -1,0 +1,39 @@
+{
+  "slug": "lumen-coffee",
+  "title": "Lumen Coffee — system marki od zera",
+  "subtitle": "Nowa palarnia kawy bez historii — pełna identyfikacja, opakowania na 6 SKU i system na social.",
+  "heroImage": "/case-studies/lumen-coffee.svg",
+  "heroImageAlt": "Mockup identyfikacji wizualnej Lumen Coffee — opakowania i znak.",
+  "metaDescription": "Lumen Coffee — case study brandingu palarni: znak, opakowania na 6 SKU, system na social.",
+  "stats": {
+    "czas": "[do uzupełnienia]",
+    "budzet": "[do uzupełnienia]",
+    "efekt": "Wejście do 3 sieci"
+  },
+  "problem": "Dwóch baristów otwierało palarnię i nie chciało wyglądać jak każda druga „specialty\" marka — żadnych gór, żadnych łuków. Trzeba było zaprojektować markę, która wyróżni się na półce, ale nie zlewa z trendami sezonu.",
+  "steps": [
+    {
+      "title": "Naming, znak, typografia",
+      "description": "Punkt wyjścia — nazwa, znak słowny i para typograficzna jako kręgosłup całego systemu.",
+      "image": "/case-studies/lumen-coffee.svg",
+      "imageAlt": "Logo i typografia Lumen Coffee."
+    },
+    {
+      "title": "Opakowania dla 6 SKU",
+      "description": "Single origin + blendy. Spójny system kolorów i hierarchii informacji — łatwo skalowalny przy dokładaniu nowych SKU.",
+      "image": "/case-studies/lumen-coffee.svg",
+      "imageAlt": "Opakowania kawy Lumen Coffee — 6 SKU."
+    },
+    {
+      "title": "Tone of voice + 40 szablonów",
+      "description": "Strategia komunikacji i pełen design system na web + social — 40+ szablonów postów, story i nagłówków.",
+      "image": "/case-studies/lumen-coffee.svg",
+      "imageAlt": "Szablony Lumen Coffee na social media."
+    }
+  ],
+  "quote": {
+    "text": "[do uzupełnienia — cytat klienta]",
+    "author": "[do uzupełnienia]",
+    "role": "Lumen Coffee"
+  }
+}

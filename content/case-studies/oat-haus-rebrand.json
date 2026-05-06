@@ -1,0 +1,39 @@
+{
+  "slug": "oat-haus-rebrand",
+  "title": "Oat Haus — kompletny rebrand",
+  "subtitle": "Reset wizualny marki owsianej: nowy znak, system kolorów i film launchowy na premierę linii barista.",
+  "heroImage": "/case-studies/oat-haus.svg",
+  "heroImageAlt": "Mockup nowej identyfikacji Oat Haus — opakowania linii barista.",
+  "metaDescription": "Oat Haus — case study rebrandu marki owsianej: znak, system kolorów, film launchowy linii barista.",
+  "stats": {
+    "czas": "[do uzupełnienia]",
+    "budzet": "[do uzupełnienia]",
+    "efekt": "Sold-out w 11 dni"
+  },
+  "problem": "Oat Haus przyszedł z dziewięcioletnim logo i etykietami, które zlewały się z półką. Cel: wyciągnąć markę z segmentu commodity i ustawić ją obok premium konkurencji w segmencie barista — bez utraty znajomości marki u stałych klientów.",
+  "steps": [
+    {
+      "title": "Znak i system kolorów",
+      "description": "Nowy znak słowny, monogram używany na nakrętkach oraz system kolorów oparty na ciepłej bieli, grafitcie i oat-yellow.",
+      "image": "/case-studies/oat-haus.svg",
+      "imageAlt": "Znak i system kolorów Oat Haus."
+    },
+    {
+      "title": "Typografia i opakowania",
+      "description": "Dwujęzyczna para typograficzna: serif na opakowaniach jako sygnał premium, grotesk na webie jako narzędzie konwersji.",
+      "image": "/case-studies/oat-haus.svg",
+      "imageAlt": "Opakowania linii barista Oat Haus."
+    },
+    {
+      "title": "Launch video 22s",
+      "description": "Film launchowy 22s — pierwszy rollout na Instagramie i w Lidlu. Pełnił funkcję wizualnej manifestacji nowej marki, nie zwykłego ad-creative.",
+      "image": "/case-studies/oat-haus.svg",
+      "imageAlt": "Klatka z launch video Oat Haus."
+    }
+  ],
+  "quote": {
+    "text": "[do uzupełnienia — cytat klienta]",
+    "author": "[do uzupełnienia]",
+    "role": "Oat Haus"
+  }
+}

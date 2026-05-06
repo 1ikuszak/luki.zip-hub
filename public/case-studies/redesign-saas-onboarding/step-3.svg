@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" width="1200" height="900" role="img" aria-label="Step 3 placeholder">
+  <rect width="1200" height="900" fill="#F6F5FC"/>
+  <rect x="0" y="0" width="1200" height="900" fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="2"/>
+  <g fill="#141115" font-family="Inter, system-ui, sans-serif">
+    <text x="60" y="120" font-size="120" font-weight="700" fill="#2656d9">03</text>
+    <text x="60" y="180" font-size="28" font-weight="600">Wdrożenie i pomiar</text>
+    <text x="60" y="220" font-size="16" fill="#6c6c6c">step-3.svg · 1200 × 900</text>
+  </g>
+  <polyline points="60,700 200,640 340,560 480,520 620,440 760,380 900,300 1040,260 1140,200" fill="none" stroke="#2656d9" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>
+  <line x1="60" y1="780" x2="1140" y2="780" stroke="#141115" stroke-width="2" opacity="0.2"/>
+  <line x1="60" y1="280" x2="60" y2="780" stroke="#141115" stroke-width="2" opacity="0.2"/>
+</svg>

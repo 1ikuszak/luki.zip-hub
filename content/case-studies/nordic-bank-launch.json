@@ -1,0 +1,39 @@
+{
+  "slug": "nordic-bank-launch",
+  "title": "Nordic Bank — launch video premiery",
+  "subtitle": "30-sekundowy launch video dla nowego konta dla freelancerów. Od koncepcji po final cut w 4 tygodnie.",
+  "heroImage": "/case-studies/nordic-bank.svg",
+  "heroImageAlt": "Klatka z launch video Nordic Bank — produkt na pierwszym planie.",
+  "metaDescription": "Nordic Bank — case study produkcji 30s launch video dla nowego konta freelancera. Strategia, produkcja, efekty.",
+  "stats": {
+    "czas": "4 tygodnie",
+    "budzet": "[do uzupełnienia]",
+    "efekt": "Highest reach w historii działu"
+  },
+  "problem": "Nordic Bank otwierał ofertę dla freelancerów i potrzebował filmu, który w 30 sekundach tłumaczy produkt bez koncesji na charakter marki. Standardowe formaty „korporacyjne\" nie pasowały do grupy docelowej, ale brand guidelines wymagały zachowania spójności wizualnej.",
+  "steps": [
+    {
+      "title": "Storyboard i scenariusz",
+      "description": "Storyboard i scenariusz w jednym dokumencie — żeby decyzje produkcyjne i narracyjne były podejmowane razem, a nie sekwencyjnie.",
+      "image": "/case-studies/nordic-bank.svg",
+      "imageAlt": "Storyboard launch video Nordic Bank."
+    },
+    {
+      "title": "Reżyseria zdjęć + motion",
+      "description": "Reżyseria zdjęć w studio + 2 plenery, plus motion design dla typografii i UI demo. Każda klatka miała pełnić konkretną funkcję narracyjną.",
+      "image": "/case-studies/nordic-bank.svg",
+      "imageAlt": "Plan zdjęciowy Nordic Bank."
+    },
+    {
+      "title": "3 wersje cięte pod kanały",
+      "description": "Final cut wyszedł w trzech wersjach (15s / 22s / 30s) pod różne kanały — każda zoptymalizowana pod media plan, a nie tylko skrócona.",
+      "image": "/case-studies/nordic-bank.svg",
+      "imageAlt": "Frame compare 3 wersji launch video Nordic Bank."
+    }
+  ],
+  "quote": {
+    "text": "[do uzupełnienia — cytat klienta]",
+    "author": "[do uzupełnienia]",
+    "role": "Nordic Bank"
+  }
+}
