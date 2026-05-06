@@ -13,7 +13,7 @@ export function BrandBrainOSCTA() {
         Chcesz więcej takich poradników?
       </h2>
       <p className="mt-3 text-[15px] text-white/70 leading-relaxed">
-        Co tydzień jeden konkretny insight z brand designu i launchów. Krótko, bez fluffu, bez spamu.
+        Co tydzień jeden konkretny insight o budowaniu brandu w erze AI. Krótko, bez spamu.
       </p>
       <TrackedLink
         ctaId="brain_poradnik_footer"
