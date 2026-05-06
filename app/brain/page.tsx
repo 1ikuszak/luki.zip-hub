@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
 import { EmailCaptureForm } from "./EmailCaptureForm";
 
 const pageTitle = "Newsletter | luki.zip";
@@ -34,13 +33,6 @@ const FAQ = [
   },
 ];
 
-const PERKS = [
-  "Jeden mail tygodniowo",
-  "Brand design i launchy",
-  "Bez spamu i upselli",
-  "Wypis jednym kliknięciem",
-];
-
 export default function BrainPage() {
   return (
     <>
@@ -50,8 +42,8 @@ export default function BrainPage() {
         </div>
         <h1 className="t-h1 mt-5 max-w-[800px]">Poradniki na maila</h1>
         <p className="t-body-large mt-6 text-[var(--text-secondary)] max-w-[640px]">
-          Co tydzień jeden konkretny insight z brand designu i launchów.
-          Krótko, bez fluffu, bez spamu.
+          Co tydzień jeden konkretny insight o budowaniu brandu w erze AI.
+          Krótko, bez spamu.
         </p>
 
         <div className="mt-10 max-w-[560px]">
@@ -60,22 +52,6 @@ export default function BrainPage() {
             Po zapisie dostaniesz email z potwierdzeniem.
           </p>
         </div>
-
-        <ul className="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 max-w-[560px]">
-          {PERKS.map((perk) => (
-            <li
-              key={perk}
-              className="flex items-center gap-2.5 text-[15px] text-[var(--text)]"
-            >
-              <Check
-                size={16}
-                strokeWidth={2.5}
-                className="shrink-0 text-[var(--accent)]"
-              />
-              <span>{perk}</span>
-            </li>
-          ))}
-        </ul>
       </section>
 
       <section className="container-narrow py-16 sm:py-24">
