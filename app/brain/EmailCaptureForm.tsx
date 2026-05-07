@@ -1,8 +1,7 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
-import { useRouter } from "next/navigation";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check } from "lucide-react";
 import { trackCTA } from "@/app/lib/analytics";
 
 export function EmailCaptureForm({
@@ -10,9 +9,9 @@ export function EmailCaptureForm({
 }: {
   ctaId?: string;
 }) {
-  const router = useRouter();
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
@@ -34,12 +33,25 @@ export function EmailCaptureForm({
         return;
       }
 
-      trackCTA(ctaId, "/dzieki");
-      router.push("/dzieki");
+      trackCTA(ctaId);
+      setSuccess(true);
+      setSubmitting(false);
     } catch {
       setError("Brak połączenia. Sprawdź internet i spróbuj ponownie.");
       setSubmitting(false);
     }
+  }
+
+  if (success) {
+    return (
+      <div
+        role="status"
+        className="inline-flex items-center gap-2 h-[52px] px-5 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] text-base font-semibold"
+      >
+        <Check size={18} strokeWidth={2.25} />
+        Jesteś w środku &lt;3
+      </div>
+    );
   }
 
   return (

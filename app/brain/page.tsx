@@ -48,9 +48,6 @@ export default function BrainPage() {
 
         <div className="mt-10 max-w-[560px]">
           <EmailCaptureForm ctaId="cta_brain_hero_submit" />
-          <p className="mt-3 t-small text-[var(--text-secondary)]">
-            Po zapisie dostaniesz email z potwierdzeniem.
-          </p>
         </div>
       </section>
 
