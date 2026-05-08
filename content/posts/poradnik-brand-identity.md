@@ -1,7 +1,7 @@
 ---
 title: "Brand Identity w 30 minut, z moodboardu do 18-panelowego sheeta"
 date: "2026-05-04"
-order: 1
+order: 2
 tag: "poradnik"
 description: "Trzy prompty, jeden moodboard, 18-panelowy brand identity sheet. Logo, typografia, kolory, packaging, wszystko z Twoich referencji, nic z templatki."
 tools: ["Cosmos.so", "Pinterest", "Nano Banana Pro", "GPT Image 2"]

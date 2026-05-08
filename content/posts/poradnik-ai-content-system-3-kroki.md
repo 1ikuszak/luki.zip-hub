@@ -1,7 +1,7 @@
 ---
 title: "AI Content System: 3 kroki +2K followers w 30 dni"
 date: "2026-05-06"
-order: 0
+order: 1
 tag: "poradnik"
 description: "Trzy kroki w tej kolejności: research z Reddita + Claude Code, analiza top rolek u top twórców, twój własny styl. Zdobyłem 2K followers w 30 dni"
 ---

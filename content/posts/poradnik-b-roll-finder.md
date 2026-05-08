@@ -1,6 +1,6 @@
 ---
 title: "B-Roll Finder"
-order: 2
+order: 3
 tag: "poradnik"
 description: "AI skill do Claude Code. Dajesz skrypt, dostajesz gotowy b-roll z taste scoringiem i timestampami."
 problem: "Spędzasz godziny na YouTube szukając b-rolla. AI skill robi to za Ciebie w 5 minut."

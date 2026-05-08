@@ -1,6 +1,6 @@
 ---
 title: "AI Skille w Claude Code: produkcyjny system w 30 minut, bez vague promptów"
-order: 7
+order: 8
 tag: "poradnik"
 description: "30+ produkcyjnych skilli, 9 patternów, pętla samonaprawy. Architektura, którą Claude faktycznie egzekwuje. Zero teorii, zero filler'a."
 problem: "Vague prompty produkują vague output. Co miesiąc piszesz to samo od zera, a Claude zapomina co działało wczoraj."

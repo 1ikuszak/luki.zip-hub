@@ -1,6 +1,6 @@
 ---
 title: "Jak sprawić żeby Twoje video zostało zapamiętane: framework jednego przekazu"
-order: 8
+order: 9
 tag: "poradnik"
 description: "Rzuć komuś dziesięć piłek naraz, nie złapie żadnej. Twoje video działa tak samo. Framework Zamiar Dowódcy + Test Jaskiniowca, w 30 minut wybierasz JEDEN przekaz."
 problem: "Większość brandów rzuca dziesięć przekazów naraz i dziwi się, że nikt nie łapie."

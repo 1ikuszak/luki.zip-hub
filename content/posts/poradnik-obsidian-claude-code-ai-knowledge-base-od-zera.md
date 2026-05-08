@@ -1,6 +1,6 @@
 ---
 title: "Obsidian + Claude Code: AI Knowledge Base od zera"
-order: 4
+order: 5
 tag: "poradnik"
 description: "Twoja wiedza jest w 40 chatach, 200 bookmarkach, 15 dokumentach i glowie. AI nie widzi z tego nic. Za kazdym razem tlumaczysz mu od zera kim jestes, co robisz i"
 problem: ""

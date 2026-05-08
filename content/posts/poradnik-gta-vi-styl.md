@@ -1,6 +1,6 @@
 ---
 title: "GTA VI Styl"
-order: 5
+order: 6
 tag: "poradnik"
 description: "Jak generować zdjęcia i wideo w stylu GTA VI. JSON prompty do Nano Banana Pro i Veo 3.1."
 problem: "Generatory AI domyślnie idą w loading screen art zamiast in-game screenshot. JSON zmusza je do RAGE engine quality."

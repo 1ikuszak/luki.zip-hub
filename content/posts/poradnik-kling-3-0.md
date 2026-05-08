@@ -1,6 +1,6 @@
 ---
 title: "Kling 3.0"
-order: 6
+order: 7
 tag: "poradnik"
 description: "Wrzuć ten plik jako kontekst do Claude, Gemini, ChatGPT lub dowolnego AI, i poproś o napisanie promptu do Klinga 3.0. AI użyje tych zasad żeby dać Ci lepszy ou"
 problem: ""

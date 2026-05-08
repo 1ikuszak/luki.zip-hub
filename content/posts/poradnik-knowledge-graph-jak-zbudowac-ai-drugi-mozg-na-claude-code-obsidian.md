@@ -1,6 +1,6 @@
 ---
 title: "AI Knowledge Base: drugi mózg w 30 minut na Claude Code + Obsidian"
-order: 3
+order: 4
 tag: "poradnik"
 description: "Twoja wiedza jest w 40 chatach, 200 bookmarkach, 15 dokumentach. AI nie widzi z tego nic. Postawisz drugi mózg w 30 minut. Karpathy pattern + skille."
 problem: "Twoja wiedza jest w 40 chatach, 200 bookmarkach, 15 dokumentach. AI nie widzi z tego nic."
