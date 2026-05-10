@@ -4,7 +4,7 @@ import { ArticleCard } from "@/app/components/ArticleCard";
 
 const pageTitle = "Artykuły | luki.zip";
 const pageDescription =
-  "Praktyczne notatki o video, AI i pracy creatora. Bez fluffu, same konkretne fixy.";
+  "Jak budować markę w świecie AI, który zmienia się z tygodnia na tydzień. Konkretne, praktyczne porady.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -32,8 +32,8 @@ export default function ArtykulyPage() {
         <header className="max-w-[680px]">
           <h1 className="t-h1">Artykuły</h1>
           <p className="t-body-large mt-4 text-[var(--text-secondary)]">
-            Praktyczne notatki o video, AI i pracy creatora. Bez fluffu, same
-            konkretne fixy.
+            Jak budować markę w świecie AI, który zmienia się z tygodnia na
+            tydzień. Konkretne, praktyczne porady.
           </p>
         </header>
 
