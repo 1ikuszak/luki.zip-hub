@@ -3,7 +3,11 @@
 import { ArrowRight } from "lucide-react";
 import { TrackedLink } from "@/app/components/TrackedLink";
 
-export function BrandBrainOSCTA() {
+type Props = {
+  articleSlug: string;
+};
+
+export function BrandBrainOSCTA({ articleSlug }: Props) {
   return (
     <aside className="mt-4 rounded-xl bg-[var(--text)] text-white p-6 sm:p-8">
       <p className="text-[11px] uppercase tracking-wider font-semibold text-[var(--chartreuse)]">
@@ -18,6 +22,8 @@ export function BrandBrainOSCTA() {
       <TrackedLink
         ctaId="brain_poradnik_footer"
         href="/brain"
+        articleSlug={articleSlug}
+        medium="article"
         className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--chartreuse)] underline underline-offset-4 hover:no-underline"
       >
         Zapisz się na newsletter

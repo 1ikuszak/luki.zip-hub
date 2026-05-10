@@ -15,9 +15,21 @@ export function trackPixelCustom(name: string, params?: Params): void {
   window.fbq("trackCustom", name, params ?? {});
 }
 
-export function trackCTA(ctaId: string, href?: string): void {
-  trackGA("click_cta", { cta_id: ctaId, href });
-  if (ctaId.startsWith("brain_")) {
-    trackPixel("Lead", { content_name: ctaId });
+type CTAExtras = {
+  article_slug?: string;
+  medium?: string;
+};
+
+export function trackCTA(
+  ctaId: string,
+  href?: string,
+  extras?: CTAExtras,
+): void {
+  trackGA("click_cta", { cta_id: ctaId, href, ...(extras ?? {}) });
+  if (ctaId.startsWith("brain_") || ctaId.startsWith("cta_brain_")) {
+    trackPixel("Lead", {
+      content_name: ctaId,
+      ...(extras?.article_slug ? { article_slug: extras.article_slug } : {}),
+    });
   }
 }

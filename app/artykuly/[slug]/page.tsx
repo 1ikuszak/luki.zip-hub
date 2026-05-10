@@ -120,7 +120,7 @@ export default async function ArticlePage({
         )}
 
         {isPoradnik ? (
-          <BrandBrainOSCTA />
+          <BrandBrainOSCTA articleSlug={post.slug} />
         ) : (
           <aside className="mt-4 bg-white border border-[var(--border)] rounded-xl p-6 sm:p-8">
             <p className="text-[11px] uppercase tracking-wider font-semibold text-[var(--text-secondary)]">

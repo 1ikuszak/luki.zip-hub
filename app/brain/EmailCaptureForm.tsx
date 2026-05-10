@@ -1,14 +1,17 @@
 "use client";
 
 import { useState, type FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 import { trackCTA } from "@/app/lib/analytics";
+import { readSourceContext } from "@/app/lib/source-tracking";
 
 export function EmailCaptureForm({
   ctaId = "brain_form_submit",
 }: {
   ctaId?: string;
 }) {
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -20,11 +23,18 @@ export function EmailCaptureForm({
     setSubmitting(true);
     setError(null);
 
+    const source = readSourceContext(searchParams);
+
     try {
       const res = await fetch("/api/subscribe", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          email,
+          article_slug: source.article_slug,
+          medium: source.medium,
+          referring_site: source.referring_site,
+        }),
       });
 
       if (!res.ok) {
@@ -33,7 +43,10 @@ export function EmailCaptureForm({
         return;
       }
 
-      trackCTA(ctaId);
+      trackCTA(ctaId, undefined, {
+        article_slug: source.article_slug,
+        medium: source.medium,
+      });
       setSuccess(true);
       setSubmitting(false);
     } catch {

@@ -20,10 +20,10 @@ export function Hero() {
 
       <div className="mt-10 flex flex-col sm:flex-row gap-3">
         <Link
-          href="/brain"
+          href="/brain?utm_medium=homepage"
           data-track="cta_hero"
           data-track-id="cta_hero_brain"
-          data-track-href="/brain"
+          data-track-href="/brain?utm_medium=homepage"
           className="inline-flex h-[52px] items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-7 text-base font-semibold text-white hover:bg-[var(--accent-light)] transition-colors"
         >
           Zapisz się na newsletter

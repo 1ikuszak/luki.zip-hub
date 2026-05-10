@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import type { Metadata } from "next";
 import { EmailCaptureForm } from "./EmailCaptureForm";
 
@@ -47,7 +48,9 @@ export default function BrainPage() {
         </p>
 
         <div className="mt-10 max-w-[560px]">
-          <EmailCaptureForm ctaId="cta_brain_hero_submit" />
+          <Suspense fallback={<div className="h-[52px]" aria-hidden />}>
+            <EmailCaptureForm ctaId="cta_brain_hero_submit" />
+          </Suspense>
         </div>
       </section>
 
