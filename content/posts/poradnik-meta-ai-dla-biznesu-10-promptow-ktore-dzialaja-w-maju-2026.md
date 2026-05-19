@@ -10,6 +10,8 @@ description: "10 paste-ready promptów Meta AI do audytu Instagrama, badania tre
 
 Mowa o Meta AI.
 
+> **Chcesz tylko link do narzędzia?** Otwórz [meta.ai](https://www.meta.ai) (web, po polsku, zero rejestracji). Pomijasz 10 promptów i klikasz. Reszta poradnika jest dla tych, którzy chcą wiedzieć co z nim zrobić.
+
 ---
 
 ## Jak to działa (60 sekund)
