@@ -1,7 +1,7 @@
 ---
 title: "Meta AI dla biznesu: 10 promptów które działają w maju 2026"
 date: "2026-05-19"
-order: 10
+order: -1
 tag: "poradnik"
 description: "10 paste-ready promptów Meta AI do audytu Instagrama, badania trendów w niszy, analizy konkurencji, odkrywania luk w contentcie i budowy lejka pod digital produkt. Plus uczciwe limity i jak nie dostać bana w fali zawieszeń kont z maja 2026."
 ---
