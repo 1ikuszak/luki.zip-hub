@@ -1,5 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
+import { DitherFlow } from "@/app/components/oferta/DitherFlow";
 import {
   BadgeCheck,
   Instagram,
@@ -45,7 +47,7 @@ const socials: Social[] = [
   {
     label: "LinkedIn",
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/lukaszglica",
+    href: "https://www.linkedin.com/in/lukasz-glica-4b3889267/",
     external: true,
   },
 ];
@@ -61,24 +63,18 @@ type CtaLink = {
 
 const ctaLinks: CtaLink[] = [
   {
-    title: "Pracujmy razem",
-    sub: "Brand · Launch video · Creative direction · od 7 000 zł",
-    href: "/oferta",
-    trackId: "cta_links_oferta",
-    variant: "primary",
-  },
-  {
-    title: "Zobacz case studies",
-    sub: "Realizacje dla klientów — Lumen, Nordic Bank, Oat Haus",
-    href: "/case-studies",
-    trackId: "cta_links_case_studies",
-  },
-  {
     title: "Darmowe poradniki AI",
     sub: "11 konkretnych playbooków — Meta AI, Claude Code, Kling. Bez teoretyzowania.",
     href: "/artykuly",
     trackId: "cta_links_artykuly",
     badge: "DARMOWE",
+  },
+  {
+    title: "Twój content nie robi klientów? Pogadajmy.",
+    sub: "Creative direction dla marek i founderów",
+    href: "/oferta",
+    trackId: "cta_links_oferta",
+    variant: "primary",
   },
   {
     title: "Newsletter na maila",
@@ -91,16 +87,23 @@ const ctaLinks: CtaLink[] = [
 export default function LinksPage() {
   return (
     <div className="min-h-screen bg-[var(--bg-page)]">
-      {/* Cover banner — full-width (edge-to-edge) (TODO: podmień na <Image src="/links/banner.jpg" />) */}
-      <div className="w-full aspect-[16/5] sm:aspect-[16/4] md:aspect-[16/3] bg-gradient-to-br from-[var(--accent)] via-[var(--accent-light)] to-[var(--chartreuse)]" />
+      {/* Cover banner — shader (liquid dither) */}
+      <div className="w-full h-32 overflow-hidden bg-[var(--accent)] sm:h-40 md:h-44">
+        <DitherFlow className="h-full w-full" />
+      </div>
 
       <main className="container-narrow pb-10 sm:pb-14">
         <div className="flex flex-col items-center text-center">
           {/* Avatar (TODO: podmień na <Image src="/links/avatar.jpg" />) */}
-          <div className="-mt-14 sm:-mt-16 w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)] border-4 border-[var(--bg-page)] flex items-center justify-center shrink-0">
-            <span className="text-white font-semibold text-[32px] sm:text-[36px] tracking-wider">
-              LZ
-            </span>
+          <div className="relative -mt-20 sm:-mt-24 w-44 h-44 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[var(--bg-page)] bg-[var(--bg-card)] shrink-0">
+            <Image
+              src="/links/avatar.jpg"
+              alt="Łukasz Glica"
+              fill
+              sizes="192px"
+              className="object-cover"
+              priority
+            />
           </div>
 
           {/* Imię + checkmark */}
@@ -118,13 +121,13 @@ export default function LinksPage() {
           </div>
 
           {/* Tagline */}
-          <p className="mt-1.5 text-[15px] text-[var(--text-secondary)]">
-            Video · Content · Design · Creative Direction
+          <p className="mt-2 text-[15px] text-[var(--text)] max-w-[440px]">
+            Buduję marki, które wyglądają cool w dobie AI
           </p>
 
-          {/* Mini-bio */}
-          <p className="mt-2 text-[15px] text-[var(--text)] max-w-[420px]">
-            Robię marki, które wyglądają cool.
+          {/* Discipline row */}
+          <p className="mt-1.5 text-[14px] text-[var(--text-secondary)]">
+            Video · Content · Design · Creative Direction
           </p>
 
           {/* Social icons row */}
