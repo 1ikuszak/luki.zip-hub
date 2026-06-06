@@ -7,7 +7,7 @@ const NAV_LINKS = [
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 bg-[var(--bg-page)] border-b border-[var(--border)]">
+    <header className="sticky top-0 z-50 bg-white border-b border-[var(--border)]">
       <nav className="container-wide flex h-16 items-center justify-between">
         <Link
           href="/"

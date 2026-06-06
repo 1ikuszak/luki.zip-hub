@@ -1,6 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  // Crossfade route changes via native View Transitions API
+  experimental: {
+    viewTransition: true,
+  },
   images: {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",

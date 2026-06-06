@@ -1,10 +1,14 @@
 import type { Metadata } from "next";
-import { Calendar, Check } from "lucide-react";
-import { CALENDLY_URL } from "@/app/lib/data";
+import { Check, ArrowRight } from "lucide-react";
+import { STARTER_FORM_URL } from "@/app/lib/data";
+import { GradientBackdrop } from "@/app/components/GradientBackdrop";
+import { MoreCTA } from "@/app/components/MoreCTA";
+import { Counter } from "@/app/components/oferta/Counter";
+import { Reveal } from "@/app/components/oferta/Reveal";
 
 const pageTitle = "Oferta | luki.zip";
 const pageDescription =
-  "Brand DNA i Launch Video dla AI startupów. Pozycjonowanie, identyfikacja i video, które nie usypia.";
+  "Zdobywaj klientów organicznym contentem. Kierunek marki plus 8 gotowych skryptów pod twój cel. W tydzień. Za 997 zł.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -23,222 +27,319 @@ export const metadata: Metadata = {
   },
 };
 
-type Tier = {
-  id: string;
-  name: string;
-  price: string;
-  hook: string;
-  audience: string;
-  bullets: string[];
-  effect: string;
-  timing?: string;
-  featured?: boolean;
-};
+const STATS: {
+  to: number;
+  suffix?: string;
+  prefix?: string;
+  decimals?: number;
+  label: string;
+}[] = [
+  { to: 2, suffix: "M+", label: "wyświetleń wygenerowanych contentem" },
+  { to: 8, suffix: "K", label: "subskrypcji YouTube w 3 miesiące" },
+  { to: 500, label: "leadów z jednego materiału" },
+];
 
-const TIERS: Tier[] = [
+const DELIVERABLES: { name: string; desc: string; value: string }[] = [
   {
-    id: "brand-stylist",
-    name: "Brand Stylist",
-    price: "6 000 zł",
-    hook: "Przestajesz wyglądać jak „kolejny AI tool”.",
-    audience:
-      "Dla pre-seed/seed, które mają produkt, ale giną w tłumie.",
-    bullets: [
-      "Pozycjonowanie — 1 zdanie dla VC i 1 dla usera",
-      "Identyfikacja — logo, kolory, typografia (pliki dla deva)",
-      "System — brand book + biblioteka promptów + voice guide (maile, posty, decki)",
-    ],
-    effect: "Efekt: inwestor rozumie w 10 sekund. User pamięta po 1 scrollu.",
+    name: "Brand Teardown Call (60 min)",
+    desc: "Rozkładam twoją markę. Pokazuję, gdzie tracisz uwagę i leady.",
+    value: "600 zł",
   },
   {
-    id: "launch-video",
-    name: "Launch Video",
-    price: "8 000 zł",
-    hook: "Video na start, które opowiada o Twoim produkcie tak, że ludzie oglądają do końca.",
-    audience: "Video, które sprzedaje, nie tylko wygląda.",
-    bullets: [
-      "Strategia pod Twojego odbiorcę",
-      "Skrypt z mocnym otwarciem",
-      "Nagranie i montaż",
-    ],
-    effect: "Po 21 dniach masz asset, który sprzedaje zamiast Ciebie.",
-    featured: true,
+    name: "Content Direction (1 strona)",
+    desc: "Pozycjonowanie, narracja, 3 pillary. Twój filtr na każdy content.",
+    value: "1500 zł",
   },
   {
-    id: "creative-partner",
-    name: "Creative Partner",
-    price: "od 9 000 zł/mies",
-    hook: "Twój zespół kreatywny bez etatu. Pauzujesz kiedy chcesz.",
-    audience:
-      "Dla brandów, które rosną za szybko na freelancerów, za wolno na agencję.",
-    bullets: [
-      "Stały zespół zamiast 5 freelancerów: brand, product design, video, web",
-      "Bezpośrednia komunikacja w 24h",
-      "Pauza w każdej chwili",
-    ],
-    effect: "Po 30 dniach: 1 partner, nie 5 wątków w Slacku.",
+    name: "8 gotowych skryptów na Instagram Reels",
+    desc: "Hook, body, CTA. Każdy pod twój cel i styl. Wchodzisz, nagrywasz.",
+    value: "2000 zł",
+  },
+  {
+    name: "Bank 20 dodatkowych hooków",
+    desc: "Na kolejne tygodnie. Nigdy nie siadasz przed pustą kartką.",
+    value: "500 zł",
+  },
+  {
+    name: "Walkthrough: jak nagrywać i publikować",
+    desc: "Krok po kroku, żebyś ruszył sam.",
+    value: "400 zł",
   },
 ];
 
+// ASCII-graficzki nad nagłówkami sekcji (kolor akcentu, na bieli)
+const MARK_DOWN = " .|.\n -+-\n  v";
+const MARK_SPARK = ". * .\n* + *\n. * .";
+const MARK_COMPASS = " .'.\n(-+-)\n '.'";
+
+function Mark({ art }: { art: string }) {
+  return (
+    <pre
+      aria-hidden="true"
+      className="m-0 mb-2 select-none text-[var(--accent)]"
+      style={{
+        fontFamily: "ui-monospace, SFMono-Regular, Menlo, monospace",
+        fontSize: "12px",
+        lineHeight: "1.15",
+        whiteSpace: "pre",
+      }}
+    >{art}</pre>
+  );
+}
+
 export default function OfertaPage() {
   return (
-    <main className="container-wide py-12 sm:py-20">
-      <div className="flex flex-col gap-16 sm:gap-24">
-        {/* Header */}
-        <header className="flex flex-col gap-4">
-          <h1 className="t-h1">Oferta</h1>
-        </header>
+    <div className="relative min-h-screen bg-[var(--bg-page)]">
+      {/* FIXED efekt — tło gradientowe */}
+      <GradientBackdrop />
 
-        {/* Pakiety */}
-        <section>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-            {TIERS.map((tier) => {
-              const isFeatured = tier.featured;
-              const muted = isFeatured ? "text-white/60" : "text-[var(--text-secondary)]";
-              const text = isFeatured ? "text-white" : "text-[var(--text)]";
-              const divider = isFeatured ? "border-white/15" : "border-[var(--border)]";
+      {/* padding dookoła — efekt jako równa ramka ze wszystkich stron */}
+      <div className="relative z-10 p-3 sm:p-6 lg:p-8">
+        {/* ZAOKRĄGLONA BIAŁA KARTA — floatuje na efekcie */}
+        <div className="relative mx-auto w-full max-w-[1400px] overflow-hidden rounded-[22px] border border-[var(--border)] shadow-[0_30px_80px_-50px_rgba(8,12,40,0.4)] sm:rounded-[30px]">
+          {/* BIAŁY blok górny */}
+          <div className="bg-[var(--bg-card)]">
+            {/* odstęp u góry */}
+            <div className="h-12 sm:h-16" />
 
-              const checkColor = isFeatured ? "text-white" : "text-[var(--accent)]";
-              return (
-                <div
-                  key={tier.id}
-                  className={`relative rounded-xl p-6 flex flex-col ${
-                    isFeatured
-                      ? "bg-[var(--accent)] text-white border border-[var(--accent)]"
-                      : "bg-white border border-[var(--border)]"
-                  }`}
-                >
-                  <div className={`text-[11px] font-semibold tracking-[0.12em] uppercase ${muted}`}>
-                    {tier.name}
-                  </div>
+          {/* ─── HERO ─────────────────────────────────────────── */}
+          <section className="flex min-h-[68vh] flex-col items-center justify-center gap-8 px-6 py-20 text-center sm:px-10">
+            <h1 className="max-w-[16ch] text-balance text-[44px] font-semibold leading-[1.0] tracking-[-0.03em] text-[var(--text)] sm:text-[64px] lg:text-[78px]">
+              Miesiąc contentu, który{" "}
+              <span className="text-[var(--accent)]">faktycznie sprzedaje.</span>
+            </h1>
 
-                  <div
-                    className={`mt-3 text-[32px] font-semibold leading-none ${text}`}
-                    style={{ fontVariantNumeric: "tabular-nums" }}
-                  >
-                    {tier.price}
-                  </div>
-
-                  <p className={`text-[15px] mt-3 leading-snug font-semibold ${text}`}>
-                    {tier.hook}
-                  </p>
-
-                  <p className={`text-[13px] mt-2 leading-relaxed ${muted}`}>
-                    {tier.audience}
-                  </p>
-
-                  <div className={`border-t ${divider} my-5`} />
-
-                  <ul className="flex flex-col gap-2.5 grow">
-                    {tier.bullets.map((b) => (
-                      <li
-                        key={b}
-                        className={`flex items-start gap-2.5 text-[14px] leading-snug ${text}`}
-                      >
-                        <Check
-                          size={16}
-                          strokeWidth={2.5}
-                          className={`mt-0.5 shrink-0 ${checkColor}`}
-                        />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className={`border-t ${divider} my-5`} />
-
-                  <p className={`text-[13px] leading-relaxed ${text}`}>
-                    {tier.effect}
-                  </p>
-                  {tier.timing && (
-                    <p className={`text-[13px] mt-1 leading-relaxed ${muted}`}>
-                      {tier.timing}
-                    </p>
-                  )}
-
-                  <a
-                    href="#formularz"
-                    data-track="cta_oferta_card"
-                    data-track-id={`cta_oferta_${tier.id}`}
-                    data-track-href="#formularz"
-                    className={`mt-7 inline-flex items-center self-start text-[13px] underline underline-offset-4 hover:no-underline transition-opacity ${
-                      isFeatured ? "text-white/80 hover:text-white" : "text-[var(--text-secondary)] hover:text-[var(--text)]"
-                    }`}
-                  >
-                    pasuje? → sprawdźmy fit
-                  </a>
-                </div>
-              );
-            })}
-          </div>
-
-          <div className="mt-12 sm:mt-16 flex flex-col items-center text-center gap-4">
-            <a
-              href="#formularz"
-              data-track="cta_oferta_main"
-              data-track-id="cta_oferta_main"
-              data-track-href="#formularz"
-              className="inline-flex items-center justify-center gap-2 h-[60px] rounded-lg bg-[var(--accent)] px-8 font-semibold text-[17px] text-white hover:bg-[var(--accent-light)] transition-colors"
-            >
-              <Calendar size={18} strokeWidth={2.25} />
-              Sprawdźmy fit, 15 min
-            </a>
-          </div>
-        </section>
-
-        {/* O mnie */}
-        <section>
-          <h2 className="t-h2">O mnie</h2>
-          <div className="flex flex-col sm:flex-row gap-6 items-start mt-8">
-            <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-[var(--accent)] to-[var(--accent-light)] flex items-center justify-center shrink-0">
-              <span className="text-white font-semibold text-[28px] sm:text-[30px] tracking-wider">
-                LZ
+            <p className="max-w-[46ch] text-[17px] leading-relaxed text-[var(--text-secondary)] sm:text-[20px]">
+              Strategia marki plus 8 gotowych skryptów pod twój cel. W tydzień.
+              <span className="mt-1 block font-semibold text-[var(--text)]">
+                Za 997 zł.
               </span>
-            </div>
-            <div className="flex flex-col gap-4 t-body text-[var(--text)] max-w-[640px]">
-              <p>
-                <strong>Łukasz Glica.</strong> Creative Director dla AI tech startupów.
-              </p>
-              <p>
-                Robię tak, żeby Wasza marka wyglądała cool i nie zginęła w slopie.
-              </p>
-              <p>
-                Aktualnie kreatywny partner DFIRST. Pracuję z tech startupami w PL, EU, USA. Wcześniej creative partner JBB Bałdyga, PetitePants.
-              </p>
-              <p>
-                Rozumiem internet. Zgromadziłem 8 tysięcy subskrypcji na YouTube w parę miesięcy od zera. 100 tysięcy zasięgu na Instagramie miesięcznie. Buduję swoją markę i wiem, jak zbudować coś, co rezonuje i sprzedaje.
-              </p>
-              <p className="text-[var(--text-secondary)]">
-                Bez agencyjnych warstw. Bez juniorów. Bez korpo umów.
-              </p>
-            </div>
-          </div>
-        </section>
+            </p>
 
-        {/* Formularz */}
-        <section id="formularz" className="scroll-mt-24">
-          <h2 className="t-h2">Formularz, sprawdźmy fit</h2>
-          <div className="mt-6 bg-white rounded-xl border border-[var(--border)] overflow-hidden">
-            <iframe
-              src={CALENDLY_URL}
-              className="w-full h-[700px] border-0 block"
-              title="Wyślij brief"
-              loading="lazy"
-            />
+            <div className="flex flex-col items-center gap-3 sm:flex-row">
+              <a
+                href={STARTER_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="cta_oferta_main"
+                data-track-id="cta_oferta_hero"
+                data-track-href={STARTER_FORM_URL}
+                className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-[var(--accent)] px-8 text-[16px] font-semibold text-white shadow-[0_20px_50px_-18px_rgba(38,86,217,0.6)] transition-transform hover:scale-[1.03]"
+              >
+                Chcę Starter
+                <ArrowRight
+                  size={18}
+                  strokeWidth={2.5}
+                  className="transition-transform group-hover:translate-x-0.5"
+                />
+              </a>
+            </div>
+
+            {/* statystyki */}
+            <div className="mt-6 flex flex-col items-center justify-center gap-6 sm:flex-row sm:gap-0">
+              {STATS.map((s, i) => (
+                <div key={s.label} className="flex items-center">
+                  {i > 0 && (
+                    <span className="mx-8 hidden h-10 w-px bg-[var(--border)] sm:block" />
+                  )}
+                  <div className="flex flex-col items-center sm:items-start">
+                    <Counter
+                      to={s.to}
+                      suffix={s.suffix}
+                      prefix={s.prefix}
+                      decimals={s.decimals}
+                      className="text-[30px] font-semibold leading-none text-[var(--text)] sm:text-[34px]"
+                    />
+                    <span className="mt-1.5 text-[12px] leading-snug text-[var(--text-secondary)]">
+                      {s.label}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* ─── TREŚĆ ────────────────────────────────────────── */}
+          <div className="container-narrow flex flex-col gap-20 border-t border-[var(--border)] py-24 sm:gap-28 sm:py-28">
+            {/* Problem */}
+            <Reveal>
+              <section className="flex flex-col gap-4">
+                <Mark art={MARK_DOWN} />
+                <h2 className="text-balance text-[26px] font-semibold leading-[1.18] tracking-[-0.02em] sm:text-[32px]">
+                  Wrzucasz rolki i nie ma rezultatu.
+                </h2>
+                <p className="t-body max-w-[52ch] text-[var(--text-secondary)]">
+                  Setki poświęconych godzin, a wciąż zero zapytań i zero
+                  sprzedaży. Bez systemu i pozycjonowania tylko tracisz czas.
+                </p>
+              </section>
+            </Reveal>
+
+            {/* Dowiedz się, co naprawdę przynosi klientów */}
+            <Reveal>
+              <section className="flex flex-col gap-4">
+                <Mark art={MARK_SPARK} />
+                <h2 className="text-balance text-[26px] font-semibold leading-[1.18] tracking-[-0.02em] sm:text-[32px]">
+                  Dowiedz się, co naprawdę przynosi ci klientów.
+                </h2>
+                <p className="t-body max-w-[52ch] text-[var(--text-secondary)]">
+                  Zrobiłem ponad{" "}
+                  <span className="font-semibold text-[var(--text)]">
+                    2 miliony wyświetleń
+                  </span>
+                  . Swoich i klientów.
+                </p>
+                <p className="t-body max-w-[52ch] text-[var(--text-secondary)]">
+                  Ale z wyświetleń nie zapłacisz pensji. Z klientów tak.
+                </p>
+                <p className="t-body max-w-[52ch] text-[var(--text-secondary)]">
+                  Pokażę ci, które rolki pozyskują klientów. I jak wdrożyć to u
+                  ciebie.
+                </p>
+              </section>
+            </Reveal>
+
+            {/* Co dostajesz */}
+            <Reveal>
+              <section className="flex flex-col gap-8">
+                <Mark art={MARK_COMPASS} />
+                <h2 className="text-balance text-[26px] font-semibold leading-[1.18] tracking-[-0.02em] sm:text-[32px]">
+                  Dostajesz kierunek, który zamienia uwagę w klientów.
+                </h2>
+
+                <ul className="flex flex-col">
+                  {DELIVERABLES.map((d, i) => (
+                    <li
+                      key={d.name}
+                      className={`flex items-start gap-4 py-5 ${
+                        i > 0 ? "border-t border-[var(--border)]" : ""
+                      }`}
+                    >
+                      <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[var(--accent)]/10">
+                        <Check
+                          size={15}
+                          strokeWidth={2.75}
+                          className="text-[var(--accent)]"
+                        />
+                      </span>
+                      <div className="flex grow flex-col gap-1">
+                        <span className="text-[16px] font-semibold leading-snug text-[var(--text)]">
+                          {d.name}
+                        </span>
+                        <p className="text-[14px] leading-snug text-[var(--text-secondary)]">
+                          {d.desc}
+                        </p>
+                      </div>
+                      <span
+                        className="mt-1 shrink-0 whitespace-nowrap text-[13px] text-[var(--text-secondary)]"
+                        style={{ fontVariantNumeric: "tabular-nums" }}
+                      >
+                        warte {d.value}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+
+                {/* Cena — klikalna karta */}
+                <a
+                  href={STARTER_FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="cta_oferta_main"
+                  data-track-id="cta_oferta_price"
+                  data-track-href={STARTER_FORM_URL}
+                  className="group relative block overflow-hidden rounded-[24px] bg-[var(--accent)] p-8 text-white shadow-[0_30px_70px_-24px_rgba(38,86,217,0.65)] transition-transform hover:-translate-y-1 sm:p-10"
+                >
+                  {/* poświata */}
+                  <div
+                    className="pointer-events-none absolute -right-16 -top-24 h-72 w-72 rounded-full opacity-40 blur-3xl"
+                    style={{
+                      background:
+                        "radial-gradient(circle, rgba(56,189,248,0.9), transparent 70%)",
+                    }}
+                  />
+                  <div className="relative flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+                    <div className="flex flex-col gap-2">
+                      <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-white/70">
+                        Starter
+                      </span>
+                      <span className="text-[14px] text-white/65 line-through">
+                        Łączna wartość ~5000 zł
+                      </span>
+                      <div className="flex items-baseline gap-2">
+                        <span className="text-[15px] text-white/80">Płacisz</span>
+                        <span
+                          className="text-[52px] font-semibold leading-none sm:text-[60px]"
+                          style={{ fontVariantNumeric: "tabular-nums" }}
+                        >
+                          997 zł
+                        </span>
+                      </div>
+                    </div>
+                    <span className="inline-flex h-[56px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-8 text-[16px] font-semibold text-[var(--accent)] transition-transform group-hover:scale-[1.03]">
+                      Chcę Starter
+                      <ArrowRight
+                        size={18}
+                        strokeWidth={2.5}
+                        className="transition-transform group-hover:translate-x-0.5"
+                      />
+                    </span>
+                  </div>
+                </a>
+              </section>
+            </Reveal>
+
           </div>
-          <p className="text-[13px] text-[var(--text-secondary)] mt-4 text-center">
-            Problem z formularzem?{" "}
-            <a
-              href={CALENDLY_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="underline underline-offset-2 text-[var(--accent)] hover:no-underline"
-            >
-              Wyślij brief w nowej karcie
-            </a>
-          </p>
-        </section>
+          </div>
+
+          {/* DZIURA w białym — prześwituje fixed gradient (biały tekst) */}
+          <Reveal>
+            <section className="flex flex-col items-center gap-4 px-6 py-24 text-center sm:px-10">
+              <h2
+                className="text-balance text-[26px] font-semibold leading-[1.18] tracking-[-0.02em] text-white sm:text-[32px]"
+                style={{ textShadow: "0 1px 24px rgba(5,8,30,0.45)" }}
+              >
+                Każdy miesiąc bez systemu to stracone nagrania.
+              </h2>
+              <p
+                className="t-body max-w-[52ch] text-white/85"
+                style={{ textShadow: "0 1px 18px rgba(5,8,30,0.4)" }}
+              >
+                Sam szukałbyś tego, co działa, pół roku. Zgadując, testując,
+                gadając do ściany. Ja skracam to do jednej sesji.
+              </p>
+              <p
+                className="t-body max-w-[52ch] text-white/85"
+                style={{ textShadow: "0 1px 18px rgba(5,8,30,0.4)" }}
+              >
+                Nie kupujesz skryptów. Kupujesz miesiące, których nie tracisz.
+              </p>
+              <div className="mt-2">
+                <a
+                  href={STARTER_FORM_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-track="cta_oferta_main"
+                  data-track-id="cta_oferta_close"
+                  data-track-href={STARTER_FORM_URL}
+                  className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-white px-8 text-[16px] font-semibold text-[var(--accent)] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.45)] transition-transform hover:scale-[1.03]"
+                >
+                  Chcę Starter
+                  <ArrowRight
+                    size={18}
+                    strokeWidth={2.5}
+                    className="transition-transform group-hover:translate-x-0.5"
+                  />
+                </a>
+              </div>
+            </section>
+          </Reveal>
+
+        </div>
+
+        {/* Zamykający CTA — wspólny komponent */}
+        <MoreCTA />
       </div>
-    </main>
+    </div>
   );
 }

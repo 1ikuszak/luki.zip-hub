@@ -3,6 +3,13 @@ import { CommandItemData, ReviewData, SocialLink } from "@/app/types";
 export const CALENDLY_URL =
   "https://docs.google.com/forms/d/e/1FAIpQLSf6pBE9idOVF33I22RuX5h15BfGoXhN8UByOhKRSwxibveoOw/viewform";
 
+// Starter / Content Interest Form (Notion) — przyciski "Chcę Starter"
+export const STARTER_FORM_URL =
+  "https://www.notion.so/Content-Interest-Form-36a8f4fa2413802a820ff2dae75f7c96";
+
+// TODO: podmień na Notion Form ("Pogadajmy" / Let's Talk)
+export const CONTACT_FORM_URL = "#";
+
 export const mainCommands: CommandItemData[] = [
   {
     id: "oferta",
@@ -51,6 +58,13 @@ export const socialLinks: SocialLink[] = [
     label: "TikTok",
     href: "https://www.tiktok.com/@luki.zip",
     keywords: "tiktok social video",
+  },
+  {
+    id: "linkedin",
+    icon: "Linkedin",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/lukasz-glica-4b3889267/",
+    keywords: "linkedin social",
   },
 ];
 

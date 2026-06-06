@@ -3,6 +3,7 @@ import "./globals.css";
 import { Analytics } from "./components/Analytics";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import { ChromeGate } from "./components/ChromeGate";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://luki.zip";
 const title = "luki.zip — brand design & launch video";
@@ -60,10 +61,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pl">
+      <head>
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
+        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
+      </head>
       <body className="antialiased">
-        <Navbar />
+        <ChromeGate>
+          <Navbar />
+        </ChromeGate>
         <main>{children}</main>
-        <Footer />
+        <ChromeGate>
+          <Footer />
+        </ChromeGate>
         <Analytics />
       </body>
     </html>
