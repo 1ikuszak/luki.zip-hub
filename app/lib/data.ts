@@ -7,8 +7,9 @@ export const CALENDLY_URL =
 export const STARTER_FORM_URL =
   "https://www.notion.so/Content-Interest-Form-36a8f4fa2413802a820ff2dae75f7c96";
 
-// TODO: podmień na Notion Form ("Pogadajmy" / Let's Talk)
-export const CONTACT_FORM_URL = "#";
+// "Pogadajmy" — booking Cal.com
+export const CONTACT_FORM_URL =
+  "https://cal.com/łukasz-glica-tz6ei1/30min";
 
 export const mainCommands: CommandItemData[] = [
   {
