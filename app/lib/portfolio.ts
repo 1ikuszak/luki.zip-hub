@@ -377,6 +377,14 @@ export const portfolioItems: PortfolioItem[] = [
   },
   {
     kind: "video",
+    src: "/portfolio/video/skolim-jbb-full-1.mp4",
+    poster: "/portfolio/poster/skolim-jbb-full-1.webp",
+    width: 1080,
+    height: 1920,
+    alt: "Projekt (wideo)",
+  },
+  {
+    kind: "video",
     src: "/portfolio/video/screen-recording-2024-12-08-at-11-31-15.mp4",
     poster: "/portfolio/poster/screen-recording-2024-12-08-at-11-31-15.webp",
     width: 1280,
