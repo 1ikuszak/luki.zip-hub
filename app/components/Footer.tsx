@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 import { socialLinks } from "@/app/lib/data";
 
 const NAV_LINKS = [
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Artykuły", href: "/artykuly" },
   { label: "Oferta", href: "/oferta" },
   { label: "Newsletter", href: "/brain" },
 ];
 
 // strony z gradientowym tłem → footer biały + przezroczysty, na gradiencie
-const GRADIENT_ROUTES = ["/oferta", "/artykuly"];
+const GRADIENT_ROUTES = ["/oferta", "/artykuly", "/portfolio", "/about"];
 
 export function Footer() {
   const pathname = usePathname();
@@ -47,6 +48,9 @@ export function Footer() {
             <div className={`text-[17px] font-semibold ${cls.title}`}>
               luki.zip
             </div>
+            <p className={`text-[15px] max-w-[28ch] ${cls.muted}`}>
+              I build brands with taste. In the age of AI.
+            </p>
             <a
               href="mailto:lukasz.glica07@gmail.com"
               className={`text-[15px] ${cls.emailLink} transition-colors mt-1 w-fit underline underline-offset-4`}

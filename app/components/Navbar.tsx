@@ -1,8 +1,10 @@
 import Link from "next/link";
 
 const NAV_LINKS = [
+  { label: "Portfolio", href: "/portfolio" },
   { label: "Artykuły", href: "/artykuly" },
-  { label: "Oferta", href: "/oferta" },
+  { label: "Współpraca", href: "/oferta" },
+  { label: "About me", href: "/about" },
 ];
 
 export function Navbar() {
