@@ -70,6 +70,12 @@ const ctaLinks: CtaLink[] = [
     badge: "DARMOWE",
   },
   {
+    title: "Moje projekty",
+    sub: "Wybrane realizacje — strony, brandingi, reele.",
+    href: "/portfolio",
+    trackId: "cta_links_portfolio",
+  },
+  {
     title: "Newsletter na maila",
     sub: "Co tydzień jeden konkretny insight o brandzie w erze AI",
     href: "/brain",
