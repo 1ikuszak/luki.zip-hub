@@ -13,27 +13,19 @@ export type PortfolioItem = {
 
 export const portfolioItems: PortfolioItem[] = [
   {
-    kind: "video",
-    src: "/portfolio/video/filip-ai-coach-1-225.mp4",
-    poster: "/portfolio/poster/filip-ai-coach-1-225.webp",
-    width: 1280,
-    height: 720,
-    alt: "Projekt (wideo)",
-  },
-  {
-    kind: "video",
-    src: "/portfolio/video/filip-ai-coach-2-2431.mp4",
-    poster: "/portfolio/poster/filip-ai-coach-2-2431.webp",
-    width: 1280,
-    height: 720,
-    alt: "Projekt (wideo)",
-  },
-  {
     kind: "image",
     src: "/portfolio/img/technology-integration-visuals-43950.webp",
     width: 2752,
     height: 1536,
     alt: "Projekt",
+  },
+  {
+    kind: "video",
+    src: "/portfolio/video/filip-ai-coach-1-5.mp4",
+    poster: "/portfolio/poster/filip-ai-coach-1-5.webp",
+    width: 1280,
+    height: 720,
+    alt: "Projekt (wideo)",
   },
   {
     kind: "video",
@@ -112,6 +104,14 @@ export const portfolioItems: PortfolioItem[] = [
     kind: "video",
     src: "/portfolio/video/yt-muzk8crnvog-pov-japo-scy-przyjaciele-zaprosili-mni.mp4",
     poster: "/portfolio/poster/yt-muzk8crnvog-pov-japo-scy-przyjaciele-zaprosili-mni.webp",
+    width: 1280,
+    height: 720,
+    alt: "Projekt (wideo)",
+  },
+  {
+    kind: "video",
+    src: "/portfolio/video/filip-ai-coach-2-492.mp4",
+    poster: "/portfolio/poster/filip-ai-coach-2-492.webp",
     width: 1280,
     height: 720,
     alt: "Projekt (wideo)",
