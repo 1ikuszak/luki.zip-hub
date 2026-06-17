@@ -13,6 +13,22 @@ export type PortfolioItem = {
 
 export const portfolioItems: PortfolioItem[] = [
   {
+    kind: "video",
+    src: "/portfolio/video/filip-ai-coach-1-225.mp4",
+    poster: "/portfolio/poster/filip-ai-coach-1-225.webp",
+    width: 1280,
+    height: 720,
+    alt: "Projekt (wideo)",
+  },
+  {
+    kind: "video",
+    src: "/portfolio/video/filip-ai-coach-2-2431.mp4",
+    poster: "/portfolio/poster/filip-ai-coach-2-2431.webp",
+    width: 1280,
+    height: 720,
+    alt: "Projekt (wideo)",
+  },
+  {
     kind: "image",
     src: "/portfolio/img/technology-integration-visuals-43950.webp",
     width: 2752,
