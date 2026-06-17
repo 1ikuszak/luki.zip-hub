@@ -70,13 +70,6 @@ const ctaLinks: CtaLink[] = [
     badge: "DARMOWE",
   },
   {
-    title: "Twój content nie robi klientów? Pogadajmy.",
-    sub: "Creative direction dla marek i founderów",
-    href: "/oferta",
-    trackId: "cta_links_oferta",
-    variant: "primary",
-  },
-  {
     title: "Newsletter na maila",
     sub: "Co tydzień jeden konkretny insight o brandzie w erze AI",
     href: "/brain",
