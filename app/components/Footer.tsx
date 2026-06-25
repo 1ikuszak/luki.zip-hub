@@ -4,22 +4,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { socialLinks } from "@/app/lib/data";
 
-// PRODUKCJA: Portfolio / Artykuły / Linki / Newsletter (bez Oferty).
-// DEV (localhost): stary footer z Ofertą, żeby Luki mógł dalej budować.
-const NAV_LINKS =
-  process.env.NODE_ENV === "production"
-    ? [
-        { label: "Portfolio", href: "/portfolio" },
-        { label: "Artykuły", href: "/artykuly" },
-        { label: "Linki", href: "/links" },
-        { label: "Newsletter", href: "/brain" },
-      ]
-    : [
-        { label: "Portfolio", href: "/portfolio" },
-        { label: "Artykuły", href: "/artykuly" },
-        { label: "Oferta", href: "/oferta" },
-        { label: "Newsletter", href: "/brain" },
-      ];
+const NAV_LINKS = [
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Artykuły", href: "/artykuly" },
+  { label: "O mnie", href: "/about" },
+  { label: "Newsletter", href: "/brain" },
+];
 
 // strony z gradientowym tłem → footer biały + przezroczysty, na gradiencie
 const GRADIENT_ROUTES = ["/", "/oferta", "/artykuly", "/portfolio", "/about"];

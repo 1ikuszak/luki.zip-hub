@@ -2,6 +2,9 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import { DitherFlow } from "@/app/components/oferta/DitherFlow";
+import { CONTACT_FORM_URL } from "@/app/lib/data";
+import { getPosts } from "@/lib/posts";
+import { CopyEmail } from "./CopyEmail";
 import {
   BadgeCheck,
   Instagram,
@@ -13,9 +16,9 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Linki — Łukasz Glica (luki.zip)",
+  title: "Linki - Łukasz Glica (luki.zip)",
   description:
-    "Video, Content, Design & Creative Direction. Wszystko w jednym miejscu — oferta, portfolio, poradniki AI.",
+    "Buduję brandy z taste i wdrażam do nich AI. Poradniki AI, case studies, newsletter, wszystko w jednym miejscu.",
 };
 
 type Social = {
@@ -59,31 +62,50 @@ type CtaLink = {
   trackId: string;
   variant?: "primary" | "default";
   badge?: string;
+  external?: boolean;
 };
 
-const ctaLinks: CtaLink[] = [
-  {
-    title: "Darmowe poradniki AI",
-    sub: "11 konkretnych playbooków — Meta AI, Claude Code, Kling. Bez teoretyzowania.",
-    href: "/artykuly",
-    trackId: "cta_links_artykuly",
-    badge: "DARMOWE",
-  },
-  {
-    title: "Moje projekty",
-    sub: "Wybrane realizacje — strony, brandingi, reele.",
-    href: "/portfolio",
-    trackId: "cta_links_portfolio",
-  },
-  {
-    title: "Newsletter na maila",
-    sub: "Co tydzień jeden konkretny insight o brandzie w erze AI",
-    href: "/brain",
-    trackId: "cta_links_brain",
-  },
-];
+// ctaLinks budowane w komponencie (liczba poradników renderowana dynamicznie)
 
 export default function LinksPage() {
+  const poradnikiCount = getPosts().length;
+
+  const ctaLinks: CtaLink[] = [
+    {
+      title: "Darmowe poradniki AI",
+      sub: `${poradnikiCount} playbooków krok po kroku: Meta AI, Claude Code, Kling. Zero teorii, same konkrety.`,
+      href: "/artykuly",
+      trackId: "cta_links_artykuly",
+      variant: "primary",
+      badge: "DARMOWE",
+    },
+    {
+      title: "Zobacz co buduję",
+      sub: "Rekord kanału 300 tysięcy wyświetleń, +40% wzrostu aplikacji, 1200 godzin odzyskane rocznie. Realne wdrożenia klientów.",
+      href: "/",
+      trackId: "cta_links_realizacje",
+    },
+    {
+      title: "Kim jestem",
+      sub: "Droga po 10 nieudanych biznesach i roku w Japonii od zera. Dziś działam na przecięciu AI i świata kreatywnego. Moja historia.",
+      href: "/about",
+      trackId: "cta_links_about",
+    },
+    {
+      title: "Pracuj ze mną",
+      sub: "Wdrażam systemy AI z taste do twojego biznesu. Napisz, a odezwę się do ciebie.",
+      href: CONTACT_FORM_URL,
+      trackId: "cta_links_wspolpraca",
+      external: true,
+    },
+    {
+      title: "Newsletter na maila",
+      sub: "Co tydzień jeden konkret o budowaniu biznesów i marek w erze AI. Krótko, bez spamu.",
+      href: "/brain",
+      trackId: "cta_links_brain",
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-[var(--bg-page)]">
       {/* Cover banner — shader (liquid dither) */}
@@ -93,14 +115,14 @@ export default function LinksPage() {
 
       <main className="container-narrow pb-10 sm:pb-14">
         <div className="flex flex-col items-center text-center">
-          {/* Avatar (TODO: podmień na <Image src="/links/avatar.jpg" />) */}
+          {/* Avatar — okrągłe, ta sama foto co About (object-top, bez zoomu na twarz) */}
           <div className="relative -mt-20 sm:-mt-24 w-44 h-44 sm:w-48 sm:h-48 rounded-full overflow-hidden border-4 border-[var(--bg-page)] bg-[var(--bg-card)] shrink-0">
             <Image
-              src="/links/avatar.jpg"
+              src="/links/avatar-v6.jpg"
               alt="Łukasz Glica"
               fill
               sizes="192px"
-              className="object-cover"
+              className="object-cover object-top"
               priority
             />
           </div>
@@ -121,12 +143,12 @@ export default function LinksPage() {
 
           {/* Tagline */}
           <p className="mt-2 text-[15px] text-[var(--text)] max-w-[440px]">
-            Buduję marki, które wyglądają cool w dobie AI
+            Buduję brandy z taste i wdrażam do nich AI.
           </p>
 
           {/* Discipline row */}
           <p className="mt-1.5 text-[14px] text-[var(--text-secondary)]">
-            Video · Content · Design · Creative Direction
+            AI · Content · Creative Direction
           </p>
 
           {/* Social icons row */}
@@ -156,13 +178,8 @@ export default function LinksPage() {
             })}
           </ul>
 
-          {/* Email */}
-          <a
-            href="mailto:lukasz.glica07@gmail.com"
-            className="mt-4 text-[15px] text-[var(--text-secondary)] underline underline-offset-4"
-          >
-            lukasz.glica07@gmail.com
-          </a>
+          {/* Email — kopiowanie do schowka */}
+          <CopyEmail email="lukasz.glica07@gmail.com" />
         </div>
 
         {/* CTA stack */}
@@ -185,33 +202,56 @@ export default function LinksPage() {
               ? "shrink-0 text-white"
               : "shrink-0 text-[var(--text-secondary)]";
 
+            const inner = (
+              <>
+                {cta.badge && (
+                  <span
+                    className={`absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold tracking-[0.12em] uppercase rounded-full px-2 py-1 ${isPrimary ? "bg-white/20 text-white" : "bg-[var(--accent)]/10 text-[var(--accent)]"}`}
+                  >
+                    <Sparkles size={11} strokeWidth={2.25} />
+                    {cta.badge}
+                  </span>
+                )}
+                <div className="flex items-center justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className={titleClass}>{cta.title}</div>
+                    <div className={subClass}>{cta.sub}</div>
+                  </div>
+                  <ArrowUpRight
+                    size={isPrimary ? 22 : 20}
+                    strokeWidth={1.75}
+                    className={arrowClass}
+                  />
+                </div>
+              </>
+            );
+            const linkClass = `${baseClass} ${isPrimary ? primaryClass : defaultClass}`;
+
             return (
               <li key={cta.trackId}>
-                <Link
-                  href={cta.href}
-                  data-track="cta_links"
-                  data-track-id={cta.trackId}
-                  data-track-href={cta.href}
-                  className={`${baseClass} ${isPrimary ? primaryClass : defaultClass}`}
-                >
-                  {cta.badge && (
-                    <span className="absolute top-3 right-3 inline-flex items-center gap-1 text-[10px] font-semibold tracking-[0.12em] uppercase text-[var(--accent)] bg-[var(--accent)]/10 rounded-full px-2 py-1">
-                      <Sparkles size={11} strokeWidth={2.25} />
-                      {cta.badge}
-                    </span>
-                  )}
-                  <div className="flex items-center justify-between gap-4">
-                    <div className="flex-1 min-w-0">
-                      <div className={titleClass}>{cta.title}</div>
-                      <div className={subClass}>{cta.sub}</div>
-                    </div>
-                    <ArrowUpRight
-                      size={isPrimary ? 22 : 20}
-                      strokeWidth={1.75}
-                      className={arrowClass}
-                    />
-                  </div>
-                </Link>
+                {cta.external ? (
+                  <a
+                    href={cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-track="cta_links"
+                    data-track-id={cta.trackId}
+                    data-track-href={cta.href}
+                    className={linkClass}
+                  >
+                    {inner}
+                  </a>
+                ) : (
+                  <Link
+                    href={cta.href}
+                    data-track="cta_links"
+                    data-track-id={cta.trackId}
+                    data-track-href={cta.href}
+                    className={linkClass}
+                  >
+                    {inner}
+                  </Link>
+                )}
               </li>
             );
           })}

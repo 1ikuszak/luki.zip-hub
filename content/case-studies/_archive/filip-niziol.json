@@ -1,0 +1,39 @@
+{
+  "slug": "filip-niziol",
+  "title": "Filip Nizioł - brand film AI-first",
+  "subtitle": "Pomogłem Filipowi opowiedzieć jego produkt jako manifest, nie demo funkcji - brand film AI-first pod decydentów HR.",
+  "heroImage": "/case-studies/filip-niziol.svg",
+  "heroImageAlt": "Klatka z brand filmu \"The Silenced\" - manifest o ciszy po rozmowie rekrutacyjnej.",
+  "metaDescription": "Brand film AI-first dla Filipa Nizioła (AI Interview Analyzer): kierunek \"The Silenced\" z researchu społeczności, manifest pod decydentów HR, produkcja bez ekipy zdjęciowej.",
+  "stats": {
+    "czas": "7 dni roboczych",
+    "budzet": "Koncept + produkcja AI",
+    "efekt": "Asset żyje 12+ msc"
+  },
+  "problem": "Filip wprowadzał produkt do rekrutacji i wpadał w typową pułapkę kategorii: każdy launch wygląda tak samo, suchy explainer funkcji, który ginie w feedzie. Jego widz to CHRO i VP People - ludzie uodpornieni na \"AI-powered\" marketing. Potrzebował filmu, który trafia emocją i przeżyje kolejny rebranding produktu, a nie reklamy, która zestarzeje się za miesiąc.",
+  "steps": [
+    {
+      "title": "Research społeczności, nie burza mózgów",
+      "description": "Zamiast zgadywać, przekopałem Reddit i YouTube w poszukiwaniu realnych historii kandydatów. Stąd wyszedł kierunek \"The Silenced\" - ten cichy moment, gdy po dobrej rozmowie rekrutacyjnej zapada cisza i nikt już nie oddzwania.",
+      "image": "/case-studies/filip-niziol.svg",
+      "imageAlt": "Research społeczności Reddit i YouTube pod kierunek \"The Silenced\"."
+    },
+    {
+      "title": "Koncept i pozycjonowanie",
+      "description": "Zbudowałem to wokół człowieka, nie wokół produktu. Najpierw czujesz ciszę po dobrej rozmowie, napięcie narasta, dopiero potem wchodzi narzędzie - i wtedy działa jak ulga. Dokładnie pod widza, który ma dość marketingowego bełkotu.",
+      "image": "/case-studies/filip-niziol.svg",
+      "imageAlt": "Struktura narracyjna brand filmu: eskalacja ciszy, potem produkt jako ulga."
+    },
+    {
+      "title": "Produkcja AI-first",
+      "description": "Cały film zrobiłem bez ekipy i planu zdjęciowego - Veo, Runway, Kling. To ścięło koszt i czas do poziomu, na który klasyczny brand film tej klasy nie ma szans.",
+      "image": "/case-studies/filip-niziol.svg",
+      "imageAlt": "Produkcja AI-first w Veo, Runway i Kling, bez ekipy zdjęciowej."
+    }
+  ],
+  "quote": {
+    "text": "[do uzupełnienia - cytat klienta]",
+    "author": "Filip Nizioł",
+    "role": "Założyciel, AI Interview Analyzer"
+  }
+}

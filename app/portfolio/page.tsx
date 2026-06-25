@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { PortfolioGrid } from "@/app/components/portfolio/PortfolioGrid";
 import { GradientBackdrop } from "@/app/components/GradientBackdrop";
 import { MoreCTA } from "@/app/components/MoreCTA";
+import { Breadcrumb } from "@/app/components/Breadcrumb";
 
 const pageTitle = "Portfolio | luki.zip";
 const pageDescription = "Wybrane projekty — strony, brandingi, reele.";
@@ -34,16 +35,14 @@ export default function PortfolioPage() {
         {/* grid na białym tle — biała sekcja zasłania gradient */}
         <section className="bg-white px-2 sm:px-3 pt-16 pb-20 sm:pt-24 sm:pb-28">
           <header className="px-1 sm:px-2 max-w-[640px]">
-            <h1 className="t-h1">Projekty</h1>
+            <Breadcrumb items={[{ label: "Portfolio" }]} />
+            <h1 className="t-h1 mt-6">Projekty</h1>
           </header>
 
           <div className="mt-12 sm:mt-16">
             <PortfolioGrid />
           </div>
         </section>
-
-        {/* zamykający CTA z gwiazdką — przezroczysty, gradient prześwituje */}
-        <MoreCTA />
       </main>
     </div>
   );

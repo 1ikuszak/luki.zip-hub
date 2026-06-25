@@ -1,23 +1,46 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { Reveal } from "@/app/components/oferta/Reveal";
 
 /**
- * Wybrane realizacje. Każda karta na brand-gradiencie (bez okładek zdjęciowych),
- * ASCII ikonka + tytuł na scrimie. Wariacja gradientu per karta dla rytmu.
+ * Wybrane case studies — kompozycja w duchu Saraev "Some of our work":
+ * karta-obraz (brand-gradient) z zaokrąglonymi rogami + okrągły przycisk ↗
+ * w lewym dolnym rogu, tytuł + jednolinijkowy efekt pod kartą. 3 w jednym rzędzie.
  */
-type Project = { name: string; result: string };
+type Project = {
+  slug: string;
+  name: string;
+  result: string;
+  stat: string;
+  statLabel: string;
+};
 
 const PROJECTS: Project[] = [
-  { name: "JBB / Skolim", result: "300K wyświetleń. Rekord kanału." },
-  { name: "Filip AI Coach", result: "Brand film dla AI Interview Analyzer." },
-  { name: "Matrix", result: "System AI dla zespołu." },
-  { name: "JG Marine", result: "Strona i system marki." },
+  {
+    slug: "jbb-skolim",
+    name: "JBB / Skolim",
+    result: "Launch Skolima zbudowany hybrydowo z AI.",
+    stat: "300K",
+    statLabel: "rekord kanału",
+  },
+  {
+    slug: "matrix-crew",
+    name: "Matrix Crew",
+    result: "System AI zamiast etatu social media managera.",
+    stat: "+40%",
+    statLabel: "więcej aplikacji",
+  },
+  {
+    slug: "jg-marine",
+    name: "JG Marine",
+    result: "Custom CRM i automatyzacja fakturowni.",
+    stat: "~1200h",
+    statLabel: "odzyskane rocznie",
+  },
 ];
 
 const TILES = [
   "radial-gradient(120% 80% at 22% 12%, #5278e0, transparent 55%), radial-gradient(120% 90% at 82% 92%, #1a3aa8, transparent 55%), #131d44",
-  "radial-gradient(120% 90% at 82% 14%, #6b8cf0, transparent 55%), radial-gradient(120% 80% at 14% 88%, #20307a, transparent 55%), #101840",
   "radial-gradient(130% 100% at 50% 0%, #4a6fe0, transparent 60%), #0f1838",
   "radial-gradient(120% 80% at 16% 90%, #5e84e8, transparent 55%), radial-gradient(110% 90% at 92% 10%, #182a6b, transparent 55%), #121c46",
 ];
@@ -40,54 +63,62 @@ export function WorkStrip() {
           >
             Wdrożenia, które bronią się same.
           </h2>
-          <p className="mt-5 max-w-[48ch] t-body-large text-[var(--text-secondary)]">
-            Systemy i marki, które zbudowałem dla founderów i firm.
+          <p className="mt-5 max-w-[52ch] t-body-large text-[var(--text-secondary)]">
+            Realne efekty z realnych projektów. Każdy zbudowany, wdrożony i
+            prowadzony przeze mnie. Kliknij, żeby zobaczyć cały case.
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-5 lg:gap-7">
           {PROJECTS.map((p, i) => (
-            <Reveal key={p.name} delay={(i % 4) * 0.06}>
-              <div className="group relative aspect-[4/5] overflow-hidden rounded-[20px] border border-[var(--border)]">
-                <div
-                  className="absolute inset-0 transition-transform duration-[900ms] ease-out group-hover:scale-[1.05]"
-                  style={{ background: TILES[i % TILES.length] }}
-                />
+            <Reveal key={p.slug} delay={(i % 3) * 0.07}>
+              <Link
+                href={`/case-studies/${p.slug}`}
+                data-track="case_study_card"
+                data-track-id={`case_home_${p.slug}`}
+                data-track-href={`/case-studies/${p.slug}`}
+                className="group block"
+              >
+                {/* karta-obraz (brand gradient) + okrągły ↗ w lewym dolnym rogu */}
+                <div className="relative aspect-[4/3] overflow-hidden rounded-[20px] border border-[var(--border)]">
+                  <div
+                    className="absolute inset-0 transition-transform duration-[900ms] ease-out group-hover:scale-[1.04]"
+                    style={{ background: TILES[i % TILES.length] }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/25" />
 
-                {/* scrim pod tytułem */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/10" />
+                  {/* hero-liczba: biznesowy eye-catch, prawy górny róg, do prawej */}
+                  <div className="absolute right-5 top-5 text-right">
+                    <div
+                      className="font-semibold leading-[0.95] tracking-[-0.03em] text-white"
+                      style={{ fontSize: "clamp(34px, 4.6vw, 46px)", fontVariantNumeric: "tabular-nums" }}
+                    >
+                      {p.stat}
+                    </div>
+                    <div className="mt-1.5 text-[12px] font-medium uppercase tracking-[0.12em] text-white/75">
+                      {p.statLabel}
+                    </div>
+                  </div>
 
-                <div className="absolute inset-x-0 bottom-0 p-5">
-                  <h3 className="text-[18px] font-semibold leading-tight text-white">
+                  <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-white/10 text-white backdrop-blur-sm transition-colors duration-200 group-hover:bg-white group-hover:text-[var(--text)]">
+                    <ArrowUpRight size={18} strokeWidth={2} />
+                  </div>
+                </div>
+
+                {/* tytuł + efekt pod kartą */}
+                <div className="mt-4">
+                  <h3 className="text-[19px] font-semibold leading-tight text-[var(--text)]">
                     {p.name}
                   </h3>
-                  <p className="mt-1 text-[13px] leading-snug text-white/75">
+                  <p className="mt-1 text-[14px] leading-snug text-[var(--text-secondary)]">
                     {p.result}
                   </p>
                 </div>
-              </div>
+              </Link>
             </Reveal>
           ))}
         </div>
 
-        <Reveal delay={0.05}>
-          <div className="mt-12">
-            <Link
-              href="/portfolio"
-              data-track="cta_home"
-              data-track-id="cta_home_work_all"
-              data-track-href="/portfolio"
-              className="group inline-flex h-[52px] items-center gap-2 rounded-full border border-[var(--border)] bg-white px-7 text-[15px] font-semibold text-[var(--text)] transition-colors hover:border-[var(--text)]"
-            >
-              Zobacz wszystkie realizacje
-              <ArrowRight
-                size={17}
-                strokeWidth={2.5}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
-            </Link>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

@@ -67,12 +67,7 @@ export default async function CaseStudyPage({
         event="view_case_study"
         params={{ slug: study.slug, title: study.title }}
       />
-      <Hero
-        title={study.title}
-        subtitle={study.subtitle}
-        image={study.heroImage}
-        imageAlt={study.heroImageAlt}
-      />
+      <Hero title={study.title} subtitle={study.subtitle} />
       <StatsBar
         czas={study.stats.czas}
         budzet={study.stats.budzet}

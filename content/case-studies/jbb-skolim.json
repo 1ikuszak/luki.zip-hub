@@ -1,0 +1,39 @@
+{
+  "slug": "jbb-skolim",
+  "title": "JBB - launch Skolima, rekord kanału",
+  "subtitle": "Pomogłem JBB wystrzelić launch Skolima do 300 tysięcy wyświetleń - rekord kanału, zbudowany hybrydowo z AI.",
+  "heroImage": "/case-studies/jbb-skolim.svg",
+  "heroImageAlt": "Kadr z teasera Skolim x JBB zbudowanego hybrydowo z AI.",
+  "metaDescription": "Jak zbudowałem dla JBB launch Skolima, który zrobił 300 tysięcy wyświetleń i pobił rekord kanału - hybrydowo z AI. Research, replikacja brand identity, montaż pod retencję.",
+  "stats": {
+    "czas": "2 tygodnie",
+    "budzet": "Research + produkcja AI",
+    "efekt": "300K wyświetleń, rekord kanału"
+  },
+  "problem": "JBB to duża marka FMCG z ogólnopolską dystrybucją, ale materiały na ich kanale kręciły się w okolicach 10 tysięcy wyświetleń. Launch Skolima \"Król Smaku\" był jednym z tych momentów, gdzie albo łapiesz uwagę w pierwszej sekundzie, albo przepadasz w feedzie. Klasyczna produkcja kosztuje, trwa i zwykle ląduje w tej samej średniej co wszystko inne.",
+  "steps": [
+    {
+      "title": "Research i kierunek kreatywny",
+      "description": "Zmapowałem momentum wokół Skolima z pomocą AI - co już chwytało, jaki ton, jakie kadry - i postawiłem na jeden kierunek: Skolim jako odświeżona, podkręcona postać. Obraz, na który normalnie schodzi tydzień, miałem w jeden dzień.",
+      "image": "/case-studies/jbb-skolim.svg",
+      "imageAlt": "Kierunek kreatywny i research dla launchu Skolim x JBB."
+    },
+    {
+      "title": "Replikacja brand identity w AI",
+      "description": "Odtworzyłem świat marki w generacji obrazu - kadry pod GPT Image 2, spójne z tym jak Skolim ma wyglądać. Potem ożywiłem statyczne klatki w Seedance 2.0, a narrację dograłem w ElevenLabs.",
+      "image": "/case-studies/jbb-skolim.svg",
+      "imageAlt": "Kadry Skolim wygenerowane w GPT Image 2 i animowane w Seedance 2.0."
+    },
+    {
+      "title": "Montaż pod retencję",
+      "description": "Złożyłem materiał w format news-takeover: szybkie cięcia i pattern, który trzyma widza do ostatniej sekundy. To ta retencja zrobiła zasięg, nie sam fakt, że \"jest z AI\".",
+      "image": "/case-studies/jbb-skolim.svg",
+      "imageAlt": "Montaż teasera Skolim w formacie news-takeover."
+    }
+  ],
+  "quote": {
+    "text": "Celem nie było 'zrobić coś z AI'. Celem był film, który wpasuje się w kampanię i spodoba się ludziom.",
+    "author": "",
+    "role": ""
+  }
+}

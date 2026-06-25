@@ -5,35 +5,28 @@ type Props = {
 };
 
 export function QuoteSection({ text, author, role }: Props) {
+  // Placeholdery cytatów nie renderują się na żywej stronie (tylko realne cytaty).
+  if (!text || text.trim().startsWith("[do uzupełnienia")) return null;
+
   return (
-    <section className="container-default py-20 sm:py-28">
-      <div className="text-[11px] uppercase tracking-[0.12em] text-[var(--accent)] font-semibold">
-        Efekt
-      </div>
-      <blockquote
-        className="mt-6"
-        style={{ hangingPunctuation: "first" }}
-      >
-        <span
-          aria-hidden
-          className="block text-7xl sm:text-8xl leading-none font-semibold text-[var(--accent)]"
+    <section className="container-default pb-16 sm:pb-24">
+      <figure className="border-t border-[var(--border)] pt-12 sm:pt-16">
+        <blockquote
+          className="reveal text-[24px] font-semibold leading-[1.3] tracking-[-0.01em] text-[var(--text)] sm:text-[32px]"
+          style={{ hangingPunctuation: "first" }}
         >
-          &ldquo;
-        </span>
-        <p
-          className="mt-2 t-h3 italic"
-          style={{ textIndent: "-0.4em" }}
-        >
-          {text}
-        </p>
-        <footer className="mt-8 text-[15px] text-[var(--text-secondary)]">
-          <span className="font-semibold text-[var(--text)]">
-            {author}
-          </span>
-          <span className="mx-2">·</span>
-          <span>{role}</span>
-        </footer>
-      </blockquote>
+          &ldquo;{text}&rdquo;
+        </blockquote>
+        {(author || role) && (
+          <figcaption className="mt-6 text-[15px] text-[var(--text-secondary)]">
+            {author && (
+              <span className="font-semibold text-[var(--text)]">{author}</span>
+            )}
+            {author && role && <span className="mx-2">·</span>}
+            {role && <span>{role}</span>}
+          </figcaption>
+        )}
+      </figure>
     </section>
   );
 }

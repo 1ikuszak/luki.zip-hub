@@ -494,6 +494,39 @@ summary::-webkit-details-marker {
   width: 40%;
 }
 
+/* ─── Ściana komentarzy (pionowy auto-scroll) ─────────────── */
+@keyframes comment-marquee-up {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(0, -50%, 0); }
+}
+@keyframes comment-marquee-down {
+  from { transform: translate3d(0, -50%, 0); }
+  to   { transform: translate3d(0, 0, 0); }
+}
+
+/* Duplikat zestawu domyślnie ukryty (statyczny stack na mobile / reduced-motion) */
+.comment-dup { display: none; }
+
+@media (min-width: 640px) and (prefers-reduced-motion: no-preference) {
+  .comment-col {
+    height: 480px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      to bottom, transparent 0%, #000 11%, #000 89%, transparent 100%);
+    mask-image: linear-gradient(
+      to bottom, transparent 0%, #000 11%, #000 89%, transparent 100%);
+  }
+  .comment-track {
+    animation: comment-marquee-up 32s linear infinite;
+    will-change: transform;
+  }
+  .comment-track--down { animation-name: comment-marquee-down; }
+  .comment-track--mid  { animation-duration: 38s; }
+  .comment-track--slow { animation-duration: 46s; }
+  .comment-col:hover .comment-track { animation-play-state: paused; }
+  .comment-dup { display: block; }
+}
+
 /* ─── Poradnik hero marquee ──────────────────────────────── */
 .hero-strip-cell {
   height: 180px;
@@ -523,5 +556,47 @@ summary::-webkit-details-marker {
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
     animation: none;
+  }
+}
+
+/* ─── Case study motion (progressive, RSC-safe) ───────────────
+   .enter  = jednorazowy fade-up na load (hero, nagłówki).
+   .reveal = scroll-driven fade-up przez view-timeline. Stan ukryty
+   ustawiany TYLKO gdy przeglądarka wspiera animation-timeline ORAZ
+   user nie ma reduced-motion. Bez wsparcia = treść po prostu widoczna. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes cs-enter {
+    from { opacity: 0; transform: translate3d(0, 16px, 0); }
+    to   { opacity: 1; transform: none; }
+  }
+  .enter {
+    animation: cs-enter 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    will-change: transform, opacity;
+  }
+
+  @supports (animation-timeline: view()) {
+    @keyframes cs-reveal {
+      from { opacity: 0; transform: translate3d(0, 22px, 0); }
+      to   { opacity: 1; transform: none; }
+    }
+    .reveal {
+      animation: cs-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 24%;
+    }
+  }
+}
+
+/* ─── Iconic star — wolny, ciągły obrót (nie spadająca) ─────── */
+@keyframes star-spin {
+  to { transform: rotate(360deg); }
+}
+.star-spin {
+  display: inline-block;
+  transform-origin: center;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .star-spin {
+    animation: star-spin 9s linear infinite;
   }
 }

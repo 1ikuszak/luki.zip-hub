@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 type Props = {
   children: ReactNode;
@@ -9,8 +9,15 @@ type Props = {
   delay?: number;
 };
 
-/** Wejście sekcji: subtelny fade + slide-up przy wjeździe w viewport. */
+/** Wejście sekcji: subtelny fade + slide-up przy wjeździe w viewport.
+ *  Reduced-motion = statyczny render (bez animacji). */
 export function Reveal({ children, className, delay = 0 }: Props) {
+  const reduce = useReducedMotion();
+
+  if (reduce) {
+    return <div className={className}>{children}</div>;
+  }
+
   return (
     <motion.div
       className={className}

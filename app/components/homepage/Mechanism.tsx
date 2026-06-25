@@ -15,7 +15,7 @@ export function Mechanism() {
             <Reveal>
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[22px] border border-[var(--border)] bg-[var(--bg-card)] shadow-[0_50px_120px_-60px_rgba(8,12,40,0.55)]">
                 <Image
-                  src="/links/avatar.jpg"
+                  src="/links/avatar-v6.jpg"
                   alt="Łukasz Glica"
                   fill
                   sizes="(max-width: 1024px) 100vw, 40vw"

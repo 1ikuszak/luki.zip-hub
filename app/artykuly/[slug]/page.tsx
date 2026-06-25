@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowRight } from "lucide-react";
+import { Breadcrumb } from "@/app/components/Breadcrumb";
 import {
   formatDate,
   getPostBySlug,
@@ -71,13 +72,12 @@ export default async function ArticlePage({
         className={`container-narrow pb-16 sm:pb-24 ${hasHero ? "pt-8 sm:pt-12" : "pt-12 sm:pt-16"}`}
       >
       <div className="flex flex-col gap-8">
-        <Link
-          href="/artykuly"
-          className="inline-flex items-center gap-1.5 t-small text-[var(--text-secondary)] hover:text-[var(--accent)] transition-colors"
-        >
-          <ArrowLeft size={14} />
-          Wszystkie artykuły
-        </Link>
+        <Breadcrumb
+          items={[
+            { label: "Artykuły", href: "/artykuly" },
+            { label: post.title },
+          ]}
+        />
 
         <header>
           <div className="flex items-center gap-2 mb-4">

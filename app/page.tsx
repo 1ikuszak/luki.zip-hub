@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { redirect } from "next/navigation";
 import { GradientBackdrop } from "./components/GradientBackdrop";
 import { Hero } from "./components/homepage/Hero";
 import { StatsBand } from "./components/homepage/StatsBand";
@@ -7,9 +6,10 @@ import { WorkStrip } from "./components/homepage/WorkStrip";
 import { ForWho } from "./components/homepage/ForWho";
 import { OfferTwoWays } from "./components/homepage/OfferTwoWays";
 import { Testimonials } from "./components/homepage/Testimonials";
+import { FeaturedArticles } from "./components/homepage/FeaturedArticles";
 import { FinalCTA } from "./components/homepage/FinalCTA";
 import { CourseWaitlist } from "./components/homepage/CourseWaitlist";
-import { FAQ } from "./components/homepage/FAQ";
+import { Newsletter } from "./components/homepage/Newsletter";
 
 const pageTitle = "luki.zip — Łukasz Glica, kreatywne systemy AI z taste";
 const pageDescription =
@@ -37,12 +37,6 @@ const CARD =
   "rounded-[20px] border border-white/55 bg-[var(--bg-card)] shadow-[0_50px_140px_-70px_rgba(8,12,40,0.6)] sm:rounded-[28px]";
 
 export default function Home() {
-  // PRODUKCJA: home niedokończony → redirect na artykuły.
-  // DEV (localhost): renderuje pełny WIP homepage, żeby Luki mógł go budować.
-  if (process.env.NODE_ENV === "production") {
-    redirect("/artykuly");
-  }
-
   return (
     <div className="relative min-h-screen">
       {/* Brand shader — na całą stronę, treść trzymana ramką z paddingu */}
@@ -57,13 +51,14 @@ export default function Home() {
             <ForWho />
             <OfferTwoWays />
             <Testimonials />
+            <FeaturedArticles />
           </main>
 
           <FinalCTA />
 
           <div className={CARD}>
-            <CourseWaitlist />
-            <FAQ />
+            {/* <CourseWaitlist /> */}
+            <Newsletter />
           </div>
         </div>
       </div>

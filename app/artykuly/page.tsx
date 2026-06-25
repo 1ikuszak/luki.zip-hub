@@ -2,11 +2,11 @@ import type { Metadata } from "next";
 import { getPosts } from "@/lib/posts";
 import { ArticleCard } from "@/app/components/ArticleCard";
 import { GradientBackdrop } from "@/app/components/GradientBackdrop";
-import { MoreCTA } from "@/app/components/MoreCTA";
+import { Breadcrumb } from "@/app/components/Breadcrumb";
 
 const pageTitle = "Artykuły | luki.zip";
 const pageDescription =
-  "Jak budować markę w świecie AI, który zmienia się z tygodnia na tydzień. Konkretne, praktyczne porady.";
+  "Jak budować marki i wdrażać do nich AI bez zatracania duszy w świecie, który zmienia się co tydzień.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -29,47 +29,33 @@ export default function ArtykulyPage() {
   const posts = getPosts();
 
   return (
-    <div className="relative min-h-screen bg-[var(--bg-page)]">
-      {/* to samo tło gradientowe co na /oferta */}
+    <div className="relative min-h-screen">
+      {/* Brand shader — schowany za białym sheetem, jak na home */}
       <GradientBackdrop />
 
-      <div className="relative z-10 pt-12 pb-16 sm:pt-16 sm:pb-24">
-        <div className="container-wide flex flex-col gap-12">
-          <header className="max-w-[680px]">
-            <h1
-              className="t-h1"
-              style={{
-                color: "#fff",
-                textShadow: "0 1px 24px rgba(5,8,30,0.45)",
-              }}
-            >
-              Artykuły
-            </h1>
-            <p
-              className="t-body-large mt-4"
-              style={{
-                color: "rgba(255,255,255,0.82)",
-                textShadow: "0 1px 18px rgba(5,8,30,0.4)",
-              }}
-            >
-              Jak budować markę w świecie AI, który zmienia się z tygodnia na
-              tydzień. Konkretne, praktyczne porady.
-            </p>
-          </header>
+      <div className="relative z-10 p-2 sm:p-3">
+        <div className="mx-auto max-w-[1600px]">
+          <main className="rounded-[20px] border border-white/55 bg-[var(--bg-card)] shadow-[0_50px_140px_-70px_rgba(8,12,40,0.6)] sm:rounded-[28px]">
+            <div className="container-wide py-14 sm:py-20">
+              <Breadcrumb items={[{ label: "Artykuły" }]} />
 
-          {posts.length > 0 && (
-            <section className="flex flex-col gap-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {posts.map((post) => (
-                  <ArticleCard key={post.slug} post={post} />
-                ))}
-              </div>
-            </section>
-          )}
+              <header className="mt-8 max-w-[760px]">
+                <h1 className="t-h1">Artykuły</h1>
+                <p className="t-body-large mt-4 text-[var(--text-secondary)]">
+                  {pageDescription}
+                </p>
+              </header>
+
+              {posts.length > 0 && (
+                <div className="mt-12 grid grid-cols-1 gap-5 sm:mt-16 sm:grid-cols-2 lg:grid-cols-3">
+                  {posts.map((post) => (
+                    <ArticleCard key={post.slug} post={post} />
+                  ))}
+                </div>
+              )}
+            </div>
+          </main>
         </div>
-
-        {/* Zamykający CTA — wspólny komponent */}
-        <MoreCTA />
       </div>
     </div>
   );

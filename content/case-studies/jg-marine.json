@@ -1,0 +1,39 @@
+{
+  "slug": "jg-marine",
+  "title": "JG Marine - CRM i automatyzacja fakturowni",
+  "subtitle": "Zbudowałem JG Marine custom CRM na 50 tysięcy rekordów i automatyzację fakturowni, które oddają zespołowi około 100 godzin miesięcznie.",
+  "heroImage": "/case-studies/jg-marine.svg",
+  "heroImageAlt": "Custom CRM i automatyzacja fakturowni dla niezależnych surveyorów morskich JG Marine.",
+  "metaDescription": "Custom CRM na 50 tysięcy rekordów i automatyzacja fakturowni dla JG Marine - niezależnych surveyorów morskich. Efekt: około 100 godzin miesięcznie odzyskane z ręcznej administracji.",
+  "stats": {
+    "czas": "10h/tydz na osobę",
+    "budzet": "CRM + automatyzacja fakturowni",
+    "efekt": "~1200h odzyskane rocznie"
+  },
+  "problem": "JG Marine to niezależni surveyorzy morscy - 900+ spraw rocznie, 3 biura w Polsce, mały zespół. Wszystko chodziło ręcznie: rekordy rozsypane po arkuszach i mailach, faktury wystawiane z palca przy każdej sprawie. Przy tej skali sama administracja zjadała godziny tygodniowo, których nikt nie liczył.",
+  "steps": [
+    {
+      "title": "Custom CRM na 50 tysięcy rekordów",
+      "description": "Zbudowałem jeden system, który trzyma ~50 tysięcy rekordów w jednym miejscu zamiast w arkuszach i skrzynkach. Koniec ze szukaniem sprawy po mailach sprzed dwóch lat.",
+      "image": "/case-studies/jg-marine.svg",
+      "imageAlt": "Custom CRM na 50 tysięcy rekordów dla JG Marine."
+    },
+    {
+      "title": "Automatyzacja fakturowni",
+      "description": "Zautomatyzowałem wystawianie faktur, żeby przy 900+ sprawach rocznie nie robić tego ręcznie jedna po drugiej. To był największy pożeracz czasu, który dało się zdjąć z ludzi.",
+      "image": "/case-studies/jg-marine.svg",
+      "imageAlt": "Automatyzacja fakturowni dla 900+ spraw rocznie."
+    },
+    {
+      "title": "Spięcie 3 biur w jeden system",
+      "description": "Połączyłem Sopot, Szczecin i Warszawę na jednych danych, żeby nikt nie pracował na własnej wersji prawdy. Razem to około 10 godzin tygodniowo na osobę z powrotem do realnej pracy zamiast administracji.",
+      "image": "/case-studies/jg-marine.svg",
+      "imageAlt": "Trzy biura JG Marine spięte w jeden system danych."
+    }
+  ],
+  "quote": {
+    "text": "[do uzupełnienia - cytat klienta]",
+    "author": "Jacek Goszczyński",
+    "role": "Założyciel, JG-Marine"
+  }
+}

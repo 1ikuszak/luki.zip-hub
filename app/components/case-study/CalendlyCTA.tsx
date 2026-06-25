@@ -21,7 +21,7 @@ export function CalendlyCTA({ caseTitle }: Props) {
             Masz podobny problem do tego z case&apos;a &bdquo;{caseTitle}&rdquo;?
           </h2>
           <p className="t-body-large mt-5 text-white/70">
-            Zarezerwuj 30 minut. Bez pitchu, bez wciskania — szczera ocena,
+            Zarezerwuj 30 minut. Bez pitchu, bez wciskania, szczera ocena,
             czy w ogóle warto to robić i jak.
           </p>
         </div>

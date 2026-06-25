@@ -1,19 +1,11 @@
 import Link from "next/link";
 
-// PRODUKCJA: tylko Portfolio / Artykuły / Linki (home + about niedokończone).
-// DEV (localhost): stary nav z About me, żeby Luki mógł dalej budować.
-const NAV_LINKS =
-  process.env.NODE_ENV === "production"
-    ? [
-        { label: "Portfolio", href: "/portfolio" },
-        { label: "Artykuły", href: "/artykuly" },
-        { label: "Linki", href: "/links" },
-      ]
-    : [
-        { label: "Portfolio", href: "/portfolio" },
-        { label: "Artykuły", href: "/artykuly" },
-        { label: "About me", href: "/about" },
-      ];
+const NAV_LINKS = [
+  { label: "Home", href: "/" },
+  { label: "O mnie", href: "/about" },
+  { label: "Portfolio", href: "/portfolio" },
+  { label: "Artykuły", href: "/artykuly" },
+];
 
 export function Navbar() {
   return (

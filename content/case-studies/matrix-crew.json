@@ -1,0 +1,39 @@
+{
+  "slug": "matrix-crew",
+  "title": "Matrix Crew - system contentowy AI",
+  "subtitle": "Po odejściu social media managera zbudowałem Matrix system AI, który jedna osoba ogarnia w 2-3 godziny tygodniowo.",
+  "heroImage": "/case-studies/matrix-crew.svg",
+  "heroImageAlt": "System contentowy AI dla agencji crewingowej Matrix Crew Management.",
+  "metaDescription": "Jak zastąpiłem odejście social media managera w Matrix Crew Management systemem AI: content operating system 3-3-3, automatyzacja leadów i generowanie grafik - obsługiwane przez jedną osobę.",
+  "stats": {
+    "czas": "5 sesji wdrożenia",
+    "budzet": "System social media z AI",
+    "efekt": "+40% aplikacji z social"
+  },
+  "problem": "Matrix to 25-letnia agencja crewingowa z Gdyni. Kiedy w lutym 2026 odeszła osoba od social mediów, konta zamarły, a liczba aplikacji z socialu spadła o jakieś 80%. Nie chcieli zatrudniać i szkolić kolejnej osoby na etat, potrzebowali tylko, żeby content ogarniała jedna osoba przy okazji, bez chaosu losowych postów.",
+  "steps": [
+    {
+      "title": "Stały system contentu",
+      "description": "Wdrożyłem system, który wyciąga realne bóle ludzi z forów i researchu, i z AI robi z nich pomysły na posty - w praktyce nieskończenie wariantów, wszystkie oparte na danych, które realnie chwytają. Koniec z poniedziałkową paniką 'co dziś postujemy'.",
+      "image": "/case-studies/matrix-crew.svg",
+      "imageAlt": "Content operating system 3-3-3 wdrożony dla Matrix Crew Management."
+    },
+    {
+      "title": "Automatyzacja leadów z AI",
+      "description": "Postawiłem formularz, który od razu filtruje kandydatów - koniec z czytaniem każdego CV tylko po to, żeby odkryć, że ktoś i tak nie pasuje (choćby spoza Unii). Leady są teraz policzalne, spięte w jeden system, a metryki pokazują, które posty dają najwięcej aplikacji - pod kolejne kampanie i cele biznesowe.",
+      "image": "/case-studies/matrix-crew.svg",
+      "imageAlt": "Automatyzacja leadów z AI i formularz aplikacyjny filtrujący kandydatów."
+    },
+    {
+      "title": "Generowanie postów na LinkedIn z AI",
+      "description": "Zbudowałem system, który z jednego pomysłu albo wrzuconych zdjęć robi gotowego posta na LinkedIn - grafika z brandingiem plus dopasowany opis. Wcześniej trzeba było do tego osobnego grafika, teraz wystarczy pomysł, a całość i tak można jeszcze podedytować.",
+      "image": "/case-studies/matrix-crew.svg",
+      "imageAlt": "Generowanie grafik z AI obsługiwane przez jedną osobę."
+    }
+  ],
+  "quote": {
+    "text": "[do uzupełnienia - cytat klienta]",
+    "author": "Anna Borowska-Giera",
+    "role": "Matrix Crew Management Poland"
+  }
+}
