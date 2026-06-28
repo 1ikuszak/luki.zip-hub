@@ -20,8 +20,7 @@ export function CalendlyCTA({ caseTitle }: Props) {
             Zarezerwuj bezpłatną 30-minutową rozmowę
           </h2>
           <p className="t-body-large mt-5 text-white/70">
-            Powiem ci szczerze, co warto zrobić, żeby osiągnąć twój wymarzony
-            rezultat. Bez pitchu, bez wciskania.
+            Dowiedz się, jak wdrożyć AI, żeby osiągnąć twój wymarzony rezultat.
           </p>
         </div>
 
