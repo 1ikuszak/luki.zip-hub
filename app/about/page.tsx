@@ -80,72 +80,19 @@ export default function AboutPage() {
                     <p>
                       Wierzę, że AI nie zabija zawodów, tylko ludzi bez własnego zdania.
                       Że w świecie, w którym każdy generuje to samo, wygrywają ci z
-                      charakterem, nie z templatem. AI może za ciebie myśleć, pisać,
-                      tworzyć. Nie wybierze za ciebie życia. I ten wybór staje się twoim
-                      wyróżnikiem.
+                      charakterem.
                     </p>
                     <p className="font-semibold text-[var(--text)]">
                       Nie wierzę w lepsze AI. Wierzę w AI, które wie, kim jesteś.
                     </p>
                     <p>
-                      Nie przyszło to od razu. Przez 5 lat zacząłem 10 biznesów, każdy
-                      miał być tym ostatnim. Gra, która nie weszła na Steama. Agencje,
-                      które się rozpadły. AI startup z dofinansowaniem od Microsoftu,
-                      który nie wypalił. Potem najgorszy okres, w którym bałem się, że
-                      wypaliłem się na stałe.
-                    </p>
-                    <p>
-                      W wieku 21 lat, mając 14 tysięcy na koncie, kupiłem bilet w jedną
-                      stronę do Japonii. Rok od zera. Nagrywałem wszystko, wdrażałem AI
-                      u siebie, brałem projekty nawet za darmo, żeby się nauczyć.
-                      Zrozumiałem, że nie chodzi o 10 tysięcy godzin, tylko o 10 tysięcy
-                      iteracji. Im bardziej cisnąłem na siłę, tym mniej wychodziło.
-                      Najlepsze przychodziło, gdy robiłem to, w co naprawdę wierzyłem.
+                      Przez 5 lat zacząłem 10 biznesów. 2 lata temu, mając 14 tysięcy na
+                      koncie, kupiłem bilet w jedną stronę do Japonii, gdzie zacząłem
+                      swoją podróż z AI.
                     </p>
                     <p className="font-semibold text-[var(--text)]">
                       Dziś łączę dwa światy, AI i kreatywny, i uczę innych, jak realnie z
-                      tego korzystać. Bo chcę mieć 70 lat i pamiętać własną historię, nie
-                      cudzy schemat.
-                    </p>
-                  </div>
-                </Reveal>
-              </div>
-            </section>
-
-            {/* ── JAK DZIAŁAM ── po ludzku ── */}
-            <section className="border-t border-[var(--border)]">
-              <div className="mx-auto w-full max-w-[680px] px-6 sm:px-8 lg:px-10 py-20 md:py-28">
-                <Reveal>
-                  <h2
-                    className="font-semibold text-[var(--text)]"
-                    style={{ fontSize: "clamp(28px, 4vw, 44px)", lineHeight: 1.05, letterSpacing: "-0.03em" }}
-                  >
-                    Jak działam.
-                  </h2>
-                </Reveal>
-
-                <Reveal delay={0.05}>
-                  <p
-                    className="my-10 font-semibold text-[var(--text)] text-pretty"
-                    style={{ fontSize: "clamp(22px, 2.8vw, 30px)", lineHeight: 1.2, letterSpacing: "-0.02em" }}
-                  >
-                    Nie potrzebujesz lepszego modelu AI. Potrzebujesz
-                    spersonalizowanego.
-                  </p>
-                </Reveal>
-
-                <Reveal delay={0.05}>
-                  <div className="space-y-5 text-lg md:text-xl leading-relaxed text-[var(--text)]/85 text-pretty">
-                    <p>
-                      Dlatego zacząłem budować swój drugi mózg. System AI, który zna
-                      mój kontekst, mój taste i moje instrukcje, i tworzy jak ja, nie
-                      jak wszyscy.
-                    </p>
-                    <p>
-                      Widziałem, że to się spina. Rolki zaczęły łapać, 62 tysiące, 19
-                      tysięcy wyświetleń, a wdrożenia zaczęły realnie działać. Więc
-                      buduję to dalej, dla siebie i dla innych. Wkrótce będzie tego
-                      znacznie więcej.
+                      tego korzystać.
                     </p>
                   </div>
                 </Reveal>

@@ -220,7 +220,7 @@ export function OfferTwoWays() {
           data-track="cta_contact"
           data-track-id="cta_home_offer_call"
           data-track-href={CONTACT_FORM_URL}
-          className="group inline-flex h-16 items-center gap-3 rounded-full bg-[var(--accent)] pl-9 pr-3 text-[18px] font-semibold text-white shadow-[0_22px_50px_-18px_rgba(38,86,217,0.75)] transition-transform hover:scale-[1.03] active:scale-[0.98] sm:text-[19px]"
+          className="btn-glossy group inline-flex h-16 items-center gap-3 rounded-full pl-9 pr-3 text-[18px] font-semibold text-white sm:text-[19px]"
         >
           Umów rozmowę
           <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">

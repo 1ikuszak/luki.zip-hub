@@ -47,7 +47,7 @@ const TILES = [
 
 export function WorkStrip() {
   return (
-    <section className="relative overflow-hidden border-t border-[var(--border)] py-20 sm:py-28">
+    <section id="case-studies" className="relative scroll-mt-24 overflow-hidden border-t border-[var(--border)] py-20 sm:py-28">
       {/* miękki glow pod sekcją */}
       <div
         aria-hidden

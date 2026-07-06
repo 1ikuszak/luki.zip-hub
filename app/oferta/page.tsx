@@ -124,7 +124,7 @@ export default function OfertaPage() {
                 data-track="cta_oferta_main"
                 data-track-id="cta_oferta_hero"
                 data-track-href={STARTER_FORM_URL}
-                className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-[var(--accent)] px-8 text-[16px] font-semibold text-white shadow-[0_20px_50px_-18px_rgba(38,86,217,0.6)] transition-transform hover:scale-[1.03]"
+                className="btn-glossy group inline-flex h-[56px] items-center gap-2 rounded-full px-8 text-[16px] font-semibold text-white"
               >
                 Chcę Starter
                 <ArrowRight
@@ -276,7 +276,7 @@ export default function OfertaPage() {
                         </span>
                       </div>
                     </div>
-                    <span className="inline-flex h-[56px] shrink-0 items-center justify-center gap-2 rounded-full bg-white px-8 text-[16px] font-semibold text-[var(--accent)] transition-transform group-hover:scale-[1.03]">
+                    <span className="btn-glossy-light inline-flex h-[56px] shrink-0 items-center justify-center gap-2 rounded-full px-8 text-[16px] font-semibold text-[var(--accent)]">
                       Chcę Starter
                       <ArrowRight
                         size={18}
@@ -322,7 +322,7 @@ export default function OfertaPage() {
                   data-track="cta_oferta_main"
                   data-track-id="cta_oferta_close"
                   data-track-href={STARTER_FORM_URL}
-                  className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-white px-8 text-[16px] font-semibold text-[var(--accent)] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.45)] transition-transform hover:scale-[1.03]"
+                  className="btn-glossy-light group inline-flex h-[56px] items-center gap-2 rounded-full px-8 text-[16px] font-semibold text-[var(--accent)]"
                 >
                   Chcę Starter
                   <ArrowRight

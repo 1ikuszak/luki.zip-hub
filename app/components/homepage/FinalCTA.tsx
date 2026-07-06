@@ -82,10 +82,12 @@ export function FinalCTA() {
                 data-track="cta_contact"
                 data-track-id="cta_home_final_call"
                 data-track-href={CONTACT_FORM_URL}
-                className="group inline-flex h-[58px] items-center gap-2 rounded-full bg-white px-9 text-[17px] font-semibold text-[var(--text)] transition-transform hover:scale-[1.03] active:scale-[0.98]"
+                className="btn-glossy-light group inline-flex h-[58px] items-center gap-3 rounded-full pl-8 pr-2.5 text-[17px] font-semibold text-[var(--text)]"
               >
                 Umów rozmowę
-                <ArrowRight size={18} strokeWidth={2.5} className="transition-transform group-hover:translate-x-0.5" />
+                <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[var(--accent)] text-white transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight size={20} strokeWidth={2.25} />
+                </span>
               </a>
             </div>
           </Reveal>

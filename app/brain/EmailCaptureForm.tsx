@@ -84,7 +84,7 @@ export function EmailCaptureForm({
         <button
           type="submit"
           disabled={submitting}
-          className="inline-flex h-[52px] items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-7 text-base font-semibold text-white hover:bg-[var(--accent-light)] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+          className="btn-glossy inline-flex h-[52px] items-center justify-center gap-2 rounded-lg px-7 text-base font-semibold text-white disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {submitting ? "Wysyłam..." : "Zapisz się"}
           {!submitting && <ArrowRight size={16} strokeWidth={2.25} />}

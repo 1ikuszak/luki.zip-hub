@@ -35,7 +35,7 @@ export function Navbar() {
           data-track="cta_nav"
           data-track-id="cta_nav_brain"
           data-track-href="/brain"
-          className="inline-flex h-9 items-center justify-center rounded-lg bg-[var(--accent)] px-4 text-sm font-semibold text-white hover:bg-[var(--accent-light)] transition-colors"
+          className="btn-glossy inline-flex h-9 items-center justify-center rounded-lg px-4 text-sm font-semibold text-white"
         >
           Dołącz za darmo
         </Link>

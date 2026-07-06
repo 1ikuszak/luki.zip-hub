@@ -1,13 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { CONTACT_FORM_URL } from "@/app/lib/data";
-import { VideoStrip } from "./VideoStrip";
+import { BrandStrip } from "./BrandStrip";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-const MONO = "ui-monospace, SFMono-Regular, Menlo, Monaco, monospace";
 
 const container: Variants = {
   hidden: {},
@@ -35,14 +33,8 @@ export function Hero() {
           className="container-default relative z-10 text-center"
         >
           <motion.div variants={item} className="flex justify-center">
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-[var(--border)] bg-white/70 px-4 py-1.5 backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-[1px] bg-[var(--accent)]" aria-hidden />
-              <span
-                className="text-[11px] uppercase tracking-[0.18em] text-[var(--text-secondary)]"
-                style={{ fontFamily: MONO }}
-              >
-                Dla founderów i marek bez generycznego AI
-              </span>
+            <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--text)_5%,transparent)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--accent)]">
+              Dla founderów i marek bez generycznego AI
             </span>
           </motion.div>
 
@@ -79,30 +71,28 @@ export function Hero() {
               data-track="cta_contact"
               data-track-id="cta_home_hero_call"
               data-track-href={CONTACT_FORM_URL}
-              className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-[var(--accent)] px-8 text-[16px] font-semibold text-white shadow-[0_18px_44px_-18px_rgba(38,86,217,0.7)] transition-transform hover:scale-[1.03] active:scale-[0.98]"
+              className="btn-glossy group inline-flex h-[56px] items-center gap-3 rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-white"
             >
               Umów rozmowę
-              <ArrowRight
-                size={18}
-                strokeWidth={2.5}
-                className="transition-transform group-hover:translate-x-0.5"
-              />
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
+                <ArrowRight size={20} strokeWidth={2.25} />
+              </span>
             </a>
-            <Link
-              href="/portfolio"
+            <a
+              href="#case-studies"
               data-track="cta_home"
-              data-track-id="cta_home_hero_work"
-              data-track-href="/portfolio"
-              className="inline-flex h-[56px] items-center gap-2 rounded-full border border-[var(--border)] bg-white px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:border-[var(--text)]"
+              data-track-id="cta_home_hero_cases"
+              data-track-href="#case-studies"
+              className="inline-flex h-[56px] items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--text)_8%,transparent)] px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:bg-[color-mix(in_srgb,var(--text)_14%,transparent)]"
             >
-              Zobacz prace
-            </Link>
+              Zobacz case studies
+            </a>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* pasek wideo — zawsze widoczny na dole pierwszego ekranu */}
-      <VideoStrip />
+      {/* pas logo marek — zawsze widoczny na dole pierwszego ekranu */}
+      <BrandStrip />
     </section>
   );
 }

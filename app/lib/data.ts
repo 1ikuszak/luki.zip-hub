@@ -71,6 +71,22 @@ export const socialLinks: SocialLink[] = [
 
 export const reviews: ReviewData[] = [
   {
+    id: "review-3",
+    author: "Sebastian Majchrzak",
+    role: "CEO Football Mat",
+    content:
+      "Polecam współpracę z Łukaszem. Ma cechy, które w szczególności sobie cenię, kreatywność i proaktywność. W realizacji wykonanej dla nas czuć pasję Łukasza i otwartość na doskonalenie każdego szczegółu.",
+    rating: 5,
+  },
+  {
+    id: "review-4",
+    author: "Filip Nizioł",
+    // Parafraza z wiadomości klienta (do potwierdzenia u Filipa przed publikacją)
+    role: "Founder, AI Interview Analyzer",
+    content: "Film wyszedł świetnie i już planuję z Łukaszem kolejne wideo.",
+    rating: 5,
+  },
+  {
     id: "review-1",
     author: "Kirutika",
     role: "CEO Ambrosial",
@@ -84,24 +100,6 @@ export const reviews: ReviewData[] = [
     role: "CEO JG-Marine",
     content:
       "Łukasz zrozumiał naszą wizję od razu. Komunikacja mega klarowna. Mogliśmy spać spokojnie.",
-    rating: 5,
-  },
-  {
-    id: "review-3",
-    author: "Sebastian Majchrzak",
-    // TODO: potwierdzić tytuł + firmę (LinkedIn za login-wallem)
-    role: "klient",
-    content:
-      "Polecam współpracę z Łukaszem. Ma cechy, które w szczególności sobie cenię, kreatywność i proaktywność. W realizacji wykonanej dla nas czuć pasję Łukasza i otwartość na doskonalenie każdego szczegółu.",
-    rating: 5,
-  },
-  {
-    id: "review-4",
-    author: "Filip Nizioł",
-    // Parafraza z wiadomości klienta (do potwierdzenia u Filipa przed publikacją)
-    role: "Founder, AI Interview Analyzer",
-    content:
-      "Film wyszedł świetnie, wrzucam go na stronę i LinkedIn. Cieszę się, że się udało, i już planuję z Łukaszem kolejne wideo.",
     rating: 5,
   },
 ];
