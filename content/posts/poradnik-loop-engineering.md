@@ -1,171 +1,165 @@
 ---
-title: "Loop engineering: dlaczego przestałem promptować AI i co robię zamiast tego (z przykładami, które dają 10x)"
-date: "2026-06-23"
+title: "Loop engineering: jak z tego korzystać, plus pętla na wysoko konwertujący landing page"
+date: "2026-07-08"
 order: -3
 tag: "poradnik"
-description: "Loop engineering to następny krok po prompt engineeringu. Przestajesz klikać każdy krok i projektujesz pętlę, która robi to za ciebie. Trzy gotowe pętle do skopiowania plus jedna rzecz, której konkurencja ci nie podbierze."
+description: "Loop engineering to następny krok po prompt engineeringu. W środku gotowa pętla, którą kopiujesz, podajesz swój produkt i wychodzi konwertujące copy na cały landing page. Plus druga pętla do designu i skill do gustu, który jest must have."
 ---
 
 Twój system AI jest tak szybki, jak ty przy klawiaturze. I to jest twój problem.
 
-Promptujesz task po tasku. Piszesz, czekasz, czytasz output, poprawiasz, piszesz następny. Przy każdym kroku siedzisz ty. AI mogłoby kręcić robotę w kółko, ale ty wpinasz się między każdy krok i wszystko zatrzymuje się na tobie. Masz najszybszy silnik świata i trzymasz nogę na hamulcu.
+Promptujesz task po tasku. Piszesz, czekasz, czytasz output, poprawiasz, piszesz następny. Przy każdym kroku siedzisz ty. Robisz jeden landing, gdy pętla zrobiłaby dziesięć. AI mogłoby kręcić w kółko. Ale ty wpinasz się między kroki, więc wszystko staje na tobie. Masz najszybszy silnik świata i trzymasz nogę na hamulcu.
 
-Boris Cherny, szef Claude Code w Anthropic, rozwiązał to jednym zdaniem: nie promptuję już Claude'a, mam pętle, które chodzą same, a moja robota to pisać te pętle. Branża nazywa to loop engineering. W 2023 wszyscy gadali o prompt engineeringu, w 2025 o context engineeringu, teraz o pętlach. Ten sam skill pod spodem, inna etykieta.
+Ludzie, którzy siedzą w tym najgłębiej, mówią dziś to samo: nie promptuję już AI krok po kroku, mam pętle, które chodzą same, a moja robota to je pisać. Branża nazywa to loop engineering. W 2023 wszyscy gadali o prompt engineeringu, w 2025 o context engineeringu, teraz o pętlach. Ten sam skill pod spodem, inna etykieta.
 
-Pokażę ci o co chodzi, dlaczego to realnie zmienia twój output, i dam ci trzy pętle, które odpalisz dziś. Jedną nawet bez kodu, w 30 sekund. A na końcu rzecz, o której prawie nikt nie gada: że pętla jest warta tyle, ile dane, które jej podłożysz. To jedyna część, której konkurencja ci nie skopiuje.
-
----
-
-## Co przez to tracisz
-
-Trzy rzeczy, konkretnie.
-
-Czas. Każdy krok przechodzi przez ciebie, więc robisz dziesięć rund tam, gdzie mogłaby chodzić jedna pętla bez ciebie.
-
-Tokeny. Na każdej turze agent re-wysyła cały kontekst plus każdy wcześniejszy wynik narzędzia. Przy dziesiątej turze płacisz za przetworzenie dziesięciu kopii tego, od czego zacząłeś. Koszt rośnie nie od pisania. Rośnie, bo co turę niesiesz cały plecak od nowa.
-
-Jakość. Jak robisz coś ręcznie przez godzinę, ostatni output jest gorszy niż pierwszy, bo jesteś zmęczony. Pętla się nie męczy. Ty tak. I tu rodzi się slop.
+Zaraz dam ci gotową pętlę: kopiujesz, wklejasz, podajesz swój produkt i wychodzi konwertujące copy na cały landing. Potem drugą, do designu. Najpierw dwie minuty na to, jak pętla w ogóle działa, bo bez tego reszta to magia.
 
 ---
 
-## Czym właściwie jest loop engineering
+## Część 1. Czym jest loop engineering
 
 Loop engineering to prosta zmiana. Przestajesz być osobą, która promptuje agenta. Projektujesz system, który robi to za ciebie.
 
-Najprostszy obraz, jaki znam: redaktor z kartką.
+Najprostszy obraz, jaki znam: redaktor z kartką. Jeden agent pisze. Drugi czyta i ocenia, jak redaktor. Co słabe wraca do poprawki i leci od nowa, aż przejdzie. Ty odpalasz cel raz, a pętla kręci się sama.
 
-Jeden agent pisze. Drugi czyta i ocenia, jak redaktor. Co słabe wraca do poprawki i leci od nowa, aż przejdzie. Ty odpalasz cel raz, a pętla kręci się sama.
-
-Pod spodem są trzy klocki:
+Pod spodem są cztery klocki:
 
 - **maker** robi robotę
 - osobny **checker** ją ocenia
-- **stan żyje na dysku**, w pliku, nie w głowie agenta
+- **standard na piśmie**, do którego checker porównuje
+- **warunek stopu**, ustawiony zanim odpalisz
 
-Dlaczego osobny checker, a nie ten sam agent? Bo model oceniający własną robotę jest dla niej za miły. Uzasadnia to, co już napisał, zamiast łapać, gdzie zawalił. Świeży agent, w osobnym oknie kontekstu, czyta to bez ego. Widzi rzeczy, które autor sobie wmówił. Dokładnie dlatego redakcja w gazecie to inna osoba niż ta, która napisała tekst.
+Dlaczego osobny checker, a nie ten sam agent? Bo model oceniający własną robotę jest dla niej za miły. Uzasadnia to, co już napisał, zamiast łapać, gdzie zawalił. Świeży agent czyta to bez ego. Widzi rzeczy, które autor sobie wmówił. Dlatego redakcja w gazecie to inna osoba niż ta, która napisała tekst.
 
-Stan na dysku brzmi nudno, a jest kręgosłupem całej rzeczy. Agent zapomina wszystko między runami. Plik nie. Jak pętla trzyma w pliku, co już zrobione i co jeszcze otwarte, to może wrócić do roboty po godzinie albo po dwóch dniach i wie, gdzie skończyła. Bez tego każdy run startuje od zera i powtarza te same błędy.
+Warunek stopu ustawiasz przed startem. Na przykład: popraw tylko poważne rzeczy, maksymalnie trzy rundy, koniec gdy wszystko przejdzie standard. Pętla bez stopu kręci się i pali tokeny, aż ją zabijesz ręcznie. Jeden gość spalił tak 1,3 miliona dolarów w 30 dni. Płacił ktoś inny, bo pracuje w firmie od modeli. Ty nie masz tego luksusu. Twoja pętla musi być ciasna: jasny cel, zdefiniowane kroki, ocena na każdym z nich, punkt stopu. To się nazywa closed loop i ta wersja opłaca się dziś.
 
-I ostatnia rzecz, bez której pętla pali kasę: exit. Warunek stopu ustawiasz przed startem, nie w trakcie. Coś typu "popraw tylko poważne rzeczy, maksymalnie dwie rundy, koniec gdy wszystko przejdzie standard". Pętla bez warunku stopu kręci się i przepala tokeny, aż ją zabijesz ręcznie.
-
----
-
-## Dlaczego to zmienia grę
-
-Prompt to jeden ruch. Pętla to dźwignia.
-
-Ustawiasz ją raz, a ona robi twoją robotę w kółko i sama łapie, co słabe. Robota, która zajmowała ci godzinę klikania, dzieje się raz, bez ciebie. Przestajesz być wąskim gardłem.
-
-Kiedyś wygrywał ten, kto lepiej pisał prompty. Teraz ten, kto lepiej projektuje pętlę, która te prompty pisze za niego. Ta sama gra, tylko grasz ją piętro wyżej i przestajesz klikać.
+I to jest cała gra: pętla jest tak dobra, jak standard, który jej podłożysz. Daj checkerowi pustą kartkę, a będzie zgadywał. Daj mu spisany standard, a utnie wszystko, co nie trzyma poziomu. Zaraz pokażę ci to na konkrecie.
 
 ---
 
-## Trzy pętle, które dają 10x
+## Część 2. Pętla do copy na landing page
 
-Trzy pętle, od najprostszej do najmocniejszej. Każdą odpalisz dziś.
+To jest mięso. Napiszę ci copy na landing nie jednym promptem. Pętlą. Sama ocenia się przez sześć frameworków copywriterskich i poprawia, aż przejdzie.
 
-### 1. Najprostsza pętla, jeden prompt, zero kodu
+Nie musisz umieć pisać. Musisz tylko nakarmić ją prawdą o produkcie, surowo, w punktach. Kopiujesz prompt niżej, wklejasz do Claude albo ChatGPT. On najpierw cię przepyta o produkt. Odpowiadasz, a pętla buduje copy sekcja po sekcji, ocenia każdą i oddaje ci gotowca.
 
-Otwierasz Claude albo ChatGPT i wklejasz coś takiego:
-
-```
-Napisz 10 hooków do reela o [temat].
-Po każdym oceń go w trzech punktach: czy zatrzymuje scroll, czy jest konkretny, czy brzmi naturalnie.
-Słabe odrzuć i przepisz.
-Powtarzaj, aż 8 na 10 przejdzie wszystkie trzy punkty.
-Nie pytaj mnie o nic po drodze. Pokaż dopiero finał.
-```
-
-Cel, kryteria, poprawka, stop. Cała pętla w jednym oknie czatu. Model pisze, sam siebie ocenia względem twoich kryteriów, odrzuca słabe i kręci dalej, aż trafi w próg, który ustawiłeś.
-
-To nie jest trik tylko na hooki. Podmień pierwszą linijkę na cokolwiek: opisy produktów, cold maile, nagłówki, pomysły na nazwy. Reszta szkieletu zostaje. Najważniejsze są dwa zdania na dole. "Powtarzaj aż" daje warunek stopu. "Nie pytaj mnie o nic" zamyka pętlę, żeby nie zatrzymywała się co krok i nie robiła z ciebie znowu wąskiego gardła.
-
-### 2. Rozbij ją na zespół
-
-Jeden agent ma limit. Większą robotę rozbijasz na zespół.
-
-Na górze stoi orchestrator, taki dowódca. Dostaje cel, rozdaje go specjalistom, każdy kręci swoją pętlę, a na końcu wszystko spina się w jeden wynik. Ty dalej nie klikasz nic. Prompt wygląda mniej więcej tak:
+### Skopiuj to
 
 ```
-Jesteś orchestratorem. Cel: artykuł na bloga o [temat].
-Rozbij to na trzy role: researcher, pisarz, redaktor.
-Researcher zbiera fakty i konkretne liczby.
-Pisarz pisze draft tylko z materiału researchera.
-Redaktor ocenia draft pod: jasność, konkret, zero lania wody, i odsyła do poprawki z uwagami.
-Krąż między pisarzem a redaktorem, aż redaktor nie ma uwag. Wtedy pokaż finał.
+Jesteś moją pętlą do pisania copy na landing page. Pracujesz jako zamknięta pętla: maker pisze, osobny checker ocenia względem standardu, poprawka, powtórz aż przejdzie. Jeszcze nic nie pisz.
+
+KROK 0 - WYWIAD.
+Zanim napiszesz jedno zdanie, zadaj mi te pytania i poczekaj na moją odpowiedź:
+1. Co sprzedajesz? (produkt albo usługa, jedno zdanie)
+2. Dla kogo to jest? (konkretny człowiek, nie "wszyscy")
+3. Jaki ból ma ten człowiek, zanim cię znajdzie? Daj mi trzy najostrzejsze.
+4. Gdzie będzie po tym, jak kupi, i ile kosztuje go nierobienie nic?
+5. Jak to działa w trzech krokach?
+6. Proof: liczby, wyniki, opinie, cokolwiek realnego.
+7. Oferta i cena.
+Powiem ci dużo, ale w punktach. Weź wszystko, co dostaniesz. Jak czegoś brakuje, dopytaj raz, zwięźle. Nie zgaduj.
+
+KROK 1 - STANDARD (do tego porównujesz każdą linijkę):
+- Struktura (5 sekcji): 1. Pain Point (1-2 zdania, duży ból). 2. Transformacja (gdzie był plus koszt bezczynności). 3. Jak to działa (proste kroki, rozpal pragnienie, nie zdradzaj wszystkiego). 4. Benefity (bullety, korzyść a nie feature). 5. CTA (before/after, potem akcja; transformacja PRZED ceną, żeby porównał wartość z ceną).
+- PAS: sekcja 1 ma boleć, zanim sekcja 3 ratuje. Nie ratuj za wcześnie.
+- Value Equation: każda linijka albo podnosi (marzenie razy wiara, że się uda), albo obniża (czas razy wysiłek). Linijka, która nie rusza żadnego z tych czterech, leci do kosza.
+- Cel w hero: outcome jeden-dwa kroki przed nim, plus czas, plus konkretna metryka. Wiarygodne bije wielkie. "Pierwszy klient w 14 dni" bije "rozwiń biznes".
+- Test trzech pytań na każdą linijkę: widzę obraz? da się to obalić prawdą albo fałszem? czy konkurent może się pod tym podpisać bez zmiany sensu? Jak konkurent może, przepisz.
+- Anti-generic: podmień w nagłówku rzeczowniki na dowolną inną firmę z branży. Jak nic się nie zmienia, jest za generyczne. Wstrzyknij konkret: nazwę, liczbę, realny mechanizm.
+- Craft: krótkie zdania, aktywny głos, pierwsze zdanie robi całą robotę. Zero lania wody, zero em-dash, zero słów typu synergia, rewolucyjny, unlock, game-changer.
+
+KROK 2 - PISZ (maker): napisz copy per sekcja według struktury z KROK 1.
+
+KROK 3 - OCEŃ (checker): przejdź sekcja po sekcji. Dla każdej wypisz krótko: który framework łamie i jak. Przepisz tylko to, co nie przechodzi.
+
+KROK 4 - PĘTLA: powtarzaj KROK 2 i 3 maksymalnie trzy rundy, albo do momentu, aż każda sekcja przejdzie cały standard. Bierz jedną najważniejszą poprawkę na rundę, nie dwadzieścia drobnych.
+
+OSZCZĘDZANIE TOKENÓW (trzymaj się tego):
+- Nie pokazuj mi rund pośrednich. Pokaż tylko finał: copy per sekcja, gotowe do wklejenia na stronę.
+- Nie szukaj w internecie i nie dopisuj sekcji, których nie ma w strukturze.
+- Na końcu dorzuć trzy linijki: co poprawiłeś między rundami.
 ```
 
-To samo, co pętla numer jeden, tylko role są rozdzielone. Każdy agent robi jedną wąską robotę. Żaden nie nosi całego projektu w głowie naraz, więc koszt tokenów zostaje płaski nawet przy dużym zadaniu. W Claude Code odpalisz te role naprawdę równolegle, każda w osobnym oknie. W zwykłym czacie zasymulujesz to w jednym oknie i też zadziała, tylko wolniej.
+### Jak z tego wycisnąć maksa
 
-### 3. Closed loop zakodowany twoim standardem
+Cała robota tej pętli stoi na KROKU 0. Im więcej realnego materiału jej dasz, tym mniej zgaduje. Ale nie wklejaj eseju. Wrzuć dużo, w punktach, samo high-signal.
 
-Do tej pory checker oceniał z głowy, na podstawie ogólnego "czy to dobre". Trzeci poziom: dajesz mu twój standard na piśmie.
+Konkretnie: trzy najostrzejsze bóle twojego klienta jego własnymi słowami (podkradnij je z opinii, z DM, z rozmów). Realne liczby i wyniki. Czym się różnisz od tego, co już jest na rynku. Jak wygląda życie klienta po zakupie. Masz starą wersję strony albo notatki o produkcie? Wklej. Pętla przerobi to na copy, a ty nie musisz pisać ani zdania.
+
+### Dlaczego te frameworki
+
+Każdy zamyka jedną dziurę, przez którą ucieka konwersja. Krótko:
+
+- **Struktura 5 sekcji.** To kolejność, w jakiej kupujący podejmuje decyzję: czy mam ten problem, gdzie będę bez niego, czy to realne, co dostaję, co robię teraz. Idziesz po kolei i nie gubisz go po drodze.
+- **PAS.** Ludzie nie kupują rozwiązania. Kupują wyjście z bólu. Nie rozgrzejesz problemu, twój nagłówek jest letni i nikt nie scrolluje dalej.
+- **Value Equation.** Kontrola jakości na każdą linijkę. Podnosisz marzenie i wiarę, obniżasz czas i wysiłek. Zdanie, które nie rusza żadnego z tych czterech, jest ozdobą. Wywalasz.
+- **Clear and believable goal.** Rynek jest zmęczony wielkimi obietnicami. Konkretny cel z metryką i terminem konwertuje lepiej niż największa obietnica bez pokrycia.
+- **Test trzech pytań.** Sito na abstrakcję. Widzę obraz, da się obalić, nikt inny się pod tym nie podpisze. Linijka, która nie przechodzi choć jednego, jest niczyja i leci.
+- **Anti-generic swap.** Główny powód, dla którego copy przestaje brzmieć jak AI. Podmieniasz swoje rzeczowniki na dowolne inne konto i nic się nie zmienia? Za generyczne. Konkret robi robotę.
+
+Pierwsze trzy budują szkielet i ciśnienie. Ostatnie trzy sprawiają, że copy brzmi jak człowiek, nie jak generator.
+
+### Zobaczmy to w praktyce
+
+Powiedzmy, że sprzedajesz kurs fotografii produktowej dla małych sklepów. Wrzucasz do pętli trzy fakty. Klient traci sprzedaż przez zdjęcia z telefonu. Nie ma budżetu na studio. Twoi kursanci robią sklepowe zdjęcia w tydzień, samym telefonem.
+
+Pierwsza sekcja, którą pluje pętla, może wyglądać tak:
 
 ```
-Załączam plik standard.md. Jest w nim spisane, co u mnie działa, jak piszę i czego nie tykam.
-Napisz [X].
-Potem oceń własny draft punkt po punkcie względem standard.md.
-Każde zdanie, które nie pasuje do standardu, przepisz.
-Powtarzaj, aż draft przechodzi cały standard. Pokaż finał i krótko napisz, co poprawiłeś.
+Twoje produkty są dobre. Twoje zdjęcia mówią coś innego.
+Klient scrolluje, widzi zdjęcie z telefonu w kuchennym świetle i idzie do konkurencji, która wygląda na wartą tych pieniędzy. Nie przez produkt. Przez zdjęcie.
 ```
 
-Różnica jest ogromna. Pętla numer jeden ocenia względem trzech kryteriów, które wymyśliłeś na poczekaniu. Ta ocenia względem twojego realnego standardu, spisanego w pliku. To jest closed loop: ty projektujesz ścieżkę i to, do czego pętla porównuje wynik.
+Boli, jest konkretne, widzisz ten obraz i pod tym nie podpisze się żadna generyczna "szkoła fotografii". Tak wygląda linijka, która przeszła standard. Reszta sekcji leci tym samym torem, aż cały landing jest spójny.
+
+To nie pali tokenów, bo pętla jest zamknięta. Pytania zadaje raz. Standard jest stały, więc nie szuka niczego w sieci. Rundy ograniczone do trzech. Pokazuje ci tylko finał. Płacisz jak za jeden dobry prompt, a dostajesz robotę całej pętli.
 
 ---
 
-## Pętla jest tak dobra jak dane pod nią
+## Część 3. Druga pętla: design (i skill, który jest must have)
 
-I tu dochodzimy do rzeczy, o której nie mówi prawie nikt, kto gada o loop engineeringu. Wszyscy zatrzymują się na "potrzebujesz osobnego checkera". Ok, zgoda. Ale checker jest tylko tak dobry, jak to, do czego porównuje.
+Masz copy. Strona ma jeszcze wyglądać. I tu jedna rzecz robi całą różnicę.
 
-Daj sędziemu pustą kartkę, a będzie zgadywał. Daj mu spisany standard i utnie wszystko, co nie brzmi jak ty.
+Powiedz Claude "zrób mi ładny landing" i dostaniesz to samo co wszyscy. Fioletowy gradient AI. Wyśrodkowane hero na ciemnym tle. Trzy równe karty features. Domyślny slop. Model sięga po najbezpieczniejszy szablon, bo nie dałeś mu gustu.
 
-Pytanie tylko, co realnie wrzucasz do tego pliku. U mnie standard.md do pisania wygląda mniej więcej tak:
+Więc dajesz mu gust. Nie ręcznie, tylko raz. Chcesz, żeby strona wyglądała jak banger, a nie jak template? Zainstaluj do Claude Code skill do gustu. To dosłownie must have.
 
 ```
-## Hooki
-- hook-pytanie: u mnie słaby, niska retencja
-- konkretna liczba w pierwszej sekundzie: mocny
-## Ton
-- krótkie zdania, zero korpo
-- nie tykam słów: synergia, rewolucyjny, game-changer
-## Co zadziałało
-- reel o drugim mózgu, hook "większość nie wie", 35k wyświetleń
+npx skills add https://github.com/Leonxlnx/taste-skill --skill "design-taste-frontend"
 ```
 
-To nie jest teoria z głowy. Każda linijka to wniosek z realnych danych. I tu jest sedno: ja trzymam wszystkie swoje reelsy razem ze statystykami w jednym miejscu. Ocena trzyma je w głowie naraz i widzi rzeczy, których ja nie widzę. Na przykład że hook-pytanie ciągnie u mnie gorszą retencję niż hook z konkretną liczbą. Sam bym tego nie złapał, bo nie pamiętam czterdziestu reelsów naraz. Pętla pamięta.
+Repo i pełny opis: [tasteskill.dev](https://tasteskill.dev). Ten skill to spisany standard tego, jak wygląda dobra strona, wpięty na stałe. Zero domyślnych defaultów. Kontrast typografii. Oddech. Jeden spójny system. I działa jak checker: każdy ekran, który AI zbuduje, leci przez ten standard, zamiast wychodzić z bezpiecznego szablonu modelu. Ten sam ruch co przy copy, tylko dla oczu.
 
-To miejsce, gdzie trzymam te dane, nazywam drugim mózgiem. I to jest rzecz, której nie skopiujesz. Możesz mieć najlepsze pętle świata, ale bez danych pod spodem ocena nie ma do czego porównać. Więc nie pętla jest tu najważniejsza. To, co masz pod nią zapisane.
+Z zainstalowanym skillem odpalasz drugą pętlę. Dorzucasz swój brand kit jako drugi standard, obok gustu:
 
-Żeby było jasne, że to chodzi naprawdę. Ten artykuł i reel, z którego wyrósł, przeszły dokładnie przez taką pętlę. Jeden agent pisał, osobny sędzia oceniał pod standard zapisany w plikach, poprawka, znowu ocena. Oceniający odbił reela cztery razy, zanim trafił w mój standard i zanim ty go zobaczyłeś. Sędzia to nie ja w lepszym humorze. To osobny agent ze świeżym kontekstem, którego zadanie to znaleźć, gdzie tekst jest słaby. Nie pochwalić mnie.
+```
+Jesteś moją pętlą do designu landing page'a. Masz zainstalowany skill do gustu (design-taste-frontend) i on jest twoim standardem estetyki. Maker buduje, checker ocenia pod standard, poprawka, powtórz aż przejdzie.
 
----
+WGRYWAM:
+- copy na stronę (wklejam niżej)
+- mój brand kit: kolory (hex), fonty, logo, link do starej strony. Paletę i typografię bierz stąd, nie wymyślaj własnych.
 
-## Open kontra closed, czyli "to jest dla bogatych"
+KROK 1 - BUDUJ: złóż landing z mojego copy, trzymając strukturę sekcji i gust ze skilla.
+KROK 2 - OCEŃ: przejdź ekran po ekranie pod dwa standardy. (a) Gust ze skilla: trzyma poziom, czy zszedł do domyślnego szablonu? (b) Brand: kolory, fonty i wibe zgadzają się z moim brand kitem, czy to wygląda jak generyczny template? Wypisz, co się rozjeżdża.
+KROK 3 - PĘTLA: popraw tylko to, co nie przeszło. Maksymalnie trzy rundy. Pokaż finał.
+```
 
-Jest na to wszystko kontrargument i jest mocny. Warto go znać, zanim odpalisz pierwszą pętlę.
-
-Są dwa rodzaje pętli. Open loop jest eksploracyjny. Dajesz agentowi szerokie pole i pozwalasz mu odkrywać, próbować różnych dróg, budować rzeczy, których nie określiłeś do końca. Ekscytujący koniec zabawy. Problem to koszt. Open loop z prawdziwym polem do ruchu pali absurdalne ilości tokenów. Jeden gość spalił tak 1,3 miliona dolarów w 30 dni. Płacił ktoś inny, bo gość pracuje w firmie od modeli. Ta pętla jest zbudowana dla kogoś, kto nie płaci. Dla 90% ludzi bez nieograniczonego budżetu to jeszcze nie do uruchomienia. A wycelowane w luźny standard zamienia się w maszynkę do slopu.
-
-Closed loop jest ograniczony. To ty projektujesz ścieżkę od początku do końca. Jasny cel, zdefiniowane kroki, ocena na każdym kroku i punkt, w którym pętla się zatrzymuje albo oddaje ci robotę. Agenci dalej kręcą pętlę, ale wewnątrz ramy, którą zbudowałeś. Jest lepszy co run, bo każde przejście karmi następne. I chodzi na normalnym budżecie, bo ścieżka jest ciasna. Dla większości roboty marketingowej closed to ta, która się dziś opłaca.
-
-Jest jeszcze tania zasada na bezpieczeństwo. Im niższy próg weryfikacji, tym pewniej puścisz pętlę bez nadzoru. Nudne checki, czy wszędzie jest aktualna nazwa, czy nie brakuje pliku, są trywialne do sprawdzenia. Niech lecą same. Rzeczy, które wymagają twojego osądu, czy to trzyma markę, czy ma sens, trzymaj pod swoim okiem.
-
----
-
-## Jeśli masz zapamiętać jedną rzecz
-
-Za chwilę każdy będzie miał pętle. Te same modele, te same setupy. I przestanie chodzić o to, kto ma mądrzejsze AI. Zacznie chodzić o to, czyja pętla zna lepszy standard.
-
-Model skopiujesz. Pętlę skopiujesz. Ale twoich danych i twojego standardu nie.
-
-Trzy punkty do zapamiętania:
-
-1. Pętla to maker, który pisze, osobny checker, który ocenia, i stan na dysku. Leci, aż przejdzie. Warunek stopu ustaw przed startem.
-2. Zacznij od najprostszej pętli w jednym promptcie. Potem rozbijaj na zespół, gdy robota rośnie.
-3. Pętla jest tak dobra, jak dane pod jej oceną. Zbieraj w jednym miejscu, co u ciebie działa, a co nie.
+Skill trzyma gust. Brand kit sprawia, że strona wygląda jak twoja, nie jak cudza. Im lepszy brand kit wrzucisz, tym bliżej twojego brandu wyląduje. To jest moment, w którym Claude Code bije zwykły czat: gust wpięty na stałe, do którego model wraca przy każdej stronie.
 
 ---
 
-Pętlę zbudujesz w 30 sekund. Standard pod nią, te dane, do których ocena porównuje, to normalnie robota miesięcy. I to jedyna część, której nikt ci nie zwędzi.
+## Jedno, co warto zapamiętać
 
-Drugi mózg to system, który zbiera ten standard za ciebie, żebyś nie składał go ręcznie przez pół roku. Chcesz go u siebie? [Postaw swój drugi mózg](/brain).
+Te frameworki są publiczne. Każdy wygoogla PAS, Value Equation i strukturę landinga. Za chwilę każdy będzie miał te same pętle i te same modele. Sama pętla staje się tania i powszechna.
+
+Czego nikt ci nie skopiuje: prawdy o twoim produkcie, realnego bólu twojego klienta, twojego proofu, twojego brandu wgranego w plik. Framework to szkielet. Twoje dane to mięso.
+
+Trzy rzeczy na wynos:
+
+1. Pętla to maker, który pisze, osobny checker, który ocenia pod standard, i warunek stopu ustawiony przed startem. Leci, aż przejdzie.
+2. Copy na landing zbudujesz gotową pętlą wyżej. Wklej, odpowiedz na siedem pytań, odbierz gotowca. Design domknij drugą pętlą.
+3. Wygrywa nie ten, kto ma lepsze AI. Ten, kto podłożył pod pętlę lepszy standard i lepsze dane.
+
+---
+
+Pętlę zbudujesz w minutę. Standard i dane pod nią to robota miesięcy. I to jedyna część, której nikt ci nie zwędzi.
