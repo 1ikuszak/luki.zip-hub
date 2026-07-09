@@ -5,6 +5,8 @@ import { DitherFlow } from "@/app/components/oferta/DitherFlow";
 import { CONTACT_FORM_URL } from "@/app/lib/data";
 import { getPosts } from "@/lib/posts";
 import { CopyEmail } from "./CopyEmail";
+import { Suspense } from "react";
+import { EmailCaptureForm } from "@/app/brain/EmailCaptureForm";
 import {
   BadgeCheck,
   Instagram,
@@ -76,7 +78,6 @@ export default function LinksPage() {
       sub: `${poradnikiCount} playbooków krok po kroku: Meta AI, Claude Code, Kling. Zero teorii, same konkrety.`,
       href: "/artykuly",
       trackId: "cta_links_artykuly",
-      variant: "primary",
       badge: "DARMOWE",
     },
     {
@@ -97,12 +98,6 @@ export default function LinksPage() {
       href: CONTACT_FORM_URL,
       trackId: "cta_links_wspolpraca",
       external: true,
-    },
-    {
-      title: "Newsletter na maila",
-      sub: "Co tydzień jeden konkret o budowaniu biznesów i marek w erze AI. Krótko, bez spamu.",
-      href: "/brain",
-      trackId: "cta_links_brain",
     },
   ];
 
@@ -180,6 +175,38 @@ export default function LinksPage() {
 
           {/* Email — kopiowanie do schowka */}
           <CopyEmail email="lukasz.glica07@gmail.com" />
+        </div>
+
+        {/* Hero capture — jeden wielki zapis nad linkami */}
+        <div className="mt-10 rounded-2xl border border-[var(--accent)]/30 bg-[color-mix(in_srgb,var(--accent)_5%,var(--bg-card))] p-6 sm:mt-12 sm:p-8">
+          <h2 className="text-[21px] font-semibold leading-tight text-[var(--text)] sm:text-[24px]">
+            Zgarnij mój drugi mózg. Za darmo.
+          </h2>
+          <p className="mt-2 text-[14px] text-[var(--text-secondary)] sm:text-[15px]">
+            System AI, który myśli jak ty. Plus co tydzień jeden konkret o
+            budowaniu marki w erze AI.
+          </p>
+          <div className="mt-5">
+            <Suspense fallback={<div className="h-[52px]" aria-hidden />}>
+              <EmailCaptureForm
+                ctaId="cta_links_capture"
+                bridgeLinks={[
+                  {
+                    title: "Dlaczego 95% wdrożeń AI nie zarabia ani złotówki",
+                    href: "/artykuly/poradnik-dlaczego-wdrozenia-ai-nie-zarabiaja",
+                  },
+                  {
+                    title: "Meta AI dla biznesu: 10 promptów, które działają",
+                    href: "/artykuly/poradnik-meta-ai-dla-biznesu-10-promptow-ktore-dzialaja-w-maju-2026",
+                  },
+                  {
+                    title: "Brand Identity w 30 minut",
+                    href: "/artykuly/poradnik-brand-identity",
+                  },
+                ]}
+              />
+            </Suspense>
+          </div>
         </div>
 
         {/* CTA stack */}

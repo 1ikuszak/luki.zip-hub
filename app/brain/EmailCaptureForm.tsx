@@ -8,8 +8,10 @@ import { readSourceContext } from "@/app/lib/source-tracking";
 
 export function EmailCaptureForm({
   ctaId = "brain_form_submit",
+  bridgeLinks,
 }: {
   ctaId?: string;
+  bridgeLinks?: { title: string; href: string }[];
 }) {
   const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
@@ -57,12 +59,39 @@ export function EmailCaptureForm({
 
   if (success) {
     return (
-      <div
-        role="status"
-        className="inline-flex items-center gap-2 h-[52px] px-5 rounded-lg bg-[var(--accent)]/10 text-[var(--accent)] text-base font-semibold"
-      >
-        <Check size={18} strokeWidth={2.25} />
-        Jesteś w środku &lt;3
+      <div role="status" className="flex flex-col gap-4">
+        <div className="inline-flex items-center gap-2 text-base font-semibold text-[var(--accent)]">
+          <Check size={18} strokeWidth={2.25} />
+          Jesteś w środku. &lt;3
+        </div>
+        <p className="max-w-[480px] text-[15px] leading-relaxed text-[var(--text-secondary)]">
+          System jeszcze dopinam na ostatni guzik. Wpadnie na Twój mail lada
+          moment, pamiętam o Tobie.
+        </p>
+        {bridgeLinks && bridgeLinks.length > 0 && (
+          <div className="flex flex-col gap-2.5">
+            <span className="text-[12px] font-semibold uppercase tracking-[0.12em] text-[var(--text-secondary)]">
+              W międzyczasie zacznij tu
+            </span>
+            <ul className="flex flex-col gap-2">
+              {bridgeLinks.map((l) => (
+                <li key={l.href}>
+                  <a
+                    href={l.href}
+                    className="group inline-flex items-center gap-2 text-[15px] font-medium text-[var(--text)] transition-colors hover:text-[var(--accent)]"
+                  >
+                    <ArrowRight
+                      size={15}
+                      strokeWidth={2.25}
+                      className="shrink-0 text-[var(--accent)] transition-transform group-hover:translate-x-0.5"
+                    />
+                    {l.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     );
   }
@@ -86,7 +115,7 @@ export function EmailCaptureForm({
           disabled={submitting}
           className="btn-glossy inline-flex h-[52px] items-center justify-center gap-2 rounded-lg px-7 text-base font-semibold text-white disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          {submitting ? "Wysyłam..." : "Zapisz się"}
+          {submitting ? "Wysyłam..." : "Chcę system"}
           {!submitting && <ArrowRight size={16} strokeWidth={2.25} />}
         </button>
       </form>

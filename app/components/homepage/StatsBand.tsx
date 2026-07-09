@@ -7,8 +7,8 @@ import { Counter } from "@/app/components/oferta/Counter";
  */
 const PROOF: { to: number; suffix?: string; label: string }[] = [
   { to: 500, label: "leadów z jednego materiału" },
-  { to: 300, suffix: "K", label: "wyświetleń, rekord kanału" },
-  { to: 10, suffix: "M+", label: "wyświetleń wygenerowanych" },
+  { to: 300, suffix: "K", label: "wyświetleń, rekord kanału klienta" },
+  { to: 10, suffix: "M+", label: "wyświetleń, które wygenerowałem" },
 ];
 
 export function StatsBand() {
@@ -35,14 +35,14 @@ export function StatsBand() {
           </div>
         </Reveal>
 
-        {/* <Reveal delay={0.05}>
+        <Reveal delay={0.05}>
           <p className="mt-12 border-t border-[var(--border)] pt-6 text-[15px] text-[var(--text-secondary)]">
-            Wszystko jednym systemem, jednoosobowo, bez agencji.{" "}
+            Jednoosobowo, jednym systemem, bez agencji.{" "}
             <span className="font-semibold text-[var(--text)]">
               Tym samym, który zbuduję u ciebie.
             </span>
           </p>
-        </Reveal> */}
+        </Reveal>
       </div>
     </section>
   );

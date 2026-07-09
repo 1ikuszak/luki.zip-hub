@@ -5,7 +5,7 @@ const PAINS: string[] = [
   "Masz wizję i taste, ale AI w twoich rękach wypluwa to samo, co u wszystkich. Generyczny slop.",
   "Wiesz, że content i brand to dziś przewaga, ale nie masz czasu siedzieć w tym codziennie.",
   "Próbowałeś narzędzi AI. Efekt wygląda jak AI. Brakuje duszy, brandu, ciebie.",
-  "Najęcie agencji to wolno, drogo, i tak musisz wszystko prowadzić za rękę.",
+  "Agencja to wolno i drogo, a i tak prowadzisz ją za rękę.",
   "Twój zespół tonie w powtarzalnej robocie zamiast robić to, co naprawdę ważne.",
   "Chcesz tworzyć więcej i szybciej, ale nie kosztem jakości i kontroli nad stylem.",
 ];

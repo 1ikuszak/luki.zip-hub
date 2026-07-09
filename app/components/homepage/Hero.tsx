@@ -34,7 +34,7 @@ export function Hero() {
         >
           <motion.div variants={item} className="flex justify-center">
             <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--text)_5%,transparent)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--accent)]">
-              Dla founderów i marek bez generycznego AI
+              Dla marek, które nie chcą wyglądać jak AI
             </span>
           </motion.div>
 
@@ -47,7 +47,7 @@ export function Hero() {
               letterSpacing: "-0.035em",
             }}
           >
-            Skaluję twój biznes systemami AI, które pracują jak ty.
+            Zakoduję twój taste w system AI, który tworzy jak ty.
           </motion.h1>
 
           <motion.p
@@ -55,38 +55,42 @@ export function Hero() {
             className="mx-auto mt-6 max-w-[54ch] text-[var(--text-secondary)]"
             style={{ fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)", lineHeight: 1.6 }}
           >
-            Audytuję, buduję i wdrażam systemy z zakodowaną esencją twojej marki.
-            Od contentu po cały biznes, w skali agencji. Uczę twój zespół, jak z
-            nich korzystać.
+            Filmy, content i systemy z zakodowaną esencją twojej marki.
+            W skali agencji.
           </motion.p>
 
           <motion.div
             variants={item}
-            className="mt-9 flex flex-wrap items-center justify-center gap-3"
+            className="mt-9 flex flex-col items-center gap-3"
           >
-            <a
-              href={CONTACT_FORM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-track="cta_contact"
-              data-track-id="cta_home_hero_call"
-              data-track-href={CONTACT_FORM_URL}
-              className="btn-glossy group inline-flex h-[56px] items-center gap-3 rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-white"
-            >
-              Umów rozmowę
-              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
-                <ArrowRight size={20} strokeWidth={2.25} />
-              </span>
-            </a>
-            <a
-              href="#case-studies"
-              data-track="cta_home"
-              data-track-id="cta_home_hero_cases"
-              data-track-href="#case-studies"
-              className="inline-flex h-[56px] items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--text)_8%,transparent)] px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:bg-[color-mix(in_srgb,var(--text)_14%,transparent)]"
-            >
-              Zobacz case studies
-            </a>
+            <div className="flex flex-wrap items-center justify-center gap-3">
+              <a
+                href="#newsletter"
+                data-track="cta_home"
+                data-track-id="cta_home_hero_system"
+                data-track-href="#newsletter"
+                className="btn-glossy group inline-flex h-[56px] items-center gap-3 rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-white"
+              >
+                Zgarnij mój system
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
+                  <ArrowRight size={20} strokeWidth={2.25} />
+                </span>
+              </a>
+              <a
+                href={CONTACT_FORM_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-track="cta_contact"
+                data-track-id="cta_home_hero_call"
+                data-track-href={CONTACT_FORM_URL}
+                className="inline-flex h-[56px] items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--text)_8%,transparent)] px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:bg-[color-mix(in_srgb,var(--text)_14%,transparent)]"
+              >
+                Umów rozmowę
+              </a>
+            </div>
+            <p className="text-[13px] text-[var(--text-secondary)]">
+              Darmowy system na maila. Wdrożenie zaczynamy od rozmowy.
+            </p>
           </motion.div>
         </motion.div>
       </div>

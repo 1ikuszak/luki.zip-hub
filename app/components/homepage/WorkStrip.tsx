@@ -64,8 +64,8 @@ export function WorkStrip() {
             Wdrożenia, które bronią się same.
           </h2>
           <p className="mt-5 max-w-[52ch] t-body-large text-[var(--text-secondary)]">
-            Realne efekty z realnych projektów. Każdy zbudowany, wdrożony i
-            prowadzony przeze mnie. Kliknij, żeby zobaczyć cały case.
+            Realne projekty, realne liczby. Każdy zbudowany i prowadzony przeze
+            mnie, od pomysłu po działający system.
           </p>
         </Reveal>
 

@@ -17,7 +17,7 @@ const AUDYT = {
   tag: "Audyt",
   title: "Dostajesz mapę, nie kolejną listę narzędzi.",
   body: "Mówisz, nad czym pracujesz i co chcesz wdrożyć. Pokazuję dokładnie, gdzie tracisz czas i co zautomatyzować w pierwszej kolejności. Koniec zgadywania, które AI i który tool.",
-  benefit: "Wychodzisz wiedząc, co zrobić w poniedziałek rano.",
+  benefit: "Wychodzisz z konkretnym pierwszym krokiem. Gwarantowane.",
   steps: ["Gdzie tracisz czas", "Co zautomatyzować najpierw", "Które AI i który tool"],
 };
 
@@ -26,7 +26,7 @@ const WDROZENIE = {
   title: "Produkujesz na poziomie codziennie. Bez dokładania ludzi.",
   body: "Składam system AI z twoją marką i wiedzą w środku, i uczę twój zespół, jak go prowadzić. Powtarzalna robota schodzi z głowy, a jakość zostaje twoja.",
   benefit: "Mniej godzin i etatów. Zostaje ci czas na to, co naprawdę rusza biznes.",
-  tasks: ["fakturowanie", "obsługa leadów", "raporty", "follow-upy", "research"],
+  tasks: ["content on-brand", "kampanie", "wideo i wizuale", "research", "follow-upy"],
 };
 
 const T_LOOP = 6400;
