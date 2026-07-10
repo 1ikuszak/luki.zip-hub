@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { SESSION_COOKIE, TOKEN_TTL_SECONDS, mintToken, verifyToken } from "@/app/lib/access";
+import { SITE_URL } from "@/app/lib/site";
 
 // Konsumpcja magic linku — zawsze świeża, nigdy z cache.
 export const runtime = "nodejs";
@@ -14,7 +15,7 @@ export const dynamic = "force-dynamic";
  * Zły/wygasły token → strona kursu z formularzem "wyślij mi świeży link".
  */
 export async function GET(request: NextRequest) {
-  const base = (process.env.NEXT_PUBLIC_SITE_URL || new URL(request.url).origin).replace(/\/+$/, "");
+  const base = SITE_URL;
   const t = request.nextUrl.searchParams.get("t");
 
   const secret = process.env.COURSE_ACCESS_SECRET;

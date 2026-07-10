@@ -7,6 +7,7 @@ import {
 import { buildMagicUrl } from "@/app/lib/access";
 import { sendAccessEmail } from "@/app/lib/mail";
 import { upsertCourseBuyer } from "@/app/lib/beehiiv";
+import { SITE_URL } from "@/app/lib/site";
 
 // node:crypto + surowe body → wymusza runtime Node (nie Edge).
 export const runtime = "nodejs";
@@ -65,7 +66,7 @@ export async function POST(request: Request) {
   //    padnie, zwracamy 502 i EasyCart ponawia (mail idempotentny po orderze).
   const magicUrl = buildMagicUrl(email, "welcome", {
     secret: process.env.COURSE_ACCESS_SECRET,
-    siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+    siteUrl: SITE_URL,
   });
   if (!magicUrl) {
     console.error("[easycart-webhook] brak COURSE_ACCESS_SECRET — nie zbuduję linku");

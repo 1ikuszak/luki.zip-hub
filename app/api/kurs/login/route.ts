@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { buildMagicUrl } from "@/app/lib/access";
 import { hasPurchasedCourse } from "@/app/lib/easycart";
 import { sendAccessEmail } from "@/app/lib/mail";
+import { SITE_URL } from "@/app/lib/site";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -70,7 +71,7 @@ export async function POST(request: NextRequest) {
   if (purchased === true) {
     const url = buildMagicUrl(email, "login", {
       secret: process.env.COURSE_ACCESS_SECRET,
-      siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+      siteUrl: SITE_URL,
     });
     if (!url) {
       console.error("[kurs-login] brak COURSE_ACCESS_SECRET");

@@ -120,6 +120,6 @@ export function buildMagicUrl(
 ): string | null {
   const token = mintToken(email, purpose, opts.secret);
   if (!token) return null;
-  const base = (opts.siteUrl || "https://luki.zip").replace(/\/+$/, "");
+  const base = (opts.siteUrl || "https://www.lukaszglica.com").replace(/\/+$/, "");
   return `${base}/api/kurs/dostep?t=${encodeURIComponent(token)}`;
 }

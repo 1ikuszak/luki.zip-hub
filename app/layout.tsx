@@ -5,7 +5,9 @@ import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { ChromeGate } from "./components/ChromeGate";
 
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://luki.zip";
+import { SITE_URL } from "@/app/lib/site";
+
+const siteUrl = SITE_URL;
 const title = "luki.zip — brand design & launch video";
 const description =
   "Robię marki, które wyglądają cool. Brand design, launch video, system.";
