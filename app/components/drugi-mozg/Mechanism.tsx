@@ -11,13 +11,15 @@ export function Mechanism() {
             Żywy System
           </p>
           <h2 className="t-h2 mt-5 max-w-[20ch]">
-            Inne drugie mózgi leżą martwe. Twój żyje.
+            Inne drugie mózgi przechowują. Twój produkuje.
           </h2>
           <p className="t-body-large mt-6 text-[var(--text-secondary)]">
-            Cmentarz notatek, do których nigdy nie wracasz, kontra system, który
-            pracuje. Żywy System robi cztery rzeczy, których martwy folder nie
-            zrobi nigdy: sam się układa, sam odpowiada, sam pisze za ciebie i sam
-            się uczy po tobie.
+            Żywy System to pętla, nie folder. Wciąga twoją wiedzę: notatki,
+            transkrypcje, wyceny, rzeczy, które się sprzedały. Produkuje z niej
+            teksty, decyzje i oceny. Drugi agent sprawdza każdy output pod TWÓJ
+            standard i poprawia, zanim go zobaczysz. System zapamiętuje poprawki,
+            więc następnym razem jest bliżej ciebie. Dlatego żyje: z każdym
+            tygodniem myśli bardziej jak ty, nie bardziej jak internet.
           </p>
         </div>
       </Reveal>
@@ -30,8 +32,7 @@ export function Mechanism() {
 
       <Reveal delay={0.15}>
         <p className="mx-auto mt-14 max-w-[760px] text-balance text-center text-[22px] font-semibold leading-snug tracking-[-0.01em] text-[var(--text)] sm:mt-16 sm:text-[26px]">
-          To nie kolejny kurs o Obsidianie. Obsidian to tylko okno na twoją
-          wiedzę. Tu chodzi o to, co AI z niej robi.
+          To nie generator treści. To twój sposób myślenia, zakodowany w system.
         </p>
       </Reveal>
     </section>

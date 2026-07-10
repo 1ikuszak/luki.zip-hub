@@ -3,11 +3,11 @@ import { Reveal } from "@/app/components/oferta/Reveal";
 import { CtaButton } from "./CtaButton";
 
 const INSIDE = [
-  "3 gotowe automaty: jeden wciąga twoją wiedzę, drugi pisze z niej w twoim głosie, trzeci sam sprząta system.",
-  "Plik-mózg, który mówi AI kim jesteś, zanim o cokolwiek zapytasz.",
-  "Gotowy szkielet, w którym twoja wiedza od razu wie, gdzie usiąść.",
-  "5 lekcji wideo plus 5 PDF, każdy działa sam, z gotowymi promptami do wklejenia.",
-  "Dożywotni dostęp i aktualizacje.",
+  "5 lekcji wideo plus 5 PDF z promptami do wklejenia. Każdy działa sam.",
+  "3 gotowe automaty: pierwszy wciąga twoją wiedzę, drugi produkuje z niej w twoim głosie (teksty, wyceny, oceny), trzeci raz w tygodniu sprząta system.",
+  "Brand Voice Engine: plik, który koduje twój głos. Osobno wdrażam to za około 3 000 zł.",
+  "Gotowy szkielet vaultu: twoja wiedza od pierwszego dnia wie, gdzie usiąść.",
+  "Dożywotni dostęp i aktualizacje. Narzędzia się zmienią, system zostaje.",
 ];
 
 const REPLACES = [
@@ -25,10 +25,11 @@ export function Offer() {
             {/* lewa: co dostajesz */}
             <div className="p-8 sm:p-10 lg:p-12">
               <h2 className="t-h2 max-w-[20ch]">
-                W 5 dni masz działający Drugi Mózg.
+                W 5 wieczorów masz działający Drugi Mózg.
               </h2>
               <p className="t-body-large mt-5 text-[var(--text-secondary)]">
-                System, z którego twoje AI pisze i decyduje jak ty. W środku:
+                System, z którego twoje AI pisze, decyduje i ocenia jak ty.
+                W środku:
               </p>
 
               <ul className="mt-8 space-y-4">
@@ -65,6 +66,10 @@ export function Offer() {
                     </li>
                   ))}
                 </ul>
+                <p className="t-body mt-6 font-medium text-[var(--text)]">
+                  To ten sam sposób myślenia, który wdrażam w firmach za 15-25
+                  tys. zł. Tu stawiasz go sam.
+                </p>
               </div>
             </div>
 
@@ -98,15 +103,15 @@ export function Offer() {
                 </div>
                 {/* KOTWICA podwyzki - realna scarcity bez fake countdownu. */}
                 <p className="t-small mt-2.5 text-[var(--text-secondary)]">
-                  Cena startowa. Po pierwszej kohorcie w górę.
+                  Cena pierwszej kohorty. Po niej idzie w górę.
                 </p>
                 <div className="mt-6">
                   <CtaButton variant="primary" label="Postaw swój Drugi Mózg" />
                 </div>
                 {/* Sygnał zaufania pod przyciskiem. */}
                 <p className="t-small mt-3 text-[var(--text-secondary)]">
-                  Bezpieczna płatność przez EasyCart. Dostęp od razu po opłaceniu.
-                  Dzień 2 = pełen zwrot.
+                  Płatność przez EasyCart, faktura od ręki. Dostęp od razu po
+                  opłaceniu.
                 </p>
               </div>
 
@@ -123,9 +128,9 @@ export function Offer() {
                   </span>
                 </div>
                 <p className="t-small mt-2.5 text-[var(--text-secondary)]">
-                  Postaw system. Jeśli po Dniu 2 nie widzisz, że twoje AI pisze z
-                  twojej wiedzy zamiast ze średniej internetu, piszesz jedno
-                  zdanie i oddaję 297 zł. Bez pytań.
+                  Postaw system z lekcji 1 i 2. Jeśli AI nie wypluje ani jednego
+                  outputu, który brzmi jak ty i myśli jak ty, piszesz jedno
+                  zdanie i oddaję 297 zł. Brand Voice Engine zostaje u ciebie.
                 </p>
               </div>
             </div>

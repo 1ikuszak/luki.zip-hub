@@ -34,18 +34,19 @@ export function FinalCTA() {
         <div className="relative overflow-hidden rounded-3xl bg-[var(--accent)] px-8 py-16 text-center sm:px-12 sm:py-20">
           <Isolines />
           <h2 className="relative mx-auto max-w-[22ch] text-[30px] font-semibold leading-[1.1] tracking-[-0.02em] text-white sm:text-[42px]">
-            Za 5 dni masz AI, które myśli jak ty. Dziś zaczyna od zera za każdym
-            razem.
+            Za 5 wieczorów masz AI, które myśli jak ty. Dziś zaczyna od zera za
+            każdym razem.
           </h2>
           <p className="relative mx-auto mt-6 max-w-[46ch] text-[17px] leading-[1.6] text-white/85">
-            Skalowalny system, który zna ciebie. Koniec gubienia rzeczy w czacie
-            i tłumaczenia tego samego kontekstu od nowa.
+            Kontekst ustawiasz raz. Potem pracuje w każdym tekście, każdej
+            wycenie i każdej decyzji.
           </p>
           <div className="relative mt-9 flex justify-center">
             <CtaButton variant="onAccent" label="Postaw swój Drugi Mózg" />
           </div>
           <p className="relative mt-6 text-[13px] text-white/70">
-            Bez countdownów, bez sztucznej presji. Kupujesz, kiedy jesteś gotowy.
+            Zero sztucznych countdownów. Jedna prawdziwa zasada: pierwsza
+            kohorta płaci najmniej.
           </p>
         </div>
       </Reveal>

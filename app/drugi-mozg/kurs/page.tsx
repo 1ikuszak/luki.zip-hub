@@ -1,8 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Download, Lock } from "lucide-react";
-import { verifyAccessToken } from "@/app/lib/easycart";
-import { LESSONS, BONUS, COURSE_INTRO_VIDEO } from "./lessons";
+import {
+  ArrowRight,
+  Bookmark,
+  LifeBuoy,
+  Package,
+  Sparkles,
+  Terminal,
+} from "lucide-react";
+import { getSessionEmail } from "@/app/lib/session";
+import { VideoEmbed, NoAccess } from "@/app/components/drugi-mozg/kurs/CourseUI";
+import { CourseProgress } from "@/app/components/drugi-mozg/kurs/CourseProgress";
+import { LessonCheck } from "@/app/components/drugi-mozg/kurs/LessonCheck";
+import { Downloads } from "@/app/components/drugi-mozg/kurs/Downloads";
+import { getLessons, getDownloads, COURSE, STARTER_PACK } from "@/lib/kurs";
 
 // Strona dostępowa — nigdy nie indeksujemy i nie cache'ujemy publicznie.
 export const dynamic = "force-dynamic";
@@ -12,133 +23,151 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-function VideoEmbed({ url, title }: { url: string; title: string }) {
-  if (!url) {
-    return (
-      <div className="flex aspect-video w-full items-center justify-center rounded-2xl border border-dashed border-[var(--border)] bg-[var(--bg-page)] text-center">
-        <span className="t-small text-[var(--text-secondary)]">
-          Materiał wideo pojawi się tutaj.
-        </span>
-      </div>
-    );
-  }
-  return (
-    <div className="aspect-video w-full overflow-hidden rounded-2xl border border-[var(--border)] bg-black">
-      <iframe
-        src={url}
-        title={title}
-        className="h-full w-full"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-        allowFullScreen
-      />
-    </div>
-  );
-}
-
-function NoAccess() {
-  return (
-    <main className="container-narrow flex min-h-[70vh] flex-col items-center justify-center py-24 text-center">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--bg-page)] text-[var(--text-secondary)]">
-        <Lock size={22} strokeWidth={2} />
-      </div>
-      <h1 className="t-h2 mt-6">Ten link nie otwiera kursu</h1>
-      <p className="t-body mt-4 max-w-[42ch] text-[var(--text-secondary)]">
-        Link dostępowy jest nieprawidłowy. Otwórz kurs z maila, którego dostałeś
-        po zakupie. Jeśli mail nie przyszedł, sprawdź spam albo napisz do mnie i
-        ogarniam to od ręki.
-      </p>
-      <Link
-        href="/drugi-mozg"
-        className="group mt-8 inline-flex h-[56px] items-center gap-2 rounded-full bg-[var(--accent)] px-8 text-[16px] font-semibold text-white shadow-[0_20px_50px_-18px_rgba(38,86,217,0.6)] transition-transform hover:scale-[1.03]"
-      >
-        Wróć na stronę kursu
-        <ArrowRight size={18} strokeWidth={2.5} className="transition-transform group-hover:translate-x-0.5" />
-      </Link>
-    </main>
-  );
-}
-
 export default async function KursPage({
   searchParams,
 }: {
-  searchParams: Promise<{ k?: string }>;
+  searchParams: Promise<{ e?: string }>;
 }) {
-  const { k } = await searchParams;
-  const email = verifyAccessToken(k, process.env.COURSE_ACCESS_SECRET);
+  // Dostęp trzyma httpOnly cookie (ustawiane przez /api/kurs/dostep po
+  // kliknięciu magic linku z maila). Zero tokenów w URL-ach.
+  const email = await getSessionEmail();
 
   if (!email) {
-    return <NoAccess />;
+    const { e } = await searchParams;
+    return <NoAccess reason={e} />;
   }
 
+  const lessons = getLessons();
+  const downloads = getDownloads();
+
   return (
-    <main className="container-default py-16 sm:py-24">
-      <header className="mb-10">
+    <main className="container-default py-14 sm:py-20">
+      {/* ── Nagłówek dostępu ── */}
+      <header className="enter">
         <p className="t-small font-semibold uppercase tracking-uppercase text-[var(--accent)]">
           Twój dostęp
         </p>
         <h1 className="t-h1 mt-3">Drugi Mózg</h1>
-        <p className="t-body-large mt-4 text-[var(--text-secondary)]">
-          Wszystko jest tutaj. 5 dni, każdy działa sam. Dożywotni dostęp, wracasz
-          kiedy chcesz.
+        <p className="t-body-large mt-4 max-w-[52ch] text-[var(--text-secondary)]">
+          5 lekcji, dożywotni dostęp, wracasz kiedy chcesz.
         </p>
+        <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 t-small text-[var(--text-secondary)]">
+          <span>Odblokowane dla {email}</span>
+          <span aria-hidden className="text-[var(--border)]">·</span>
+          <span>{lessons.length} lekcji</span>
+          <span aria-hidden className="text-[var(--border)]">·</span>
+          <span>~1 wieczór na setup</span>
+        </div>
       </header>
 
-      {/* Film powitalny na górze */}
-      <section className="mb-14">
-        <VideoEmbed url={COURSE_INTRO_VIDEO} title="Start — Drugi Mózg" />
+      {/* ── Pasek postępu ── */}
+      <div className="mt-8">
+        <CourseProgress slugs={lessons.map((l) => l.slug)} />
+      </div>
+
+      {/* ── Orientacja na start ── */}
+      <div className="enter mt-8 space-y-3 rounded-2xl border border-[var(--border)] bg-white p-5 sm:p-6">
+        {/* BETA: usuń tę linię przy oficjalnym launchu (materiały będą komplet) */}
+        <div className="flex gap-3">
+          <Sparkles size={18} strokeWidth={2} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+          <p className="t-small text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text)]">Wchodzisz jako jeden z pierwszych.</span>{" "}
+            Lekcje lądują tu w tym tygodniu. Wracasz tym samym linkiem, nic ci nie ucieknie.
+          </p>
+        </div>
+        <div className="flex gap-3 border-t border-[var(--border)] pt-3">
+          <Terminal size={18} strokeWidth={2} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+          <p className="t-small text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text)]">Czego potrzebujesz:</span>{" "}
+            Claude Code i konto Anthropic. Resztę - prompty i szkielet systemu - masz w pakiecie startowym.
+          </p>
+        </div>
+      </div>
+
+      {/* ── Film powitalny ── */}
+      <section className="mt-12 reveal">
+        <VideoEmbed url={COURSE.introVideoUrl} title="Start - Drugi Mózg" />
       </section>
 
-      {/* Lekcje */}
-      <section className="space-y-14">
-        {LESSONS.map((lesson) => (
-          <article key={lesson.day}>
-            <div className="mb-4 flex items-baseline gap-3">
-              <span className="t-small font-semibold text-[var(--accent)]">
-                Dzień {lesson.day}
-              </span>
+      {/* ── Lekcje (karty → strony lekcji) ── */}
+      <section className="mt-12 space-y-3">
+        {lessons.map((lesson) => (
+          <Link
+            key={lesson.slug}
+            href={`/drugi-mozg/kurs/${lesson.slug}`}
+            className="group block rounded-2xl border border-[var(--border)] bg-white p-5 transition-all hover:border-[var(--accent)] hover:shadow-[0_30px_80px_-50px_rgba(8,12,40,0.5)] sm:p-6 reveal"
+          >
+            <div className="flex items-start gap-4">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[var(--bg-page)] text-[16px] font-semibold text-[var(--accent)]">
+                {lesson.day}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <LessonCheck slug={lesson.slug} />
+                  <span className="t-small font-semibold text-[var(--accent)]">
+                    Dzień {lesson.day}
+                  </span>
+                </div>
+                <h2 className="t-h3 mt-1">{lesson.title}</h2>
+                <p className="t-small mt-2 text-[var(--text-secondary)]">
+                  {lesson.description}
+                </p>
+              </div>
+              <ArrowRight
+                size={20}
+                strokeWidth={2}
+                className="mt-2 shrink-0 text-[var(--text-secondary)] transition-all group-hover:translate-x-0.5 group-hover:text-[var(--accent)]"
+              />
             </div>
-            <h2 className="t-h3">{lesson.title}</h2>
-            <p className="t-body mt-2 text-[var(--text-secondary)]">
-              {lesson.description}
-            </p>
-            <div className="mt-5">
-              <VideoEmbed url={lesson.videoUrl} title={`Dzień ${lesson.day} — ${lesson.title}`} />
-            </div>
-            {lesson.pdfUrl ? (
-              <a
-                href={lesson.pdfUrl}
-                className="mt-4 inline-flex h-[44px] items-center gap-2 rounded-full border border-[var(--border)] bg-white px-5 text-[15px] font-semibold text-[var(--text)] transition-colors hover:border-[var(--text)]"
-              >
-                <Download size={16} strokeWidth={2.5} />
-                PDF do Dnia {lesson.day}
-              </a>
-            ) : null}
-          </article>
+          </Link>
         ))}
       </section>
 
-      {/* Bonus */}
-      <section className="mt-16 rounded-3xl border border-[var(--border)] bg-[var(--bg-page)] p-8 sm:p-10">
-        <h2 className="t-h3">{BONUS.title}</h2>
-        <p className="t-body mt-2 text-[var(--text-secondary)]">
-          {BONUS.description}
+      {/* ── Pakiet startowy ── */}
+      <section
+        id="pakiet"
+        className="mt-12 scroll-mt-24 rounded-3xl border border-[var(--border)] bg-white p-7 shadow-[0_40px_120px_-70px_rgba(8,12,40,0.4)] sm:p-10 reveal"
+      >
+        <div className="flex items-center gap-3">
+          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-[var(--bg-page)] text-[var(--accent)]">
+            <Package size={20} strokeWidth={2} />
+          </div>
+          <h2 className="t-h3">{STARTER_PACK.title}</h2>
+        </div>
+        <p className="t-body mt-4 max-w-[58ch] text-[var(--text-secondary)]">
+          {STARTER_PACK.description}
         </p>
-        {BONUS.url ? (
-          <a
-            href={BONUS.url}
-            className="group mt-5 inline-flex h-[52px] items-center gap-2 rounded-full bg-[var(--accent)] px-7 text-[16px] font-semibold text-white shadow-[0_20px_50px_-18px_rgba(38,86,217,0.6)] transition-transform hover:scale-[1.03]"
-          >
-            Pobierz pakiet startowy
-            <ArrowRight size={18} strokeWidth={2.5} className="transition-transform group-hover:translate-x-0.5" />
-          </a>
-        ) : null}
+
+        <div className="mt-7">
+          {downloads ? (
+            <Downloads zip={downloads.zip} files={downloads.files} />
+          ) : (
+            <span className="inline-flex h-[52px] items-center gap-2 rounded-full border border-dashed border-[var(--border)] px-7 text-[15px] font-semibold text-[var(--text-secondary)]">
+              <Package size={17} strokeWidth={2} />
+              Pakiet do pobrania wkrótce
+            </span>
+          )}
+        </div>
       </section>
 
-      <footer className="mt-16 border-t border-[var(--border)] pt-6">
-        <p className="t-small text-[var(--text-secondary)]">
-          Zaloguj się tym samym linkiem, kiedy chcesz wrócić. Zapisz go sobie.
-          Coś nie działa? Napisz, ogarniam.
-        </p>
+      {/* ── Stopka: zapisz link + wsparcie ── */}
+      <footer className="mt-14 grid gap-4 sm:grid-cols-2">
+        <div className="flex gap-3 rounded-2xl border border-[var(--border)] bg-[var(--bg-page)] p-5">
+          <Bookmark size={18} strokeWidth={2} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+          <p className="t-small text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text)]">Zapisz ten link.</span>{" "}
+            Wracasz nim, kiedy chcesz - to twój dożywotni dostęp. Dodaj do
+            zakładek albo zostaw maila w skrzynce.
+          </p>
+        </div>
+        <div className="flex gap-3 rounded-2xl border border-[var(--border)] bg-[var(--bg-page)] p-5">
+          <LifeBuoy size={18} strokeWidth={2} className="mt-0.5 shrink-0 text-[var(--accent)]" />
+          <p className="t-small text-[var(--text-secondary)]">
+            <span className="font-semibold text-[var(--text)]">Coś nie działa?</span>{" "}
+            Napisz do mnie i ogarniam od ręki. Żaden problem z dostępem nie
+            zostaje z tobą sam.
+          </p>
+        </div>
       </footer>
     </main>
   );

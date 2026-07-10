@@ -1,0 +1,85 @@
+{
+  "zip": {
+    "name": "pakiet-startowy-drugi-mozg.zip",
+    "label": "Cały pakiet startowy",
+    "size": 85046
+  },
+  "lessons": [
+    {
+      "day": 1,
+      "name": "lekcja-1-fundament.zip",
+      "label": "Paczka Lekcji 1",
+      "size": 11223
+    },
+    {
+      "day": 2,
+      "name": "lekcja-2-skille-rdzenia.zip",
+      "label": "Paczka Lekcji 2",
+      "size": 30728
+    },
+    {
+      "day": 3,
+      "name": "lekcja-3-skille.zip",
+      "label": "Paczka Lekcji 3",
+      "size": 164064
+    }
+  ],
+  "files": [
+    {
+      "name": "00-README.md",
+      "label": "00 - README",
+      "size": 8755
+    },
+    {
+      "name": "01-fundament.md",
+      "label": "01 - Fundament",
+      "size": 13039
+    },
+    {
+      "name": "02-obsidian-wiring.md",
+      "label": "02 - Obsidian wiring",
+      "size": 6413
+    },
+    {
+      "name": "03-git-backup.md",
+      "label": "03 - Git backup",
+      "size": 10225
+    },
+    {
+      "name": "04-hooks-gwarancje.md",
+      "label": "04 - Hooks gwarancje",
+      "size": 10215
+    },
+    {
+      "name": "05-skille.md",
+      "label": "05 - Skille",
+      "size": 9451
+    },
+    {
+      "name": "06-rules.md",
+      "label": "06 - Rules",
+      "size": 13355
+    },
+    {
+      "name": "07-lessons-konstytucja.md",
+      "label": "07 - Lessons konstytucja",
+      "size": 8255
+    },
+    {
+      "name": "08-weryfikacja.md",
+      "label": "08 - Weryfikacja",
+      "size": 15124
+    },
+    {
+      "name": "09-maintenance-prompt.md",
+      "label": "09 - Maintenance prompt",
+      "size": 13445
+    },
+    {
+      "name": "10-puls.md",
+      "label": "10 - Puls",
+      "size": 7512
+    }
+  ],
+  "generatedNote": "sync-downloads.mjs - nie edytuj recznie"
+}

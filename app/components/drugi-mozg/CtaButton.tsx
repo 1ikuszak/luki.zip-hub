@@ -12,8 +12,10 @@ type Props = {
  * domyślny "#checkout" jest automatycznie podmieniany na hostowany checkout
  * EasyCart - jeden klik prosto do płatności, zero pól po naszej stronie.
  * Sekret nigdy nie trafia do klienta: NEXT_PUBLIC_* to tylko publiczny link koszyka.
- * Jawnie podany href (np. "#checkout" przekazany świadomie albo inna kotwica)
- * nadpisuje to zachowanie tylko, gdy różni się od domyślnego.
+ *
+ * Styl przycisków = ten sam glossy co homepage (.btn-glossy / .btn-glossy-light
+ * z globals.css) + chip-strzałka w kółku. primary = niebieski połysk,
+ * secondary = szara pigułka, onAccent = biały połysk (na niebieskim tle).
  */
 function resolveHref(href: string): string {
   const checkoutUrl = process.env.NEXT_PUBLIC_EASYCART_CHECKOUT_URL;
@@ -32,7 +34,7 @@ export function CtaButton({
     return (
       <a
         href={resolvedHref}
-        className="inline-flex h-[56px] items-center gap-2 rounded-full border border-[var(--border)] bg-white px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:border-[var(--text)]"
+        className="inline-flex h-[56px] items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--text)_8%,transparent)] px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:bg-[color-mix(in_srgb,var(--text)_14%,transparent)]"
       >
         {label}
       </a>
@@ -43,14 +45,12 @@ export function CtaButton({
     return (
       <a
         href={resolvedHref}
-        className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-white px-8 text-[16px] font-semibold text-[var(--accent)] shadow-[0_20px_50px_-18px_rgba(0,0,0,0.45)] transition-transform hover:scale-[1.03]"
+        className="btn-glossy-light group inline-flex h-[56px] items-center gap-3 whitespace-nowrap rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-[var(--accent)]"
       >
         {label}
-        <ArrowRight
-          size={18}
-          strokeWidth={2.5}
-          className="transition-transform group-hover:translate-x-0.5"
-        />
+        <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-[var(--accent)] text-white transition-transform group-hover:translate-x-0.5">
+          <ArrowRight size={20} strokeWidth={2.25} />
+        </span>
       </a>
     );
   }
@@ -58,14 +58,12 @@ export function CtaButton({
   return (
     <a
       href={resolvedHref}
-      className="group inline-flex h-[56px] items-center gap-2 rounded-full bg-[var(--accent)] px-8 text-[16px] font-semibold text-white shadow-[0_20px_50px_-18px_rgba(38,86,217,0.6)] transition-transform hover:scale-[1.03]"
+      className="btn-glossy group inline-flex h-[56px] items-center gap-3 whitespace-nowrap rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-white"
     >
       {label}
-      <ArrowRight
-        size={18}
-        strokeWidth={2.5}
-        className="transition-transform group-hover:translate-x-0.5"
-      />
+      <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
+        <ArrowRight size={20} strokeWidth={2.25} />
+      </span>
     </a>
   );
 }

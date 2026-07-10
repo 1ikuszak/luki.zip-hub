@@ -1,30 +1,15 @@
 import crypto from "node:crypto";
 
 /**
- * EasyCart (easy.tools) integration helpers — server-only.
- *
- * Bezpieczeństwo opiera się na dwóch sekretach (NIGDY client-side):
- *  - EASYCART_WEBHOOK_SECRET  — podpisuje webhooki EasyCart (X-Webhook-Signature).
- *  - COURSE_ACCESS_SECRET     — podpisuje linki dostępowe do /drugi-mozg/kurs.
- *
- * Model dostępu jest BEZSTANOWY (zero bazy): link = email + podpis HMAC.
- * Tylko serwer znający COURSE_ACCESS_SECRET potrafi taki link wygenerować,
- * więc nikt nie podrobi dostępu wpisując dowolny email w URL.
+ * EasyCart (easy.tools) — server-only: weryfikacja webhooków + sprawdzenie
+ * zakupu w API zamówień. Tokeny dostępu do kursu żyją w app/lib/access.ts.
  */
 
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EASYCART_API_BASE = "https://cart.easy.tools/api/v1";
 
-function base64url(input: Buffer | string): string {
-  return Buffer.from(input)
-    .toString("base64")
-    .replace(/\+/g, "-")
-    .replace(/\//g, "_")
-    .replace(/=+$/, "");
-}
-
-function base64urlDecode(input: string): string {
-  return Buffer.from(input, "base64url").toString("utf8");
-}
+/** UUID produktu "Drugi Mózg" (nadpisywalny env-em, gdyby produkt się zmienił). */
+export const DRUGI_MOZG_PRODUCT_ID =
+  process.env.EASYCART_PRODUCT_ID || "9060aebc-0007-408f-87e3-25a780021b14";
 
 function hmacHex(message: string, secret: string): string {
   return crypto.createHmac("sha256", secret).update(message).digest("hex");
@@ -62,54 +47,65 @@ export function verifyWebhookSignature(
   return safeEqualHex(received.trim().toLowerCase(), expected.toLowerCase());
 }
 
-// ─── Access tokens (link do /drugi-mozg/kurs) ───────────────────────────────
+// ─── Orders API — weryfikacja zakupu (formularz "odzyskaj dostęp") ──────────
 
 /**
- * Generuje podpisany token dostępu związany z emailem kupującego.
- * Format: base64url(email).hmacHex  — jeden nieprzezroczysty parametr `k`.
+ * Sprawdza w API EasyCart, czy dany email ma zamówienie kursu.
+ * Źródło prawdy = EasyCart (zero własnej bazy). Defensywnie: schemat itemu
+ * zamówienia nie jest publicznie udokumentowany, więc szukamy UUID produktu
+ * (lub jego nazwy) w całym obiekcie zamówienia; puste `items` = brak zakupu.
+ *
+ * Zwraca "unavailable" przy błędzie API (brak klucza, timeout, 5xx) — caller
+ * decyduje co z tym zrobić (my: nie wysyłamy linku, logujemy).
  */
-export function signAccessToken(
+export async function hasPurchasedCourse(
   email: string,
-  secret: string | undefined,
-): string | null {
-  if (!secret) return null;
-  const normalized = email.trim().toLowerCase();
-  if (!EMAIL_REGEX.test(normalized)) return null;
-  const payload = base64url(normalized);
-  const sig = hmacHex(payload, secret);
-  return `${payload}.${sig}`;
-}
-
-/**
- * Weryfikuje token z linku dostępowego. Zwraca email kupującego albo null.
- */
-export function verifyAccessToken(
-  token: string | undefined | null,
-  secret: string | undefined,
-): string | null {
-  if (!token || !secret) return null;
-  const parts = token.split(".");
-  if (parts.length !== 2) return null;
-  const [payload, sig] = parts;
-  const expected = hmacHex(payload, secret);
-  if (!safeEqualHex(sig, expected)) return null;
-  try {
-    const email = base64urlDecode(payload).toLowerCase();
-    return EMAIL_REGEX.test(email) ? email : null;
-  } catch {
-    return null;
+): Promise<true | false | "unavailable"> {
+  const apiKey = process.env.EASYCART_API_KEY;
+  if (!apiKey) {
+    console.error("[easycart-orders] brak EASYCART_API_KEY");
+    return "unavailable";
   }
-}
 
-/** Buduje absolutny link dostępowy wysyłany kupującemu (np. mailem). */
-export function buildCourseAccessUrl(
-  email: string,
-  opts: { secret: string | undefined; siteUrl: string | undefined },
-): string | null {
-  const token = signAccessToken(email, opts.secret);
-  if (!token) return null;
-  const base = (opts.siteUrl || "https://luki.zip").replace(/\/+$/, "");
-  return `${base}/drugi-mozg/kurs?k=${encodeURIComponent(token)}`;
+  let res: Response;
+  try {
+    res = await fetch(
+      `${EASYCART_API_BASE}/orders?email=${encodeURIComponent(email)}`,
+      {
+        headers: {
+          Authorization: `Bearer ${apiKey}`,
+          Accept: "application/json",
+        },
+        signal: AbortSignal.timeout(8_000),
+        cache: "no-store",
+      },
+    );
+  } catch (err) {
+    console.error(`[easycart-orders] network: ${String(err)}`);
+    return "unavailable";
+  }
+
+  if (!res.ok) {
+    const detail = await res.text().catch(() => "");
+    console.error(`[easycart-orders] ${res.status}: ${detail.slice(0, 200)}`);
+    return "unavailable";
+  }
+
+  let body: { items?: unknown[] };
+  try {
+    body = (await res.json()) as { items?: unknown[] };
+  } catch {
+    return "unavailable";
+  }
+
+  const items = Array.isArray(body.items) ? body.items : [];
+  if (items.length === 0) return false;
+
+  const needleId = DRUGI_MOZG_PRODUCT_ID.toLowerCase();
+  return items.some((item) => {
+    const blob = JSON.stringify(item).toLowerCase();
+    return blob.includes(needleId) || blob.includes("drugi m");
+  });
 }
 
 // ─── Webhook payload typy ────────────────────────────────────────────────────

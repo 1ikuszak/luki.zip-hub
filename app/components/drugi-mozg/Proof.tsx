@@ -13,8 +13,8 @@ const space = (n: number) => n.toLocaleString("pl-PL").replace(/ /g, " ");
 const plain = (n: number) => String(n);
 
 const STATS: { to: number; fmt: (n: number) => string; label: string }[] = [
-  { to: 55000, fmt: space, label: "wyświetleń reela Drugi Mózg, 1534 osoby w komentarzach" },
-  { to: 116000, fmt: space, label: "wyświetleń reela XP Farming" },
+  { to: 71874, fmt: space, label: "wyświetleń reela o tym systemie" },
+  { to: 3046, fmt: space, label: "osób zapisało go sobie, żeby wrócić" },
   { to: 1842, fmt: plain, label: "notatki, 465 konceptów, 60 reeli z tego systemu" },
 ];
 
@@ -84,10 +84,16 @@ export function Proof() {
       <Reveal delay={0.2}>
         <div className="mt-8 flex flex-col gap-2 rounded-2xl border border-[var(--border)] bg-[var(--bg-card)] p-8">
           <p className="t-body text-[var(--text)]">
-            1534 osoby zostawiły komentarz pod jednym reelem o tym systemie,
-            pytając jak go postawić u siebie.
+            1929 osób pytało w komentarzach, jak postawić go u siebie. Ta strona
+            to odpowiedź.
           </p>
-          <p className="t-small text-[var(--text-secondary)]">
+          <p className="t-body mt-2 text-[var(--text)]">
+            Jestem Luki. Buduję systemy AI na przecięciu kreatywności
+            i technologii. Ten system prowadzi mój content, moje oferty i moją
+            robotę dla marek. Ten sam typ systemu stoi za filmem, który pobił
+            rekord kanału mojego klienta: 300 tys. wyświetleń.
+          </p>
+          <p className="t-small mt-1 text-[var(--text-secondary)]">
             Działa po polsku i po angielsku. Opinie uczniów dorzucę po pierwszej
             kohorcie. Tylko realne, zero zmyślonych nazwisk.
           </p>

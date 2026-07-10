@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useInView, useReducedMotion } from "framer-motion";
 import { FileText, Check, Loader2, Search } from "lucide-react";
+import { CtaButton } from "./CtaButton";
 
 /**
  * Alternatywa full-width: JEDEN panel. Czat (lewo) napędza mapę (prawo).
@@ -17,20 +18,20 @@ import { FileText, Check, Loader2, Search } from "lucide-react";
  * UWAGA: pytanie, kroki, pliki, odpowiedź = placeholder microcopy do dotknięcia.
  */
 
-const PROMPT = "Napisz hook do reela o drugim mózgu.";
-// finałowy hook (Dan Koe: cios bólu -> obietnica), prezentowany DUŻO na końcu
-const ANSWER_HOOK = "Twoja wiedza siedzi w 40 narzędziach. I nie pracuje.";
-const ANSWER_PROMISE = "Ten system pisze nią twoim głosem. W sekundę.";
+const PROMPT = "Klient pyta o wycenę strony. Co odpowiadam?";
+// finałowa odpowiedź (demo MYŚLENIA, nie pisania): decyzja z własnej historii
+const ANSWER_HOOK = "Widełki 9-12K. Poniżej 8K nie schodzisz.";
+const ANSWER_PROMISE = "Ostatnie dwa razy poniżej floora żałowałeś. Masz to zapisane.";
 
 const STEPS: { label: string; file?: string }[] = [
   { label: "Analizuję pytanie" },
   { label: "Przeszukuję twój drugi mózg" },
-  { label: "Czytam twój głos", file: "moj-glos.md" },
-  { label: "Czytam pomysły, co zadziałało", file: "pomysly.md" },
-  { label: "Czytam strategię", file: "strategia.md" },
-  { label: "Czytam skrypty, co zbiły", file: "skrypty.md" },
-  { label: "Dopasowuję do twojego stylu" },
-  { label: "Piszę hook w twoim głosie" },
+  { label: "Czytam twoje wyceny", file: "wyceny.md" },
+  { label: "Czytam historię klientów", file: "klienci.md" },
+  { label: "Czytam twoje zasady", file: "zasady-biznesu.md" },
+  { label: "Czytam oferty, które przeszły", file: "oferty.md" },
+  { label: "Porównuję z twoimi liczbami" },
+  { label: "Składam odpowiedź z twojej historii" },
 ];
 const READ_OFFSET = 2;
 
@@ -38,10 +39,10 @@ const VW = 460;
 const VH = 306;
 const BAZA = { x: 330, y: 153 };
 const ITEMS = [
-  { file: "moj-glos.md", x: 100, y: 64 },
-  { file: "pomysly.md", x: 64, y: 153 },
-  { file: "strategia.md", x: 104, y: 242 },
-  { file: "skrypty.md", x: 205, y: 230 },
+  { file: "wyceny.md", x: 100, y: 64 },
+  { file: "klienci.md", x: 64, y: 153 },
+  { file: "zasady-biznesu.md", x: 104, y: 242 },
+  { file: "oferty.md", x: 205, y: 230 },
 ];
 
 const CHAR_MS = 42;
@@ -129,7 +130,7 @@ export function KnowledgeReader() {
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        Zadajesz pytanie. Widzisz, jak czyta dokładnie twoje pliki.
+        Zwykłe AI zgaduje. Twoje otwiera twoją historię i odpowiada jak ty.
       </motion.h2>
 
       {/* JEDEN panel. Prawa kolumna ma stałą min-wysokość -> mapa statyczna. */}
@@ -192,7 +193,7 @@ export function KnowledgeReader() {
             >
               <span className="inline-flex items-center gap-1.5 text-[12.5px] font-medium text-[var(--accent)]">
                 <WesternStar reduce={reduce} />
-                Twój hook, w twoim głosie
+                Twoja decyzja, z twojej historii
               </span>
               <motion.p
                 initial={false}
@@ -211,7 +212,7 @@ export function KnowledgeReader() {
                 {ANSWER_PROMISE}
               </motion.p>
               <div className="mt-1 flex flex-wrap items-center gap-1.5">
-                <span className="text-[11.5px] text-[var(--text-secondary)]">napisane z:</span>
+                <span className="text-[11.5px] text-[var(--text-secondary)]">złożone z:</span>
                 {ITEMS.map((it) => (
                   <span key={it.file} className="inline-flex items-center gap-1 rounded-md bg-[var(--accent)]/[0.1] px-1.5 py-0.5 text-[11px] font-medium text-[var(--accent)]">
                     <FileText size={10} strokeWidth={2.5} />
@@ -331,6 +332,14 @@ export function KnowledgeReader() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* mid-page CTA: pierwszy peak wiary (system myśli, nie tylko pisze) */}
+      <div className="mt-10 flex flex-col items-center gap-3">
+        <CtaButton variant="primary" label="Postaw swój Drugi Mózg" />
+        <p className="t-small text-[var(--text-secondary)]">
+          297 zł jednorazowo · dostęp od razu po opłaceniu
+        </p>
       </div>
     </section>
   );

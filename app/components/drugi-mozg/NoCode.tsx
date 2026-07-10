@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
-import { Check } from "lucide-react";
+import { Check, Gem, SquareTerminal, Github } from "lucide-react";
 
 /**
  * Obiekcja "to dla programistów?" rozbita pokazem: wklejasz jedną komendę, a
@@ -13,9 +13,34 @@ import { Check } from "lucide-react";
  * UWAGA: komenda i kroki = placeholder microcopy do dotknięcia.
  */
 
-const COMMAND = "npx drugi-mozg init";
+const COMMAND = "Wklejam PROMPT 1: fundament";
 const SPIN = ["|", "/", "-", "\\"];
 const TOTAL = 6400;
+
+// stack (merge dawnej sekcji Stack): 3 narzędzia, płacisz za jedno
+const TOOLS = [
+  {
+    name: "Obsidian",
+    role: "Okno na twoją wiedzę.",
+    tag: "darmowe",
+    Icon: Gem,
+    hero: false,
+  },
+  {
+    name: "Claude Code",
+    role: "Silnik. Czyta twoje pliki, łączy je, produkuje z nich.",
+    tag: "subskrypcja, Pro wystarcza",
+    Icon: SquareTerminal,
+    hero: true,
+  },
+  {
+    name: "GitHub",
+    role: "Cofnij błąd. Backup poza komputerem.",
+    tag: "darmowe",
+    Icon: Github,
+    hero: false,
+  },
+];
 
 type Step = { label: string; start: number; dur: number };
 const STEPS: Step[] = [
@@ -56,8 +81,8 @@ export function NoCode() {
         <div className="mx-auto max-w-[680px] text-center">
           <h2 className="t-h2 max-w-[20ch] mx-auto">Boisz się, że to dla programistów?</h2>
           <p className="t-body-large mt-4 text-[var(--text-secondary)]">
-            Nie napiszesz ani linijki kodu. Wklejasz jedną komendę, reszta dzieje
-            się sama.
+            Nie napiszesz ani linijki kodu. Wklejasz gotowe prompty, a system
+            stawia się na twoich oczach.
           </p>
         </div>
 
@@ -67,14 +92,14 @@ export function NoCode() {
             <span className="font-mono text-[13px] text-[var(--text-secondary)]">drugi-mozg / setup</span>
             <span className="inline-flex items-center gap-1.5 font-mono text-[12.5px] font-medium text-[var(--accent)]">
               {done ? <Check size={13} strokeWidth={2.75} /> : <span className="inline-block w-3 text-center">{spin}</span>}
-              {done ? "gotowe" : "instaluję"}
+              {done ? "gotowe" : "buduję"}
             </span>
           </div>
 
           <div className="px-5 py-6 font-mono text-[14px] leading-relaxed sm:px-8 sm:py-8 sm:text-[15px]">
             {/* komenda */}
             <div className="flex flex-wrap items-center gap-2 text-[var(--text)]">
-              <span className="text-[var(--accent)]">$</span>
+              <span className="text-[var(--accent)]">&gt;</span>
               <span>{COMMAND.slice(0, cmdN)}</span>
               {!done && cmdN >= COMMAND.length && (
                 <span className="inline-block h-[1.05em] w-[8px] animate-pulse bg-[var(--accent)] align-middle" />
@@ -127,6 +152,67 @@ export function NoCode() {
         <p className="mt-5 text-center font-mono text-[12.5px] text-[var(--text-secondary)]">
           Utkniesz? Masz nagranie, gdzie robię to klik w klik.
         </p>
+
+        {/* stack: 3 narzędzia, płacisz za jedno (merge dawnej sekcji Stack) */}
+        <div className="mt-16 sm:mt-20">
+          <h3 className="t-h2 max-w-[16ch]">All you need is Claude Code.</h3>
+          <p className="t-body-large mt-4 max-w-[42ch] text-[var(--text-secondary)]">
+            Twoja wiedza nie potrzebuje czterdziestu narzędzi. Potrzebuje
+            trzech. Płacisz za jedno.
+          </p>
+
+          <div className="mt-8 grid items-center gap-5 md:grid-cols-3 md:gap-6">
+            {TOOLS.map((t) => (
+              <div
+                key={t.name}
+                className={
+                  t.hero
+                    ? "relative overflow-hidden rounded-3xl border border-[var(--accent)] bg-[var(--bg-page)] p-8 shadow-[0_40px_120px_-60px_rgba(38,86,217,0.7)] md:-my-4 md:p-9"
+                    : "relative rounded-3xl border border-[var(--border)] bg-[var(--bg-page)] p-7"
+                }
+              >
+                <div className="flex items-center justify-between">
+                  <span
+                    className={`flex items-center justify-center rounded-2xl ${
+                      t.hero
+                        ? "h-12 w-12 bg-[var(--accent)]"
+                        : "h-11 w-11 bg-[var(--accent)]/[0.1]"
+                    }`}
+                  >
+                    <t.Icon
+                      size={t.hero ? 24 : 20}
+                      strokeWidth={2}
+                      className={t.hero ? "text-white" : "text-[var(--accent)]"}
+                    />
+                  </span>
+                  <span
+                    className={`rounded-full px-2.5 py-1 text-[11.5px] font-semibold uppercase tracking-[0.08em] ${
+                      t.hero
+                        ? "bg-[var(--accent)]/[0.1] text-[var(--accent)]"
+                        : "bg-[var(--text-secondary)]/10 text-[var(--text-secondary)]"
+                    }`}
+                  >
+                    {t.hero ? "wymagane" : "darmowe"}
+                  </span>
+                </div>
+                <p className="mt-5 text-[20px] font-semibold tracking-[-0.01em] text-[var(--text)]">
+                  {t.name}
+                </p>
+                <p className="t-body mt-1.5 text-[var(--text-secondary)]">
+                  {t.role}
+                </p>
+                <p className="t-small mt-4 text-[var(--text-secondary)]/80">
+                  {t.tag}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="t-body mt-8 max-w-[48ch] text-[var(--text)]">
+            Claude Pro to około 80 zł na miesiąc. Jeśli system zaoszczędzi ci
+            dwie godziny pracy w tygodniu, zwraca ci się pierwszego dnia.
+          </p>
+        </div>
       </div>
     </section>
   );

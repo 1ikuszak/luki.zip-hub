@@ -11,12 +11,12 @@ export const metadata: Metadata = {
 const NEXT_STEPS = [
   "Sprawdź maila (czasem ląduje w spamie albo w zakładce Oferty).",
   "Kliknij link dostępowy — otwiera komplet kursu, wszystkie 5 dni od razu.",
-  "Zapisz ten link albo dodaj do zakładek. Wracasz nim, kiedy chcesz.",
+  "Po kliknięciu ta przeglądarka pamięta cię przez pół roku. Nowe urządzenie albo link wygasł? Na stronie kursu podajesz maila i dostajesz świeży.",
 ];
 
 export default function DziekujePage() {
   return (
-    <main className="container-narrow py-20 sm:py-28">
+    <main className="container-narrow py-20 sm:py-28 enter">
       <div className="flex h-14 w-14 items-center justify-center rounded-full bg-[var(--accent)] text-white">
         <Check size={26} strokeWidth={3} />
       </div>
@@ -53,13 +53,19 @@ export default function DziekujePage() {
         </p>
       </section>
 
-      <div className="mt-10">
+      <div className="mt-10 flex flex-wrap items-center gap-4">
         <Link
           href="/drugi-mozg"
           className="inline-flex h-[52px] items-center gap-2 rounded-full border border-[var(--border)] bg-white px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:border-[var(--text)]"
         >
           Wróć na stronę
           <ArrowRight size={18} strokeWidth={2.5} />
+        </Link>
+        <Link
+          href="/drugi-mozg/kurs"
+          className="t-small font-semibold text-[var(--accent)] hover:underline"
+        >
+          Mail nie doszedł w 10 minut? Wyślij ponownie
         </Link>
       </div>
     </main>

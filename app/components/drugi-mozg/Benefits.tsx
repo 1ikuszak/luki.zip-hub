@@ -16,9 +16,9 @@ import { Mic, Film, FileText, Lock, Check, PenLine } from "lucide-react";
 
 const VOICE_LINE = "Nie pisz jak wszyscy. Pisz jak ty.";
 const SOURCES = [
-  { label: "twoje reele", Icon: Film },
-  { label: "twój głos", Icon: Mic },
-  { label: "twoje notatki", Icon: FileText },
+  { label: "twoje wyceny", Icon: FileText },
+  { label: "twoi klienci", Icon: Film },
+  { label: "twoje zasady", Icon: Mic },
 ];
 
 // ── cykliczny beat: liczy fazy gdy w viewport ──────────────
@@ -170,7 +170,7 @@ function ContextOnceDemo({ inView, reduce }: { inView: boolean; reduce: boolean 
           className={locked ? "text-[var(--accent)]" : "text-[var(--text-secondary)]"}
         />
         <span className="text-[14px] font-medium text-[var(--text)]">
-          twój kontekst
+          twój standard
         </span>
       </motion.div>
       <div className="flex items-baseline gap-2">
@@ -178,7 +178,7 @@ function ContextOnceDemo({ inView, reduce }: { inView: boolean; reduce: boolean 
           1×
         </span>
         <span className="t-small text-[var(--text-secondary)]">
-          ustawiasz, potem zna cię zawsze
+          kodujesz go raz, pilnowany zawsze
         </span>
       </div>
     </div>
@@ -340,37 +340,37 @@ export function Benefits() {
       <div ref={ref} className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <Shell demo={<VoiceDemo inView={inView} reduce={reduce} />}>
           <p className="t-body max-w-[30ch] text-[var(--text)]">
-            Piszesz post, maila, ofertę. Wychodzi w twoim głosie, nie jak każdy
-            inny output z internetu.
+            Piszesz brief w dwóch zdaniach. Dostajesz post, maila albo ofertę
+            w swoim głosie. Wybierasz wersję, zamiast ratować generyk.
           </p>
         </Shell>
 
         <Shell demo={<RetrievalDemo inView={inView} reduce={reduce} />}>
           <p className="t-body max-w-[30ch] text-[var(--text)]">
-            Cała twoja wiedza w jednym miejscu. AI sięga po nią w sekundę i
-            realnie z niej pracuje.
+            Pytasz o wycenę, priorytet, plan tygodnia. Odpowiada z twojej
+            historii i twoich liczb, nie z poradnika dla wszystkich.
           </p>
         </Shell>
 
         <Shell demo={<ContextOnceDemo inView={inView} reduce={reduce} />}>
           <p className="t-body max-w-[30ch] text-[var(--text)]">
-            Kontekst ustawiasz raz. AI zna cię na zawsze. Koniec tłumaczenia
-            tego samego od zera.
+            Wrzucasz kreację, stronę, tekst. Ocenia pod twój gust i twój
+            standard. Jak wspólnik, który zna twoją kreskę.
           </p>
         </Shell>
 
         {/* MOAT = bohater */}
         <Shell peak wide demo={<MoatDemo inView={inView} reduce={reduce} />}>
           <p className="max-w-[40ch] text-[22px] font-semibold leading-snug tracking-[-0.01em] text-[var(--text)] sm:text-[26px]">
-            AI, które myśli jak ty, nie jak internet. To przewaga, której nikt
-            nie skopiuje.
+            AI, które myśli jak ty, nie jak internet. Każdy ma dostęp do tych
+            samych modeli. Twojego kontekstu nie ma nikt.
           </p>
         </Shell>
 
         <Shell demo={<SelfMaintainDemo inView={inView} reduce={reduce} />}>
           <p className="t-body max-w-[30ch] text-[var(--text)]">
-            Baza utrzymuje się sama. Nie umiera po dwóch tygodniach jak każdy
-            folder wcześniej.
+            System utrzymuje się sam. Agent sprząta raz w tygodniu. Nie umiera
+            po dwóch tygodniach jak każdy folder przed nim.
           </p>
         </Shell>
       </div>

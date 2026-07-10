@@ -13,27 +13,27 @@ import { Sparkles } from "lucide-react";
 
 const DAYS = [
   {
-    day: "Dzień 1",
+    day: "Wieczór 1",
     title: "Fundament w jeden wieczór",
-    body: "Stawiasz cały system jedną komendą. Od zera, bez kodowania. Wieczorem masz działający vault.",
+    body: "Wklejasz gotowe prompty, jeden po drugim, i system stawia się na twoich oczach. Zero kodowania. Kładziesz się spać z działającym vaultem.",
   },
   {
-    day: "Dzień 2",
+    day: "Wieczór 2",
     title: "Wiedza układa się sama",
-    body: "Wrzucasz źródło, agent rozkłada je po systemie i łączy z resztą. Od tego dnia AI odpowiada twoimi słowami i twoimi przykładami.",
+    body: "Wrzucasz źródło, agent rozkłada je po systemie i łączy z tym, co już masz. Od tego dnia AI odpowiada twoimi słowami, twoimi liczbami i twoimi przykładami.",
   },
   {
-    day: "Dzień 3",
-    title: "Mózg pisze za ciebie",
-    body: "Budujesz pętlę: generuj, oceń, popraw, z bramką jakości. AI produkuje z twojego kontekstu, w twoim stylu.",
+    day: "Wieczór 3",
+    title: "Mózg produkuje za ciebie",
+    body: "Budujesz pętlę: generuj, oceń pod swój standard, popraw. Ta bramka odsiewa generyk. Post, wycena, feedback: wszystko z twojego kontekstu, w twoim stylu.",
   },
   {
-    day: "Dzień 4",
+    day: "Wieczór 4",
     title: "Twój sposób pracy w jednej komendzie",
-    body: "Zamieniasz to, jak ty pracujesz, w jedną komendę. Odpalasz ją i AI robi robotę tak, jak ty byś ją zrobił.",
+    body: "Pakujesz swoje SOP-y w komendy. Odpalasz jedną i AI przechodzi twój proces tak, jak ty byś go przeszedł.",
   },
   {
-    day: "Dzień 5",
+    day: "Wieczór 5",
     title: "System utrzymuje się sam",
     body: "Agent raz w tygodniu sprząta, łączy, archiwizuje. Utrzymanie przestaje być twoim problemem.",
   },
@@ -51,7 +51,7 @@ export function Transformation() {
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        5 dni. Jedna lekcja dziennie.
+        5 wieczorów. Jedna lekcja dziennie.
       </motion.h2>
       <motion.p
         className="t-body-large mt-4 max-w-[40ch] text-[var(--text-secondary)]"
@@ -60,7 +60,7 @@ export function Transformation() {
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.6, delay: 0.05 }}
       >
-        Wideo plus PDF z gotowymi promptami do każdej.
+        Każda lekcja: wideo plus PDF z gotowymi promptami do wklejenia.
       </motion.p>
 
       {/* oś czasu: wszystkie dni widoczne, kręgosłup + węzły */}
@@ -125,10 +125,10 @@ export function Transformation() {
             </span>
           </div>
           <div className="rounded-2xl bg-[var(--accent)] p-6 text-white shadow-[0_30px_80px_-44px_rgba(38,86,217,0.7)]">
-            <span className="text-[13px] font-semibold text-white/85">Bonus po Dniu 5</span>
+            <span className="text-[13px] font-semibold text-white/85">Bonus po Wieczorze 5</span>
             <p className="t-body mt-2 max-w-[48ch] text-white/95">
-              Galeria zastosowań: AI piszące twoim głosem, mózg, który pisze
-              twoje maile, brand assety z gustem. Co zbudujesz dalej.
+              Galeria zastosowań: AI piszące twoim głosem, mózg odpisujący na
+              maile, brand assety z gustem. Co zbudujesz dalej.
             </p>
           </div>
         </motion.div>

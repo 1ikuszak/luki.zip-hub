@@ -3,30 +3,40 @@
 import { useEffect, useRef } from "react";
 
 /**
- * Hero bohater: REALNY drugi mózg (graf jak w Obsidianie), ale W AKCJI.
- * Nie statyczny obrazek: graf SAM SIĘ BUDUJE (węzły wskakują klaster po klastrze,
- * krawędzie się dociągają), potem żyje: brain-scan przejeżdża i podświetla węzły,
- * huby pulsują, myśli płyną krawędziami do hubów.
- *
- * Mózg = klastry (phyllotaxis / golden-angle = matematyczny, organiczny) + radialny
- * wybuch (hub-and-spoke) + rozsypane satelity wciągnięte w sieć. Slate na bieli,
- * akcent #2656d9 na hubach. ZERO gradientów (skan/pierścienie = solidne kreski).
+ * Hero bohater: REALNY drugi mózg (graf jak w Obsidianie), W AKCJI i ZSYNCHRONIZOWANY
+ * z oknem czatu. Sterowany fazą (prop `phase`):
+ *   ask -> analyze (czyta pliki: myśli płyną, węzły iskrzą) -> answer
+ *   -> save (wyrasta FOLDER + rozwija się w subpliki, podpięty do sieci)
+ *   -> reconnect (folder linkuje się do drugiego huba, sieć re-formuje)
+ * Bez ambientowych skan-line'ów i losowego twinkle - ruch idzie za tym, co robi czat.
+ * Brak prop `phase` = wewnętrzny cykl (fallback, np. mobile).
  *
  * Performance: rAF poza React state, drzewo policzone raz na resize, IO pauza,
- * DPR cap 2, liczba węzłów skalowana do rozmiaru. reduced-motion -> statyczny graf.
+ * DPR cap 2, liczba węzłów skalowana. reduced-motion -> statyczny graf.
  */
 
 type N = { x: number; y: number; r: number; phase: number; accent: boolean; hub: boolean; born: number };
 type E = { a: number; b: number; born: number };
 type Flow = { a: number; b: number; t: number };
+type Phase = "ask" | "analyze" | "answer" | "save" | "reconnect";
 
 const ASSEMBLE = 2400; // ms: budowanie mózgu
-const SCAN_PERIOD = 5200;
-const SCAN_DUR = 1700;
+const GROW_CAP = 24; // ile "zapisów" (folderów) sieć dopisze zanim przystanie
+const CYCLE = 8600; // wewnętrzny cykl faz (fallback bez sterowania z zewnątrz)
 
-export function BrainGraph() {
+export function BrainGraph({
+  tone = "default",
+  phase,
+}: {
+  tone?: "default" | "onDark" | "spectrum";
+  phase?: Phase;
+}) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
+  const phaseRef = useRef<Phase | undefined>(phase);
+  useEffect(() => {
+    phaseRef.current = phase;
+  }, [phase]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -44,13 +54,29 @@ export function BrainGraph() {
     const AR = (ai >> 16) & 255, AG = (ai >> 8) & 255, AB = ai & 255;
     const accent = (o: number) => `rgba(${AR},${AG},${AB},${o})`;
     const slate = (o: number) => `rgba(59,66,82,${o})`;
+    const white = (o: number) => `rgba(255,255,255,${o})`;
+    const onDark = tone === "onDark";
+    const spectrum = tone === "spectrum";
+    const SPECTRUM = [
+      [38, 86, 217], [74, 114, 228], [109, 94, 240], [155, 93, 229],
+      [62, 200, 240], [91, 141, 239], [123, 79, 224], [47, 168, 224],
+    ];
+    const spec = (i: number, a: number) => {
+      const c = SPECTRUM[Math.abs((i * 2654435761) % SPECTRUM.length)];
+      return `rgba(${c[0]},${c[1]},${c[2]},${a})`;
+    };
+    const sizeMul = spectrum ? 1.4 : 1;
 
     let W = 0, H = 0, dpr = 1;
     let nodes: N[] = [];
     let edges: E[] = [];
     let hubEdges: E[] = [];
     let flows: Flow[] = [];
+    let rings: { x: number; y: number; born: number }[] = [];
     const flash: Record<number, number> = {};
+    let growthCount = 0;
+    let nextFlow = 0;
+    let lastPhase: Phase | "" = "";
     const STATIC = 1e6;
 
     const rnd = (a: number, b: number) => a + Math.random() * (b - a);
@@ -122,15 +148,19 @@ export function BrainGraph() {
       edges = [];
       hubEdges = [];
       flows = [];
+      rings = [];
       for (const k in flash) delete flash[+k];
+      growthCount = 0;
+      nextFlow = 0;
+      lastPhase = "";
       const m = Math.min(W, H);
       const scale = W < 380 ? 0.55 : W < 520 ? 0.78 : 1;
 
-      const A = cluster(W * 0.46, H * 0.42, m * 0.27, Math.round(150 * scale), 0, 1100);
-      const B = cluster(W * 0.74, H * 0.26, m * 0.12, Math.round(45 * scale), 400, 600);
-      const hub = burst(W * 0.62, H * 0.74, Math.round(95 * scale), m * 0.26, 800, 1100);
-      const arc1 = arc(W * 0.5, H * 0.5, m * 0.42, m * 0.49, Math.PI * 0.55, Math.PI * 1.15, Math.round(50 * scale), 1300, 900);
-      const arc2 = arc(W * 0.5, H * 0.5, m * 0.4, m * 0.48, -Math.PI * 0.32, Math.PI * 0.14, Math.round(40 * scale), 1300, 900);
+      const A = cluster(W * 0.46, H * 0.42, m * 0.27, Math.round(188 * scale), 0, 1100);
+      const B = cluster(W * 0.74, H * 0.26, m * 0.12, Math.round(58 * scale), 400, 600);
+      const hub = burst(W * 0.62, H * 0.74, Math.round(118 * scale), m * 0.26, 800, 1100);
+      const arc1 = arc(W * 0.5, H * 0.5, m * 0.42, m * 0.49, Math.PI * 0.55, Math.PI * 1.15, Math.round(64 * scale), 1300, 900);
+      const arc2 = arc(W * 0.5, H * 0.5, m * 0.4, m * 0.48, -Math.PI * 0.32, Math.PI * 0.14, Math.round(52 * scale), 1300, 900);
 
       const aHub = A.find((i) => nodes[i].hub) ?? A[0];
       const bHub = B.find((i) => nodes[i].hub) ?? B[0];
@@ -143,6 +173,53 @@ export function BrainGraph() {
           link(set[Math.floor(rnd(0, set.length))], rnd(0, 1) < 0.5 ? aHub : hub);
         }
       }
+    }
+
+    function hubList() {
+      const hs: number[] = [];
+      for (let i = 0; i < nodes.length; i++) if (nodes[i].hub) hs.push(i);
+      return hs;
+    }
+
+    // ZAPIS: folder wyrasta w WIDOCZNYM pierścieniu wokół centrum (poza kartą czatu),
+    // podpina się do najbliższego huba długą krawędzią, rozwija w subpliki, reconnect do sieci.
+    function growFolder(g: number) {
+      const hubs = hubList();
+      if (!hubs.length) return;
+      const cx = W / 2, cy = H / 2;
+      const R = Math.min(W, H) * (0.4 + Math.random() * 0.08);
+      const ang = Math.random() * Math.PI * 2;
+      const fx = Math.max(16, Math.min(W - 16, cx + Math.cos(ang) * R));
+      const fy = Math.max(16, Math.min(H - 16, cy + Math.sin(ang) * R * 0.9));
+      // najbliższy hub = źródło łączącej krawędzi (widoczna linia do środka)
+      let hi = hubs[0], best = Infinity;
+      for (const h of hubs) {
+        const d = (nodes[h].x - fx) ** 2 + (nodes[h].y - fy) ** 2;
+        if (d < best) { best = d; hi = h; }
+      }
+      const folder = addNode(fx, fy, rnd(4.4, 5.6), g, true, true);
+      link(hi, folder);
+      const kids = 2 + Math.floor(Math.random() * 2);
+      for (let k = 0; k < kids; k++) {
+        const ka = ang + rnd(-1.0, 1.0);
+        const kd = Math.min(W, H) * (0.05 + Math.random() * 0.03);
+        const cx2 = Math.max(8, Math.min(W - 8, fx + Math.cos(ka) * kd));
+        const cy2 = Math.max(8, Math.min(H - 8, fy + Math.sin(ka) * kd));
+        const ci = addNode(cx2, cy2, rnd(1.8, 2.6), g + 240 + k * 130);
+        link(folder, ci);
+      }
+      // reconnect: drugi najbliższy hub
+      let other = hi, best2 = Infinity;
+      for (const h of hubs) {
+        if (h === hi) continue;
+        const d = (nodes[h].x - fx) ** 2 + (nodes[h].y - fy) ** 2;
+        if (d < best2) { best2 = d; other = h; }
+      }
+      if (other !== hi) link(folder, other);
+      flash[folder] = 2.4;
+      flows.push({ a: hi, b: folder, t: 0 });
+      rings.push({ x: fx, y: fy, born: g });
+      growthCount++;
     }
 
     function resize() {
@@ -158,49 +235,62 @@ export function BrainGraph() {
       build();
     }
 
-    function scanX(g: number): number | null {
-      if (g < ASSEMBLE) return null;
-      const t = (g - ASSEMBLE) % SCAN_PERIOD;
-      if (t > SCAN_DUR) return null;
-      return (-0.05 + (t / SCAN_DUR) * 1.1) * W;
+    function internalPhase(g: number): Phase {
+      if (g < ASSEMBLE + 200) return "ask";
+      const c = (g - ASSEMBLE) % CYCLE;
+      if (c < 1400) return "ask";
+      if (c < 4200) return "analyze";
+      if (c < 5200) return "answer";
+      if (c < 6800) return "save";
+      return "reconnect";
     }
 
     function draw(g: number) {
       ctx!.clearRect(0, 0, W, H);
-      const sx = scanX(g);
-      const band = W * 0.09;
 
-      // krawędzie (dociągają się)
-      ctx!.lineWidth = 0.6;
-      ctx!.strokeStyle = accent(0.1);
+      // krawędzie (cienkie, lekkie). Podświetlenie TYLKO dla nowych połączeń (zapis),
+      // NIE przy budowaniu na starcie - inaczej cały graf miga na grubo.
+      const baseEdge = spectrum ? slate(0.1) : onDark ? white(0.14) : accent(0.08);
+      const freshEdge = onDark ? white(0.42) : accent(0.32);
       for (const e of edges) {
-        const p = Math.max(0, Math.min(1, (g - e.born) / 320));
+        const p = Math.max(0, Math.min(1, (g - e.born) / 360));
         if (p <= 0.01) continue;
+        const fresh = e.born > ASSEMBLE && g - e.born < 1500;
+        ctx!.strokeStyle = fresh ? freshEdge : baseEdge;
+        ctx!.lineWidth = fresh ? 0.9 : 0.5;
         const a = nodes[e.a], b = nodes[e.b];
         ctx!.beginPath();
         ctx!.moveTo(a.x, a.y);
         ctx!.lineTo(a.x + (b.x - a.x) * p, a.y + (b.y - a.y) * p);
         ctx!.stroke();
       }
-
-      // linia skanu (solidna, delikatna)
-      if (sx !== null) {
+      // pierścienie "zapisu" przy nowym folderze (cienkie)
+      for (const rg of rings) {
+        const p = (g - rg.born) / 900;
+        if (p < 0 || p > 1) continue;
         ctx!.beginPath();
-        ctx!.moveTo(sx, 0);
-        ctx!.lineTo(sx, H);
-        ctx!.strokeStyle = accent(0.14);
-        ctx!.lineWidth = 1.2;
+        ctx!.arc(rg.x, rg.y, 6 + p * 44, 0, Math.PI * 2);
+        ctx!.strokeStyle = onDark ? white(0.4 * (1 - p)) : accent(0.35 * (1 - p));
+        ctx!.lineWidth = 1;
         ctx!.stroke();
       }
 
-      // myśli do hubów
+      // myśli płynące krawędziami = wiązki światła (delikatny glow, mały punkt)
+      if (onDark) {
+        ctx!.shadowColor = "rgba(255,255,255,0.85)";
+        ctx!.shadowBlur = 7;
+      } else if (!spectrum) {
+        ctx!.shadowColor = accent(0.7);
+        ctx!.shadowBlur = 6;
+      }
       for (const f of flows) {
         const a = nodes[f.a], b = nodes[f.b];
         ctx!.beginPath();
-        ctx!.arc(a.x + (b.x - a.x) * f.t, a.y + (b.y - a.y) * f.t, 2.2, 0, Math.PI * 2);
-        ctx!.fillStyle = accent(0.9);
+        ctx!.arc(a.x + (b.x - a.x) * f.t, a.y + (b.y - a.y) * f.t, 1.9, 0, Math.PI * 2);
+        ctx!.fillStyle = spectrum ? spec(f.b, 0.95) : onDark ? white(1) : accent(0.95);
         ctx!.fill();
       }
+      ctx!.shadowBlur = 0;
 
       // węzły
       for (let i = 0; i < nodes.length; i++) {
@@ -209,79 +299,84 @@ export function BrainGraph() {
         if (ap <= 0.01) continue;
         const ease = 1 - Math.pow(1 - ap, 3);
         const pulse = n.hub ? 1 + Math.sin(g * 0.002 + n.phase) * 0.12 : 1;
-        // brain-scan: węzły blisko linii rozbłyskują
-        let scanHit = 0;
-        if (sx !== null) {
-          const d = Math.abs(n.x - sx);
-          if (d < band) scanHit = 1 - d / band;
-        }
         const fl = flash[i] || 0;
-        const r = (n.r * pulse + fl * 2) * ease * (1 + scanHit * 0.6);
+        const r = (n.r * sizeMul * pulse + fl * 2) * ease;
+        const bright = n.accent || fl > 0.5;
 
+        if (onDark && (n.hub || bright)) {
+          ctx!.shadowColor = "rgba(4,6,26,0.55)";
+          ctx!.shadowBlur = 6;
+        }
         ctx!.beginPath();
         ctx!.arc(n.x, n.y, r, 0, Math.PI * 2);
-        if (n.accent || scanHit > 0.3) ctx!.fillStyle = accent(0.95);
-        else ctx!.fillStyle = slate(0.82);
+        if (bright) ctx!.fillStyle = spectrum ? spec(i, 1) : onDark ? white(1) : accent(0.95);
+        else ctx!.fillStyle = spectrum ? spec(i, 0.85) : onDark ? white(0.85) : slate(0.82);
         ctx!.fill();
+        ctx!.shadowBlur = 0;
 
         if (n.hub) {
           ctx!.beginPath();
           ctx!.arc(n.x, n.y, r + 4 + fl * 6, 0, Math.PI * 2);
-          ctx!.strokeStyle = accent(0.18 + fl * 0.3);
-          ctx!.lineWidth = 1;
-          ctx!.stroke();
-        }
-        if (scanHit > 0.5) {
-          ctx!.beginPath();
-          ctx!.arc(n.x, n.y, r + 3, 0, Math.PI * 2);
-          ctx!.strokeStyle = accent(0.35 * scanHit);
+          ctx!.strokeStyle = spectrum ? spec(i, 0.3 + fl * 0.3) : onDark ? white(0.35 + fl * 0.3) : accent(0.18 + fl * 0.3);
           ctx!.lineWidth = 1;
           ctx!.stroke();
         }
       }
     }
 
-    function step(g: number) {
+    function step(g: number, ph: Phase) {
       for (const k in flash) {
         flash[+k] *= 0.92;
         if (flash[+k] < 0.01) delete flash[+k];
       }
       for (let i = flows.length - 1; i >= 0; i--) {
-        flows[i].t += 0.03;
+        flows[i].t += 0.032;
         if (flows[i].t >= 1) {
           flash[flows[i].b] = 1;
           flows.splice(i, 1);
         }
       }
-      void g;
+      for (let i = rings.length - 1; i >= 0; i--) {
+        if (g - rings[i].born > 1000) rings.splice(i, 1);
+      }
+      // ciągły delikatny ruch (kilka myśli), a w ANALIZIE dużo (czytanie plików) + iskrzenie
+      if (g > ASSEMBLE && g > nextFlow && hubEdges.length) {
+        const cap = ph === "analyze" ? 8 : 4;
+        if (flows.length < cap) {
+          const e = hubEdges[Math.floor(rnd(0, hubEdges.length))];
+          flows.push({ a: e.a, b: e.b, t: 0 });
+          nextFlow = g + (ph === "analyze" ? 200 : 650);
+        }
+      }
+      if (ph === "analyze" && nodes.length && Math.random() < 0.14) {
+        const i = Math.floor(Math.random() * nodes.length);
+        if (g > nodes[i].born) flash[i] = Math.max(flash[i] || 0, 0.8);
+      }
     }
 
-    let raf = 0, running = false, t0 = 0, thoughtTimer: number | undefined;
+    let raf = 0, running = false, t0 = 0, elapsed = 0;
     function frame(now: number) {
-      if (!t0) t0 = now;
+      if (!t0) t0 = now - elapsed; // po pauzie kontynuuj (nie gub dodanych folderów)
       const g = now - t0;
-      step(g);
+      elapsed = g;
+      const ph: Phase = phaseRef.current ?? internalPhase(g);
+      if (ph !== lastPhase) {
+        if (ph === "save" && growthCount < GROW_CAP) growFolder(g);
+        lastPhase = ph;
+      }
+      step(g, ph);
       draw(g);
       raf = requestAnimationFrame(frame);
-    }
-    function tickThought() {
-      if (!t0 || performance.now() - t0 < ASSEMBLE) return;
-      if (flows.length >= 4 || !hubEdges.length) return;
-      const e = hubEdges[Math.floor(rnd(0, hubEdges.length))];
-      flows.push({ a: e.a, b: e.b, t: 0 });
     }
     function start() {
       if (running || reduce) return;
       running = true;
       t0 = 0;
       raf = requestAnimationFrame(frame);
-      thoughtTimer = window.setInterval(tickThought, 620);
     }
     function stop() {
       running = false;
       cancelAnimationFrame(raf);
-      if (thoughtTimer) clearInterval(thoughtTimer);
-      thoughtTimer = undefined;
     }
 
     resize();
@@ -299,15 +394,15 @@ export function BrainGraph() {
       ro.disconnect();
       io.disconnect();
     };
-  }, []);
+  }, [tone]);
 
   return (
-    <div ref={wrapRef} className="relative aspect-square w-full max-w-[540px]">
+    <div ref={wrapRef} className="relative aspect-square w-full max-w-[680px]">
       <canvas
         ref={canvasRef}
         className="h-full w-full"
         role="img"
-        aria-label="Żywy drugi mózg: graf wiedzy buduje się z klastrów notatek i konceptów, radialnego skupiska i rozsypanych satelitów, połączonych w jedną sieć. Linia skanu przejeżdża i podświetla węzły."
+        aria-label="Żywy drugi mózg: graf wiedzy czyta pliki, a przy zapisie wyrasta nowy folder z plikami i podpina się do sieci."
       />
     </div>
   );

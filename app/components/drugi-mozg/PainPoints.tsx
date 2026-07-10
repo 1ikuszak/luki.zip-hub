@@ -226,29 +226,31 @@ export function PainPoints() {
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.6, delay: 0.05 }}
       >
-        Trzy rzeczy, przez które AI brzmi jak wszyscy, a twoja wiedza leży
-        odłogiem.
+        Trzy powody, przez które AI brzmi jak wszyscy, a twoja wiedza leży
+        i nie zarabia.
       </motion.p>
 
       <div ref={ref} className="mt-12 grid gap-4 lg:auto-rows-fr lg:grid-cols-2">
         <Card tall demoClass="min-h-[200px] flex-1" demo={<ChatSlopDemo inView={inView} reduce={reduce} />}>
           <h3 className="t-h3">Pytasz o posta. Dostajesz coś, co mógł napisać każdy.</h3>
           <p className="t-body mt-2 text-[var(--text-secondary)]">
-            Model cię nie zna, dostaje pusty prompt i oddaje średnią internetu.
+            Model cię nie zna. Dostaje pusty prompt, oddaje średnią internetu.
           </p>
         </Card>
 
         <Card demo={<ScatteredDemo inView={inView} reduce={reduce} />}>
           <h3 className="t-h3">Twoja wiedza siedzi w 40 narzędziach.</h3>
           <p className="t-body mt-2 text-[var(--text-secondary)]">
-            Rozsypana, osobno, niepołączona. Po prostu leży i nie pracuje.
+            Notatki, maile, transkrypcje, screeny. Każde osobno. Żadne nie
+            pracuje.
           </p>
         </Card>
 
         <Card demo={<ZeroLoopDemo inView={inView} reduce={reduce} />}>
-          <h3 className="t-h3">Tłumaczysz ten sam kontekst. W kółko.</h3>
+          <h3 className="t-h3">Tłumaczysz AI to samo. Trzeci raz w tym tygodniu.</h3>
           <p className="t-body mt-2 text-[var(--text-secondary)]">
-            Każdy nowy czat zaczyna od zera. Cała robota do wyjaśnienia od nowa.
+            Każdy nowy czat zaczyna od zera. Kim jesteś, co robisz, jak piszesz.
+            Od nowa.
           </p>
         </Card>
       </div>

@@ -12,8 +12,7 @@ import { X, Check } from "lucide-react";
 const OUT = [
   "Szukasz magicznego przycisku, który zrobi robotę bez ciebie.",
   "Chcesz kolejny folder na notatki, do którego nie zajrzysz.",
-  "Wolisz narzekać na generyczne AI, niż coś z tym zrobić.",
-  "Liczysz, że obejrzysz jedno wideo i będzie git.",
+  "Liczysz, że samo obejrzenie wideo coś wdroży.",
   "Nie masz zamiaru wrzucić własnej wiedzy do systemu.",
 ];
 
@@ -52,6 +51,16 @@ export function Filter() {
       >
         To nie jest dla każdego.
       </motion.h2>
+      <motion.p
+        className="t-body-large mt-4 max-w-[46ch] text-[var(--text-secondary)]"
+        initial={reduce ? false : { opacity: 0, y: 12 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-12% 0px" }}
+        transition={{ duration: 0.6, delay: 0.05 }}
+      >
+        Dwie minuty szczerości, żebyś nie kupił czegoś, co u ciebie nie zadziała.
+        Sprawdź, po której stronie jesteś.
+      </motion.p>
 
       <div className="mt-10 grid gap-4 sm:grid-cols-2">
         {/* OUT - przygasa */}
@@ -115,7 +124,7 @@ export function Filter() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="t-body-large mt-8 max-w-[40ch] font-medium text-[var(--text)]"
       >
-        Jeśli to ty, Dzień 1 stawia fundament jeszcze dziś.
+        Jeśli to ty, pierwszy wieczór stawia fundament jeszcze dziś.
       </motion.p>
     </section>
   );

@@ -1,186 +1,169 @@
-# EasyCart — bramka płatnicza kursu Drugi Mózg
+# Kurs Drugi Mózg — płatność, dostawa, dostęp (runbook)
 
-Kompletny flow: **przycisk → hostowany checkout EasyCart → płatność → zweryfikowany webhook → dostawa dostępu mailem → gated strona kursu**.
+Kompletny flow: **przycisk → hostowany checkout EasyCart → płatność → zweryfikowany
+webhook → mail z krótkotrwałym magic linkiem (Resend) → klik = httpOnly cookie →
+gated strony kursu + pobrania**.
 
-## Stan obecny (skonfigurowane przez API EasyCart)
+Zaktualizowane 2026-07-10: dostawa przez **Resend** (nie Beehiiv), dostęp przez
+**magic link + cookie sesji** (nie wieczny link `?k=` w URL).
 
-Produkt jest gotowy i opublikowany — ustawiony programowo przez API (`PATCH /products/{id}`):
+## Model bezpieczeństwa (co chroni przed czym)
 
-| Pole | Wartość |
-|------|---------|
-| Nazwa | **Drugi Mózg** |
-| Cena | **297 zł** jednorazowo (variant `one_time`, 29700 gr) |
-| Slug / checkout | `https://cart.easy.tools/checkout/49734101/drugi-mozg` |
-| Status | `published` |
-| Redirect po zakupie | `https://luki.zip/drugi-mozg/dziekuje` (3 s, z parametrami zamówienia) |
-| Refund | 14 dni |
-| Opis | przepisany w głosie Luki (zero slopu) |
-| Product UUID | `9060aebc-0007-408f-87e3-25a780021b14` |
-| Store ID | `e0c0400c-6ccf-4fe2-b8fa-0e6e96c80632` (default, owner) |
+| Zagrożenie | Ochrona |
+|------------|---------|
+| Ktoś zgaduje/podrabia link | Tokeny podpisane HMAC-SHA256 (`COURSE_ACCESS_SECRET`), porównania stałoczasowe |
+| Kupujący forwarduje maila koledze | Link z maila żyje **72h** (zakup) / **30 min** (login) - stary mail nie otwiera nic |
+| Token wisi w historii/screenach | Po kliknięciu token znika: `/api/kurs/dostep` ustawia **httpOnly cookie** (180 dni) i przekierowuje na czysty URL |
+| Wyciąga dostęp przez formularz | Nowy link dostaje TYLKO skrzynka, która kupiła - weryfikacja w **API zamówień EasyCart** (źródło prawdy, zero własnej bazy) |
+| Enumeracja klientów przez formularz | Odpowiedź zawsze generyczna ("jeśli ten mail kupił...") + rate limit (3/15min per email, 10/15min per IP) |
+| Fałszywy webhook "kupiłem" | Podpis `X-Webhook-Signature` HMAC z surowego body, zły podpis = 401 |
+| Retry webhooka = drugi mail | `Idempotency-Key` = order_uuid (Resend dedupe 24h) |
+| Google/CDN indeksuje kurs | `robots: noindex` + `force-dynamic` na wszystkich stronach dostępowych |
+| Path traversal na pobraniach | Whitelist nazw z manifestu + `path.basename` |
+| Refund / abuse | Kill-switch: zmiana `COURSE_ACCESS_SECRET` unieważnia WSZYSTKIE linki i sesje |
 
-`NEXT_PUBLIC_EASYCART_CHECKOUT_URL` w `.env.local` jest już ustawiony na ten link.
-Przetestowane end-to-end na dev (przycisk, redirect, webhook z podpisem, gated kurs).
+Świadome kompromisy MVP: rate limit in-memory (per instancja serverless; twardy
+sufit i tak daje dzienny limit Resend), sesja 180 dni bez rewokacji per-user
+(rewokacja = rotacja sekretu, unieważnia wszystkich).
 
-**API EasyCart (do referencji):** base `https://cart.easy.tools/api/v1`, auth `Authorization: Bearer <token>`
-+ `Accept/Content-Type: application/json`. Token z `https://cart.easy.tools/creator/store-settings/developer`.
-Orders są **read-only** (brak „create order" w API → dlatego hostowany checkout, nie budowanie zamówienia).
-UWAGA: Cloudflare na cart.easy.tools banuje user-agenty typu `Python-urllib` — wołaj API curl-em.
-
-## Czego API NIE zrobi (musisz w panelu, jednorazowo, przed LIVE)
-
-1. **Signing key webhooka** — generujesz TYLKO w panelu (Store settings → API & Webhooks →
-   Generate webhook signing key). API tego nie wystawia. Skopiuj i wklej do
-   `EASYCART_WEBHOOK_SECRET`. Wartość w env musi być IDENTYCZNA jak w panelu, inaczej
-   prawdziwe webhooki dostaną 401.
-2. **Globalny URL webhooka** — zarejestruj `https://luki.zip/api/easycart/webhook` w panelu
-   (Store settings → API & Webhooks). API ustawia tylko webhook per-produkt i tylko na
-   publiczny URL (nie localhost).
-3. **Beehiiv custom field + automatyzacja** — patrz sekcja Beehiiv niżej.
-
-## Jak to działa (architektura)
+## Architektura
 
 ```
-CtaButton (/drugi-mozg)
-   │  href="#checkout" → podmieniany na NEXT_PUBLIC_EASYCART_CHECKOUT_URL
+CtaButton (/drugi-mozg)                      href="#checkout" → NEXT_PUBLIC_EASYCART_CHECKOUT_URL
    ▼
-Hostowany one-page checkout EasyCart (297 zł)
-   │  po płatności EasyCart:
+Hostowany checkout EasyCart (297 zł, kod rabatowy przez ?promo=KOD)
+   │  po płatności:
    │   1) redirect kupującego → /drugi-mozg/dziekuje
-   │   2) wysyła webhook (server→server) → /api/easycart/webhook
+   │   2) webhook (server→server) → /api/easycart/webhook
    ▼
 /api/easycart/webhook
-   │  - weryfikuje podpis X-Webhook-Signature (HMAC-SHA256 hex z raw body)
-   │  - działa tylko na event `product_assigned` (single_product_bought ignoruje)
-   │  - buduje podpisany link dostępowy: /drugi-mozg/kurs?k=<token>
-   │  - upsert kupującego do Beehiiv (custom field drugi_mozg_access_url)
-   │  - opcjonalnie enroll do automatyzacji Beehiiv → mail z linkiem
+   │  - weryfikuje podpis (HMAC z raw body, stałoczasowo)
+   │  - tylko event `product_assigned` (single_product_bought = ack bez akcji)
+   │  - mintuje magic link "welcome" (72h): /api/kurs/dostep?t=<token>
+   │  - MAIL przez Resend (ścieżka krytyczna; padnie → 502 → EasyCart ponawia,
+   │    Idempotency-Key = order_uuid, więc retry nie dubluje maila)
+   │  - Beehiiv upsert (lista marketingowa, tag drugi-mozg-buyer) = best-effort
    ▼
-Beehiiv automation → mail z linkiem dostępowym
+Mail "Twój dostęp do kursu Drugi Mózg" → klik
    ▼
-/drugi-mozg/kurs?k=<token>  (weryfikuje token HMAC server-side, noindex)
+/api/kurs/dostep?t=...
+   │  - weryfikuje token (welcome 72h / login 30min)
+   │  - ustawia httpOnly cookie `dm_dostep` (180 dni, Secure, SameSite=Lax)
+   │  - redirect 303 na CZYSTY /drugi-mozg/kurs (token znika z URL)
+   ▼
+/drugi-mozg/kurs + /drugi-mozg/kurs/[dzien] + /api/kurs/download
+   - wszystkie czytają cookie sesji; brak/wygasła → NoAccess z formularzem
+   ▼
+Formularz "wyślij mi link" → POST /api/kurs/login
+   - rate limit → weryfikacja zakupu w EasyCart Orders API → mail z linkiem 30 min
+   - odpowiedź ZAWSZE generyczna (zero wyroczni "czy ten mail kupił")
 ```
-
-**Dlaczego hostowany checkout, nie tworzenie zamówienia przez API:** EasyCart to
-one-page checkout zaprojektowany pod konwersję. Publiczne API do tworzenia
-zamówień nie jest udokumentowane otwarcie (`developers.easy.tools` wymaga
-logowania). Hostowany link = zero zgadywania, mniej ruchomych części, EASYCART_API_KEY
-zostaje server-side i nie jest potrzebny do startu płatności = maksymalna niezawodność.
 
 ## Pliki
 
 | Plik | Rola |
 |------|------|
-| `app/lib/easycart.ts` | weryfikacja podpisu webhooka + mint/verify tokenu dostępu (HMAC) |
-| `app/lib/beehiiv.ts` | idempotentny upsert kupującego + enroll do automatyzacji |
-| `app/api/easycart/webhook/route.ts` | endpoint webhooka (runtime nodejs) |
-| `app/components/drugi-mozg/CtaButton.tsx` | podmienia `#checkout` na link EasyCart |
-| `app/components/drugi-mozg/Offer.tsx` | microcopy zaufania pod przyciskiem |
-| `app/drugi-mozg/dziekuje/page.tsx` | strona po płatności (noindex) |
-| `app/drugi-mozg/kurs/page.tsx` | gated strona kursu (token HMAC, noindex) |
-| `app/drugi-mozg/kurs/lessons.ts` | treść kursu — tu wklejasz realne linki wideo/PDF |
+| `app/lib/access.ts` | tokeny HMAC z TTL (welcome/login/session) + budowa magic URL |
+| `app/lib/session.ts` | odczyt sesji z cookie w server components |
+| `app/lib/mail.ts` | Resend: mail "welcome" + "login", idempotency, dev-fallback do konsoli |
+| `app/lib/easycart.ts` | weryfikacja podpisu webhooka + `hasPurchasedCourse` (Orders API) |
+| `app/lib/beehiiv.ts` | best-effort upsert kupującego na listę newslettera |
+| `app/api/easycart/webhook/route.ts` | dostawa po zakupie |
+| `app/api/kurs/dostep/route.ts` | konsumpcja magic linku → cookie → redirect |
+| `app/api/kurs/login/route.ts` | "odzyskaj dostęp" (rate limit + weryfikacja zakupu) |
+| `app/api/kurs/download/route.ts` | pobrania zza cookie (whitelist + anty-traversal) |
+| `app/components/drugi-mozg/kurs/AccessForm.tsx` | formularz maila (klient) |
+| `app/drugi-mozg/kurs/page.tsx` + `[dzien]/page.tsx` | gated strony kursu |
+| `app/drugi-mozg/dziekuje/page.tsx` | strona po płatności |
 
-## Zmienne środowiskowe (`.env.local`, NIE commituj)
+## Zmienne środowiskowe (`.env.local` / Vercel)
 
 ```bash
-EASYCART_API_KEY=            # token API EasyCart (format "id|token") — server-side
-EASYCART_WEBHOOK_SECRET=     # signing key z panelu EasyCart (do weryfikacji podpisu)
-COURSE_ACCESS_SECRET=        # openssl rand -hex 32 — podpisuje linki dostępowe
-NEXT_PUBLIC_EASYCART_CHECKOUT_URL=   # link koszyka z panelu (publiczny, nie sekret)
-BEEHIIV_API_KEY=             # już masz
-BEEHIIV_PUBLICATION_ID=      # już masz
-BEEHIIV_DRUGI_MOZG_AUTOMATION_ID=    # opcjonalnie — automatyzacja wysyłająca mail
+EASYCART_API_KEY=            # token API EasyCart ("id|token") — Orders API, server-side
+EASYCART_WEBHOOK_SECRET=     # signing key webhooka z panelu
+COURSE_ACCESS_SECRET=        # openssl rand -hex 32 — podpisuje tokeny; rotacja = kill-switch
+NEXT_PUBLIC_EASYCART_CHECKOUT_URL=  # link koszyka (publiczny)
+NEXT_PUBLIC_SITE_URL=        # PROD: https://luki.zip (baza magic linków!)
+RESEND_API_KEY=              # re_... z resend.com/api-keys
+RESEND_FROM=Luki <kurs@luki.zip>
+RESEND_REPLY_TO=             # gdzie lecą odpowiedzi (np. gmail)
+BEEHIIV_API_KEY=             # lista marketingowa (best-effort)
+BEEHIIV_PUBLICATION_ID=
 ```
 
-## Konfiguracja w panelach (jednorazowo)
+## CHECKLIST przed wysyłką do 10 testerów (kolejność ma znaczenie)
 
-### 1. EasyCart
-- Produkt + cena + slug + redirect + opis: **ZROBIONE przez API** (patrz „Stan obecny").
-- Zostaje TYLKO (panel, raz): **signing key webhooka** → `EASYCART_WEBHOOK_SECRET`
-  oraz **rejestracja URL webhooka** `https://luki.zip/api/easycart/webhook`.
-  - Eventy: wystarczy `product_assigned` (kod ignoruje resztę). Jeśli panel
-    wysyła wszystko — w porządku, odrzucamy nieistotne ze statusem 200.
+### 1. Resend (raz, ~10 min + propagacja DNS)
+1. Konto na resend.com → **Domains → Add domain → luki.zip**.
+2. Wklej pokazane rekordy (DKIM TXT + Return-Path CNAME) do DNS
+   (Squarespace - tam stoją nameservery luki.zip). NIE ruszaj istniejącego
+   SPF Protona na root - rekordy Resend żyją na subdomenach, nie gryzą się.
+3. Czekaj na "Verified" (zwykle < 1h), potem **API Keys → Create** →
+   `RESEND_API_KEY` do `.env.local` i do Vercela.
+4. Test: wyślij maila na siebie (formularzem "odzyskaj dostęp" po zakupie
+   testowym albo `curl api.resend.com` - przykład w docs Resend).
 
-### 2. Beehiiv
-1. Settings → **Custom Fields** → dodaj pole tekstowe o nazwie **`drugi_mozg_access_url`**.
-   (Bez tego API zignoruje zapis linku.)
-2. Zbuduj **automatyzację** wyzwalaną na tym custom fieldzie / tagu kampanii
-   `drugi-mozg-buyer`, której mail zawiera link: użyj merge tagu pola
-   `drugi_mozg_access_url`. Skopiuj jej **ID** → `BEEHIIV_DRUGI_MOZG_AUTOMATION_ID`.
-   - Alternatywa bez automatyzacji: zostaw ID puste i wysyłaj mail ręcznie/segmentem —
-     link i tak jest zapisany na subskrybencie.
+### 2. EasyCart panel (raz, ~5 min)
+1. **Store settings → API & Webhooks → Generate webhook signing key** →
+   wartość 1:1 do `EASYCART_WEBHOOK_SECRET` (env musi być IDENTYCZNY,
+   inaczej realne webhooki dostaną 401).
+2. Tamże zarejestruj **webhook URL**: `https://luki.zip/api/easycart/webhook`
+   (eventy: wystarczy `product_assigned`; nadmiarowe kod ackuje bez akcji).
+3. **Kod rabatowy dla testerów**: Store → Discount Codes (albo Product →
+   Checkout → Discount) → nowy kod, np. `PIONIER`:
+   - typ: kwotowy albo %, wedle promo,
+   - **limit użyć: 10** (po 10 sam gaśnie),
+   - link dla testerów: `https://cart.easy.tools/checkout/49734101/drugi-mozg?promo=PIONIER`
+     (kod sam się wpisze; pole kodu na checkoucie jest domyślnie ukryte - OK).
 
-### 3. Treść kursu
-Wklej realne linki w `app/drugi-mozg/kurs/lessons.ts` (embedy wideo + PDF + bonus).
+### 3. Vercel (raz)
+1. Project → Settings → Environment Variables: wszystkie z sekcji env wyżej.
+   `NEXT_PUBLIC_SITE_URL=https://luki.zip` (od tego zależą linki w mailach!).
+2. `NEXT_PUBLIC_*` są build-time → po dodaniu env **redeploy**.
+3. `next.config.ts`: redirecty blokujące `/drugi-mozg` są zakomentowane
+   (strona live). Zostaw tak na launch.
 
-## Bezpieczeństwo linku dostępowego
+### 4. Smoke test na prod (przed wysyłką linków testerom)
+1. Kup przez link `?promo=PIONIER` (własna karta; potem możesz zwrócić w panelu).
+2. Sprawdź: redirect na `/dziekuje` → mail w skrzynce (< 1 min) → klik →
+   kurs się otwiera → pobranie paczki działa → wejście w tryb incognito
+   pokazuje formularz (nie kurs) → formularz z twoim mailem wysyła świeży link.
+3. `GET https://luki.zip/api/easycart/webhook` → `{"ok":true}` (healthcheck).
 
-- Link `/drugi-mozg/kurs?k=<token>` zawiera **podpis HMAC-SHA256** z `COURSE_ACCESS_SECRET`.
-  Bez znajomości sekretu nie da się go podrobić — wpisanie cudzego maila w URL nie zadziała.
-- Strona ma `robots: noindex, nofollow` + `force-dynamic` → nie trafia do Google ani cache CDN.
-- To **bearer link**: kto ma ważny link, ten wchodzi (jak każdy link do pliku/Notion).
-  Ochrona dotyczy STRONY. Realna ochrona PLIKÓW WIDEO = hosting z domain-lock/signed URL
-  (Vimeo "unlisted" + privacy domeny / Bunny Stream token auth). Patrz sekcja "Ocena" niżej.
+## Jak przetestować lokalnie (bez płacenia)
 
-## Webhook — szczegóły bezpieczeństwa
-
-- Podpis liczony z **surowego body** (`request.text()`), nie z przeparsowanego JSON.
-- Porównanie **stałoczasowe** (`crypto.timingSafeEqual`). Zły podpis → `401`.
-- **Idempotencja:** działamy tylko na `product_assigned`; upsert Beehiiv ma
-  `reactivate_existing: true`, więc powtórka webhooka = ten sam efekt, nie duplikat.
-  (Na serverless nie trzymamy bazy "przetworzonych zamówień" — side-effect jest idempotentny.)
-- **Zwroty:** EasyCart **nie wysyła** webhooka refund/return/chargeback (14 eventów,
-  żaden to zwrot). Zwrot 297 zł robisz ręcznie w panelu EasyCart; dostęp odetniesz
-  zmieniając `COURSE_ACCESS_SECRET` (unieważnia wszystkie linki) lub kasując subskrybenta.
-
-## Jak przetestować
-
-EasyCart nie ma jawnego sandboxa w publicznych docs. Test robisz tak:
-
-### A. Webhook lokalnie (bez płacenia)
-1. `pnpm dev` (localhost:3000).
-2. Wystaw tunel: `npx ngrok http 3000` → weź URL `https://xxxx.ngrok.app`.
-3. Wyślij testowy webhook z poprawnym podpisem (podstaw swój `EASYCART_WEBHOOK_SECRET`):
+1. `pnpm dev`. Bez `RESEND_API_KEY` mail NIE wychodzi - link loguje się w konsoli
+   (`[mail-dev] link: ...`). Pełny flow klikalny lokalnie.
+2. Symulacja webhooka z poprawnym podpisem:
    ```bash
+   SECRET=$(grep '^EASYCART_WEBHOOK_SECRET=' .env.local | cut -d= -f2-)
    BODY='{"event":"product_assigned","customer_email":"test@twojmail.pl","order_uuid":"test-1","product_name":"Drugi Mozg"}'
-   SIG=$(printf '%s' "$BODY" | openssl dgst -sha256 -hmac "$EASYCART_WEBHOOK_SECRET" | sed 's/^.* //')
+   SIG=$(printf '%s' "$BODY" | openssl dgst -sha256 -hmac "$SECRET" | sed 's/^.* //')
    curl -i -X POST http://localhost:3000/api/easycart/webhook \
-     -H "Content-Type: application/json" \
-     -H "X-Webhook-Signature: $SIG" \
-     -d "$BODY"
+     -H "Content-Type: application/json" -H "X-Webhook-Signature: $SIG" -d "$BODY"
    ```
-   Oczekiwane: `200 {"ok":true}`, log `[easycart-webhook] dostawa OK`, kupujący w Beehiiv.
-4. Zły podpis → `401 {"error":"invalid_signature"}` (zmień jeden znak w `$SIG`).
+   Oczekiwane: `200 {"ok":true}`, w konsoli dev `[mail-dev] link: http://localhost:3000/api/kurs/dostep?t=...`
+3. Otwórz zalogowany link → redirect na `/drugi-mozg/kurs` + cookie → kurs otwarty.
+4. Incognito na `/drugi-mozg/kurs` → formularz "Tu trzeba się wpuścić".
+5. Zły podpis → `401`. Zepsuty/wygasły token → redirect `?e=wygasly`.
 
-### B. Link dostępowy
-- Z logu/maila weź `/drugi-mozg/kurs?k=...` → otwiera kurs.
-- Zepsuj token (zmień znak) → strona „Ten link nie otwiera kursu”.
-
-### C. End-to-end (realna płatność)
-1. Wpięte env na prod (Vercel) + webhook URL `https://luki.zip/api/easycart/webhook`.
-2. Kup realnie (możesz potem zwrócić w panelu) albo testowym produktem za grosze.
-3. Sprawdź: redirect na `/dziekuje` → mail z Beehiiv → link otwiera `/kurs`.
-
-> **Pełna PŁATNOŚĆ na DEV (opcjonalnie):** redirect po zakupie (`redirect_url`)
-> i webhook EasyCart muszą trafić na publiczny https, a nie na localhost. Żeby
-> przeklikać prawdziwą płatność lokalnie: odpal `npx ngrok http 3000`, a potem
-> ustaw przez API `redirect_url` i `webhook_url` produktu na URL z ngroka
-> (`https://xxxx.ngrok.app/...`). Bez tego: przycisk i checkout działają na dev,
-> ale redirect po opłaceniu leci na `https://luki.zip/...` (czyli zadziała dopiero
-> po deployu strony). Webhook na dev testujesz symulacją z sekcji A.
-
-## Edge cases (jak są obsłużone)
+## Edge cases
 
 | Sytuacja | Zachowanie |
 |----------|-----------|
-| Nieudana płatność | EasyCart nie wysyła `product_assigned` → nic nie dostarczamy. |
-| Zły/brak podpisu | `401`, zero przetwarzania. |
-| Duplikat webhooka | `product_assigned` + idempotentny upsert = jeden efekt. |
-| `single_product_bought` | `200` ack bez akcji (żeby nie dublować). |
-| Brak emaila w payloadzie | `200` + log warning (retry nic nie da). |
-| Beehiiv padł | `502` → EasyCart ponowi, upsert bezpieczny przy retry. |
-| Zwrot/refund | Brak eventu w EasyCart → ręcznie w panelu (patrz wyżej). |
+| Nieudana płatność | brak `product_assigned` → nic nie dostarczamy |
+| Zły/brak podpisu webhooka | `401`, zero przetwarzania |
+| Duplikat webhooka | Idempotency-Key po order_uuid → jeden mail |
+| `single_product_bought` | `200` ack bez akcji |
+| Brak emaila w payloadzie | `200` + warning (retry nic nie da) |
+| Resend padł | `502` → EasyCart ponawia |
+| Beehiiv padł | log, dostawa i tak poszła (best-effort) |
+| Link wygasł / nowe urządzenie | formularz → weryfikacja zakupu w Orders API → świeży link 30 min |
+| EasyCart Orders API padło | formularz zwraca "spróbuj później" (503), zero fałszywych odmów |
+| Zwrot/refund | EasyCart NIE wysyła webhooka refund → ręcznie w panelu; odcięcie dostępu = rotacja `COURSE_ACCESS_SECRET` (unieważnia wszystkich) |
 
-## Deploy
+## Ochrona plików wideo (na później, gdy wideo wejdzie)
 
-Sekrety dodaj w Vercel (Project → Settings → Environment Variables). `NEXT_PUBLIC_*`
-muszą być ustawione **build-time**. Po dodaniu env zrób redeploy.
+Cookie chroni STRONY i PLIKI z `/api/kurs/download`. Wideo embedowane z
+zewnątrz (`videoUrl` w frontmatter lekcji) chroń u źródła: Vimeo unlisted +
+domain-lock na luki.zip albo Bunny Stream z token auth. Decyzja przy nagraniach.
