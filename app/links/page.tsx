@@ -99,6 +99,14 @@ export default function LinksPage() {
       trackId: "cta_links_wspolpraca",
       external: true,
     },
+    {
+      title: "Jedno narzędzie AI, które polecam szczerze",
+      sub: "Wszystkie topowe modele obrazu i wideo na jednym koncie, jedna subskrypcja zamiast pięciu. Tu powstaje większość moich projektów.",
+      href: "https://referral.magnific.com/mzUVB6v",
+      trackId: "cta_links_magnific",
+      badge: "MÓJ STACK",
+      external: true,
+    },
   ];
 
   return (
