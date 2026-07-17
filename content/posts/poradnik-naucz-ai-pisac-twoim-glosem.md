@@ -204,8 +204,6 @@ ZASADY DLA CIEBIE (silnika): closed loop; max 3 rundy korekty sedziego; SELF-TES
 
 ## Co zrobić z plikiem
 
-Zapisz go jako notatkę i wklejaj na start każdej rozmowy o pisaniu. W Claude Code nic nie wklejasz. Prompt sam zapisze skill do folderu. Instrukcję codziennej pętli dostaniesz razem z plikiem. A jak takie pętle działają od kuchni, rozpisałem w [loop engineeringu](/artykuly/poradnik-loop-engineering).
+Skopiuj cały blok i wklej do Claude. Prompt sam ci powie, czego potrzebuje: poprosi o twoje teksty, zada kilka pytań i zapisze wszystko jako skill, który potem dodajesz do swojego AI.
 
-I dopisuj do niego po każdej publikacji, co zadziałało, a co umarło. Sędzia jest tak dobry, jak dane, do których porównuje. Każdy wpis go ostrzy. Ja trzymam tak bazę 42 rolek z wynikami. Sędzia ocenia twoje teksty. Rynek ocenia sędziego.
-
-Voice Forge to pierwszy klocek większego systemu. Buduję drugi mózg operacyjny publicznie. Raz w tygodniu wysyłam następny klocek: prompt, automat albo liczby. Jak chcesz budować dalej, [zostaw maila tutaj](/brain).
+Voice Forge to pierwszy klocek większego systemu. Buduję drugi mózg operacyjny publicznie. Raz w tygodniu wysyłam następny etap: żeby twoje AI myślało jak ty, odblokowywało ci czas i pomagało rozwijać biznes. [Zostaw maila tutaj](/brain).
