@@ -6,8 +6,6 @@ tag: "poradnik"
 description: "Prompt Voice Forge do skopiowania: buduje profil twojego głosu z twoich tekstów i sędziego, który ocenia każdy tekst 0-1, zanim wyjdzie pod twoim nazwiskiem. Pół godziny roboty, plik zostaje na zawsze."
 ---
 
-AI pisze za ciebie, a ty i tak przepisujesz wszystko ręcznie. Bo brzmi jak każde inne konto. Postawiłem na to sędziego: agenta, który daje każdemu tekstowi ocenę od zera do jednego. Prawdziwy tekst klienta dostał od niego 1.0. Kompetentny generyk o tej samej marce: 0.0 i trzynaście zakazanych fraz. Żadna nie poszła do klienta. Rolkę o tym systemie też napisał agent moim głosem. Sędzia przepuścił dopiero trzecią wersję, na 0.86.
-
 AI pisze generycznie nie przez słaby model. Dajesz mu pusty czat zamiast wzorca. I nikt nie sprawdza tekstu przed publikacją. Niżej masz prompt, który naprawia obie te rzeczy naraz. Voice Forge: pętla, która bierze twoje najlepsze teksty i zostawia ci jeden plik. Plik pisze twoim głosem. I sam łapie każdy tekst, który tak nie brzmi, zanim wyjdzie pod twoim nazwiskiem. Draft, który poprawiałeś godzinę, dostajesz w minutę. A standard w rubryce sędziego jest jeden: fan ma uwierzyć, że pisałeś ty.
 
 Jak to działa. Kopiujesz cały blok i wklejasz do Claude, najlepiej Claude Code (może być ChatGPT). Wrzucasz 5-20 swoich tekstów: masz je w swoich postach i rolkach. Odpowiadasz na kilka pytań. Reszta jest w prompcie: profil głosu, sędzia z rubryką, frameworki copy od hooków po oferty. Na końcu sam się testuje. Nie odda ci pliku, dopóki sędzia nie odróżni twojego mocnego tekstu od kompetentnego generyka. Pół godziny roboty. Plik zostaje na zawsze.
