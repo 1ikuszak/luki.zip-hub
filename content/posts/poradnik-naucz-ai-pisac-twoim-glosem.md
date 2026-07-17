@@ -126,8 +126,7 @@ C7. Reel 12 struktur (rdzen): zawsze OUTCOME potem PROCESS. Np. Confession->Patt
 C8. Reel 13 retention devices (min 3/skrypt): #1 Perspective shift (r=0.78, MANDATORY, sec 18-30: ANCHOR temat -> PIVOT bridge -> LAND na implikacji dla widza) + stakes/emotion escalation, curiosity re-opener, specificity, demo, pattern interrupt, social proof, contrast, rhythm break, direct address 3x, objection preempt, cliffhanger.
 C9. Reel bridge (sec 3-8): daj powod, by zostac PONAD hook (nowe stakes / nowa info / drugi open loop). NIGDY nie powtarzaj hooka, nie zdradzaj odpowiedzi. Kill rule: widz streszcza z hook+bridge = bridge zabil.
 C10. Reel close (ost. 10s, forward energy): Identity Reframe / Prediction+Stakes / Forward Loop / Emotional Landing / keyword CTA (1-2 sylaby + KONKRETNY deliverable). BANNED: "peace/daj znac", summary, "co myslisz?".
-C11. Launch video 4-akt: Hook 25% (6 warstw bolu: Familiar->Systemic->Personal->Dehumanizing->Material->Data + 0.5s cisza + FLIP bol->szansa) / Proof 35% (Rejection-to-Result: stack rejections -> reframe -> stack results) / Bridge 15% / Product+Closer 25% (ACTION->MAGIC->BRAND w 5-8s; closer = bookend hooka).
-C12. Founder story 10 beatow: Hook -> where started -> first pursuit -> first win -> the crack -> collapse (dno) -> realization -> rebuild -> helping others/now -> big lesson.
+C11. Founder story 10 beatow: Hook -> where started -> first pursuit -> first win -> the crack -> collapse (dno) -> realization -> rebuild -> helping others/now -> big lesson.
 
 ### D. HOOKI
 D1. 3-line hook: L1 [CIEKAWOSC] open loop <=8 slow, pierwsze slowo niesie wage. L2 [AKCJA+IDENTITY] dane/grupa/bold claim/identity stack. L3 [VALUE PROMISE] co widz dostanie.
@@ -140,13 +139,10 @@ D5. YouTube 10 title formul: Extreme Action / Distance-Effort / Insider "How [au
 E1. Hormozi Value Equation: Value = (Dream Outcome x Perceived Likelihood) / (Time Delay x Effort). Rosnij gore, gnaj dol do zera. Wygrane defensywne = szybkosc i latwosc (tam nikt nie konkuruje).
 E2. Grand Slam Offer: nieporownywalna oferta (promocja + wartosc + premium cena + gwarancja + money model). Starving Crowd: Market > Offer > Persuasion (scoruj: Pain/Power/Targetowalnosc/Rosnacy). Riches in niches.
 E3. 5 Enhancers: Scarcity (limit ilosci) . Urgency (limit czasu) . Bonuses (stackuj nazwane z cena, NIE dyskontuj) . Guarantees (#1 conversion lever) . MAGIC name (Magnet-Avatar-Goal-Interval-Container).
-E4. CFA + Money Model: 30-dniowy gross profit z 1 klienta finansuje 2+ kolejnych. Attraction (free/discount) -> Upsell (anchor 5-10x) -> Downsell (zmien JAK/CO placa, nigdy nie dyskontuj tego samego) -> Continuity last.
-E5. Wrappers + ceny: Premium/Free/Discount (jedna oferta 3 sposoby). Podnos cene (99% za malo liczy), "as high as you can say without cracking a smile", zamykaj bez dyskontu (nazwany bonus pod obiekcje).
-E6. Nick Saraev outreach 4-step: Personalization -> Who Am I -> Offer -> CTA. CVR = (ROI x Trust) / Friction. Personalizacja nie sygnalizuje sprzedazy; offer "zrobie [X] w [Y] albo [risk reversal]", no ranges; CTA jeden krok od yes do booked.
-E7. Conversion content (Nick Setting): rozdziel TRAFFIC (reele, nie zamykaja) od CONVERSION (story sequence/email, domykaja). "Confused mind doesn't buy". Story sequence 6 krokow: curiosity -> obstacle (wolaj po PAIN) -> statement+proof -> belief shift -> transition -> close from abundance. Trust = repetycja. Liczby /3.
-E8. Dan Koe product: BRAND=transformacja/CONTENT=mapa/PRODUKT=SYSTEM. Angle (7 pragnien) + Clear Goal (outcome 1-2 kroki przed + timeframe + metryka) + mechanism z NAZWA. Drabina: Micro Service (~$1000, sprzedaj przed budowa) -> Micro Product ($10-20). Landing 5 sekcji: Pain->Transformation->How->Benefits->CTA.
-E9. Blair Enns Doctor Mode: "jaki problem?" (autorytet) nie "czego chcesz? oto menu" (commodity). Price the THINKING nie deliverables. Kto najmniej potrzebuje deala, ma wladze.
-E10. Matt Gray Category of One: positioning > produkt; wybierz JEDNO slowo do posiadania. Czesto to problem positioningu, nie oferty. Wysoka cena wymusza standard.
+E4. Nick Saraev outreach 4-step: Personalization -> Who Am I -> Offer -> CTA. CVR = (ROI x Trust) / Friction. Personalizacja nie sygnalizuje sprzedazy; offer "zrobie [X] w [Y] albo [risk reversal]", no ranges; CTA jeden krok od yes do booked.
+E5. Conversion content (Nick Setting): rozdziel TRAFFIC (reele, nie zamykaja) od CONVERSION (story sequence/email, domykaja). "Confused mind doesn't buy". Story sequence 6 krokow: curiosity -> obstacle (wolaj po PAIN) -> statement+proof -> belief shift -> transition -> close from abundance. Trust = repetycja. Liczby /3.
+E6. Dan Koe product: BRAND=transformacja/CONTENT=mapa/PRODUKT=SYSTEM. Angle (7 pragnien) + Clear Goal (outcome 1-2 kroki przed + timeframe + metryka) + mechanism z NAZWA. Drabina: Micro Service (~$1000, sprzedaj przed budowa) -> Micro Product ($10-20). Landing 5 sekcji: Pain->Transformation->How->Benefits->CTA.
+E7. Matt Gray Category of One: positioning > produkt; wybierz JEDNO slowo do posiadania. Czesto to problem positioningu, nie oferty. Wysoka cena wymusza standard.
 
 ### F. DYSTRYBUCJA / ALGORYTM (referencja)
 F1. X algo wagi: Bookmark 40x / Reply 27x / Retweet 20x / Like 1x / Profile click massive / Dwell high. Pierwsze 30 min decyduja. Zabojcy: >2 hashtagi, identyczne posty, engagement bait.
@@ -158,10 +154,6 @@ F6. Compounding: 1 reel = X thread (T+24h) + spin-offy. Reel = pytanie, long-for
 
 ### G. FUNDAMENTY (referencja)
 G1. Source vs Echo: Source (oryginal, laczy istniejace w net-new) vs Echo (kopiuje).
-G2. Naval: Wealth = Specific Knowledge x Accountability x Leverage (Judgment = mnoznik). Leverage permissionless = Code & Media.
-G3. Productivity: Expected Value = Impact x Probability (optymalizuj probability, sekwencjonuj).
-G4. Speed: odpisuj od razu, kazda wiadomosc ma next step, zla decyzja szybko > dobra za pozno.
-G5. Talent > Agency (face/name/voice, known for something specific) + They Ask You Answer (content przed sales call = pre-sold).
 
 ===================================================================
 ## [SZABLON SKILLA] (generujesz wypelniony na koncu)
