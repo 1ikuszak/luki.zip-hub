@@ -41,7 +41,6 @@ Koniec, gdy: (a) potwierdzisz profil, (b) sedzia przejdzie SELF-TEST (czysto ods
 
 ## INPUT (zbierasz w RUNDZIE 1)
 - Moje teksty. Min 5, idealnie 10-20. KURUJ, NIE ZRZUCAJ: 10-20 skurowanych tekstow bije caly folder. Hierarchia zrodel: transkrypcje tego, jak MOWIE (rolki, wideo, nagrania) > najlepsze posty/artykuly/newslettery > maile i wiadomosci. Odrzucamy teksty wygladzone przez edytorow, korpo-komunikaty i wszystko, co juz brzmi jak szablon - to splaszcza glos w papke.
-- 1-2 anty-przyklady ("tak nigdy bym nie napisal") - najlepiej realne teksty, ktore mnie irytuja.
 - 1-3 konkretnych tworcow/tekstow, ktorych glos swiadomie podpatruje (albo wprost "brak" - wtedy zostaw te sekcje pusta, nie zmyslaj nazwisk).
 - 4 odpowiedzi: (1) dla kogo pisze + jaki ich realny bol (ich slowami, nie moimi), (2) co robie/sprzedaje, (3) jedna teza, w ktora wierze, a mainstream sie myli, (4) ton w 3 slowach.
 
@@ -52,7 +51,7 @@ Powiedz mi w 2 zdaniach, co zrobimy. Zapytaj o jedno: "Pracujesz w Claude Code (
 
 ### RUNDA 1 - EKSTRAKCJA (maker + samokontrola)
 Gdy dostaniesz materialy:
-1. Zbuduj PROFIL wg [SCHEMAT PROFILU]. Sekcja "Brzmi jak" = WYLACZNIE doslowne linie z moich tekstow (cytuj verbatim, zero parafraz). "Nie brzmi jak" = z moich anty-przykladow + generyczne AI-klisze; KAZDA pozycja z jednolinijkowa diagnoza w nawiasie, DLACZEGO to nie ja (np. "(guru-energia)", "(korpo-mgla)"). Liczby i fakty tylko z moich materialow - NIGDY nie zmyslaj.
+1. Zbuduj PROFIL wg [SCHEMAT PROFILU]. Sekcja "Brzmi jak" = WYLACZNIE doslowne linie z moich tekstow (cytuj verbatim, zero parafraz). "Nie brzmi jak" = generyczne AI-klisze + wzorce, ktorych w moich tekstach NIE MA (wywnioskuj z kontrastu); KAZDA pozycja z jednolinijkowa diagnoza w nawiasie, DLACZEGO to nie ja (np. "(guru-energia)", "(korpo-mgla)"). Liczby i fakty tylko z moich materialow - NIGDY nie zmyslaj.
 2. SAMOKONTROLA, zanim pokazesz: "Brzmi jak" to realny verbatim, nie parafraza? Kazdy banned z diagnoza? Nic nie zmyslone? Popraw, co nie gra.
 3. Pokaz profil. Zapytaj: "Zgadza sie? Co brzmi nie tak?". Popraw wg reakcji. To najtanszy moment na korekte: zly profil tu kosztuje jedno zdanie, pozniej cala petle. Jak dalem < 5 zrodel, powiedz wprost, ze profil bedzie slabszy, ale nie blokuj.
 
