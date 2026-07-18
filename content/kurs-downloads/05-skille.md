@@ -33,6 +33,8 @@ Wypisze `PyYAML OK` = gotowe.
 
 > **Czemu to tutaj, a nie później.** Bez tej biblioteki health-check i narzędzie inboxa rzucają błędem zamiast działać. Skrypty są napisane tak, że gdyby PyYAML brakowało, powiedzą Ci to po ludzku ("PyYAML is required: pip3 install pyyaml") zamiast sypać niezrozumiałym tracebackiem - ale i tak najlepiej załatwić to teraz, raz, i mieć z głowy. Smoke-test w komponencie 08 odpala oba skrypty; jak ten krok pominiesz, zgłosi FAIL na warstwie UMIEJĘTNOŚCI.
 
+> **Opcjonalnie - dla ZAAWANSOWANEGO skilla `vault-search` (semantic search).** W paczce jest czwarty, opcjonalny skill: `vault-search` - wyszukiwanie po ZNACZENIU (nie tylko po dokładnym słowie), hybryda semantic + exact. NIE potrzebujesz go na start - rdzeń (grep przez `vault-query`) wystarcza dla małego vaulta. Dodaj go dopiero, gdy grep zacznie gubić (patrz komponent `11-mcp-search.md`). Jeśli chcesz go teraz, dołóż jego zależności: `pip3 install sentence-transformers mcp` (pierwsze użycie ściąga model ~570MB, raz).
+
 ---
 
 ## CZĘŚĆ A - Skopiuj 3 foldery skilli na miejsce
@@ -46,9 +48,11 @@ mkdir -p .claude/skills
 cp -r "<sciezka-do-paczki>/skills/vault-ingest" .claude/skills/
 cp -r "<sciezka-do-paczki>/skills/vault-query"  .claude/skills/
 cp -r "<sciezka-do-paczki>/skills/vault-linter" .claude/skills/
+# opcjonalnie (zaawansowany semantic search - dodaj gdy grep zacznie gubic):
+# cp -r "<sciezka-do-paczki>/skills/vault-search" .claude/skills/
 ```
 
-**Albo w Finderze:** przeciągnij trzy foldery (`vault-ingest`, `vault-query`, `vault-linter`) z `setup-package/skills/` do `.claude/skills/` w swoim vaulcie.
+**Albo w Finderze:** przeciągnij trzy foldery (`vault-ingest`, `vault-query`, `vault-linter`) z `setup-package/skills/` do `.claude/skills/` w swoim vaulcie. (`vault-search` jest opcjonalny - patrz komponent `11-mcp-search.md`.)
 
 **Sprawdź, że masz:**
 

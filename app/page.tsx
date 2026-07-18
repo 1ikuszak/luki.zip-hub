@@ -11,9 +11,9 @@ import { FinalCTA } from "./components/homepage/FinalCTA";
 import { CourseWaitlist } from "./components/homepage/CourseWaitlist";
 import { Newsletter } from "./components/homepage/Newsletter";
 
-const pageTitle = "luki.zip — Łukasz Glica, kreatywne systemy AI z taste";
+const pageTitle = "Łukasz Glica - twój taste w systemie AI, nie generyczny slop";
 const pageDescription =
-  "Wdrażam kreatywne systemy AI do twojego biznesu. Spersonalizowane systemy z zakodowaną esencją twojej marki, które robią on-brand content w skali agencji.";
+  "Zakoduję taste twojej marki w system AI. Produkujesz content na poziomie studia, bez generycznego slopu. JBB: rekord kanału 300K, 10M+ views.";
 
 export const metadata: Metadata = {
   title: pageTitle,

@@ -49,7 +49,7 @@ Potem utwórz puste-ale-zalążkowe pliki rdzenia (treść wypełnimy w kolejnyc
 
 Każdy z tych czterech plików zacznij od frontmattera (blok YAML między ---) z sześcioma polami: type / tags / layer / created / updated / status. Typy: _MOC.md i _MOC-knowledge.md -> type: moc, _LOG.md -> type: log, _GUIDE.md -> type: resource. Layer: 1 dla _GUIDE.md i _LOG.md, 2 dla obu MOC. Status: active. Daty: dzisiejsza. W _MOC-knowledge.md dopisz w treści linijkę "Part of [[_MOC]]", a w _MOC.md wypisz dzieci jako wikilinki: [[_GUIDE]], [[_LOG]] i [[_MOC-knowledge]] (hub linkuje wszystko, co ma pod sobą). Dzięki temu health-check (poznasz go w Dniu 2) od pierwszego uruchomienia pokaże zero błędów, zamiast flagować własne pliki rdzenia.
 
-WAŻNE - czego NIE tworzysz (świadomie): żadnego _MANIFEST.md ani _NOW.md. Index wiedzy = MOC + grep + filesystem. "Co teraz robię" wyprowadzasz z 1-projects/ ze status: active, nie z osobnego pliku. Mniej plików do utrzymania = mniej rzeczy do zgnicia.
+WAŻNE - czego NIE tworzysz (świadomie): żadnego _MANIFEST.md ani _NOW.md. Index wiedzy = MOC + grep + filesystem - to DEFAULT i wystarcza dla większości vaultów (zmierzone). Gdy grep zacznie gubić synonimy/parafrazy (zrobisz drift-test), jest opcjonalny upgrade: semantic search (skill vault-search, moduł 11-mcp-search) - natywne narzędzie retrievalu, nie kolejny trigger. "Co teraz robię" wyprowadzasz z 1-projects/ ze status: active, nie z osobnego pliku. Mniej plików do utrzymania = mniej rzeczy do zgnicia.
 
 Pokaż mi listę tego co utworzysz, zapytaj o zgodę, utwórz. Potem: "Zrobione: struktura PARA + warstwa wiedzy + pliki rdzenia (Krok 1/5)" i lecimy dalej.
 
@@ -95,7 +95,7 @@ Z odpowiedzi z KROKU 2 zbuduj CLAUDE.md w rootcie. To jest plik, który czytasz 
   2. Read-before: przed pracą nad klientem czytaj jego kontekst (jeśli odp. 7 = ma klientów); przed pisaniem do vaulta czytaj _GUIDE.md.
   3. Jeśli odp. 8 = ma źródło prawdy: "Przed decyzją biznesową/strategiczną czytaj NAJPIERW <ścieżka>."
   4. Routing niepewny? ZAPYTAJ. Nigdy nie zgaduj gdzie coś zapisać.
-  5. Pytania do wiedzy (QUERY): gdy pytam o coś z mojej bazy, odpowiadaj TYLKO z vaulta, a przy każdym twierdzeniu dawaj cytat [Source: [[notatka]]]. Czego nie ma w bazie - powiedz wprost "tego nie mam", nie zgaduj. (Pełny skill vault-query wgrasz jako narzędzie; ta reguła to baza.)
+  5. Pytania do wiedzy (QUERY): gdy pytam o coś z mojej bazy, odpowiadaj TYLKO z vaulta, a przy każdym twierdzeniu dawaj cytat [Source: [[notatka]]]. Czego nie ma w bazie - powiedz wprost "tego nie mam", nie zgaduj. Domyślnie szukasz grepem (vault-query); jeśli mam zainstalowany vault-search (semantic), sięgaj po nie jako natywne narzędzie, gdy szukam po znaczeniu. (Pełny skill vault-query wgrasz jako narzędzie; ta reguła to baza.)
 
 ## Self-Modifying Instructions
   Na razie ZOSTAW PUSTĄ z notką: "(pętlę samo-uczenia dodam później: Dzień 5 kursu / komponent 07 pakietu)". Nie wypełniaj.

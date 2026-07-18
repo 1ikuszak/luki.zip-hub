@@ -47,7 +47,7 @@ export function Hero() {
               letterSpacing: "-0.035em",
             }}
           >
-            Zakoduję twój taste w system AI, który tworzy jak ty.
+            Zakoduję twój taste w system AI. Tworzy jak ty, nie jak wszyscy.
           </motion.h1>
 
           <motion.p
@@ -55,8 +55,8 @@ export function Hero() {
             className="mx-auto mt-6 max-w-[54ch] text-[var(--text-secondary)]"
             style={{ fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)", lineHeight: 1.6 }}
           >
-            Filmy, content i systemy z zakodowaną esencją twojej marki.
-            W skali agencji.
+            Większość marek używa AI i wygląda tak samo. Ty nie musisz.
+            Produkujesz content na poziomie studia, sam, bez agencji.
           </motion.p>
 
           <motion.div
@@ -71,7 +71,7 @@ export function Hero() {
                 data-track-href="#newsletter"
                 className="btn-glossy group inline-flex h-[56px] items-center gap-3 rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-white"
               >
-                Zgarnij mój system
+                Odbierz mój system za darmo
                 <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
                   <ArrowRight size={20} strokeWidth={2.25} />
                 </span>
@@ -85,7 +85,7 @@ export function Hero() {
                 data-track-href={CONTACT_FORM_URL}
                 className="inline-flex h-[56px] items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--text)_8%,transparent)] px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:bg-[color-mix(in_srgb,var(--text)_14%,transparent)]"
               >
-                Umów rozmowę
+                Sprawdź czy pasujemy
               </a>
             </div>
             <p className="text-[13px] text-[var(--text-secondary)]">

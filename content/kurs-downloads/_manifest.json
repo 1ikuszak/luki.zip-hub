@@ -2,20 +2,20 @@
   "zip": {
     "name": "pakiet-startowy-drugi-mozg.zip",
     "label": "Cały pakiet startowy",
-    "size": 85046
+    "size": 97793
   },
   "lessons": [
     {
       "day": 1,
       "name": "lekcja-1-fundament.zip",
       "label": "Paczka Lekcji 1",
-      "size": 11223
+      "size": 11439
     },
     {
       "day": 2,
       "name": "lekcja-2-skille-rdzenia.zip",
       "label": "Paczka Lekcji 2",
-      "size": 30728
+      "size": 40651
     },
     {
       "day": 3,
@@ -33,7 +33,7 @@
     {
       "name": "01-fundament.md",
       "label": "01 - Fundament",
-      "size": 13039
+      "size": 13461
     },
     {
       "name": "02-obsidian-wiring.md",
@@ -53,7 +53,7 @@
     {
       "name": "05-skille.md",
       "label": "05 - Skille",
-      "size": 9451
+      "size": 10206
     },
     {
       "name": "06-rules.md",
@@ -79,6 +79,11 @@
       "name": "10-puls.md",
       "label": "10 - Puls",
       "size": 7512
+    },
+    {
+      "name": "11-mcp-search.md",
+      "label": "11 - Mcp search",
+      "size": 3895
     }
   ],
   "generatedNote": "sync-downloads.mjs - nie edytuj recznie"

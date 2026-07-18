@@ -77,7 +77,7 @@ export function OfferTwoWays() {
         viewport={{ once: true, margin: "-12% 0px" }}
         transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
       >
-        Jak możemy pracować.
+        Jak zaczynamy.
       </motion.h2>
 
       <div className="mt-12 grid items-stretch gap-5 md:grid-cols-2">
