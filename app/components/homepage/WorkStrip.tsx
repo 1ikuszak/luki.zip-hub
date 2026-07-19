@@ -67,6 +67,13 @@ export function WorkStrip() {
             Realne projekty, realne liczby. Każdy zbudowany i prowadzony przeze
             mnie, od pomysłu po działający system.
           </p>
+          <Link
+            href="/uslugi"
+            className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+          >
+            Zobacz wszystkie usługi i branże
+            <ArrowUpRight size={17} strokeWidth={2.2} />
+          </Link>
         </Reveal>
 
         <div className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-3 sm:gap-5 lg:gap-7">
@@ -118,7 +125,6 @@ export function WorkStrip() {
             </Reveal>
           ))}
         </div>
-
       </div>
     </section>
   );

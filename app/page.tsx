@@ -5,15 +5,16 @@ import { StatsBand } from "./components/homepage/StatsBand";
 import { WorkStrip } from "./components/homepage/WorkStrip";
 import { ForWho } from "./components/homepage/ForWho";
 import { OfferTwoWays } from "./components/homepage/OfferTwoWays";
+import { Process } from "./components/homepage/Process";
 import { Testimonials } from "./components/homepage/Testimonials";
-import { FeaturedArticles } from "./components/homepage/FeaturedArticles";
+// import { FeaturedArticles } from "./components/homepage/FeaturedArticles"; // ukryte 2026-07-19, odkomentuj by wrocic
 import { FinalCTA } from "./components/homepage/FinalCTA";
 import { CourseWaitlist } from "./components/homepage/CourseWaitlist";
 import { Newsletter } from "./components/homepage/Newsletter";
 
-const pageTitle = "Łukasz Glica - twój taste w systemie AI, nie generyczny slop";
+const pageTitle = "Łukasz Glica - AI, które zna twój biznes, nie tylko prompt";
 const pageDescription =
-  "Zakoduję taste twojej marki w system AI. Produkujesz content na poziomie studia, bez generycznego slopu. JBB: rekord kanału 300K, 10M+ views.";
+  "95% wdrożeń AI nie zwraca złotówki, bo AI zna prompt, nie twój biznes. Buduję systemy pod twoją markę: treść, procesy i wiedza w jednym mózgu operacyjnym.";
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -48,10 +49,11 @@ export default function Home() {
             <Hero />
             <StatsBand />
             <WorkStrip />
+            <Process />
+            <Testimonials />
             <ForWho />
             <OfferTwoWays />
-            <Testimonials />
-            <FeaturedArticles />
+            {/* <FeaturedArticles /> - ukryte 2026-07-19 (Hormozi: jedna strona, jeden cel, bez exitow przy CTA). Odkomentuj by wrocic. */}
           </main>
 
           <FinalCTA />

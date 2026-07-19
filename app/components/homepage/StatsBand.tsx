@@ -34,15 +34,6 @@ export function StatsBand() {
             ))}
           </div>
         </Reveal>
-
-        <Reveal delay={0.05}>
-          <p className="mt-12 border-t border-[var(--border)] pt-6 text-[15px] text-[var(--text-secondary)]">
-            Jednoosobowo, jednym systemem, bez agencji.{" "}
-            <span className="font-semibold text-[var(--text)]">
-              Tym samym, który zbuduję u ciebie.
-            </span>
-          </p>
-        </Reveal>
       </div>
     </section>
   );

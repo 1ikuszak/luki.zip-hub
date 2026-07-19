@@ -34,7 +34,7 @@ export function Hero() {
         >
           <motion.div variants={item} className="flex justify-center">
             <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--text)_5%,transparent)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--accent)]">
-              Dla marek, które nie chcą wyglądać jak AI
+              Dla marek, które chcą się skalować z AI tam, gdzie ma to faktycznie sens
             </span>
           </motion.div>
 
@@ -47,7 +47,7 @@ export function Hero() {
               letterSpacing: "-0.035em",
             }}
           >
-            Zakoduję twój taste w system AI. Tworzy jak ty, nie jak wszyscy.
+            95% wdrożeń AI nie zwraca złotówki. Bo nikt nie nauczył AI twojego biznesu.
           </motion.h1>
 
           <motion.p
@@ -55,42 +55,28 @@ export function Hero() {
             className="mx-auto mt-6 max-w-[54ch] text-[var(--text-secondary)]"
             style={{ fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)", lineHeight: 1.6 }}
           >
-            Większość marek używa AI i wygląda tak samo. Ty nie musisz.
-            Produkujesz content na poziomie studia, sam, bez agencji.
+            Treść, procesy i wiedza w jednym systemie pod twoją markę. Zdejmij powtarzalną robotę
+            i skaluj to, co realnie zarabia.
           </motion.p>
 
           <motion.div
             variants={item}
             className="mt-9 flex flex-col items-center gap-3"
           >
-            <div className="flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="#newsletter"
-                data-track="cta_home"
-                data-track-id="cta_home_hero_system"
-                data-track-href="#newsletter"
-                className="btn-glossy group inline-flex h-[56px] items-center gap-3 rounded-full pl-7 pr-2.5 text-[16px] font-semibold text-white"
-              >
-                Odbierz mój system za darmo
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
-                  <ArrowRight size={20} strokeWidth={2.25} />
-                </span>
-              </a>
-              <a
-                href={CONTACT_FORM_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-track="cta_contact"
-                data-track-id="cta_home_hero_call"
-                data-track-href={CONTACT_FORM_URL}
-                className="inline-flex h-[56px] items-center gap-2 rounded-full bg-[color-mix(in_srgb,var(--text)_8%,transparent)] px-7 text-[16px] font-semibold text-[var(--text)] transition-colors hover:bg-[color-mix(in_srgb,var(--text)_14%,transparent)]"
-              >
-                Sprawdź czy pasujemy
-              </a>
-            </div>
-            <p className="text-[13px] text-[var(--text-secondary)]">
-              Darmowy system na maila. Wdrożenie zaczynamy od rozmowy.
-            </p>
+            <a
+              href={CONTACT_FORM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-track="cta_contact"
+              data-track-id="cta_home_hero_call"
+              data-track-href={CONTACT_FORM_URL}
+              className="btn-glossy group inline-flex h-[56px] items-center gap-3 rounded-full pl-8 pr-2.5 text-[16px] font-semibold text-white"
+            >
+              Pogadajmy
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-white text-[var(--accent)] transition-transform group-hover:translate-x-0.5">
+                <ArrowRight size={20} strokeWidth={2.25} />
+              </span>
+            </a>
           </motion.div>
         </motion.div>
       </div>
