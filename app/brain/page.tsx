@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 import type { Metadata } from "next";
 import { EmailCaptureForm } from "./EmailCaptureForm";
+import { Breadcrumb } from "@/app/components/Breadcrumb";
 
 const pageTitle = "Newsletter | luki.zip";
 const pageDescription =
@@ -37,8 +38,9 @@ const FAQ = [
 export default function BrainPage() {
   return (
     <>
-      <section className="container-wide pt-16 sm:pt-24 pb-12 sm:pb-20">
-        <div className="text-[11px] uppercase tracking-[0.12em] font-semibold text-[var(--accent)]">
+      <section className="container-wide pt-10 sm:pt-14 pb-12 sm:pb-20">
+        <Breadcrumb items={[{ label: "Newsletter" }]} />
+        <div className="mt-8 text-[11px] uppercase tracking-[0.12em] font-semibold text-[var(--accent)]">
           Newsletter
         </div>
         <h1 className="t-h1 mt-5 max-w-[800px]">Poradniki na maila</h1>

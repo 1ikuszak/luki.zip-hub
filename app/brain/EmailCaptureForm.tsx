@@ -100,7 +100,7 @@ export function EmailCaptureForm({
     <div className="flex flex-col gap-2">
       <form
         onSubmit={onSubmit}
-        className="flex flex-col sm:flex-row gap-2 sm:gap-2"
+        className="flex flex-col sm:flex-row gap-2.5"
       >
         <input
           type="email"
@@ -108,12 +108,12 @@ export function EmailCaptureForm({
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="twój@email.com"
-          className="flex-1 h-[52px] px-4 rounded-lg bg-white border border-[var(--border)] text-base text-[var(--text)] placeholder:text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)]"
+          className="w-full sm:flex-1 h-[56px] sm:h-[52px] px-4 rounded-lg bg-white border border-[var(--border)] text-base text-[var(--text)] placeholder:text-[var(--text-secondary)] transition-colors hover:border-[var(--accent)] focus:border-[var(--accent)] focus:outline-none"
         />
         <button
           type="submit"
           disabled={submitting}
-          className="btn-glossy inline-flex h-[52px] items-center justify-center gap-2 rounded-lg px-7 text-base font-semibold text-white disabled:opacity-60 disabled:cursor-not-allowed"
+          className="btn-glossy inline-flex w-full sm:w-auto h-[56px] sm:h-[52px] items-center justify-center gap-2 rounded-lg px-7 text-base font-semibold text-white disabled:opacity-60 disabled:cursor-not-allowed"
         >
           {submitting ? "Wysyłam..." : "Chcę system"}
           {!submitting && <ArrowRight size={16} strokeWidth={2.25} />}
