@@ -73,7 +73,7 @@ export const reviews: ReviewData[] = [
   {
     id: "review-4f",
     author: "Barbara Wieliczko",
-    role: "4F / OTCF",
+    role: "4F",
     // Napisane przez klientkę własnymi słowami, zgoda na publiczne użycie
     // udzielona wprost (WhatsApp, 2026-07-20). Tekst verbatim — nie skracać
     // bez potrzeby. UWAGA: klientka CELOWO nie nazwała projektu ("jeden
