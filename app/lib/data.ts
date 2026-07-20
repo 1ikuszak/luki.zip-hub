@@ -71,6 +71,19 @@ export const socialLinks: SocialLink[] = [
 
 export const reviews: ReviewData[] = [
   {
+    id: "review-4f",
+    author: "Barbara Wieliczko",
+    role: "4F / OTCF",
+    // Napisane przez klientkę własnymi słowami, zgoda na publiczne użycie
+    // udzielona wprost (WhatsApp, 2026-07-20). Tekst verbatim — nie skracać
+    // bez potrzeby. UWAGA: klientka CELOWO nie nazwała projektu ("jeden
+    // z naszych projektów specjalnych") — nie dopisywać obok nazwy kampanii
+    // ani "F1", bo to niweczy jej dyskrecję wobec NDA.
+    content:
+      "Łukasz odpowiadał za materiały tworzone z użyciem AI przy jednym z naszych projektów specjalnych i była to współpraca, którą z pełnym przekonaniem polecam. Celnie zinterpretował brief, trafiając nie tylko w treść, ale i w intencję oraz vibe, na którym nam zależało. Pracowaliśmy zespołowo i na każdym etapie widać było zaangażowanie, dobrą komunikację i realne poczucie odpowiedzialności za efekt. Co najważniejsze, mimo bardzo napiętego terminu dowiózł materiał na świetnym poziomie, bez kompromisów po stronie jakości.",
+    rating: 5,
+  },
+  {
     id: "review-3",
     author: "Sebastian Majchrzak",
     role: "CEO Football Mat",
@@ -79,27 +92,20 @@ export const reviews: ReviewData[] = [
     rating: 5,
   },
   {
-    id: "review-4",
-    author: "Filip Nizioł",
-    // Parafraza z wiadomości klienta (do potwierdzenia u Filipa przed publikacją)
-    role: "Founder, AI Interview Analyzer",
-    content: "Film wyszedł świetnie i już planuję z Łukaszem kolejne wideo.",
-    rating: 5,
-  },
-  {
-    id: "review-1",
-    author: "Kirutika",
-    role: "CEO Ambrosial",
-    content:
-      "Praca z Lukim to czysta przyjemność. Nasza Marka wygląda świetnie, a redesign już zbiera pozytywne opinie.",
-    rating: 5,
-  },
-  {
     id: "review-2",
     author: "Jacek Goszczyński",
     role: "CEO JG-Marine",
     content:
       "Łukasz zrozumiał naszą wizję od razu. Komunikacja mega klarowna. Mogliśmy spać spokojnie.",
+    // ⬇️ NOWA WERSJA — PODMIENIĆ dopiero po "ok" od Jacka (zapytanie 2026-07-20).
+    // Tekst napisany przez Łukasza na bazie danych z projektu, NIE cytat
+    // z wiadomości klienta. Liczby do potwierdzenia u niego (10h/tydz na osobę,
+    // 3 biura na jednych danych). Do publikacji potrzebna jego zgoda.
+    //
+    // "Łukasz zrozumiał naszą wizję od razu i wdrożył system dokładnie tam,
+    //  gdzie traciliśmy najwięcej czasu. Trzy biura pracują dziś na jednych
+    //  danych. Odzyskaliśmy średnio 10 godzin tygodniowo na osobę, które idą
+    //  teraz na realną pracę, a nie na administrację."
     rating: 5,
   },
 ];

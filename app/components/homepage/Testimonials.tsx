@@ -161,13 +161,20 @@ export function Testimonials() {
         </div>
       </Reveal>
 
-      {/* Klienci — karty z monogramem (każdy awatar inny) */}
+      {/* Klienci — karty z monogramem (każdy awatar inny).
+          Pierwsza opinia = featured (pełna szerokość, większy tekst), reszta
+          w dwóch kolumnach pod spodem. Zamysł: najmocniejszy proof dostaje
+          inną RANGĘ zamiast być skracany do rozmiaru pozostałych. */}
       {reviews.length > 0 && (
         <div className="mt-14 grid gap-4 border-t border-[var(--border)] pt-12 md:grid-cols-2">
           {reviews.map((r, i) => (
-            <Reveal key={r.id} delay={i * 0.06}>
-              <figure className="group flex h-full flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--bg-card)] p-7">
-                <blockquote className="text-[17px] leading-relaxed text-[var(--text)]">
+            <Reveal key={r.id} delay={i * 0.06} className={i === 0 ? "md:col-span-2" : undefined}>
+              <figure className="group flex h-full flex-col justify-between rounded-[20px] border border-[var(--border)] bg-[var(--bg-card)] p-7 md:p-8">
+                <blockquote
+                  className={`leading-relaxed text-[var(--text)] ${
+                    i === 0 ? "text-[18px] md:text-[20px]" : "text-[17px]"
+                  }`}
+                >
                   “{r.content}”
                 </blockquote>
                 <figcaption className="mt-7 flex items-center gap-3">
