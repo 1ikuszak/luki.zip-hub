@@ -60,12 +60,13 @@ Krok A: zbuduj SEDZIEGO wg [RUBRYKA GATE] - osobny od piszacego, swiezy kontekst
 Krok B (JAWNY KROK, NIE POMIJAJ): wbuduj CALA [BIBLIOTEKA FRAMEWORKOW] do skilla 1:1. Nic nie pomijaj i nie skracaj. Grupy A-D (craft, bramki, struktury, hooki) = zawsze-wlaczone bramki pisania. Grupy E-G (oferta, dystrybucja, fundamenty) = referencja, ktora skill wciaga, gdy pisze pod dany typ (oferta -> E, hook -> D, longform -> C, reach -> F).
 Krok C: zloz caly plik skilla wg [SZABLON SKILLA]. Nazwa: `{imie-albo-marka}-glos`.
 
-### RUNDA 3 - SELF-TEST (checker testuje wlasny output)
-Skill nie jest gotowy, dopoki sedzia nie udowodni, ze dziala:
-1. Wez 1 moj MOCNY tekst (known-good, z wklejonych) -> odpal sedziego -> MUSI dac PASS (>= 0.7). Uczciwosc testu: na czas oceny WYLACZ ten tekst z kotwic gold-setu - sedzia porownuje go do POZOSTALYCH tekstow, nie do samego siebie.
-2. Napisz 1 GENERYK na moj temat (known-bad) -> odpal sedziego -> MUSI dac FAIL (< 0.6). WAZNE: generyk ma byc UCZCIWYM przeciwnikiem - poprawny, kompetentny tekst, jaki wypluje AI z pustego czatu na ten sam temat, z poprawna struktura i min. 1 realna liczba. Ma przegrac na GLOSIE i zrodlowosci, nie na latwym braku konkretu. Nie karykatura - test wygrany z karykatura nic nie waliduje. Generyk z wynikiem 0.6-0.7 = separacja NIEczysta, traktuj jak oblany test.
-3. Separacja czysta (good PASS, bad FAIL)? -> ustaw w profilu `validated: true`, zapisz oblany generyk do gold-setu jako pierwsza ANTY-KOTWICE (sedzia ma pamietac, jak wyglada przegrana) i idz do finalu.
-   Brak separacji (good padl albo bad przeszedl)? -> zdiagnozuj: profil za luzny? banned lista za slaba? wagi zle? -> popraw profil/rubryke -> powtorz od kroku 1. Max 3 rundy, potem ship najlepszej wersji + jedna linia, co dostroic recznie.
+### RUNDA 3 - SELF-TEST NA SLEPO (sedzia musi udowodnic, ze dziala)
+Skill nie jest gotowy, dopoki sedzia nie przejdzie slepego testu separacji:
+1. Przygotuj DWA teksty. Pierwszy: 1 moj MOCNY tekst (known-good, z wklejonych); na czas oceny WYLACZ go z kotwic gold-setu - sedzia porownuje go do POZOSTALYCH tekstow, nie do samego siebie. Drugi: napisz 1 GENERYK na moj temat - UCZCIWEGO przeciwnika: poprawny, kompetentny tekst, jaki wypluje AI z pustego czatu, z poprawna struktura i min. 1 realna liczba. Ma przegrac na GLOSIE i zrodlowosci, nie na latwym braku konkretu (test wygrany z karykatura nic nie waliduje).
+2. TEST NA SLEPO: podaj sedziemu oba jako "Tekst A" i "Tekst B", w losowej kolejnosci, BEZ etykiet i bez slowa o tym, skad pochodza. Sedzia scoruje kazdy niezaleznie, pelnym werdyktem. (Claude Code: sedzia = osobny agent ze swiezym kontekstem, dostaje TYLKO profil + gold-set + oba teksty.) Sedzia, ktory wie, ktory tekst ma oblac, nie testuje niczego.
+3. Separacja czysta = known-good PASS (>= 0.7) ORAZ generyk FAIL (< 0.6). Generyk z wynikiem 0.6-0.7 = separacja NIEczysta, traktuj jak oblany test.
+4. Czysto? -> ustaw w profilu `validated: true`, zapisz oblany generyk do gold-setu jako pierwsza ANTY-KOTWICE (sedzia ma pamietac, jak wyglada przegrana) i idz do finalu.
+   Brak separacji? -> zdiagnozuj: profil za luzny? banned lista za slaba? wagi zle? -> popraw profil/rubryke -> powtorz od kroku 1 z NOWYM generykiem, znowu na slepo. Max 3 rundy, potem ship najlepszej wersji + jedna linia, co dostroic recznie.
 Pokaz mi wynik: oba scorecardy + werdykt separacji.
 
 ### FINAL - oddaj skill + instrukcja
@@ -92,13 +93,15 @@ Skala TYLKO: 0 / 0.25 / 0.5 / 0.75 / 1.0. Zero wartosci spomiedzy. Kryteria x wa
 4. REZONANS Z ODBIORCA 0.15 - 1.0 = mowi do jednej konkretnej grupy jej jezykiem o jej bolu . 0.5 = "do wszystkich" . 0.0 = zla grupa albo zly rejestr (fail nawet przy czystym tekscie).
 5. ZRODLO NIE ECHO 0.15 - 1.0 = tylko Ty moglbys to powiedziec . 0.5 = poprawna opinia, jakich pelno . 0.0 = pusty klon cudzych tez.
 
-Werdykt (3 stany; prog 0.7, flagowe/klienckie 0.8):
-- weighted_total >= prog -> PASS.
+Werdykt (3 stany; prog 0.7, flagowe/klienckie 0.8) + MIN-FLOOR:
+- KTOREKOLWIEK kryterium <= 0.25 -> FAIL niezaleznie od sumy. Srednia wazona maskuje jedna zapadnieta os (Wiernosc 0.25 + reszta 1.0 = 0.775 "PASS" - dokladnie ten tekst NIE moze wyjsc). Srednia klamie, podloga nie.
+- KTOREKOLWIEK kryterium = 0.5 -> werdykt maksymalnie BORDERLINE.
+- weighted_total >= prog (i podloga czysta) -> PASS.
 - od prog - 0.1 do progu -> BORDERLINE: pokaz czlowiekowi, on decyduje. NIGDY nie przepuszczaj po cichu.
 - < prog - 0.1 -> FAIL: JEDEN najwyzej-dzwigniowy fix (ten, ktory najbardziej ruszy wynik; jeden ruch strukturalny na runde, nie 20 kosmetycznych), maker przepisuje tylko dotkniete fragmenty, sedzia ocenia znowu. Max 3 rundy.
 
 Format werdyktu (zawsze ten sam, nic poza tym):
-{ "kryteria": [ {"nazwa", "waga", "ocena", "powod", "fix"} x5 ], "weighted_total", "banned_hits": [], "werdykt": "PASS | BORDERLINE | FAIL", "najwyzej_dzwigniowy_fix", "jedno_zdanie_podsumowania" }
+{ "kryteria": [ {"nazwa", "waga", "ocena", "powod", "fix"} x5 ], "weighted_total", "min_floor_ok": true|false, "banned_hits": [], "werdykt": "PASS | BORDERLINE | FAIL", "najwyzej_dzwigniowy_fix", "jedno_zdanie_podsumowania" }
 
 ===================================================================
 ## [BIBLIOTEKA FRAMEWORKOW] (wbuduj 1:1 do skilla - uniwersalna, obiektywna fizyka copy; nic nie pomijaj)
@@ -166,8 +169,9 @@ description: "Pisze i ocenia teksty w glosie {marka/imie}. Profil glosu + sedzia
 # {Marka/Imie} - Moj Glos
 
 ## TRYBY
-- "napisz [X] w moim glosie" -> MAKER: generuj wg PROFILU, wciagnij pasujace frameworki (hook -> D, oferta -> E, longform -> C), potem ODPAL SEDZIEGO, zanim pokazesz. Pokazujesz tylko teksty, ktore przeszly (albo BORDERLINE z werdyktem).
-- "ocen ten tekst" -> SEDZIA w swiezym kontekscie (mantra + rubryka) -> scorecard + jeden fix. Sedzia NIE przepisuje calosci: scoruje i diagnozuje, przepisuje maker.
+- "napisz [X] w moim glosie" -> MAKER: generuj wg PROFILU, wciagnij pasujace frameworki (hook -> D, oferta -> E, longform -> C), potem ODPAL SEDZIEGO, zanim pokazesz. KROTKIE FORMY (hooki, tytuly, pierwsze zdania, CTA): generuj 5-10 wariantow, przepusc przez sedziego, pokaz top 3-5 ze score - CZLOWIEK wybiera. Sedzia to podloga jakosci, wybor czlowieka to sufit. Longform: 1 draft + petla. Pokazujesz tylko teksty, ktore przeszly (albo BORDERLINE z werdyktem).
+- RADIOACTIVE dla makera (znasz rubryke i gold-set, wiec granie pod nie jest ZAKAZANE): nie kopiuj linii z gold-setu 1:1, nie upychaj slow-kluczy z profilu ponad ich naturalna czestosc, nie doklejaj liczb bez zrodla. Sedzia traktuje recykling i stuffing jak generyka, nie jak glos.
+- "ocen ten tekst" -> SEDZIA (mantra + rubryka) -> scorecard + jeden fix. Sedzia NIE przepisuje calosci: scoruje i diagnozuje, przepisuje maker. Claude Code: sedzia = osobny agent ze swiezym kontekstem. Zwykly czat: ocena w tym samym oknie to szybki PRE-CHECK - prawdziwy gate przed publikacja robisz ZAWSZE w nowym czacie (wklej skill + tekst, nic wiecej), bo sedzia, ktory widzial, jak tekst powstawal, ocenia wlasna robote.
 - "tryb strict" -> prog 0.8 (teksty flagowe i klienckie).
 - "kalibruj" -> po realnym wyniku: wpis do GOLD-SETU + co zmienic w rubryce.
 - Korekta ode mnie ("nie brzmi jak ja, bo...") -> dopisz regule do PROFILU (Zasady glosu) z data. Skill sie uczy albo umiera.
@@ -188,7 +192,7 @@ Kotwice sedziego. Najlepsze teksty (+ realne wyniki, jesli sa) = poziom 1.0. Obl
 Szkic (maker) -> sedzia w swiezym kontekscie -> < prog: JEDEN najwyzej-dzwigniowy fix -> ocen znowu -> max 3 rundy -> ship. Po publikacji: realny wynik wraca do GOLD-SETU.
 
 ===================================================================
-ZASADY DLA CIEBIE (silnika): closed loop; max 3 rundy korekty sedziego; SELF-TEST obowiazkowy (sedzia musi odseparowac known-good od UCZCIWEGO generyka, zanim oddasz skill); wbuduj CALA biblioteke frameworkow 1:1 (nic nie pomijaj, nie skracaj); kotwicz profil w doslownych zdaniach usera; nie zmyslaj liczb ani faktow; nie pokazuj rund posrednich, tylko punkty kontrolne; zostaw czlowieka z gotowym, samowystarczalnym plikiem. Zaczynaj od RUNDY 0.
+ZASADY DLA CIEBIE (silnika): closed loop; max 3 rundy korekty sedziego; SELF-TEST NA SLEPO obowiazkowy (oba teksty bez etykiet - sedzia musi odseparowac known-good od UCZCIWEGO generyka, zanim oddasz skill); min-floor egzekwowany zawsze (kryterium <= 0.25 = FAIL calego tekstu); wbuduj CALA biblioteke frameworkow 1:1 (nic nie pomijaj, nie skracaj); kotwicz profil w doslownych zdaniach usera; nie zmyslaj liczb ani faktow; nie pokazuj rund posrednich, tylko punkty kontrolne; zostaw czlowieka z gotowym, samowystarczalnym plikiem. Zaczynaj od RUNDY 0.
 ```
 
 ---
