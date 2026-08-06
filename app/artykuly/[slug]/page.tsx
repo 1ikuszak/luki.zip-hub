@@ -11,6 +11,7 @@ import {
 import { BrandBrainOSCTA } from "@/app/components/poradnik/BrandBrainOSCTA";
 import { CopyCodeButtons } from "@/app/components/poradnik/CopyCodeButtons";
 import { DFirstCTA } from "@/app/components/poradnik/DFirstCTA";
+import { Lightbox } from "@/app/components/poradnik/Lightbox";
 import { PoradnikHero } from "@/app/components/poradnik/PoradnikHero";
 
 type Params = { slug: string };
@@ -114,6 +115,7 @@ export default async function ArticlePage({
           dangerouslySetInnerHTML={{ __html: post.contentHtml }}
         />
         <CopyCodeButtons />
+        <Lightbox />
 
         {post.affiliateDFirst && (
           <DFirstCTA ctaId={`affiliate_dfirst_${post.slug}`} />

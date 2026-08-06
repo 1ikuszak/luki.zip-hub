@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img">
+<defs>
+  <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+    <circle cx="30" cy="30" r="2.2" fill="#2656d9" fill-opacity="0.12"/>
+  </pattern>
+  <marker id="arw" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<rect width="1600" height="900" fill="#ffffff"/>
+<rect width="1600" height="900" fill="url(#dots)"/>
+<text x="96" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">CO WRZUCASZ</text>
+<rect x="96" y="186" width="330" height="72" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="261.0" y="229.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">TRANSKRYPTY CALLI</text>
+<rect x="96" y="276" width="330" height="72" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="261.0" y="319.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">MAILE I OFERTY</text>
+<rect x="96" y="366" width="330" height="72" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="261.0" y="409.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">TWOJE TEKSTY</text>
+<rect x="96" y="456" width="330" height="72" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="261.0" y="499.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">ROZMOWA Z AGENTEM</text>
+<path d="M 496 222.0 L 496 492.0" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 426 222.0 L 496 222.0" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 426 312.0 L 496 312.0" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 426 402.0 L 496 402.0" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 426 492.0 L 496 492.0" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 496 357.0 L 596 357.0" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<text x="600" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">1   ZBIERA ZA CIEBIE</text>
+<rect x="600" y="186" width="400" height="440" fill="#2656d9" fill-opacity="0.06" stroke="#2656d9" stroke-width="2.4"/>
+<text x="800" y="232" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="23" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">BAZA</text>
+<path d="M 600 262 L 1000 262" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="632" y="322" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#141115" fill-opacity="0.78" text-anchor="start" font-weight="400" letter-spacing="0.1em">NOTATKI: DATA + STATUS</text>
+<text x="632" y="384" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#141115" fill-opacity="0.78" text-anchor="start" font-weight="400" letter-spacing="0.1em">CLAUDE.MD   REGUŁY</text>
+<text x="632" y="446" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#141115" fill-opacity="0.78" text-anchor="start" font-weight="400" letter-spacing="0.1em">LEKCJE.MD   KOREKTY</text>
+<text x="632" y="508" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#141115" fill-opacity="0.78" text-anchor="start" font-weight="400" letter-spacing="0.1em">LOG.MD   HISTORIA</text>
+<text x="1180" y="150" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">2   ODPOWIADA Z TWOICH DANYCH</text>
+<rect x="1180" y="186" width="324" height="96" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="241.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">AGENT</text>
+<path d="M 1000 234 L 1176 234" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<path d="M 1342 282 L 1342 340" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="1180" y="344" width="324" height="128" fill="#2656d9" fill-opacity="0.06" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="402.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">ODPOWIEDŹ</text>
+<text x="1342.0" y="432.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">Z TWOICH NOTATEK</text>
+<text x="1180" y="588" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">3   ROBI PRZEGLĄD OKRESU</text>
+<rect x="1180" y="620" width="324" height="96" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="675.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">AUDYT</text>
+<path d="M 900 626 L 900 668 L 1176 668" fill="none" stroke="#2656d9" stroke-width="2.2" marker-end="url(#arw)"/>
+<path d="M 1342 716 L 1342 790 L 700 790 L 700 630" fill="none" stroke="#2656d9" stroke-width="2.2" marker-end="url(#arw)"/>
+<text x="96" y="838" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">BAZA TO ZWYKŁY FOLDER PLIKÓW NA TWOIM DYSKU.</text>
+<text x="96" y="868" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">TY KURUJESZ ŹRÓDŁA. CAŁĄ RESZTĘ ROBI AGENT.</text>
+</svg>

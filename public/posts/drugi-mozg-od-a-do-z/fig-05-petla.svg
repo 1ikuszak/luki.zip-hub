@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" role="img">
+<defs>
+  <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+    <circle cx="30" cy="30" r="2.2" fill="#2656d9" fill-opacity="0.12"/>
+  </pattern>
+  <marker id="arw" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<rect width="1600" height="700" fill="#ffffff"/>
+<rect width="1600" height="700" fill="url(#dots)"/>
+<rect x="96" y="200" width="340" height="130" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="266.0" y="272.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">BAZA</text>
+<path d="M 436 265.0 L 448 265.0" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="452" y="200" width="340" height="130" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="622.0" y="259.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">AUDYT</text>
+<text x="622.0" y="289.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">JEDNA KOMENDA</text>
+<path d="M 792 265.0 L 804 265.0" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="808" y="200" width="340" height="130" fill="#2656d9" fill-opacity="0.06" stroke="#2656d9" stroke-width="2.4"/>
+<text x="978.0" y="259.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">RAPORT</text>
+<text x="978.0" y="289.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">DANE + STAN BAZY</text>
+<path d="M 1148 265.0 L 1160 265.0" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="1164" y="200" width="340" height="130" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1334.0" y="259.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">TWOJA DECYZJA</text>
+<text x="1334.0" y="289.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">MAX 5 RZECZY</text>
+<path d="M 1334.0 330 L 1334.0 470 L 266.0 470 L 266.0 334" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<text x="800" y="508" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="16" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.14em">POPRAWKI I LEKCJE WRACAJĄ DO BAZY</text>
+<text x="96" y="636" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">NICZEGO NIE NAPRAWIA SAM. WYPISUJE LISTĘ, DECYDUJESZ TY.</text>
+</svg>

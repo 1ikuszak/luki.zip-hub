@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="780" viewBox="0 0 1600 780" role="img">
+<defs>
+  <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+    <circle cx="30" cy="30" r="2.2" fill="#2656d9" fill-opacity="0.12"/>
+  </pattern>
+  <marker id="arw" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<rect width="1600" height="780" fill="#ffffff"/>
+<rect width="1600" height="780" fill="url(#dots)"/>
+<rect x="96" y="316" width="340" height="100" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="266.0" y="360.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">NOWA RZECZ</text>
+<text x="266.0" y="390.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">_INBOX</text>
+<path d="M 436 366 L 616 366" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="620" y="286" width="280" height="160" fill="#2656d9" fill-opacity="0.06" stroke="#2656d9" stroke-width="2.4"/>
+<text x="760.0" y="373.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">JEDNO PYTANIE</text>
+<text x="760" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">GDZIE TO ŻYJE?</text>
+<path d="M 900 366 L 990 366" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 990 136 L 990 556" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 990 136 L 1176 136" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="1180" y="96" width="324" height="80" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="143.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">1-PROJECTS</text>
+<text x="1080" y="122" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">MA TERMIN</text>
+<path d="M 990 276 L 1176 276" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="1180" y="236" width="324" height="80" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="283.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">2-AREAS</text>
+<text x="1080" y="262" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">ŻYWE BEZ TERMINU</text>
+<path d="M 990 416 L 1176 416" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="1180" y="376" width="324" height="80" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="423.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">3-RESOURCES</text>
+<text x="1080" y="402" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">JEST MATERIAŁEM</text>
+<path d="M 990 556 L 1176 556" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="1180" y="516" width="324" height="80" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1342.0" y="563.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">4-ARCHIVE</text>
+<text x="1080" y="542" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="14" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">JEST TRUPEM</text>
+<text x="96" y="726" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">ODPOWIADASZ NA TO PRZY KAŻDEJ NOWEJ RZECZY. ARCHIWUM JEST W UKŁADZIE OD PIERWSZEGO DNIA.</text>
+</svg>

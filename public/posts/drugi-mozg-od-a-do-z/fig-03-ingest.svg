@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="820" viewBox="0 0 1600 820" role="img">
+<defs>
+  <pattern id="dots" width="60" height="60" patternUnits="userSpaceOnUse">
+    <circle cx="30" cy="30" r="2.2" fill="#2656d9" fill-opacity="0.12"/>
+  </pattern>
+  <marker id="arw" viewBox="0 0 12 12" refX="10" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<rect width="1600" height="820" fill="#ffffff"/>
+<rect width="1600" height="820" fill="url(#dots)"/>
+<rect x="96" y="356" width="340" height="108" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="266.0" y="404.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">JEDEN PLIK</text>
+<text x="266.0" y="434.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">_INBOX</text>
+<path d="M 436 410 L 640 410" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<text x="538" y="388" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="16" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.16em">INGEST</text>
+<path d="M 700 162 L 700 612" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<path d="M 700 162 L 916 162" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="920" y="110" width="480" height="104" fill="#2656d9" fill-opacity="0.06" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1160.0" y="156.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">SOURCES</text>
+<text x="1160.0" y="186.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">PEŁNA TREŚĆ + TWOJA ANALIZA</text>
+<path d="M 700 312 L 916 312" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="920" y="260" width="480" height="104" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1160.0" y="306.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">CONCEPTS</text>
+<text x="1160.0" y="336.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">DOPISANE DO ISTNIEJĄCYCH STRON</text>
+<path d="M 700 462 L 916 462" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="920" y="410" width="480" height="104" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1160.0" y="456.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">ENTITIES</text>
+<text x="1160.0" y="486.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">OSOBY, NARZĘDZIA, FIRMY</text>
+<path d="M 700 612 L 916 612" fill="none" stroke="#2656d9" stroke-width="2.4" marker-end="url(#arw)"/>
+<rect x="920" y="560" width="480" height="104" fill="none" stroke="#2656d9" stroke-width="2.4"/>
+<text x="1160.0" y="606.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="21" fill="#2656d9" fill-opacity="1.0" text-anchor="middle" font-weight="500" letter-spacing="0.09em">INDEX.MD</text>
+<text x="1160.0" y="636.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#6c6c6c" fill-opacity="1.0" text-anchor="middle" font-weight="400" letter-spacing="0.12em">SPIS W KAŻDYM FOLDERZE</text>
+<path d="M 1400 162 L 1462 162 L 1462 664 L 1400 664" fill="none" stroke="#2656d9" stroke-width="2.0" stroke-dasharray="7 7"/>
+<text x="920" y="706" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">LINKI W OBIE STRONY</text>
+<text x="96" y="762" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">JEDNO ŹRÓDŁO DOTYKA OD PIĘCIU DO PIĘTNASTU PLIKÓW. TEGO NIE ZROBISZ RĘCZNIE.</text>
+<text x="96" y="792" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="17" fill="#6c6c6c" fill-opacity="1.0" text-anchor="start" font-weight="400" letter-spacing="0.14em">SUROWIEC LĄDUJE W _INBOX/PRZEROBIONE. ORYGINAŁ NIGDY NIE GINIE.</text>
+</svg>
