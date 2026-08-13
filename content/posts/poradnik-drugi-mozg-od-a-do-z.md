@@ -122,7 +122,7 @@ Zanim założysz nową notatkę, przeszukaj bazę, czy nie ma już notatki na te
 
 Pole stan_na zawsze wypełniaj datą, kiedy dana rzecz była prawdą naprawdę, nigdy dzisiejszą. Nigdy nie nadpisuj notatki w miejscu. Po każdym zapisie dopisz linię do log.md i zrób commit.
 
-Dołóż regułę: za każdym razem, gdy cię poprawiam - mówię że coś zrobiłeś źle - dopisz do lekcje.md jedną linię: data i reguła, maksymalnie dwa zdania, zero wyjaśnień. Zanim dopiszesz nową, sprawdź czy któraś już nie mówi tego samego - jeśli tak, popraw ją zamiast dokładać drugą.
+Dołóż tę regułę, dosłownie w tym kształcie - to gotowy schemat, nie musisz go wymyślać: za każdym razem, gdy cię poprawiam albo mówię, że coś zrobiłeś źle: 1) zatrzymaj się, 2) zanim odpowiesz dalej, dopisz do lekcje.md jedną linię w formacie "[data] - [reguła, max dwa zdania]" - najpierw sprawdź, czy któraś istniejąca linia nie mówi już tego samego, jeśli tak, popraw ją zamiast dokładać drugą, 3) potwierdź mi jednym zdaniem, co zapisałeś, 4) wróć do przerwanej roboty, już z poprawką.
 
 Gdy skończysz zapis, podaj mi ścieżkę pliku i to, co ustawiłeś. Pytaj mnie o zgodę przed każdym zapisem tak długo, aż powiem "wyłącz zatwierdzanie".
 ```
@@ -286,5 +286,7 @@ Zacznij od tej jednej rzeczy, którą już gubisz. Po miesiącu pytasz swój sys
 4. Cotygodniowy przegląd: lista tego, co się zestarzało, nic nie naprawia sam - masz teraz działający, pusty fundament
 5. Rozmowa o sobie plus `2-areas/o-mnie.md`
 6. Skill "ingest" przez skill-creator, nakarmiony wprost stroną, social media i dokumentami - bez przystanku w `_inbox`
+
+To nie jest system zamknięty. Jeśli w praktyce coś ci nie pasuje - inny podział folderów, inna reguła zapisu, brakujący typ notatki - nie edytujesz plików ręcznie. Mówisz to wprost agentowi: "od teraz X ma iść do Y" albo "załóż mi folder na Z, tak jak już mam poukładane gdzie indziej". On zaktualizuje CLAUDE.md i od następnej sesji będzie pamiętał nową zasadę - to żywy dokument, nie instrukcja raz na zawsze.
 
 Co tydzień opisuję, co u mnie z tego wyszło i co po drodze przestawiłem. Jeśli chcesz to dostawać, [zapisz się na newsletter](https://luki.zip).
