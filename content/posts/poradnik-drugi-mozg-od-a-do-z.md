@@ -37,11 +37,9 @@ Ta sekcja jest dla modelu, który dostał ten artykuł do wykonania.
 ```
 Baza staje w ~/drugi-mozg. Nie pytaj użytkownika gdzie - to ma tu stanąć, chyba że powie inaczej zanim zaczniesz. Nigdy nie uruchamiaj "claude" i niczego nie instaluj poza pluginem z kroku pierwszego: już działasz w środku Claude Code.
 
-Restart sesji po kroku pierwszym służy SPRAWDZENIU reguł i aktywacji pluginu, nie zapisaniu plików. Pliki zakładasz bez restartu, więc przejdź kroki od pierwszego do czwartego po kolei. Dopiero na końcu powiedz użytkownikowi, żeby zamknął Claude Code i otworzył go na nowo na tym samym folderze, i sam przeszedł te akapity "Zadziałało, gdy", których ty nie mogłeś sprawdzić. Wypisz mu je konkretnie.
+Restart sesji po kroku pierwszym służy SPRAWDZENIU reguł i aktywacji pluginu, nie zapisaniu plików. Pliki zakładasz bez restartu, więc przejdź wszystkie sześć kroków po kolei. Dopiero na końcu powiedz użytkownikowi, żeby zamknął Claude Code i otworzył go na nowo na tym samym folderze, i sam przeszedł te akapity "Zadziałało, gdy", których ty nie mogłeś sprawdzić. Wypisz mu je konkretnie.
 
-Kroki, których nie zrobisz sam: zrzut z głowy (krok 5), przejrzenie pierwszych dwudziestu zapisów (krok 2), instalacja Obsidiana. Przy każdym z nich zatrzymaj się i poproś użytkownika o materiał albo decyzję.
-
-Krok piąty i szósty są opcjonalne i idą na koniec, dopiero gdy pierwsze cztery kroki działają i użytkownik potwierdzi, że chce jechać dalej. Nie pomijaj ich milcząco - zapytaj, czy chce teraz nakarmić bazę.
+Kroki, których nie zrobisz sam: rozmowa o sobie (krok 5), przejrzenie pierwszych dwudziestu zapisów (krok 2), instalacja Obsidiana. Przy każdym z nich zatrzymaj się i poproś użytkownika o materiał albo decyzję.
 
 Linijki z obrazkami to podpisy pod diagramy. Nic z nimi nie rób.
 ```
@@ -100,8 +98,6 @@ Napisz CLAUDE.md w folderze bazy - to konstytucja, którą czytasz przed każdą
 
 Jeden dom: jeden fakt żyje w jednym pliku. Sprzeczność: gdy nowa informacja kłóci się ze starą, nie nadpisujesz - piszesz nową, starą oznaczasz jako zastąpioną i linkujesz w obie strony. Daty: w polu stan_na zapisujesz datę, kiedy dana rzecz była prawdą, nigdy dzisiejszej. Commit: po każdej operacji na bazie dopisujesz linię do log.md i robisz commit. Lekcje: gdy cię poprawię, dopisujesz linię do lekcje.md - ta reguła wraca w kroku drugim.
 
-Ostatnia linia pliku ma brzmieć: "Nigdy nie odpowiadaj z pamięci. Zawsze otwórz plik." Każdą kolejną sekcję, którą dopiszesz w następnych krokach, wstawiaj PRZED tą linią - ona zawsze zostaje na końcu pliku.
-
 Sprawdź, czy masz zainstalowany plugin skill-creator (komenda: claude plugin list). Jeśli go nie masz, zainstaluj go od razu, bez pytania mnie o zgodę (komenda: claude plugin install skill-creator@claude-plugins-official) - będziesz go używać do budowania skilli w kolejnych krokach.
 
 Zrób w tym folderze git init i pierwszy commit. Pokaż mi drzewo folderów, jak skończysz.
@@ -139,17 +135,19 @@ Przejrzyj pierwsze dwadzieścia zapisów i poprawiaj bez litości. Te dwadzieśc
 
 ## Prompt 3: jak ma odpowiadać
 
-Agent, który czegoś nie znajdzie, zmyśli to i poda pewnym tonem. Ten prompt mu tego zabrania.
+Agent, który czegoś nie znajdzie, potrafi zmyślić to i podać pewnym tonem, jakby to był fakt z twojej bazy. Ten prompt uczy go mówić, skąd wie to, co mówi.
 
 ```
 Dopisz do CLAUDE.md sekcję o tym, jak odpowiadasz na moje pytania.
 
-Gdy pytam, przeszukujesz pliki i budujesz krótką kartę dowodową dla każdego użytego faktu: status, data kiedy był prawdziwy, dokładna ścieżka pliku. Nigdy nie wczytujesz całych plików do kontekstu, tylko potrzebne fragmenty. Gdy na jeden temat masz kilka notatek, używasz tej ze statusem "aktualna" i nie mieszasz mi w odpowiedzi wersjami zastąpionymi. Jeśli dwie notatki się kłócą, mówisz o obu zamiast wybierać jedną. Jeśli w bazie nie ma odpowiedzi, mówisz wprost że jej nie ma - nie zalepiasz dziury wiedzą ogólną.
+Gdy pytam, najpierw przeszukujesz pliki i budujesz krótką kartę dowodową dla każdego użytego faktu: status, data kiedy był prawdziwy, dokładna ścieżka pliku. Nigdy nie wczytujesz całych plików do kontekstu, tylko potrzebne fragmenty. Gdy na jeden temat masz kilka notatek, używasz tej ze statusem "aktualna" i nie mieszasz mi w odpowiedzi wersjami zastąpionymi. Jeśli dwie notatki się kłócą, mówisz o obu zamiast wybierać jedną.
+
+Jeśli w bazie nie ma odpowiedzi, mów to wprost - a potem, jeśli chcesz, odpowiedz z ogólnej wiedzy. Zawsze zaznacz wyraźnie, że ta część odpowiedzi nie pochodzi z bazy, żebym wiedział, czemu ufać na sto procent, a co warto sprawdzić.
 
 Nie stawiaj bazy wektorowej ani embeddingów. Przy tej skali zwykłe szukanie po plikach jest dokładniejsze, a gdy chybi, widać dlaczego.
 ```
 
-**Zadziałało, gdy:** w nowej sesji pytasz o trzy rzeczy, które wcześniej wrzuciłeś do bazy, i dostajesz swoje odpowiedzi, a na czwarte pytanie, o coś, czego w bazie nie ma, słyszysz "nie ma tego w bazie" zamiast wymyślonej odpowiedzi.
+**Zadziałało, gdy:** w nowej sesji pytasz o trzy rzeczy, które wcześniej wrzuciłeś do bazy, i dostajesz swoje odpowiedzi z podaną ścieżką pliku, a na czwarte pytanie, o coś, czego w bazie nie ma, słyszysz "nie ma tego w bazie" i dopiero potem, osobno oznaczoną, odpowiedź z ogólnej wiedzy - nie jedno zlepione zdanie.
 
 Ostatni akapit prompta to jedyne miejsce, w którym każę ci robić inaczej, niż mam u siebie. Więc powiem, jak to poszło. Zacząłem od zwykłego grepa, czyli szukania po tekście, i zmierzyłem go na swoich realnych pytaniach. Właściwy plik lądował w pierwszej trójce w siedmiu przypadkach na dziesięć. To wystarczyło na długo. Szukanie po znaczeniu dołożyłem dopiero, gdy zabolało, i do dziś chodzi razem z grepem, nie zamiast:
 
@@ -179,29 +177,23 @@ Przez pierwszy miesiąc wpisujesz "sprawdź bazę" ręcznie, raz w tygodniu. Dop
 
 ![Pętla przeglądu: baza, cotygodniowa komenda, lista tego co się zestarzało, twoja decyzja, a poprawki wracają do bazy jako lekcje](/posts/drugi-mozg-od-a-do-z/fig-05-petla.svg)
 
----
-
-## Masz fundament. Reszta jest opcjonalna, ale warto
-
-Cztery prompty wyżej dają ci działający system: pusty, ale żywy. Struktura stoi, agent zapisuje, odpowiada tylko z faktów, przegląd chodzi w tle. Możesz na tym poprzestać i dokładać wiedzę ręcznie, jedną rozmową naraz.
-
-Dwa kolejne kroki są opcjonalne i robisz je, gdy chcesz nakarmić bazę od razu, hurtowo, zamiast czekać tygodniami. Pierwszy to zrzut tego, co masz w głowie. Drugi to zrzut tego, co masz na dysku i w internecie - strona, social media, dokumenty.
+Cztery prompty wyżej dają ci działający system: struktura stoi, agent zapisuje, odpowiada z faktów i mówi skąd je wziął, przegląd chodzi w tle. Zostały jeszcze dwa kroki, które napełniają go treścią - pierwszy tym, co masz w głowie, drugi tym, co masz na dysku i w internecie.
 
 ---
 
-## Prompt 5: braindump (opcjonalnie)
+## Prompt 5: opowiedz o sobie
 
-Empty your head. Mów o tym, co budujesz, komu sprzedajesz, za ile, z kim pracujesz i gdzie chcesz być za rok.
+Teraz mów swobodnie o tym, co budujesz, komu sprzedajesz, za ile, z kim pracujesz i gdzie chcesz być za rok.
 
 ```
-Zaraz zrobię zrzut z głowy w tym oknie. Do momentu, aż napiszę "zapisz zrzut", nie uruchamiaj skilla zapisz, nie zakładaj żadnych notatek i o nic nie pytaj. Tylko słuchaj.
+Zaraz opowiem ci o sobie w tym oknie. Do momentu, aż powiem "zapisz rozmowę", nie uruchamiaj skilla zapisz, nie zakładaj żadnych notatek i o nic nie pytaj. Tylko słuchaj.
 
-Gdy napiszę "zapisz zrzut", zapisz wszystko, co powiedziałem, słowo w słowo do _inbox/zrzut-[dzisiejsza data].md, zrób commit i podaj mi ścieżkę. Nic nie streszczaj i nie poprawiaj.
+Gdy powiem "zapisz rozmowę", zapisz wszystko, co powiedziałem, słowo w słowo do _inbox/rozmowa-[dzisiejsza data].md, zrób commit i podaj mi ścieżkę. Nic nie streszczaj i nie poprawiaj.
 ```
 
-**Zadziałało, gdy:** plik `_inbox/zrzut-[data].md` istnieje i zawiera twoje własne zdania, a nie ich streszczenie.
+**Zadziałało, gdy:** plik `_inbox/rozmowa-[data].md` istnieje i zawiera twoje własne zdania, a nie ich streszczenie.
 
-Z tego zrzutu wyciągasz od razu jedną rzecz:
+Z tej rozmowy wyciągasz od razu jedną rzecz:
 
 ```
 Z tego, co ci przed chwilą powiedziałem, napisz 2-areas/o-mnie.md: kim jestem, co sprzedaję, komu, czego nie robię i jak mam brzmieć, gdy piszesz coś za mnie. Krótko, w punktach. Czego nie wiesz, nie zgaduj, tylko wypisz na końcu jako pytania do mnie.
@@ -211,7 +203,7 @@ Z tego, co ci przed chwilą powiedziałem, napisz 2-areas/o-mnie.md: kim jestem,
 
 ---
 
-## Prompt 6: ingest bezpośrednio (opcjonalnie)
+## Prompt 6: ingest bezpośrednio
 
 Jedno źródło dotyka od pięciu do piętnastu plików naraz. To ta robota, której człowiek nigdy nie zrobi ręcznie. Ten wariant pomija `_inbox` - podajesz agentowi realne materiały wprost, on czyta je i katalogizuje od razu, bez pośredniego kopiowania.
 
@@ -290,9 +282,9 @@ Zacznij od tej jednej rzeczy, którą już gubisz. Po miesiącu pytasz swój sys
 
 1. Baza w `~/drugi-mozg`, wszystkie foldery od razu, `CLAUDE.md`/`lekcje.md`/`log.md` obok nich, plugin skill-creator zainstalowany po cichu, git init i pierwszy commit
 2. Skill "zapisz" przez skill-creator: zatwierdzanie do pierwszych dwudziestu zapisów, korekty lądują w `lekcje.md`
-3. Reguły odpowiadania: tylko z twoich notatek, zero zmyślania, zero osobnego silnika wyszukiwania
+3. Reguły odpowiadania: najpierw z twoich notatek, ogólna wiedza tylko jako oznaczony dodatek, zero osobnego silnika wyszukiwania
 4. Cotygodniowy przegląd: lista tego, co się zestarzało, nic nie naprawia sam - masz teraz działający, pusty fundament
-5. (opcjonalnie) Zrzut z głowy plus `2-areas/o-mnie.md`
-6. (opcjonalnie) Skill "ingest" przez skill-creator, nakarmiony wprost stroną, social media i dokumentami - bez przystanku w `_inbox`
+5. Rozmowa o sobie plus `2-areas/o-mnie.md`
+6. Skill "ingest" przez skill-creator, nakarmiony wprost stroną, social media i dokumentami - bez przystanku w `_inbox`
 
 Co tydzień opisuję, co u mnie z tego wyszło i co po drodze przestawiłem. Jeśli chcesz to dostawać, [zapisz się na newsletter](https://luki.zip).
