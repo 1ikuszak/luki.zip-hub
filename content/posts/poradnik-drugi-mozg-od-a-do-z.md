@@ -140,14 +140,14 @@ Agent, który czegoś nie znajdzie, potrafi zmyślić to i podać pewnym tonem, 
 ```
 Dopisz do CLAUDE.md sekcję o tym, jak odpowiadasz na moje pytania.
 
-Gdy pytam, najpierw przeszukujesz pliki i budujesz krótką kartę dowodową dla każdego użytego faktu: status, data kiedy był prawdziwy, dokładna ścieżka pliku. Nigdy nie wczytujesz całych plików do kontekstu, tylko potrzebne fragmenty. Gdy na jeden temat masz kilka notatek, używasz tej ze statusem "aktualna" i nie mieszasz mi w odpowiedzi wersjami zastąpionymi. Jeśli dwie notatki się kłócą, mówisz o obu zamiast wybierać jedną.
+Konkretny fakt - liczbę, datę, nazwisko, ścieżkę, status - zawsze bierzesz z pliku, nigdy z pamięci rozmowy, nawet jeśli podałem ci go dwie wiadomości wcześniej. Dla każdego takiego faktu budujesz krótką kartę dowodową: status, data kiedy był prawdziwy, dokładna ścieżka pliku. Nigdy nie wczytujesz całych plików do kontekstu, tylko potrzebne fragmenty. Gdy na jeden temat masz kilka notatek, używasz tej ze statusem "aktualna" i nie mieszasz mi w odpowiedzi wersjami zastąpionymi. Jeśli dwie notatki się kłócą, mówisz o obu zamiast wybierać jedną.
 
-Jeśli w bazie nie ma odpowiedzi, mów to wprost - a potem, jeśli chcesz, odpowiedz z ogólnej wiedzy. Zawsze zaznacz wyraźnie, że ta część odpowiedzi nie pochodzi z bazy, żebym wiedział, czemu ufać na sto procent, a co warto sprawdzić.
+Reszta - opinia, rozumowanie, ogólny kontekst - może iść swobodnie, bez szukania w plikach za każdym razem. Jeśli pytanie dotyczy faktu, a bazy w niej nie ma, mów to wprost zamiast zgadywać.
 
 Nie stawiaj bazy wektorowej ani embeddingów. Przy tej skali zwykłe szukanie po plikach jest dokładniejsze, a gdy chybi, widać dlaczego.
 ```
 
-**Zadziałało, gdy:** w nowej sesji pytasz o trzy rzeczy, które wcześniej wrzuciłeś do bazy, i dostajesz swoje odpowiedzi z podaną ścieżką pliku, a na czwarte pytanie, o coś, czego w bazie nie ma, słyszysz "nie ma tego w bazie" i dopiero potem, osobno oznaczoną, odpowiedź z ogólnej wiedzy - nie jedno zlepione zdanie.
+**Zadziałało, gdy:** w nowej sesji pytasz o trzy fakty, które wcześniej wrzuciłeś do bazy, i dostajesz odpowiedzi z podaną ścieżką pliku - nie z pamięci tej samej rozmowy - a na czwarte pytanie, o fakt, którego w bazie nie ma, słyszysz "nie ma tego w bazie" zamiast zgadywanej liczby.
 
 Ostatni akapit prompta to jedyne miejsce, w którym każę ci robić inaczej, niż mam u siebie. Więc powiem, jak to poszło. Zacząłem od zwykłego grepa, czyli szukania po tekście, i zmierzyłem go na swoich realnych pytaniach. Właściwy plik lądował w pierwszej trójce w siedmiu przypadkach na dziesięć. To wystarczyło na długo. Szukanie po znaczeniu dołożyłem dopiero, gdy zabolało, i do dziś chodzi razem z grepem, nie zamiast:
 
@@ -282,7 +282,7 @@ Zacznij od tej jednej rzeczy, którą już gubisz. Po miesiącu pytasz swój sys
 
 1. Baza w `~/drugi-mozg`, wszystkie foldery od razu, `CLAUDE.md`/`lekcje.md`/`log.md` obok nich, plugin skill-creator zainstalowany po cichu, git init i pierwszy commit
 2. Skill "zapisz" przez skill-creator: zatwierdzanie do pierwszych dwudziestu zapisów, korekty lądują w `lekcje.md`
-3. Reguły odpowiadania: najpierw z twoich notatek, ogólna wiedza tylko jako oznaczony dodatek, zero osobnego silnika wyszukiwania
+3. Reguły odpowiadania: konkretny fakt zawsze z pliku, nigdy z pamięci rozmowy; reszta swobodnie; zero osobnego silnika wyszukiwania
 4. Cotygodniowy przegląd: lista tego, co się zestarzało, nic nie naprawia sam - masz teraz działający, pusty fundament
 5. Rozmowa o sobie plus `2-areas/o-mnie.md`
 6. Skill "ingest" przez skill-creator, nakarmiony wprost stroną, social media i dokumentami - bez przystanku w `_inbox`
