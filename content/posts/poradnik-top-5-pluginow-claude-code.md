@@ -83,6 +83,6 @@ Repo: [github.com/rebelytics/one-skill-to-rule-them-all](https://github.com/rebe
 
 To wszystko. Pięć linków, jeden prompt i masz setup, na którym sam pracuję codziennie.
 
-Co tydzień wysyłam jeden mail: konkretny system albo narzędzie, które u mnie działa, z promptami do skopiowania. Zero teorii, zero "10 trendów AI". Czasem dorzucam, co po drodze spieprzyłem i co bym zrobił inaczej.
+Co tydzień wysyłam ci jeden mail: konkretny system albo narzędzie, które u mnie działa, tak żebyś od razu mógł to zapiąć u siebie.
 
-Dołączasz do 500+ osób, które wdrażają AI u siebie i rozwijają na tym biznes. [Zapisz się tutaj](https://www.lukaszglica.com).
+Dołączasz do 500+ osób, które rozwijają swój biznes przy pomocy AI. [Zapisz się tutaj](https://www.lukaszglica.com).
