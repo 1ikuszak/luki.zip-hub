@@ -135,7 +135,7 @@ export default async function ArticlePage({
               Cotygodniowa praca 1:1, konkretne fixy zamiast generyk.
             </p>
             <Link
-              href="/oferta"
+              href="/uslugi"
               className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[var(--accent)] underline underline-offset-4 hover:no-underline"
             >
               Sprawdź ofertę

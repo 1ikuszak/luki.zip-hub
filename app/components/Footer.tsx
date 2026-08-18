@@ -12,7 +12,7 @@ const NAV_LINKS = [
 ];
 
 // strony z gradientowym tłem → footer biały + przezroczysty, na gradiencie
-const GRADIENT_ROUTES = ["/", "/oferta", "/artykuly", "/portfolio", "/about"];
+const GRADIENT_ROUTES = ["/", "/uslugi", "/artykuly", "/portfolio", "/about"];
 
 export function Footer() {
   const pathname = usePathname();

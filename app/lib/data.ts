@@ -19,7 +19,7 @@ export const mainCommands: CommandItemData[] = [
     description: "Pakiety i wycena",
     shortcut: "O",
     action: "ZOBACZ",
-    href: "/oferta",
+    href: "/uslugi",
     keywords: "oferta pakiety cena pricing wycena starter growth full",
   },
   {
