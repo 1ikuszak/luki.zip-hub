@@ -7,7 +7,7 @@ const HIDDEN_ROUTES = ["/links"];
 // Strefa kursu = bez site-chrome (navbar/footer): kursant po zakupie ma byc
 // w "aplikacji kursu", nie na stronie-wizytowce. Landing /drugi-mozg
 // CELOWO zostaje z navbarem (to nadal strona sprzedazowa).
-const HIDDEN_PREFIXES: string[] = []; // kurs zarchiwizowany 2026-08-18 (_archive/)
+const HIDDEN_PREFIXES: string[] = [];
 
 export function ChromeGate({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
