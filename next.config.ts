@@ -11,6 +11,38 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  // 2026-08-18: nagłówki bezpieczeństwa (po false positive Kaspersky/Nord).
+  // CSP: własne skrypty + GTM/GA4 + Meta Pixel + fonty Fontshare + Vercel Live.
+  async headers() {
+    const csp = [
+      "default-src 'self'",
+      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
+      "style-src 'self' 'unsafe-inline' https://api.fontshare.com",
+      "font-src 'self' data: https://cdn.fontshare.com https://api.fontshare.com",
+      "img-src 'self' data: blob: https:",
+      "media-src 'self' https:",
+      "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://www.facebook.com https://api.beehiiv.com https://vercel.live wss://ws-us3.pusher.com",
+      "frame-src 'self' https://www.youtube.com https://www.youtube-nocookie.com https://cal.com https://app.cal.com https://vercel.live",
+      "frame-ancestors 'self'",
+      "base-uri 'self'",
+      "form-action 'self' https://cal.com",
+      "object-src 'none'",
+      "upgrade-insecure-requests",
+    ].join("; ");
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "Content-Security-Policy", value: csp },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+        ],
+      },
+    ];
+  },
   async redirects() {
     // Zablokowane publicznie (WIP / nieużywane). permanent:false = łatwo cofnąć.
     return [
