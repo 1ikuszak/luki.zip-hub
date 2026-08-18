@@ -14,9 +14,12 @@ const nextConfig: NextConfig = {
   // 2026-08-18: nagłówki bezpieczeństwa (po false positive Kaspersky/Nord).
   // CSP: własne skrypty + GTM/GA4 + Meta Pixel + fonty Fontshare + Vercel Live.
   async headers() {
+    // 'unsafe-eval' TYLKO w dev: React/Turbopack uzywaja eval() do debugowania,
+    // produkcja go nie potrzebuje i nie dostaje.
+    const dev = process.env.NODE_ENV === "development";
     const csp = [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live",
+      `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live`,
       "style-src 'self' 'unsafe-inline' https://api.fontshare.com",
       "font-src 'self' data: https://cdn.fontshare.com https://api.fontshare.com",
       "img-src 'self' data: blob: https:",
