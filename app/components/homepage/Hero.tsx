@@ -19,7 +19,7 @@ export function Hero() {
         <div className="container-default relative z-10 text-center">
           <div className="hero-in flex justify-center" style={step(0)}>
             <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--text)_5%,transparent)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--accent)]">
-              Wdrażam AI tam, gdzie ma to faktycznie sens
+              Wdróż AI tam, gdzie ma to faktycznie sens
             </span>
           </div>
 
