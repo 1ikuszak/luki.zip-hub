@@ -36,7 +36,7 @@ export function Newsletter() {
           </p>
 
           <div className="mt-8 max-w-[560px]">
-            <Suspense fallback={<div className="h-[52px]" aria-hidden />}>
+            <Suspense fallback={<div className="h-[122px] sm:h-[52px]" aria-hidden />}>
               <EmailCaptureForm ctaId="cta_home_newsletter" bridgeLinks={BRIDGE_LINKS} />
             </Suspense>
           </div>

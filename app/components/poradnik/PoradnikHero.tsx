@@ -38,8 +38,9 @@ export function PoradnikHero({ images, lead }: Props) {
                 fill
                 sizes={`${Math.round(STRIP_H_DESKTOP * ratio)}px`}
                 className="object-cover"
-                priority={i < 2}
-                fetchPriority={i < 2 ? "high" : "auto"}
+                priority={i === 0}
+                loading={i === 0 ? undefined : "lazy"}
+                fetchPriority={i === 0 ? "high" : "auto"}
               />
             </div>
           );

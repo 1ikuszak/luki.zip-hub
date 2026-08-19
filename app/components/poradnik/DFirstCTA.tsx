@@ -1,5 +1,3 @@
-"use client";
-
 import { ArrowRight, Check, Sparkles } from "lucide-react";
 import { TrackedLink } from "@/app/components/TrackedLink";
 

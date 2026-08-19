@@ -35,8 +35,11 @@ export function ForWho() {
         {/* numerowana lista bóli */}
         <ol className="lg:col-span-8">
           {PAINS.map((p, i) => (
-            <Reveal key={p} delay={i * 0.05}>
-              <li className="group flex items-start gap-5 border-b border-[var(--border)] py-7 transition-colors first:border-t first:border-[var(--border)] sm:gap-8">
+            <li
+              key={p}
+              className="reveal-anim group flex items-start gap-5 border-b border-[var(--border)] py-7 transition-colors first:border-t first:border-[var(--border)] sm:gap-8"
+              style={{ "--reveal-delay": `${i * 0.05}` } as React.CSSProperties}
+            >
                 <span
                   className="shrink-0 text-[var(--accent)]/35 transition-colors duration-300 group-hover:text-[var(--accent)]"
                   style={{
@@ -59,8 +62,7 @@ export function ForWho() {
                 >
                   {p}
                 </span>
-              </li>
-            </Reveal>
+            </li>
           ))}
         </ol>
       </div>

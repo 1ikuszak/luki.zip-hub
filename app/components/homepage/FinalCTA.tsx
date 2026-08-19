@@ -13,10 +13,10 @@ export function FinalCTA() {
       <div className="relative overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--bg-card)] px-7 py-16 text-center sm:px-14 sm:py-24">
         {/* subtelny akcent glow - gora, srodek */}
         <div
-          className="pointer-events-none absolute left-1/2 top-0 h-[340px] w-[640px] max-w-[92vw] -translate-x-1/2 -translate-y-1/3 rounded-full opacity-40 blur-[120px]"
+          className="pointer-events-none absolute left-1/2 top-0 h-[440px] w-[860px] max-w-[112vw] -translate-x-1/2 -translate-y-1/3 rounded-full opacity-40"
           style={{
             background:
-              "radial-gradient(closest-side, color-mix(in srgb, var(--accent) 24%, transparent), transparent)",
+              "radial-gradient(closest-side, color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 8%, transparent) 55%, transparent 78%)",
           }}
         />
 

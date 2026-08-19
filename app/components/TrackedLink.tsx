@@ -1,8 +1,10 @@
-"use client";
-
 import type { AnchorHTMLAttributes, ReactNode } from "react";
-import { trackCTA } from "@/app/lib/analytics";
-import { rememberArticleSource } from "@/app/lib/source-tracking";
+
+/**
+ * Komponent serwerowy (2026-08-19): klikniecie lapie jeden delegowany listener
+ * z ClickTracking, wiec link nie wymusza juz hydracji swojego drzewa.
+ * Kontekst zrodla jedzie w data-track-slug / data-track-medium.
+ */
 
 type Medium = "article" | "homepage";
 
@@ -31,7 +33,6 @@ export function TrackedLink({
   articleSlug,
   medium,
   children,
-  onClick,
   ...rest
 }: Props) {
   const validSlug = articleSlug && SLUG_REGEX.test(articleSlug) ? articleSlug : undefined;
@@ -44,13 +45,8 @@ export function TrackedLink({
       data-track={trackKind}
       data-track-id={ctaId}
       data-track-href={finalHref}
-      onClick={(e) => {
-        if (validSlug) {
-          rememberArticleSource(validSlug, medium ?? "article");
-        }
-        trackCTA(ctaId, finalHref, validSlug ? { article_slug: validSlug, medium } : undefined);
-        onClick?.(e);
-      }}
+      data-track-slug={validSlug}
+      data-track-medium={validSlug ? medium ?? "article" : undefined}
     >
       {children}
     </a>

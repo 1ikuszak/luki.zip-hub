@@ -1,4 +1,3 @@
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,600&display=swap");
 @import "tailwindcss";
 
 /* CLS-killer: Arial fallback z metrykami zbliżonymi do Satoshi */
@@ -31,8 +30,8 @@
 
   /* Font stack — Satoshi (single face). --font-display aliasuje do tego samego
    * żeby `font-display` className działało bez zmiany wyglądu. */
-  --font-sans:    "Satoshi", "Satoshi-fallback", sans-serif;
-  --font-display: "Satoshi", "Satoshi-fallback", sans-serif;
+  --font-sans:    var(--font-satoshi), "Satoshi-fallback", sans-serif;
+  --font-display: var(--font-satoshi), "Satoshi-fallback", sans-serif;
 }
 
 @theme inline {
@@ -88,7 +87,6 @@ body {
   color: var(--text);
   font-feature-settings: "ss01" on, "ss02" on, "cv06" on, "liga" on, "kern" on;
   font-variant-ligatures: common-ligatures;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -636,11 +634,16 @@ summary::-webkit-details-marker {
   align-items: center;
   justify-content: center;
   padding: 4vmin;
-  background: rgba(16, 14, 20, 0.74);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(16, 14, 20, 0.92);
   cursor: zoom-out;
   animation: lightbox-in 0.16s ease-out;
+}
+@media (min-width: 768px) {
+  .lightbox {
+    background: rgba(16, 14, 20, 0.74);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 .lightbox__frame {
   margin: 0;
@@ -670,13 +673,13 @@ summary::-webkit-details-marker {
 }
 .lightbox__close {
   position: fixed;
-  top: 20px;
-  right: 24px;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  right: calc(env(safe-area-inset-right, 0px) + 16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.08);
@@ -744,7 +747,6 @@ summary::-webkit-details-marker {
   }
   .comment-track {
     animation: comment-marquee-up 32s linear infinite;
-    will-change: transform;
   }
   .comment-track--down { animation-name: comment-marquee-down; }
   .comment-track--mid  { animation-duration: 38s; }
@@ -770,7 +772,6 @@ summary::-webkit-details-marker {
 
 .marquee-track {
   animation: hero-marquee 45s linear infinite;
-  will-change: transform;
 }
 .marquee-track:hover {
   animation-play-state: paused;
@@ -880,5 +881,63 @@ summary::-webkit-details-marker {
     );
     background-size: 200% 100%;
     animation: kurs-shimmer 2.4s ease-in-out infinite;
+  }
+}
+
+/* ─── Reveal sekcji (scroll-driven, RSC-safe) ─────────────────
+   Zastapil framer-motion whileInView (2026-08-19). Stan ukryty tylko gdy
+   przegladarka wspiera animation-timeline i user nie prosil o mniej ruchu. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @keyframes reveal-in {
+      from { opacity: 0; transform: translate3d(0, 22px, 0); }
+      to   { opacity: 1; transform: none; }
+    }
+    .reveal-anim {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      /* Zakres liczony w fazie WEJSCIA, nie "cover": element na samym dole
+         strony nigdy nie dojedzie do cover 20% i zostalby przezroczysty
+         na zawsze (zlapane w tescie 2026-08-19). */
+      animation-range: entry 0% entry calc(65% + var(--reveal-delay, 0) * 200%);
+    }
+  }
+}
+
+/* ─── Formularze: mobile-safe ─────────────────────────────────
+   16 px na polach jest twarde: ponizej tego iOS Safari zoomuje strone
+   przy tapnieciu w input i uzytkownik zostaje w przeskalowanym widoku. */
+input[type="email"],
+input[type="text"],
+textarea,
+select {
+  font-size: 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ─── Hero: wejscie na CSS ────────────────────────────────────
+   Wersja na framer-motion trzymala naglowek na opacity 0 do czasu hydracji,
+   przez co LCP na telefonie mial 5,5 s samego czekania (pomiar 2026-08-19).
+   Animacja startuje z pierwszym pomalowaniem; reduced-motion = od razu stan
+   koncowy; brak CSS animacji = tekst po prostu widoczny. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-in {
+    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    to   { opacity: 1; transform: none; }
+  }
+  .hero-in {
+    animation: hero-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--hero-delay, 0s);
   }
 }

@@ -1,5 +1,10 @@
 import Script from "next/script";
 
+/**
+ * GA4 + Meta Pixel na lazyOnload (mobile perf 2026-08-19): gtag wazy 168 KB
+ * i na telefonie konkurowal o watek z hydracja. Zdarzenia i tak leca po load.
+ */
+
 export function Analytics() {
   const gaId = process.env.NEXT_PUBLIC_GA_ID;
   const pixelId = process.env.NEXT_PUBLIC_META_PIXEL_ID;
@@ -10,9 +15,9 @@ export function Analytics() {
         <>
           <Script
             src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
           />
-          <Script id="ga4-init" strategy="afterInteractive">
+          <Script id="ga4-init" strategy="lazyOnload">
             {`
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
@@ -25,7 +30,7 @@ export function Analytics() {
       )}
 
       {pixelId && (
-        <Script id="meta-pixel" strategy="afterInteractive">
+        <Script id="meta-pixel" strategy="lazyOnload">
           {`
             !function(f,b,e,v,n,t,s)
             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?

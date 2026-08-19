@@ -23,11 +23,11 @@ export function Breadcrumb({ items, tone = "light" }: Props) {
 
   return (
     <nav aria-label="Breadcrumb">
-      <ol className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] leading-none">
+      <ol className="-my-2 flex flex-wrap items-center gap-x-2 text-[14px] leading-none">
         <li>
           <Link
             href="/"
-            className={`inline-flex items-center gap-1.5 font-medium transition-colors ${linkCls}`}
+            className={`inline-flex min-h-[44px] items-center gap-1.5 py-2 font-medium transition-colors ${linkCls}`}
           >
             <Home size={16} strokeWidth={2} />
             <span>Home</span>
@@ -39,7 +39,10 @@ export function Breadcrumb({ items, tone = "light" }: Props) {
             <li key={i} className="flex items-center gap-2">
               <ChevronRight size={15} strokeWidth={2} className={sepCls} aria-hidden />
               {item.href && !isLast ? (
-                <Link href={item.href} className={`font-medium transition-colors ${linkCls}`}>
+                <Link
+                  href={item.href}
+                  className={`inline-flex min-h-[44px] items-center py-2 font-medium transition-colors ${linkCls}`}
+                >
                   {item.label}
                 </Link>
               ) : (

@@ -1,7 +1,4 @@
-"use client";
-
 import type { ReactNode } from "react";
-import { motion, useReducedMotion } from "framer-motion";
 
 type Props = {
   children: ReactNode;
@@ -9,24 +6,24 @@ type Props = {
   delay?: number;
 };
 
-/** Wejście sekcji: subtelny fade + slide-up przy wjeździe w viewport.
- *  Reduced-motion = statyczny render (bez animacji). */
+/**
+ * Wejscie sekcji: fade + slide-up przy wjezdzie w viewport.
+ *
+ * Od 2026-08-19 komponent SERWEROWY na scroll-driven CSS (`animation-timeline:
+ * view()`) zamiast framer-motion `whileInView`. Na homepage bylo 89 instancji,
+ * czyli 89 osobnych obserwatorow i tyle samo drzew do hydracji - na telefonie
+ * to byla realna czesc janku przy scrollu.
+ *
+ * Degradacja: brak `animation-timeline` (m.in. Firefox) albo reduced-motion =
+ * tresc po prostu widoczna, bez animacji. Nigdy ukryta.
+ */
 export function Reveal({ children, className, delay = 0 }: Props) {
-  const reduce = useReducedMotion();
-
-  if (reduce) {
-    return <div className={className}>{children}</div>;
-  }
-
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-10% 0px" }}
-      transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
+    <div
+      className={className ? `reveal-anim ${className}` : "reveal-anim"}
+      style={delay ? ({ "--reveal-delay": `${delay}` } as React.CSSProperties) : undefined}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

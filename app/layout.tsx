@@ -1,6 +1,23 @@
 import type { Metadata } from "next";
+import localFont from "next/font/local";
 import "./globals.css";
+
+/**
+ * Satoshi self-hosted (mobile perf 2026-08-19): @import z api.fontshare.com
+ * robil lancuch HTML -> CSS -> CSS fontshare -> woff2 (2 dodatkowe RTT do
+ * pierwszego tekstu). Zmienny plik 300-900 (42 KB) zastepuje dwa statyczne.
+ */
+const satoshi = localFont({
+  src: "./fonts/Satoshi-Variable.woff2",
+  weight: "300 900",
+  style: "normal",
+  display: "swap",
+  preload: true,
+  variable: "--font-satoshi",
+  fallback: ["Satoshi-fallback", "Arial", "sans-serif"],
+});
 import { Analytics } from "./components/Analytics";
+import { ClickTracking } from "./components/ClickTracking";
 import { Navbar } from "./components/Navbar";
 import { Footer } from "./components/Footer";
 import { ChromeGate } from "./components/ChromeGate";
@@ -62,11 +79,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl">
-      <head>
-        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="" />
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="" />
-      </head>
+    <html lang="pl" className={satoshi.variable}>
       <body className="antialiased">
         <ChromeGate>
           <Navbar />
@@ -75,6 +88,7 @@ export default function RootLayout({
         <ChromeGate>
           <Footer />
         </ChromeGate>
+        <ClickTracking />
         <Analytics />
       </body>
     </html>

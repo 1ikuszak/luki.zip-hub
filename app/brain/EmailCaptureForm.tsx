@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { ArrowRight, Check } from "lucide-react";
 import { trackCTA } from "@/app/lib/analytics";
@@ -18,6 +18,13 @@ export function EmailCaptureForm({
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // Po zapisie znika formularz razem z aktywnym elementem - focus wraca na
+  // komunikat, zeby czytnik ekranu i klawiatura nie zgubily miejsca.
+  useEffect(() => {
+    if (success) successRef.current?.focus();
+  }, [success]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -37,10 +44,16 @@ export function EmailCaptureForm({
           medium: source.medium,
           referring_site: source.referring_site,
         }),
+        // Slabe LTE potrafilo zostawic przycisk w "Wysylam..." bez konca.
+        signal: AbortSignal.timeout(10000),
       });
 
       if (!res.ok) {
-        setError("Coś nie zagrało. Spróbuj za chwilę.");
+        setError(
+          res.status === 400
+            ? "Ten adres wygląda na niepoprawny. Sprawdź go i wyślij jeszcze raz."
+            : "Zapis nie przeszedł. Spróbuj za chwilę.",
+        );
         setSubmitting(false);
         return;
       }
@@ -51,15 +64,24 @@ export function EmailCaptureForm({
       });
       setSuccess(true);
       setSubmitting(false);
-    } catch {
-      setError("Brak połączenia. Sprawdź internet i spróbuj ponownie.");
+    } catch (err) {
+      setError(
+        err instanceof DOMException && err.name === "TimeoutError"
+          ? "Serwer nie odpowiada. Spróbuj jeszcze raz za chwilę."
+          : "Brak połączenia. Sprawdź internet i spróbuj ponownie.",
+      );
       setSubmitting(false);
     }
   }
 
   if (success) {
     return (
-      <div role="status" className="flex flex-col gap-4">
+      <div
+        ref={successRef}
+        role="status"
+        tabIndex={-1}
+        className="flex flex-col gap-4 outline-none"
+      >
         <div className="inline-flex items-center gap-2 text-base font-semibold text-[var(--accent)]">
           <Check size={18} strokeWidth={2.25} />
           Jesteś w środku. &lt;3
@@ -102,9 +124,20 @@ export function EmailCaptureForm({
         onSubmit={onSubmit}
         className="flex flex-col sm:flex-row gap-2.5"
       >
+        <label htmlFor="newsletter-email" className="sr-only">
+          Adres e-mail
+        </label>
         <input
+          id="newsletter-email"
+          name="email"
           type="email"
           required
+          autoComplete="email"
+          inputMode="email"
+          enterKeyHint="go"
+          autoCapitalize="off"
+          autoCorrect="off"
+          spellCheck={false}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="twój@email.com"

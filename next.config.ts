@@ -6,6 +6,9 @@ const nextConfig: NextConfig = {
     viewTransition: true,
   },
   images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [360, 414, 640, 750, 828, 1080, 1200, 1600, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     qualities: [75, 90],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
@@ -20,8 +23,8 @@ const nextConfig: NextConfig = {
     const csp = [
       "default-src 'self'",
       `script-src 'self' 'unsafe-inline'${dev ? " 'unsafe-eval'" : ""} https://www.googletagmanager.com https://www.google-analytics.com https://connect.facebook.net https://vercel.live`,
-      "style-src 'self' 'unsafe-inline' https://api.fontshare.com",
-      "font-src 'self' data: https://cdn.fontshare.com https://api.fontshare.com",
+      "style-src 'self' 'unsafe-inline'",
+      "font-src 'self' data:",
       "img-src 'self' data: blob: https:",
       "media-src 'self' https:",
       "connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com https://region1.google-analytics.com https://www.facebook.com https://api.beehiiv.com https://vercel.live wss://ws-us3.pusher.com",

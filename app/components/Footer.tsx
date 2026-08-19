@@ -5,14 +5,13 @@ import { usePathname } from "next/navigation";
 import { socialLinks } from "@/app/lib/data";
 
 const NAV_LINKS = [
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Artykuły", href: "/artykuly" },
   { label: "O mnie", href: "/about" },
   { label: "Newsletter", href: "/brain" },
 ];
 
 // strony z gradientowym tłem → footer biały + przezroczysty, na gradiencie
-const GRADIENT_ROUTES = ["/", "/uslugi", "/artykuly", "/portfolio", "/about"];
+const GRADIENT_ROUTES = ["/", "/uslugi", "/artykuly", "/about"];
 
 export function Footer() {
   const pathname = usePathname();
@@ -23,7 +22,7 @@ export function Footer() {
       ? "relative z-10 border-white/15 bg-transparent"
       : "border-[var(--border)] bg-[var(--bg-page)]",
     title: onGradient ? "text-white" : "text-[var(--text)]",
-    muted: onGradient ? "text-white/65" : "text-[var(--text-secondary)]",
+    muted: onGradient ? "text-white/85" : "text-[var(--text-secondary)]",
     link: onGradient
       ? "text-white/85 hover:text-white"
       : "text-[var(--text)] hover:text-[var(--accent)]",
@@ -53,7 +52,7 @@ export function Footer() {
             </p>
             <a
               href="mailto:lukasz.glica07@gmail.com"
-              className={`text-[15px] ${cls.emailLink} transition-colors mt-1 w-fit underline underline-offset-4`}
+              className={`inline-flex min-h-[44px] items-center text-[15px] ${cls.emailLink} transition-colors w-fit underline underline-offset-4`}
             >
               lukasz.glica07@gmail.com
             </a>
@@ -65,12 +64,12 @@ export function Footer() {
             >
               Nawigacja
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`text-[15px] ${cls.link} transition-colors`}
+                    className={`inline-flex min-h-[44px] items-center text-[15px] ${cls.link} transition-colors`}
                   >
                     {link.label}
                   </Link>
@@ -85,14 +84,14 @@ export function Footer() {
             >
               Social
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col">
               {socialLinks.map((link) => (
                 <li key={link.id}>
                   <a
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-[15px] ${cls.link} transition-colors`}
+                    className={`inline-flex min-h-[44px] items-center text-[15px] ${cls.link} transition-colors`}
                   >
                     {link.label}
                   </a>

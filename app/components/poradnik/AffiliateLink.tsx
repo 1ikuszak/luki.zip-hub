@@ -1,5 +1,3 @@
-"use client";
-
 import type { ReactNode } from "react";
 import { ExternalLink } from "lucide-react";
 import { TrackedLink } from "@/app/components/TrackedLink";
