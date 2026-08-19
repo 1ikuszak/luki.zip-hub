@@ -1,10 +1,7 @@
-"use client";
-
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import type { PostMeta } from "@/lib/posts";
 import { formatDate } from "@/lib/format";
-import { trackCTA } from "@/app/lib/analytics";
 
 export function ArticleCard({ post }: { post: PostMeta }) {
   const href = `/artykuly/${post.slug}`;
@@ -12,7 +9,6 @@ export function ArticleCard({ post }: { post: PostMeta }) {
   return (
     <Link
       href={href}
-      onClick={() => trackCTA(ctaId, href)}
       data-track="article_card"
       data-track-id={ctaId}
       data-track-href={href}

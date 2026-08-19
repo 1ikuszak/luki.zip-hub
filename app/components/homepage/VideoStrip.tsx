@@ -34,7 +34,7 @@ export function VideoStrip() {
               muted
               loop
               playsInline
-              preload="metadata"
+              preload="none"
               className="absolute inset-0 h-full w-full object-cover"
             />
           </div>

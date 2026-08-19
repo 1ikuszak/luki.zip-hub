@@ -1,4 +1,3 @@
-@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,600&display=swap");
 @import "tailwindcss";
 
 /* CLS-killer: Arial fallback z metrykami zbliżonymi do Satoshi */
@@ -31,8 +30,8 @@
 
   /* Font stack — Satoshi (single face). --font-display aliasuje do tego samego
    * żeby `font-display` className działało bez zmiany wyglądu. */
-  --font-sans:    "Satoshi", "Satoshi-fallback", sans-serif;
-  --font-display: "Satoshi", "Satoshi-fallback", sans-serif;
+  --font-sans:    var(--font-satoshi), "Satoshi-fallback", sans-serif;
+  --font-display: var(--font-satoshi), "Satoshi-fallback", sans-serif;
 }
 
 @theme inline {
@@ -88,7 +87,6 @@ body {
   color: var(--text);
   font-feature-settings: "ss01" on, "ss02" on, "cv06" on, "liga" on, "kern" on;
   font-variant-ligatures: common-ligatures;
-  text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -883,5 +881,22 @@ summary::-webkit-details-marker {
     );
     background-size: 200% 100%;
     animation: kurs-shimmer 2.4s ease-in-out infinite;
+  }
+}
+
+/* ─── Reveal sekcji (scroll-driven, RSC-safe) ─────────────────
+   Zastapil framer-motion whileInView (2026-08-19). Stan ukryty tylko gdy
+   przegladarka wspiera animation-timeline i user nie prosil o mniej ruchu. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    @keyframes reveal-in {
+      from { opacity: 0; transform: translate3d(0, 22px, 0); }
+      to   { opacity: 1; transform: none; }
+    }
+    .reveal-anim {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover calc(20% + var(--reveal-delay, 0) * 60%);
+    }
   }
 }

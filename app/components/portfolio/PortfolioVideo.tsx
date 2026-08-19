@@ -18,9 +18,14 @@ export function PortfolioVideo({ src, poster, width, height }: Props) {
     const el = ref.current;
     if (!el) return;
 
+    // Reduced-motion: kafelek zostaje na plakacie, zero pobierania wideo.
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches) return;
+
+    let visible = false;
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        visible = entry.isIntersecting;
+        if (visible && !document.hidden) {
           // play() może odrzucić obietnicę (np. zakładka w tle) — ignorujemy.
           el.play().catch(() => {});
         } else {
@@ -30,8 +35,18 @@ export function PortfolioVideo({ src, poster, width, height }: Props) {
       { threshold: 0.25 },
     );
 
+    // Karta w tle nie ma prawa mielic dekodera wideo (bateria na telefonie).
+    const onVisibility = () => {
+      if (document.hidden) el.pause();
+      else if (visible) el.play().catch(() => {});
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
     io.observe(el);
-    return () => io.disconnect();
+    return () => {
+      io.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+    };
   }, []);
 
   return (
