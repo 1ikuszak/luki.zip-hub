@@ -26,9 +26,9 @@ export function ArticleCard({ post }: { post: PostMeta }) {
         )}
       </div>
 
-      <h3 className="mt-4 line-clamp-2 text-[19px] font-semibold leading-snug tracking-[-0.01em] text-[var(--text)] sm:text-[21px]">
+      <h2 className="mt-4 line-clamp-2 text-[19px] font-semibold leading-snug tracking-[-0.01em] text-[var(--text)] sm:text-[21px]">
         {post.title}
-      </h3>
+      </h2>
       <p className="mt-2 line-clamp-2 text-[14px] leading-relaxed text-[var(--text-secondary)] sm:text-[15px]">
         {post.description}
       </p>

@@ -127,7 +127,7 @@ export function OfferTwoWays() {
                         <span className="h-1.5 w-1.5 rounded-full bg-[var(--text-secondary)]/40" />
                       )}
                     </span>
-                    <span className={`text-[14px] font-medium transition-colors ${st === "idle" ? "text-[var(--text-secondary)]/60" : "text-[var(--text)]"}`}>
+                    <span className={`text-[14px] font-medium transition-colors ${st === "idle" ? "text-[var(--text-secondary)]" : "text-[var(--text)]"}`}>
                       {label}
                     </span>
                   </div>
@@ -136,7 +136,7 @@ export function OfferTwoWays() {
             </div>
             <div className="mt-5 flex items-center gap-2 text-[12px] font-medium uppercase tracking-[0.12em] text-[var(--accent)]">
               <span>Mapa</span>
-              <span className="text-[var(--text-secondary)]/50">{mapped}/{AUDYT.steps.length}</span>
+              <span className="text-[var(--text-secondary)]">{mapped}/{AUDYT.steps.length}</span>
             </div>
           </div>
 

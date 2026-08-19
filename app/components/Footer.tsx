@@ -23,7 +23,7 @@ export function Footer() {
       ? "relative z-10 border-white/15 bg-transparent"
       : "border-[var(--border)] bg-[var(--bg-page)]",
     title: onGradient ? "text-white" : "text-[var(--text)]",
-    muted: onGradient ? "text-white/65" : "text-[var(--text-secondary)]",
+    muted: onGradient ? "text-white/85" : "text-[var(--text-secondary)]",
     link: onGradient
       ? "text-white/85 hover:text-white"
       : "text-[var(--text)] hover:text-[var(--accent)]",
