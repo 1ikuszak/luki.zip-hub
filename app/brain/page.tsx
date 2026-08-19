@@ -50,7 +50,7 @@ export default function BrainPage() {
         </p>
 
         <div className="mt-10 max-w-[560px]">
-          <Suspense fallback={<div className="h-[52px]" aria-hidden />}>
+          <Suspense fallback={<div className="h-[122px] sm:h-[52px]" aria-hidden />}>
             <EmailCaptureForm ctaId="cta_brain_hero_submit" />
           </Suspense>
         </div>

@@ -1,20 +1,10 @@
-"use client";
-
-import { motion, type Variants } from "framer-motion";
+import type { CSSProperties } from "react";
 import { ArrowRight } from "lucide-react";
 import { CONTACT_FORM_URL } from "@/app/lib/data";
 import { BrandStrip } from "./BrandStrip";
 
-const EASE = [0.16, 1, 0.3, 1] as const;
-
-const container: Variants = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1, delayChildren: 0.06 } },
-};
-const item: Variants = {
-  hidden: { opacity: 0, y: 24 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.85, ease: EASE } },
-};
+/** Stagger wejscia hero na CSS (klasa .hero-in, globals.css). */
+const step = (i: number) => ({ "--hero-delay": `${0.06 + i * 0.1}s` } as CSSProperties);
 
 export function Hero() {
   return (
@@ -26,43 +16,34 @@ export function Hero() {
           style={{ background: "radial-gradient(closest-side, rgba(38,86,217,0.16), rgba(38,86,217,0.07) 55%, transparent 78%)" }}
         />
 
-        <motion.div
-          variants={container}
-          initial="hidden"
-          animate="show"
-          className="container-default relative z-10 text-center"
-        >
-          <motion.div variants={item} className="flex justify-center">
+        <div className="container-default relative z-10 text-center">
+          <div className="hero-in flex justify-center" style={step(0)}>
             <span className="inline-flex items-center rounded-full bg-[color-mix(in_srgb,var(--text)_5%,transparent)] px-3.5 py-1.5 text-[13px] font-medium text-[var(--accent)]">
               Dla marek, które chcą się skalować z AI tam, gdzie ma to faktycznie sens
             </span>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            variants={item}
-            className="mx-auto mt-8 max-w-[22ch] font-semibold text-[var(--text)]"
+          <h1
+            className="hero-in mx-auto mt-8 max-w-[22ch] font-semibold text-[var(--text)]"
             style={{
+              ...step(1),
               fontSize: "clamp(2.2rem, 4.8vw, 4.4rem)",
               lineHeight: 1.0,
               letterSpacing: "-0.035em",
             }}
           >
             95% wdrożeń AI nie zwraca złotówki. Bo nikt nie nauczył AI twojego biznesu.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={item}
-            className="mx-auto mt-6 max-w-[54ch] text-[var(--text-secondary)]"
-            style={{ fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)", lineHeight: 1.6 }}
+          <p
+            className="hero-in mx-auto mt-6 max-w-[54ch] text-[var(--text-secondary)]"
+            style={{ ...step(2), fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)", lineHeight: 1.6 }}
           >
             Treść, procesy i wiedza w jednym systemie pod twoją markę. Zdejmij powtarzalną robotę
             i skaluj to, co realnie zarabia.
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={item}
-            className="mt-9 flex flex-col items-center gap-3"
-          >
+          <div className="hero-in mt-9 flex flex-col items-center gap-3" style={step(3)}>
             <a
               href={CONTACT_FORM_URL}
               target="_blank"
@@ -77,8 +58,8 @@ export function Hero() {
                 <ArrowRight size={20} strokeWidth={2.25} />
               </span>
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </div>
 
       {/* pas logo marek — zawsze widoczny na dole pierwszego ekranu */}

@@ -925,3 +925,19 @@ select {
   white-space: nowrap;
   border: 0;
 }
+
+/* ─── Hero: wejscie na CSS ────────────────────────────────────
+   Wersja na framer-motion trzymala naglowek na opacity 0 do czasu hydracji,
+   przez co LCP na telefonie mial 5,5 s samego czekania (pomiar 2026-08-19).
+   Animacja startuje z pierwszym pomalowaniem; reduced-motion = od razu stan
+   koncowy; brak CSS animacji = tekst po prostu widoczny. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-in {
+    from { opacity: 0; transform: translate3d(0, 24px, 0); }
+    to   { opacity: 1; transform: none; }
+  }
+  .hero-in {
+    animation: hero-in 0.85s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: var(--hero-delay, 0s);
+  }
+}

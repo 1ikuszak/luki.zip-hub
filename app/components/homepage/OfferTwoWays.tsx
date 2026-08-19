@@ -192,7 +192,7 @@ export function OfferTwoWays() {
                         <span className="h-1.5 w-1.5 rounded-full bg-white/40" />
                       )}
                     </span>
-                    <span className={`text-[14px] transition-colors ${done ? "text-white" : "text-white/55"}`}>
+                    <span className={`text-[14px] transition-colors ${done ? "text-white" : "text-white/80"}`}>
                       {task}
                     </span>
                     {done && (
