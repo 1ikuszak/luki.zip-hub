@@ -69,7 +69,7 @@ export function WorkStrip() {
           </p>
           <Link
             href="/uslugi"
-            className="mt-5 inline-flex items-center gap-2 text-[15px] font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
+            className="mt-3 inline-flex min-h-[44px] items-center gap-2 py-2 text-[15px] font-semibold text-[var(--accent)] underline-offset-4 hover:underline"
           >
             Zobacz wszystkie usługi i branże
             <ArrowUpRight size={17} strokeWidth={2.2} />

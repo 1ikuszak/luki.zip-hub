@@ -53,7 +53,7 @@ export function Footer() {
             </p>
             <a
               href="mailto:lukasz.glica07@gmail.com"
-              className={`text-[15px] ${cls.emailLink} transition-colors mt-1 w-fit underline underline-offset-4`}
+              className={`inline-flex min-h-[44px] items-center text-[15px] ${cls.emailLink} transition-colors w-fit underline underline-offset-4`}
             >
               lukasz.glica07@gmail.com
             </a>
@@ -65,12 +65,12 @@ export function Footer() {
             >
               Nawigacja
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className={`text-[15px] ${cls.link} transition-colors`}
+                    className={`inline-flex min-h-[44px] items-center text-[15px] ${cls.link} transition-colors`}
                   >
                     {link.label}
                   </Link>
@@ -85,14 +85,14 @@ export function Footer() {
             >
               Social
             </div>
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col">
               {socialLinks.map((link) => (
                 <li key={link.id}>
                   <a
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`text-[15px] ${cls.link} transition-colors`}
+                    className={`inline-flex min-h-[44px] items-center text-[15px] ${cls.link} transition-colors`}
                   >
                     {link.label}
                   </a>

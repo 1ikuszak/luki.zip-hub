@@ -673,13 +673,13 @@ summary::-webkit-details-marker {
 }
 .lightbox__close {
   position: fixed;
-  top: 20px;
-  right: 24px;
+  top: calc(env(safe-area-inset-top, 0px) + 16px);
+  right: calc(env(safe-area-inset-right, 0px) + 16px);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.2);
   background: rgba(255, 255, 255, 0.08);
@@ -896,7 +896,10 @@ summary::-webkit-details-marker {
     .reveal-anim {
       animation: reveal-in linear both;
       animation-timeline: view();
-      animation-range: entry 0% cover calc(20% + var(--reveal-delay, 0) * 60%);
+      /* Zakres liczony w fazie WEJSCIA, nie "cover": element na samym dole
+         strony nigdy nie dojedzie do cover 20% i zostalby przezroczysty
+         na zawsze (zlapane w tescie 2026-08-19). */
+      animation-range: entry 0% entry calc(65% + var(--reveal-delay, 0) * 200%);
     }
   }
 }
