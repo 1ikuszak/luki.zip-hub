@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Wyciag z watku">
+<defs>
+  <pattern id="g" width="80" height="80" patternUnits="userSpaceOnUse">
+    <circle cx="40" cy="40" r="3.2" fill="none" stroke="#2656d9" stroke-opacity="0.15" stroke-width="1.1"/>
+  </pattern>
+  <marker id="a" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<style>
+  .flow{stroke-dasharray:8 10;animation:f 1.7s linear infinite}
+  @keyframes f{to{stroke-dashoffset:-36}}
+  .breathe{animation:b 4s ease-in-out infinite}
+  @keyframes b{0%,100%{fill-opacity:.10}50%{fill-opacity:.20}}
+  @media (prefers-reduced-motion: reduce){
+    .flow,.breathe{animation:none}
+    .mover{display:none}
+  }
+</style>
+<rect width="1600" height="900" fill="#FCFBFA"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<rect x="110" y="340" width="400" height="150" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="310.0" y="409.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">SUROWY WĄTEK</text>
+<text x="310.0" y="441.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">CZTERY WIADOMOŚCI, JEDNA BEZ TREŚCI</text>
+<text x="600" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.12em">WYCIĄG</text>
+<text x="600" y="420" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.12em">ROBI MODEL</text>
+<path class="flow" d="M 510 440 L 690 440" fill="none" stroke="#2656d9" stroke-width="2" marker-end="url(#a)"/>
+<circle class="mover" r="6" fill="#2656d9" opacity="0"><set attributeName="opacity" to="1" begin="0s"/><animateMotion dur="2.4s" begin="0s" repeatCount="indefinite" path="M 510 440 L 690 440"/></circle>
+<rect class="breathe" x="690" y="340" width="400" height="150" fill="#2656d9" fill-opacity="0.14"/>
+<rect x="690" y="340" width="400" height="150" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="890.0" y="409.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="22" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">WYCIĄG</text>
+<text x="890.0" y="441.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">PYTANIE - USTALENIE - CZEGO DOTYCZY</text>
+<text x="1180" y="396" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.12em">ZAPIS</text>
+<text x="1180" y="420" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.12em">DO BAZY</text>
+<path d="M 1090 440 L 1270 440" fill="none" stroke="#2656d9" stroke-width="2" marker-end="url(#a)"/>
+<rect x="1270" y="340" width="300" height="150" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="1420.0" y="409.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">WIERSZ</text>
+<text x="1420.0" y="441.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">TO IDZIE DO SZUKANIA</text>
+<text x="110" y="600" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">CO WCHODZI</text>
+<text x="110" y="630" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">PYTANIE, KTORE KTOŚ REALNIE ZADAL</text>
+<text x="690" y="600" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">CO ZOSTAJE</text>
+<text x="690" y="630" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">USTALENIE, CZYLI JAK SIĘ SKOŃCZYŁO</text>
+<text x="1270" y="600" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">CO OBOK</text>
+<text x="1270" y="630" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">CAŁA ROZMOWA I LINK</text>
+<text x="110" y="760" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.12em">ORYGINALU NIE WEKTORYZUJESZ. ZOSTAJE, ŻEBY DAŁO SIĘ W NIEGO KLIKNAC</text>
+</svg>

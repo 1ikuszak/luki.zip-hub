@@ -11,7 +11,6 @@
     "sync:downloads": "node scripts/sync-downloads.mjs"
   },
   "dependencies": {
-    "cmdk": "^1.1.1",
     "framer-motion": "^12.23.26",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.561.0",

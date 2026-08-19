@@ -636,11 +636,16 @@ summary::-webkit-details-marker {
   align-items: center;
   justify-content: center;
   padding: 4vmin;
-  background: rgba(16, 14, 20, 0.74);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(16, 14, 20, 0.92);
   cursor: zoom-out;
   animation: lightbox-in 0.16s ease-out;
+}
+@media (min-width: 768px) {
+  .lightbox {
+    background: rgba(16, 14, 20, 0.74);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 .lightbox__frame {
   margin: 0;
@@ -744,7 +749,6 @@ summary::-webkit-details-marker {
   }
   .comment-track {
     animation: comment-marquee-up 32s linear infinite;
-    will-change: transform;
   }
   .comment-track--down { animation-name: comment-marquee-down; }
   .comment-track--mid  { animation-duration: 38s; }
@@ -770,7 +774,6 @@ summary::-webkit-details-marker {
 
 .marquee-track {
   animation: hero-marquee 45s linear infinite;
-  will-change: transform;
 }
 .marquee-track:hover {
   animation-play-state: paused;

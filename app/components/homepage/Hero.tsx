@@ -22,8 +22,8 @@ export function Hero() {
       <div className="relative flex flex-1 items-center justify-center py-12">
         {/* subtelny niebieski glow zamiast shadera */}
         <div
-          className="pointer-events-none absolute left-1/2 top-1/2 h-[520px] w-[820px] max-w-[90vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60 blur-[120px]"
-          style={{ background: "radial-gradient(closest-side, rgba(38,86,217,0.20), transparent)" }}
+          className="pointer-events-none absolute left-1/2 top-1/2 h-[640px] w-[1000px] max-w-[110vw] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-60"
+          style={{ background: "radial-gradient(closest-side, rgba(38,86,217,0.16), rgba(38,86,217,0.07) 55%, transparent 78%)" }}
         />
 
         <motion.div

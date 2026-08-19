@@ -31,6 +31,21 @@ const WDROZENIE = {
 
 const T_LOOP = 6400;
 
+/**
+ * Klatki kluczowe zamiast tickera co 80 ms (mobile perf 2026-08-19):
+ * stan wizualny zmienia sie tylko w tych momentach, wiec React rerenderuje
+ * ~11 razy na petle zamiast 80 razy na sekunde.
+ */
+const KEYFRAMES = (() => {
+  const t = new Set<number>([0]);
+  AUDYT.steps.forEach((_, i) => {
+    t.add(700 + i * 1150);
+    t.add(700 + i * 1150 + 750);
+  });
+  WDROZENIE.tasks.forEach((_, i) => t.add(400 + i * 850));
+  return [...t].filter((v) => v <= T_LOOP).sort((a, b) => a - b);
+})();
+
 export function OfferTwoWays() {
   const reduce = useReducedMotion() ?? false;
   const ref = useRef<HTMLDivElement>(null);
@@ -39,14 +54,21 @@ export function OfferTwoWays() {
 
   useEffect(() => {
     if (reduce || !inView) return;
-    let e = 0;
+    let i = 0;
+    let timer: ReturnType<typeof setTimeout>;
     setT(0);
-    const id = setInterval(() => {
-      e += 80;
-      if (e > T_LOOP) e = 0;
-      setT(e);
-    }, 80);
-    return () => clearInterval(id);
+    const step = () => {
+      const prev = KEYFRAMES[i];
+      i = (i + 1) % KEYFRAMES.length;
+      const next = KEYFRAMES[i];
+      const wait = i === 0 ? T_LOOP - prev + KEYFRAMES[0] : next - prev;
+      timer = setTimeout(() => {
+        setT(next);
+        step();
+      }, Math.max(50, wait));
+    };
+    step();
+    return () => clearTimeout(timer);
   }, [inView, reduce]);
 
   // Audyt: 3 kroki checklisty (idle -> active -> done)

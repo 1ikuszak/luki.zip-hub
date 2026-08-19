@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Cztery sposoby szukania">
+<defs>
+  <pattern id="g" width="80" height="80" patternUnits="userSpaceOnUse">
+    <circle cx="40" cy="40" r="3.2" fill="none" stroke="#2656d9" stroke-opacity="0.15" stroke-width="1.1"/>
+  </pattern>
+  <marker id="a" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<style>
+  .flow{stroke-dasharray:8 10;animation:f 1.7s linear infinite}
+  @keyframes f{to{stroke-dashoffset:-36}}
+  .breathe{animation:b 4s ease-in-out infinite}
+  @keyframes b{0%,100%{fill-opacity:.10}50%{fill-opacity:.20}}
+  @media (prefers-reduced-motion: reduce){
+    .flow,.breathe{animation:none}
+    .mover{display:none}
+  }
+</style>
+<rect width="1600" height="900" fill="#FCFBFA"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<text x="120" y="130" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">PYTANIE</text>
+<text x="120" y="160" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">„PRZYWRACANIE STAJE PO WCZYTANIU LISTY PLIKÓW”</text>
+<rect x="120" y="220" width="700" height="112" fill="#2656d9" fill-opacity="0.20"/>
+<rect x="120" y="220" width="700" height="112" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="470.0" y="270.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">STAJE NA DYSKU SIECIOWYM</text>
+<text x="470.0" y="302.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">INNE SŁOWA, TA SAMA RZECZ</text>
+<rect class="breathe" x="120" y="360" width="700" height="112" fill="#2656d9" fill-opacity="0.14"/>
+<rect x="120" y="360" width="700" height="112" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="470.0" y="410.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">BŁĄD: LIMIT LISTY PLIKÓW</text>
+<text x="470.0" y="442.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">DOKŁADNIE TE SŁOWA</text>
+<rect x="120" y="500" width="700" height="112" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="470.0" y="550.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">NO DOBRA, SPOKO, SPRÓBUJE</text>
+<text x="470.0" y="582.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">ZERO RZADKICH SŁÓW</text>
+<rect x="120" y="640" width="700" height="112" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="470.0" y="690.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">TO SAMO, ALE SPRZED ROKU</text>
+<text x="470.0" y="722.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">ZA STARE, PROCEDURA NIE ISTNIEJE</text>
+<text x="120" y="810" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.12em">TA SAMA LISTA KANDYDATÓW, OCENIONA CZTERY RAZY</text>
+<path d="M 820 276 L 900 276 L 900 416 L 820 416" fill="none" stroke="#2656d9" stroke-width="2"/>
+<path class="flow" d="M 900 346 L 1000 346" fill="none" stroke="#2656d9" stroke-width="2" marker-end="url(#a)"/>
+<circle class="mover" r="6" fill="#2656d9" opacity="0"><set attributeName="opacity" to="1" begin="0s"/><animateMotion dur="2.8s" begin="0s" repeatCount="indefinite" path="M 820 276 L 900 276 L 900 346 L 1000 346"/></circle>
+<rect x="1000" y="282" width="480" height="128" fill="#2656d9" fill-opacity="0.20"/>
+<rect x="1000" y="282" width="480" height="128" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="1240.0" y="340.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">WCHODZI DO ODPOWIEDZI</text>
+<text x="1240.0" y="372.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">ZDAJE KILKA TESTÓW NARAZ</text>
+<path d="M 820 556 L 900 556 L 900 696 L 820 696" fill="none" stroke="#2656d9" stroke-width="2"/>
+<path d="M 900 626 L 1000 626" fill="none" stroke="#2656d9" stroke-width="2" marker-end="url(#a)"/>
+<rect x="1000" y="562" width="480" height="128" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="1240.0" y="620.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">ODPADA</text>
+<text x="1240.0" y="652.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">WYGRYWA TYLKO U JEDNEGO TESTU</text>
+<text x="1000" y="760" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">CZTERY TESTY</text>
+<text x="1000" y="790" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">DOKŁADNY TEKST - ZNACZENIE - RZADKOŚĆ - ŚWIEŻOŚĆ</text>
+</svg>

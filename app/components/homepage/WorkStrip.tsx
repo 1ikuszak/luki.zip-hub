@@ -51,8 +51,8 @@ export function WorkStrip() {
       {/* miękki glow pod sekcją */}
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-8 h-[420px] w-[760px] max-w-[92vw] -translate-x-1/2 rounded-full opacity-50 blur-[130px]"
-        style={{ background: "radial-gradient(closest-side, rgba(38,86,217,0.16), transparent)" }}
+        className="pointer-events-none absolute left-1/2 top-8 h-[540px] w-[980px] max-w-[112vw] -translate-x-1/2 rounded-full opacity-50"
+        style={{ background: "radial-gradient(closest-side, rgba(38,86,217,0.13), rgba(38,86,217,0.06) 55%, transparent 78%)" }}
       />
 
       <div className="container-wide relative">
@@ -107,7 +107,7 @@ export function WorkStrip() {
                     </div>
                   </div>
 
-                  <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-white/10 text-white backdrop-blur-sm transition-colors duration-200 group-hover:bg-white group-hover:text-[var(--text)]">
+                  <div className="absolute bottom-4 left-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/35 bg-white/20 text-white transition-colors duration-200 group-hover:bg-white group-hover:text-[var(--text)]">
                     <ArrowUpRight size={18} strokeWidth={2} />
                   </div>
                 </div>

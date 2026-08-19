@@ -141,6 +141,20 @@ export function DitherFlow({ className }: { className?: string }) {
     const uRes = gl.getUniformLocation(prog, "u_res");
     const uTime = gl.getUniformLocation(prog, "u_time");
 
+    const reduce =
+      typeof window !== "undefined" &&
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+    // Mobile (dotyk / waski ekran): jedna statyczna klatka zamiast petli 30 fps.
+    // Fullscreen fragment shader na telefonie kosztowal ~1,2-2,3 s zablokowanego
+    // watku i ciagle mielil GPU pod trescia (audyt mobile 2026-08-19).
+    const isMobile =
+      typeof window !== "undefined" &&
+      (window.matchMedia?.("(max-width: 767px)").matches ||
+        window.matchMedia?.("(pointer: coarse)").matches);
+
+    const staticFrame = reduce || isMobile;
+
     const resize = () => {
       const w = Math.max(1, Math.floor(canvas.clientWidth * RES_SCALE));
       const h = Math.max(1, Math.floor(canvas.clientHeight * RES_SCALE));
@@ -150,13 +164,14 @@ export function DitherFlow({ className }: { className?: string }) {
       }
       gl.viewport(0, 0, canvas.width, canvas.height);
       gl.uniform2f(uRes, canvas.width, canvas.height);
+      // Statyczna klatka po zmianie rozmiaru musi sie przerysowac sama.
+      if (staticFrame) {
+        gl.uniform1f(uTime, 8.0);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      }
     };
     resize();
     window.addEventListener("resize", resize);
-
-    const reduce =
-      typeof window !== "undefined" &&
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
 
     let raf = 0;
     let start = 0;
@@ -171,15 +186,33 @@ export function DitherFlow({ className }: { className?: string }) {
       gl.drawArrays(gl.TRIANGLES, 0, 3);
     };
 
-    if (reduce) {
+    const drawStill = () => {
       gl.uniform1f(uTime, 8.0);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
+    };
+
+    // Karta w tle nie ma prawa mielic petli renderu.
+    const onVisibility = () => {
+      if (staticFrame) return;
+      if (document.hidden) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      } else if (!raf) {
+        last = 0;
+        raf = requestAnimationFrame(render);
+      }
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+
+    if (staticFrame) {
+      drawStill();
     } else {
       raf = requestAnimationFrame(render);
     }
 
     return () => {
       cancelAnimationFrame(raf);
+      document.removeEventListener("visibilitychange", onVisibility);
       window.removeEventListener("resize", resize);
       gl.deleteProgram(prog);
       gl.deleteShader(vert);
