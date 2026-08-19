@@ -3,7 +3,15 @@ import { NextResponse } from "next/server";
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const SLUG_REGEX = /^[a-z0-9-]{1,80}$/;
 const ALLOWED_MEDIUMS = ["article", "homepage", "direct", "social"] as const;
-const ALLOWED_REFERRER_HOSTS = ["luki.zip", "www.luki.zip", "localhost"];
+// 2026-08-19: domena to lukaszglica.com, wiec kazdy referring_site odpadal
+// na walidacji i beehiiv nie dostawal zrodla zapisu.
+const ALLOWED_REFERRER_HOSTS = [
+  "lukaszglica.com",
+  "www.lukaszglica.com",
+  "luki.zip",
+  "www.luki.zip",
+  "localhost",
+];
 
 type Medium = (typeof ALLOWED_MEDIUMS)[number];
 
@@ -81,8 +89,18 @@ export async function POST(request: Request) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(beehiivPayload),
+      // Bez limitu czasu wolny beehiiv trzymal formularz na telefonie
+      // w stanie "Wysylam..." az do timeoutu przegladarki.
+      signal: AbortSignal.timeout(8000),
     },
-  );
+  ).catch((err) => {
+    console.error(`[subscribe] beehiiv unreachable: ${String(err)}`);
+    return null;
+  });
+
+  if (!beehiivRes) {
+    return NextResponse.json({ error: "beehiiv_timeout" }, { status: 504 });
+  }
 
   if (!beehiivRes.ok) {
     const text = await beehiivRes.text().catch(() => "");

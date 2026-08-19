@@ -63,8 +63,8 @@ export default function BrainPage() {
         <h2 className="t-h2 mt-3">Najczęstsze pytania</h2>
         <div className="mt-8 bg-white rounded-xl border border-[var(--border)] divide-y divide-[var(--border)]">
           {FAQ.map((item) => (
-            <details key={item.q} className="group p-6 cursor-pointer">
-              <summary className="flex items-center justify-between gap-4">
+            <details key={item.q} className="group cursor-pointer">
+              <summary className="flex min-h-[56px] items-center justify-between gap-4 px-6 py-4">
                 <span className="text-[16px] font-semibold text-[var(--text)]">
                   {item.q}
                 </span>
@@ -72,7 +72,7 @@ export default function BrainPage() {
                   +
                 </span>
               </summary>
-              <p className="mt-4 t-body text-[var(--text-secondary)]">
+              <p className="px-6 pb-6 t-body text-[var(--text-secondary)]">
                 {item.a}
               </p>
             </details>
