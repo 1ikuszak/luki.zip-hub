@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-label="Ciecie kodu">
+<defs>
+  <pattern id="g" width="80" height="80" patternUnits="userSpaceOnUse">
+    <circle cx="40" cy="40" r="3.2" fill="none" stroke="#2656d9" stroke-opacity="0.15" stroke-width="1.1"/>
+  </pattern>
+  <marker id="a" viewBox="0 0 12 12" refX="11" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+    <path d="M 1 1 L 11 6 L 1 11 z" fill="#2656d9"/>
+  </marker>
+</defs>
+<style>
+  .flow{stroke-dasharray:8 10;animation:f 1.7s linear infinite}
+  @keyframes f{to{stroke-dashoffset:-36}}
+  .breathe{animation:b 4s ease-in-out infinite}
+  @keyframes b{0%,100%{fill-opacity:.10}50%{fill-opacity:.20}}
+  @media (prefers-reduced-motion: reduce){
+    .flow,.breathe{animation:none}
+    .mover{display:none}
+  }
+</style>
+<rect width="1600" height="900" fill="#FCFBFA"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<rect class="breathe" x="420" y="180" width="620" height="140" fill="#2656d9" fill-opacity="0.14"/>
+<rect x="420" y="180" width="620" height="140" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="730.0" y="244.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="22" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">CAŁA KLASA</text>
+<text x="730.0" y="276.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">PRÓBUJESZ NAJPIERW TEGO</text>
+<path class="flow" d="M 730 320 L 730 380" fill="none" stroke="#2656d9" stroke-width="2" marker-end="url(#a)"/>
+<rect x="420" y="380" width="620" height="140" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="730.0" y="444.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="22" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">POJEDYNCZE METODY</text>
+<text x="730.0" y="476.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">GDY KLASA SIĘ NIE MIEŚCI</text>
+<path d="M 730 520 L 730 580" fill="none" stroke="#2656d9" stroke-width="2" marker-end="url(#a)"/>
+<rect x="420" y="580" width="620" height="140" fill="none" stroke="#2656d9" stroke-width="2"/>
+<text x="730.0" y="644.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="22" fill="#2656d9" text-anchor="middle" font-weight="400" letter-spacing="0.08em">MNIEJSZE BLOKI</text>
+<text x="730.0" y="676.0" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="middle" font-weight="400" letter-spacing="0.1em">GDY METODA DALEJ JEST ZA DUŻA</text>
+<circle class="mover" r="6" fill="#2656d9" opacity="0"><set attributeName="opacity" to="1" begin="0s"/><animateMotion dur="2.0s" begin="0s" repeatCount="indefinite" path="M 730 320 L 730 380"/></circle>
+<text x="120" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">OD OGÓLU</text>
+<text x="120" y="280" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">DO SZCZEGÓŁU</text>
+<text x="1100" y="250" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">JEDEN PLIK</text>
+<text x="1100" y="280" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">KILKA WPISÓW</text>
+<text x="1100" y="650" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="19" fill="#2656d9" text-anchor="start" font-weight="400" letter-spacing="0.09em">PRZY ZMIANIE</text>
+<text x="1100" y="680" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.1em">PRZELICZASZ TYLKO TEN KAWAŁEK</text>
+<text x="120" y="810" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', monospace" font-size="15" fill="#9A9895" text-anchor="start" font-weight="400" letter-spacing="0.12em">TNIESZ PO GRANICACH SKŁADNI, NIE CO TYLE A TYLE ZNAKÓW</text>
+</svg>

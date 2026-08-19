@@ -4,7 +4,6 @@ import { MobileNav } from "./MobileNav";
 const NAV_LINKS = [
   { label: "Home", href: "/" },
   { label: "O mnie", href: "/about" },
-  { label: "Portfolio", href: "/portfolio" },
   { label: "Artykuły", href: "/artykuly" },
 ];
 
