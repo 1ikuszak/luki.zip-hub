@@ -884,23 +884,26 @@ summary::-webkit-details-marker {
   }
 }
 
-/* ─── Reveal sekcji (scroll-driven, RSC-safe) ─────────────────
-   Zastapil framer-motion whileInView (2026-08-19). Stan ukryty tylko gdy
-   przegladarka wspiera animation-timeline i user nie prosil o mniej ruchu. */
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    @keyframes reveal-in {
-      from { opacity: 0; transform: translate3d(0, 22px, 0); }
-      to   { opacity: 1; transform: none; }
-    }
-    .reveal-anim {
-      animation: reveal-in linear both;
-      animation-timeline: view();
-      /* Zakres liczony w fazie WEJSCIA, nie "cover": element na samym dole
-         strony nigdy nie dojedzie do cover 20% i zostalby przezroczysty
-         na zawsze (zlapane w tescie 2026-08-19). */
-      animation-range: entry 0% entry calc(65% + var(--reveal-delay, 0) * 200%);
-    }
+/* ─── Reveal sekcji (IntersectionObserver, jednorazowy) ───────
+   Zastapil `animation-timeline: view()` (2026-08-26): WebKit ma
+   udokumentowany bug liczenia progresu blisko krawedzi zakresu, naprawiony
+   dopiero w Safari 26.5 beta - na starszych Safari objawial sie jako
+   przerywanie/zacinanie scrolla na telefonie. IO nie jest scroll-linked,
+   wiec caly ten bug nie ma jak wystapic. Logika w useReveal.ts, tu tylko
+   docelowe stany; ".reveal-io" (idle, bez klasy stanu) = zawsze widoczne. */
+.reveal-io--hidden {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+}
+.reveal-io--visible {
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .reveal-io--hidden {
+    opacity: 1;
+    transform: none;
   }
 }
 

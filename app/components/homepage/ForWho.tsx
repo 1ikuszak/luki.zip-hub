@@ -1,4 +1,7 @@
+"use client";
+
 import { Reveal } from "@/app/components/oferta/Reveal";
+import { useReveal } from "@/app/components/oferta/useReveal";
 
 /** Lead (Koe): kwalifikujące bóle. Edytorialowy, numerowany, sticky nagłówek. */
 const PAINS: string[] = [
@@ -9,6 +12,40 @@ const PAINS: string[] = [
   "Twój zespół tonie w powtarzalnej robocie zamiast robić to, co naprawdę ważne.",
   "Chcesz tworzyć więcej i szybciej, ale nie kosztem jakości i kontroli nad stylem.",
 ];
+
+function PainRow({ label, index }: { label: string; index: number }) {
+  const { ref, state } = useReveal<HTMLLIElement>();
+  return (
+    <li
+      ref={ref}
+      className={`reveal-io reveal-io--${state} group flex items-start gap-5 border-b border-[var(--border)] py-7 transition-colors first:border-t first:border-[var(--border)] sm:gap-8`}
+      style={{ transitionDelay: `${index * 0.05}s` }}
+    >
+      <span
+        className="shrink-0 text-[var(--accent)]/35 transition-colors duration-300 group-hover:text-[var(--accent)]"
+        style={{
+          fontVariantNumeric: "tabular-nums",
+          fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)",
+          fontWeight: 600,
+          letterSpacing: "-0.02em",
+          lineHeight: 1.1,
+        }}
+      >
+        {String(index + 1).padStart(2, "0")}
+      </span>
+      <span
+        className="text-[var(--text)]"
+        style={{
+          fontSize: "clamp(1.15rem, 1.7vw, 1.55rem)",
+          lineHeight: 1.32,
+          letterSpacing: "-0.01em",
+        }}
+      >
+        {label}
+      </span>
+    </li>
+  );
+}
 
 export function ForWho() {
   return (
@@ -35,34 +72,7 @@ export function ForWho() {
         {/* numerowana lista bóli */}
         <ol className="lg:col-span-8">
           {PAINS.map((p, i) => (
-            <li
-              key={p}
-              className="reveal-anim group flex items-start gap-5 border-b border-[var(--border)] py-7 transition-colors first:border-t first:border-[var(--border)] sm:gap-8"
-              style={{ "--reveal-delay": `${i * 0.05}` } as React.CSSProperties}
-            >
-                <span
-                  className="shrink-0 text-[var(--accent)]/35 transition-colors duration-300 group-hover:text-[var(--accent)]"
-                  style={{
-                    fontVariantNumeric: "tabular-nums",
-                    fontSize: "clamp(1.6rem, 2.4vw, 2.2rem)",
-                    fontWeight: 600,
-                    letterSpacing: "-0.02em",
-                    lineHeight: 1.1,
-                  }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span
-                  className="text-[var(--text)]"
-                  style={{
-                    fontSize: "clamp(1.15rem, 1.7vw, 1.55rem)",
-                    lineHeight: 1.32,
-                    letterSpacing: "-0.01em",
-                  }}
-                >
-                  {p}
-                </span>
-            </li>
+            <PainRow key={p} label={p} index={i} />
           ))}
         </ol>
       </div>
