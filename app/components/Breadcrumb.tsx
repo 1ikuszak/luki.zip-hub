@@ -12,11 +12,6 @@ type Props = {
 /**
  * Breadcrumb: Home (ikona + label) > crumb > crumb. Ostatni element = bieżąca
  * strona (wyszarzony, nieklikalny, ucinany przy długich tytułach).
- *
- * Mobile (2026-08-19): posrednie okruszki (wszystko poza ostatnim) chowane
- * ponizej sm - przy dlugich tytulach artykulow lamalo sie to na dwie linie
- * ("Home > Artykuly" + osobna linia z tytulem). Na mobile zostaje tylko
- * "Home > [biezaca strona]", pelna sciezka wraca od sm w gore.
  */
 export function Breadcrumb({ items, tone = "light" }: Props) {
   const dark = tone === "dark";
@@ -41,10 +36,7 @@ export function Breadcrumb({ items, tone = "light" }: Props) {
         {items.map((item, i) => {
           const isLast = i === items.length - 1;
           return (
-            <li
-              key={i}
-              className={`items-center gap-2 ${isLast ? "flex" : "hidden sm:flex"}`}
-            >
+            <li key={i} className="flex items-center gap-2">
               <ChevronRight size={15} strokeWidth={2} className={sepCls} aria-hidden />
               {item.href && !isLast ? (
                 <Link
@@ -55,7 +47,7 @@ export function Breadcrumb({ items, tone = "light" }: Props) {
                 </Link>
               ) : (
                 <span
-                  className={`max-w-[68vw] truncate sm:max-w-[44ch] ${currentCls}`}
+                  className={`max-w-[60vw] truncate sm:max-w-[44ch] ${currentCls}`}
                   aria-current={isLast ? "page" : undefined}
                 >
                   {item.label}
