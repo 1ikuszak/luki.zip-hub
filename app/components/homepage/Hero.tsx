@@ -32,7 +32,7 @@ export function Hero() {
               letterSpacing: "-0.035em",
             }}
           >
-            95% wdrożeń AI nie zwraca złotówki. Bo nikt nie nauczył AI twojego biznesu.
+            Ostateczny partner wzrostu AI dla dynamicznych firm B2B.
           </h1>
 
           <p
