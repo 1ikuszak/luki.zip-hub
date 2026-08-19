@@ -32,15 +32,15 @@ export function Hero() {
               letterSpacing: "-0.035em",
             }}
           >
-            Ostateczny partner wzrostu AI dla dynamicznych firm B2B.
+            Ostateczny partner wzrostu AI dla dynamicznych firm.
           </h1>
 
           <p
             className="hero-in mx-auto mt-6 max-w-[54ch] text-[var(--text-secondary)]"
             style={{ ...step(2), fontSize: "clamp(1.05rem, 1.35vw, 1.25rem)", lineHeight: 1.6 }}
           >
-            Treść, procesy i wiedza w jednym systemie pod twoją markę. Zdejmij powtarzalną robotę
-            i skaluj to, co realnie zarabia.
+            Systemy AI, które generują leady, zamykają deale i skalują operacje. Zdejmij
+            powtarzalną robotę i skaluj to, co realnie zarabia.
           </p>
 
           <div className="hero-in mt-9 flex flex-col items-center gap-3" style={step(3)}>
